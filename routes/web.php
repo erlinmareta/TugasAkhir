@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+
 });
+
+Route::get('/login',[App\Http\Controllers\LoginController::class,'index'])->name('login');
+Route::get('/registrasi',[App\Http\Controllers\RegistrasiController::class,'index'])->name('registrasi');
+Route::get('admin/dashboard',[App\Http\Controllers\AdminController::class,'index'])->name('dashboard.admin');
+Route::get('mentor/dashboard',[App\Http\Controllers\MentorController::class,'index']);
+Route::get('member/dashboard',[App\Http\Controllers\MemberController::class,'index']);
