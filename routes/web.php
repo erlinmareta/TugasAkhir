@@ -24,3 +24,4 @@ Route::get('/registrasi',[App\Http\Controllers\RegistrasiController::class,'inde
 Route::get('admin/dashboard',[App\Http\Controllers\AdminController::class,'index'])->name('dashboard.admin');
 Route::get('mentor/dashboard',[App\Http\Controllers\MentorController::class,'index']);
 Route::get('member/dashboard',[App\Http\Controllers\MemberController::class,'index']);
+Route::get('member/course_detail',[App\Http\Controllers\CourseController::class,'CourseDetail']);
