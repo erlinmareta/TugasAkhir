@@ -10,4 +10,19 @@ class MemberController extends Controller
     {
         return view ('member/dashboard');
     }
+
+    public function MentorProfil()
+    {
+        return view ('member/mentor_profil');
+    }
+
+    public function StudentProfil()
+    {
+        return view ('member/student_profil');
+    }
+
+    public function StudentDashboard()
+    {
+        return view ('member/student_dashboard');
+    }
 }
