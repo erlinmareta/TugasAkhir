@@ -37,6 +37,10 @@
 <!-- Chart.js Samples -->
 <script src="../learnly/public/js/page.student-dashboard.js"></script>
 
+<!-- UI Charts Page JS -->
+<script src="../learnly/public/js/chartjs-rounded-bar.js"></script>
+<script src="../learnly/public/js/chartjs.js"></script>
+
 <!-- List.js -->
 <script src="../learnly/public/vendor/list.min.js"></script>
 <script src="../learnly/public/js/list.js"></script>
@@ -44,3 +48,14 @@
 <!-- Tables -->
 <script src="../learnly/public/js/toggle-check-all.js"></script>
 <script src="../learnly/public/js/check-selected-row.js"></script>
+
+  <!-- Quill -->
+<script src="../learnly/public/vendor/quill.min.js"></script>
+<script src="../learnly/public/js/quill.js"></script>
+        
+<!-- Select2 -->
+<script src="../learnly/public/vendor/select2/select2.min.js"></script>
+<script src="../learnly/public/js/select2.js"></script>
+
+ <!-- Highlight.js -->
+ <script src="../learnly/public/js/hljs.js"></script>

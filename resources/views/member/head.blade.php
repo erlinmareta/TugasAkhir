@@ -41,52 +41,17 @@
         <!-- App CSS -->
         <link type="text/css"
               href="{{ asset('learnly/public/css/app.css') }}"
+              rel="stylesheet">                               
+
+         <!-- Quill Theme -->
+         <link type="text/css" 
+         href="{{ asset('learnly/public/css/quill.css') }}" 
+         rel="stylesheet">
+
+        <!-- Select2 -->
+        <link type="text/css"
+              href="{{ asset('learnly/public/vendor/select2/select2.min.css') }}"
               rel="stylesheet">
-           
-                     <!-- jQuery -->
-        <script src="../../public/vendor/jquery.min.js"></script>
-
-        <!-- Bootstrap -->
-        <script src="../../public/vendor/popper.min.js"></script>
-        <script src="../../public/vendor/bootstrap.min.js"></script>
-
-        <!-- Perfect Scrollbar -->
-        <script src="../../public/vendor/perfect-scrollbar.min.js"></script>
-
-        <!-- DOM Factory -->
-        <script src="../../public/vendor/dom-factory.js"></script>
-
-        <!-- MDK -->
-        <script src="../../public/vendor/material-design-kit.js"></script>
-
-        <!-- App JS -->
-        <script src="../../public/js/app.js"></script>
-
-        <!-- Preloader -->
-        <script src="../../public/js/preloader.js"></script>
-
-        <!-- Global Settings -->
-        <script src="../../public/js/settings.js"></script>
-
-        <!-- Flatpickr -->
-        <script src="../../public/vendor/flatpickr/flatpickr.min.js"></script>
-        <script src="../../public/js/flatpickr.js"></script>
-
-        <!-- Moment.js -->
-        <script src="../../public/vendor/moment.min.js"></script>
-        <script src="../../public/vendor/moment-range.js"></script>
-
-        <!-- Chart.js -->
-        <script src="../../public/vendor/Chart.min.js"></script>
-        <script src="../../public/js/chartjs.js"></script>
-
-        <!-- Chart.js Samples -->
-        <script src="../../public/js/page.student-dashboard.js"></script>
-
-        <!-- List.js -->
-        <script src="../../public/vendor/list.min.js"></script>
-        <script src="../../public/js/list.js"></script>
-
-        <!-- Tables -->
-        <script src="../../public/js/toggle-check-all.js"></script>
-        <script src="../../public/js/check-selected-row.js"></script>
+        <link type="text/css"
+              href="{{ asset('public/css/select2.css') }}"
+              rel="stylesheet">
