@@ -9,7 +9,6 @@
     </head>
 
     <body class="layout-sticky-subnav layout-learnly ">
-
         <div class="preloader">
             <div class="sk-chase">
                 <div class="sk-chase-dot"></div>

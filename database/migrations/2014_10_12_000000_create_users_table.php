@@ -21,12 +21,12 @@ class CreateUsersTable extends Migration
             $table->string('level')->nullable();
             $table->string('password');
             $table->string('tempat_lahir')->nullable();
+            $table->enum("jenis_kelamin", ['Perempuan', 'Laki-Laki'])->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->string('foto')->nullable();
             $table->string('nomor_telepon')->nullable();
             $table->string('alamat')->nullable();
             $table->string('pekerjaan')->nullable();
-            $table->string('agama')->nullable();
             $table->string('deskripsi')->nullable();
             $table->rememberToken();
             $table->timestamps();

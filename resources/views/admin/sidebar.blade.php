@@ -44,52 +44,39 @@
 								<p>Data Akun</p>
 								<span class="caret"></span>
 							</a>
+							
 							<div class="collapse" id="submenu">
-								<ul class="nav nav-collapse">
+								<ul class="nav nav-collapse">																		
 									<li>
-										<a data-toggle="collapse" href="#subnav1">
-											<span class="sub-item">Mentor</span>
-											<span class="caret"></span>
-										</a>
-										<div class="collapse" id="subnav1">
-											<ul class="nav nav-collapse subnav">
-												<li>
-													<a href="#">
-														<span class="sub-item">Peserta</span>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<span class="sub-item">Admin</span>
-													</a>
-												</li>
-											</ul>
-										</div>
+										<a href="#"> <span class="sub-item">Member</span> </a>
 									</li>
+
 									<li>
-										<a data-toggle="collapse" href="#subnav2">
-											<span class="sub-item">Level 1</span>
-											<span class="caret"></span>
-										</a>
-										<div class="collapse" id="subnav2">
-											<ul class="nav nav-collapse subnav">
-												<li>
-													<a href="#">
-														<span class="sub-item">Level 2</span>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</li>
-									<li>
-										<a href="#">
-											<span class="sub-item">Level 1</span>
-										</a>
-									</li>
+										<a href="#"> <span class="sub-item">Mentor</span> </a>
+									</li>							
 								</ul>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
+							</div>	
+							
+							<div>
+							<li class="nav-item">
+							<a data-toggle="collapse" href="#submenu">
+								<i class="fas fa-bars"></i> <p>Data Master</p>
+								<span class="caret"></span>
+							</a>							
+							<div class="collapse" id="submenu">
+								<ul class="nav nav-collapse">																		
+									<li>
+										<a href="#"> <span class="sub-item">Agama</span> </a>
+									</li>
+
+									<li>
+										<a href="#"> <span class="sub-item">Aaaa</span> </a>
+									</li>
+									</div>
+						</ul>
+					</div>
+				</li>
+			</ul>
 		</div>
+	</div>
+</div>

@@ -21,7 +21,13 @@ class LoginController extends Controller
     {
         if(Auth::attempt($request->only('email', 'password')))
         {
-            return redirect('admin/dashboard');
+            if (Auth::user()->level == 'admin') {
+                return redirect('admin/dashboard');
+            } elseif (Auth::user()->level == 'instruktur'){
+                return redirect('mentor/instructor_dashboard');
+            } else {
+                return redirect('member/student_dashboard');
+            }
         }      
     }
 

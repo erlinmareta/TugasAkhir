@@ -25,19 +25,17 @@
 
             <!-- Header -->
 
-            @include('member.header')
+            @include('member.header2')
 
             <!-- // END Header -->
 
             <!-- Header Layout Content -->
             <div class="mdk-header-layout__content page-content ">
-
                 <div class="page-section bg-alt border-bottom-2">
                     <div class="container page__container">
-
                         <div class="d-flex flex-column flex-lg-row align-items-center">
                             <div class="flex d-flex flex-column align-items-center align-items-lg-start mb-16pt mb-lg-0 text-center text-lg-left">
-                                <h1 class="h2 mb-8pt">Dashboard</h1>
+                                <h1 class="h2 mb-8pt">Dashboard  {{ Auth::user()->level }}</h1>
                                 <div>
 
                                     <span class="chip chip-outline-secondary d-inline-flex align-items-center"
@@ -46,7 +44,6 @@
                                           data-placement="bottom">
                                         <i class="material-icons icon--left">opacity</i> 2,300 points
                                     </span>
-
                                 </div>
                             </div>
                             <div class="ml-lg-16pt">
@@ -54,90 +51,19 @@
                                    class="btn btn-light">My Profile</a>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <div class="page-section">
                     <div class="container page__container">
-
                         <div class="row">
-                            <div class="col-lg-8">
-
-                                <div class="page-separator">
-                                    <div class="page-separator__text">Overview</div>
-                                </div>
-
-                                <div class="row card-group-row mb-lg-8pt">
-                                    <div class="col-md-6 card-group-row__col">
-
-                                        <div class="card card-group-row__card">
-                                            <div class="card-header d-flex align-items-center">
-                                                <div class="h2 mb-0 mr-3">116</div>
-                                                <div class="flex">
-                                                    <p class="card-title">Angular</p>
-                                                    <p class="card-subtitle text-50">Best score</p>
-                                                </div>
-                                                <div class="dropdown">
-                                                    <a href="#"
-                                                       class="btn btn-sm btn-outline-secondary dropdown-toggle"
-                                                       data-toggle="dropdown">Popular Topics</a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href=""
-                                                           class="dropdown-item">Popular Topics</a>
-                                                        <a href=""
-                                                           class="dropdown-item">Web Design</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-body p-24pt">
-                                                <div class="chart"
-                                                     style="height: 250px;">
-                                                    <canvas id="topicIqChart"
-                                                            class="chart-canvas js-update-chart-line"
-                                                            data-chart-hide-axes="true"
-                                                            data-chart-points="true"
-                                                            data-chart-suffix=" points"
-                                                            data-chart-line-border-color="primary"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6 card-group-row__col">
-
-                                        <div class="card card-group-row__card">
-                                            <div class="card-header d-flex align-items-center border-0">
-                                                <div class="h2 mb-0 mr-3">432</div>
-                                                <div class="flex">
-                                                    <p class="card-title">Experience IQ</p>
-                                                    <p class="card-subtitle text-50">4 days streak this week</p>
-                                                </div>
-                                                <i class="material-icons text-muted ml-2">trending_up</i>
-                                            </div>
-                                            <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                                                <div class="chart"
-                                                     style="height: 200px;">
-                                                    <canvas id="iqChart"
-                                                            class="chart-canvas js-update-chart-line"
-                                                            data-chart-hide-axes="false"
-                                                            data-chart-points="true"
-                                                            data-chart-suffix="pt"
-                                                            data-chart-line-border-color="primary"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                               
+                            <div class="col-lg-8">                                                             
                                 <div class="page-separator">
                                     <div class="page-separator__text">Quizzes</div>
                                 </div>
 
                                 <div class="row card-group-row">
-
                                     <div class="card-group-row__col col-md-6">
-
                                         <div class="card card-group-row__card card-sm">
                                             <div class="card-body d-flex align-items-center">
                                                 <a href="student-take-quiz.html"
@@ -160,39 +86,27 @@
 
                                             <div class="progress rounded-0"
                                                  style="height: 4px;">
-                                                <div class="progress-bar bg-primary"
-                                                     role="progressbar"
-                                                     style="width: 37%;"
-                                                     aria-valuenow="37"
-                                                     aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 37%;" aria-valuenow="37"
+                                                     aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
 
                                             <div class="card-footer">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex mr-2">
-                                                        <a href="student-take-quiz.html"
-                                                           class="btn btn-light btn-sm">
+                                                        <a href="student-take-quiz.html" class="btn btn-light btn-sm">
                                                             <i class="material-icons icon--left">refresh</i> Continue
                                                         </a>
                                                     </div>
 
                                                     <div class="dropdown">
-                                                        <a href="#"
-                                                           data-toggle="dropdown"
-                                                           data-caret="false"
-                                                           class="text-muted"><i class="material-icons">more_horiz</i></a>
+                                                        <a href="#" data-toggle="dropdown" data-caret="false" class="text-muted"><i class="material-icons">more_horiz</i></a>
                                                         <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="student-take-quiz.html"
-                                                               class="dropdown-item">Continue</a>
-                                                            <a href="student-quiz-result-details.html"
-                                                               class="dropdown-item">View Result</a>
+                                                            <a href="student-take-quiz.html"class="dropdown-item">Continue</a>
+                                                            <a href="student-quiz-result-details.html" class="dropdown-item">View Result</a>
                                                             <div class="dropdown-divider"></div>
-                                                            <a href="student-take-quiz.html"
-                                                               class="dropdown-item text-danger">Reset Quiz</a>
+                                                            <a href="student-take-quiz.html" class="dropdown-item text-danger">Reset Quiz</a>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -201,16 +115,12 @@
                                     <div class="card-group-row__col col-md-6">
                                         <div class="card card-group-row__card card-sm">
                                             <div class="card-body d-flex align-items-center">
-                                                <a href="student-take-quiz.html"
-                                                   class="avatar overlay overlay--primary avatar-4by3 mr-12pt">
-                                                    <img src="../learnly/public/images/paths/angular_200x168.png"
-                                                         alt="Angular Fundamentals"
-                                                         class="avatar-img rounded">
+                                                <a href="student-take-quiz.html" class="avatar overlay overlay--primary avatar-4by3 mr-12pt">
+                                                    <img src="../learnly/public/images/paths/angular_200x168.png" alt="Angular Fundamentals" class="avatar-img rounded">
                                                     <span class="overlay__content"></span>
                                                 </a>
                                                 <div class="flex mr-12pt">
-                                                    <a class="card-title"
-                                                       href="student-take-quiz.html">Angular Fundamentals</a>
+                                                    <a class="card-title" href="student-take-quiz.html">Angular Fundamentals</a>
                                                     <div class="card-subtitle text-50">3 days ago</div>
                                                 </div>
                                                 <div class="d-flex flex-column align-items-center">
@@ -222,26 +132,19 @@
                                             <div class="card-footer">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex mr-2">
-                                                        <a href="student-take-quiz.html"
-                                                           class="btn btn-light btn-sm">
+                                                        <a href="student-take-quiz.html" class="btn btn-light btn-sm">
                                                             <i class="material-icons icon--left">playlist_add_check</i> Reset
                                                             <span class="badge badge-dark badge-notifications ml-2">5</span>
                                                         </a>
                                                     </div>
 
                                                     <div class="dropdown">
-                                                        <a href="#"
-                                                           data-toggle="dropdown"
-                                                           data-caret="false"
-                                                           class="text-muted"><i class="material-icons">more_horiz</i></a>
+                                                        <a href="#" data-toggle="dropdown" data-caret="false" class="text-muted"><i class="material-icons">more_horiz</i></a>
                                                         <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="student-take-quiz.html"
-                                                               class="dropdown-item">Continue</a>
-                                                            <a href="student-quiz-result-details.html"
-                                                               class="dropdown-item">View Result</a>
+                                                            <a href="student-take-quiz.html" class="dropdown-item">Continue</a>
+                                                            <a href="student-quiz-result-details.html" class="dropdown-item">View Result</a>
                                                             <div class="dropdown-divider"></div>
-                                                            <a href="student-take-quiz.html"
-                                                               class="dropdown-item text-danger">Reset Quiz</a>
+                                                            <a href="student-take-quiz.html" class="dropdown-item text-danger">Reset Quiz</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -253,18 +156,13 @@
                                 <div class="mb-32pt">
                                     <ul class="pagination justify-content-start pagination-xsm m-0">
                                         <li class="page-item disabled">
-                                            <a class="page-link"
-                                               href="#"
-                                               aria-label="Previous">
-                                                <span aria-hidden="true"
-                                                      class="material-icons">chevron_left</span>
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true" class="material-icons">chevron_left</span>
                                                 <span>Prev</span>
                                             </a>
                                         </li>
                                         <li class="page-item">
-                                            <a class="page-link"
-                                               href="#"
-                                               aria-label="Page 1">
+                                            <a class="page-link" href="#" aria-label="Page 1">
                                                 <span>1</span>
                                             </a>
                                         </li>
@@ -867,7 +765,9 @@
                                             </a>
                                         </li>
                                     </ul>
-                                </div>             
+                                </div>     
+                                
+                                
             <!-- // END Header Layout Content -->
 
             <!-- Footer -->

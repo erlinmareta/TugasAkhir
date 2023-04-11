@@ -1,194 +1,208 @@
-
 <!DOCTYPE html>
-<html lang="en"
-      dir="ltr">
+<html lang="en" dir="ltr">
 
-    <head>
-       @include('member.head')
+<head>
+    @include('member.head')
 
-    </head>
+</head>
 
-    <body class="layout-sticky-subnav layout-learnly ">
+<body class="layout-sticky-subnav layout-learnly ">
 
-        <div class="preloader">
-            <div class="sk-chase">
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-            </div>
+    <div class="preloader">
+        <div class="sk-chase">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+        </div>
 
-            <!-- <div class="sk-bounce">
+        <!-- <div class="sk-bounce">
     <div class="sk-bounce-dot"></div>
     <div class="sk-bounce-dot"></div>
   </div> -->
 
-            <!-- More spinner examples at https://github.com/tobiasahlin/SpinKit/blob/master/examples.html -->
-        </div>
+        <!-- More spinner examples at https://github.com/tobiasahlin/SpinKit/blob/master/examples.html -->
+    </div>
 
-        <!-- Header Layout -->
-        <div class="mdk-header-layout js-mdk-header-layout">
+    <!-- Header Layout -->
+    <div class="mdk-header-layout js-mdk-header-layout">
 
-            <!-- Header -->
+        <!-- Header -->
 
-            @include('member.header2')
+        @include('member.header2')
 
-            <!-- // END Header -->
+        <!-- // END Header -->
 
-            <!-- Header Layout Content -->
-            <div class="mdk-header-layout__content page-content ">
+        <!-- Header Layout Content -->
+        <div class="mdk-header-layout__content page-content ">
 
-                <div class="page-section bg-alt border-bottom-2">
-                    <div class="container page__container">
+            <div class="page-section bg-alt border-bottom-2">
+                <div class="container page__container">
 
-                        <div class="d-flex flex-column flex-lg-row align-items-center">
-                            <div class="d-flex flex-column flex-md-row align-items-center flex mb-16pt mb-lg-0 text-center text-md-left">
-                                <div class="mb-16pt mb-md-0 mr-md-24pt">
-                                    <img src="../learnly/public/images/user.png"
-                                         width="104"
-                                         alt="student">
-                                </div>
-                                <div class="flex">
-                                    <h1 class="h2 mb-8pt">Laza Bogdan</h1>
-                                    <div>
-                                        <span class="chip chip-outline-secondary d-inline-flex align-items-center"
-                                              data-toggle="tooltip"
-                                              data-title="Experience IQ"
-                                              data-placement="bottom">
-                                            <i class="material-icons icon--left">opacity</i> 2,300 points
-                                        </span>
-                                    </div>
-                                </div>
+                    <div class="d-flex flex-column flex-lg-row align-items-center">
+                        <div
+                            class="d-flex flex-column flex-md-row align-items-center flex mb-16pt mb-lg-0 text-center text-md-left">
+                            <div class="mb-16pt mb-md-0 mr-md-24pt">
+                                    <img src="{{ asset('storage/profile/' . $user->foto) }}" alt=""
+                                        style="width: 150px; height:150px"
+                                        class="img-thumbnail rounded-circle mx-auto d-block">
+
                             </div>
-                            <div class="ml-lg-16pt">
-                                <a href=""
-                                   class="btn btn-light">Follow</a>
+                            <div class="flex">
+                                <h1 class="h2 mb-8pt">{{ Auth::user()->name }}</h1>
+
+                            </div>
+                        </div>
+                        <div class="ml-lg-16pt">
+                            <a href="" class="btn btn-light">Follow</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="page-section">
+                <div class="container page__container">
+
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="page-separator">
+                                <div class="page-separator__text">data</div>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <form action="{{url('/member/student_profil')}}" method="post" enctype="multipart/form-data">
+                                        @method('put')
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label>
+                                            <input type="text" name="name" class="form-control"
+                                                placeholder="Masukkan nama"
+                                                value="{{ old('name', Auth::user()->name) }}">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Tempat Lahir</label>
+                                            <input type="text" name="tempat_lahir" class="form-control"
+                                                placeholder="Masukkan tempat lahir"
+                                                value="{{ old('tempat_lahir', Auth::user()->tempat_lahir) }}">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Tanggal Lahir</label>
+                                            <input type="date" name="tanggal_lahir" class="form-control"
+                                                placeholder="Masukkan Tanggal Lahir"
+                                                value="{{ old('tanggal_lahir', Auth::user()->tanggal_lahir) }}">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="">jenis kelamin</label>
+                                        <select class="form-select form-control form-select-sm" aria-label=".form-select-sm example" name="jenis_kelamin">
+                                            <option selected>Pilih jenis kelamin</option>
+                                            <option value="Laki-Laki" {{Auth::user()->jenis_kelamin=="Laki-Laki"?"selected" : ""}}>Laki-Laki</option>
+                                            <option value="Perempuan" {{Auth::user()->jenis_kelamin=="Perempuan"?"selected" : ""}}>Perempuan</option>
+
+                                        </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Email</label>
+                                            <input type="email" name="email" class="form-control" placeholder="Masukkan email"
+                                                value="{{ old('email', Auth::user()->email) }}">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">No.Telepon</label>
+                                            <input type="text" name="nomor_telepon" class="form-control"
+                                                placeholder="Masukkan Nomor Telepon"
+                                                value="{{ old('nomor_telepon', Auth::user()->nomor_telepon) }}">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="exampleInputPassword1" class="form-label">Alamat</label>
+                                            <input type="text" name="alamat" class="form-control"
+                                                placeholder="Masukkan Alamat"
+                                                value="{{ old('alamat', Auth::user()->alamat) }}">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="exampleInputPassword1" class="form-label">Pekerjaan</label>
+                                            <input type="text" name="pekerjaan" class="form-control"
+                                                placeholder="Masukkan Pekerjaan"
+                                                value="{{ old('pekerjaan', Auth::user()->pekerjaan) }}">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="exampleInputPassword1" class="form-label">Deskripsi</label>
+                                            <input type="text" name="deskripsi" class="form-control"
+                                                value="{{ old('deskripsi', Auth::user()->deskripsi) }}">
+                                        </div>
+
+                                        <div class="form-group">
+                                        <label for="foto">Foto Diri</label><br>
+                                        <input type="file" name="foto" id="foto">
+                                    </div>
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                    <div>
+                                        <div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 card-group-row__col">
+                                    <div>
+                                        <div class="card-header d-flex align-items-center border-0">
+
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
 
-                    </div>
-                </div>
+                        <div class="col-lg-4">
 
-                <div class="page-section">
-                    <div class="container page__container">
+                            <h4>About me</h4>
+                            <p class="text-70 mb-24pt">{{ old('deskripsi', Auth::user()->deskripsi) }}</p>
 
-                        <div class="row">
-                            <div class="col-lg-8">                                                              
-                                <div class="page-separator">
-                                    <div class="page-separator__text">Experience IQ</div>
-                                </div>
-
-                                <div class="row card-group-row mb-8pt">
-                                    <div class="col-md-6 card-group-row__col">
-
-                                        <div class="card card-group-row__card">
-                                            <div class="card-header d-flex align-items-center">
-                                                <div class="h2 mb-0 mr-3">116</div>
-                                                <div class="flex">
-                                                    <p class="card-title">Angular</p>
-                                                    <p class="card-subtitle text-50">Best score</p>
-                                                </div>
-                                                <div class="dropdown">
-                                                    <a href="#"
-                                                       class="btn btn-sm btn-outline-secondary dropdown-toggle"
-                                                       data-toggle="dropdown">Popular Topics</a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href=""
-                                                           class="dropdown-item">Popular Topics</a>
-                                                        <a href=""
-                                                           class="dropdown-item">Web Design</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-body p-24pt">
-                                                <div class="chart"
-                                                     style="height: 250px;">
-                                                    <canvas id="topicIqChart"
-                                                            class="chart-canvas js-update-chart-line"
-                                                            data-chart-hide-axes="true"
-                                                            data-chart-points="true"
-                                                            data-chart-suffix=" points"
-                                                            data-chart-line-border-color="primary"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6 card-group-row__col">
-
-                                        <div class="card card-group-row__card">
-                                            <div class="card-header d-flex align-items-center border-0">
-                                                <div class="h2 mb-0 mr-3">432</div>
-                                                <div class="flex">
-                                                    <p class="card-title">Experience IQ</p>
-                                                    <p class="card-subtitle text-50">4 days streak this week</p>
-                                                </div>
-                                                <i class="material-icons text-muted ml-2">trending_up</i>
-                                            </div>
-                                            <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                                                <div class="chart"
-                                                     style="height: 200px;">
-                                                    <canvas id="iqChart"
-                                                            class="chart-canvas js-update-chart-line"
-                                                            data-chart-hide-axes="false"
-                                                            data-chart-points="true"
-                                                            data-chart-suffix="pt"
-                                                            data-chart-line-border-color="primary"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
+                            <h4>Connect</h4>
+                            <p class="text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id
+                                felis blandit congue. Mauris interdum enim vel quam consequat efficitur.
+                                In commodo magna eget augue interdum, at maximus metus lobortis. Integer
+                                at neque sapien. Praesent laoreet elementum maximus.</p>
+                            <div class="d-flex align-items-center mb-24pt">
+                                <a href=""
+                                    class="text-accent fab fa-facebook-square font-size-24pt mr-8pt"></a>
+                                <a href="" class="text-accent fab fa-twitter-square font-size-24pt mr-8pt"></a>
+                                <a href="" class="text-accent fab fa-instagram-square font-size-24pt"></a>
                             </div>
-                            <div class="col-lg-4">
 
-                                <h4>About me</h4>
-                                <p class="text-70 mb-24pt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id 
-                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur. 
-                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer 
-                                    at neque sapien. Praesent laoreet elementum maximus.</p>
 
-                                <h4>Connect</h4>
-                                <p class="text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id 
-                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur. 
-                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer 
-                                    at neque sapien. Praesent laoreet elementum maximus.</p>
-                                <div class="d-flex align-items-center mb-24pt">
-                                    <a href=""
-                                       class="text-accent fab fa-facebook-square font-size-24pt mr-8pt"></a>
-                                    <a href=""
-                                       class="text-accent fab fa-twitter-square font-size-24pt mr-8pt"></a>
-                                       <a href=""
-                                       class="text-accent fab fa-instagram-square font-size-24pt"></a>
-                                </div>
+                            <!-- // END Header Layout -->
 
-                               
-        <!-- // END Header Layout -->
+                            <!-- Drawer -->
 
-        <!-- Drawer -->
+                            <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
+                                <div class="mdk-drawer__content">
+                                    <div class="sidebar sidebar-light sidebar-light-dodger-blue sidebar-left"
+                                        data-perfect-scrollbar>
 
-        <div class="mdk-drawer js-mdk-drawer"
-             id="default-drawer">
-            <div class="mdk-drawer__content">
-                <div class="sidebar sidebar-light sidebar-light-dodger-blue sidebar-left"
-                     data-perfect-scrollbar>
+                                        <!-- Sidebar Content -->
 
-                    <!-- Sidebar Content -->
+                                        @include('member.sidebar')
 
-                    @include('member.sidebar')
+                                        <!-- // END Drawer -->
 
-        <!-- // END Drawer -->
+                                        <!-- jQuery -->
+                                        @include('member.script')
 
-        <!-- jQuery -->
-       @include('member.script')
-
-    </body>
+</body>
 
 </html>
-

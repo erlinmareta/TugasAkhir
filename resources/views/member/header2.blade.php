@@ -15,9 +15,7 @@
 
                                 <span class="avatar avatar-sm navbar-brand-icon mr-0 mr-lg-8pt">
 
-                                    <span class="avatar-title rounded bg-primary"><img src="../learnly/public/images/illustration/student/128/"
-                                             alt="logo"
-                                             class="img-fluid" /></span>
+                                    
                                     </span>
                                 <span class="d-none d-lg-block">IndLearn</span>
                             </a>
@@ -56,14 +54,29 @@
                             </form>
 
                             <ul class="nav navbar-nav ml-auto mr-0">
+                                @auth                                
+                                <li class="nav-item dropdown" data-title="{{ Auth::user()->name }}" data-toggle="tooltip" data-placement="bottom" data-boundary="window">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
+                                        <i class="material-icons">account_circle</i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a href="/logout" class="dropdown-item">Logout</a>                                        
+                                    </div>
+                                </li>
+                                @else 
                                 <li class="nav-item">
                                     <a href="/login"
                                        class="btn btn-outline-secondary">Login</a>
                                 </li>
+
                                 <li class="nav-item">
                                     <a href="/registrasi"
                                        class="btn btn-outline-secondary">Registrasi</a>
                                 </li>
+                                @endauth
+                               
+
+                               
                             </ul>
 
                         </div>
