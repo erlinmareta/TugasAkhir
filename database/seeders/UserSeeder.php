@@ -39,12 +39,12 @@ class UserSeeder extends Seeder
             'name' => 'maresta',
             'email' => 'maresta@gmail.com',
             'password' => bcrypt('maresta123'),
-            'level' => 'instruktor',
+            'level' => 'mentor',
             'remember_token' => Str::random(60),
         ]);
 
-        
 
-        
+
+
     }
 }

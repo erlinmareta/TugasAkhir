@@ -30,7 +30,7 @@
                                 <span class="sidebar-menu-text"> Dashboard</span>
                             </a>
                         </li>
-                                               
+
                         <li class="sidebar-menu-item">
                             <a class="sidebar-menu-button"
                                href="{{ url('mentor/instructor_course') }}">
@@ -39,14 +39,6 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-menu-item">
-                            <a class="sidebar-menu-button"
-                               href="{{ url('mentor/instructor_quiz') }}">
-                                <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">poll</span>
-                                <span class="sidebar-menu-text">My Quizzes</span>
-                            </a>
-                        </li>
-                                                                                               
                         <li class="sidebar-menu-item">
                             <a class="sidebar-menu-button"
                                href="student-take-course.html">
@@ -61,6 +53,5 @@
                                 <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">import_contacts</span>
                                 <span class="sidebar-menu-text">Take Lesson</span>
                             </a>
-                        </li>                                                                        
+                        </li>
                     </ul>
-                    

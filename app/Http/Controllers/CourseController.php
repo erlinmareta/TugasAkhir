@@ -10,7 +10,7 @@ class CourseController extends Controller
     {
         return view('member/browse_course');
     }
-   
+
     public function ClassDetail()
     {
         return view('member/class_detail');

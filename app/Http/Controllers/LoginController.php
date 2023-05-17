@@ -23,12 +23,12 @@ class LoginController extends Controller
         {
             if (Auth::user()->level == 'admin') {
                 return redirect('admin/dashboard');
-            } elseif (Auth::user()->level == 'instruktur'){
+            } elseif (Auth::user()->level == 'mentor'){
                 return redirect('mentor/instructor_dashboard');
             } else {
                 return redirect('member/student_dashboard');
             }
-        }      
+        }
     }
 
     public function registrasi()

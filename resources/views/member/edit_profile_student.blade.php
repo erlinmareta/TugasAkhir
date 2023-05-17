@@ -4,7 +4,7 @@
       dir="ltr">
 
     <head>
-       @include('member.head')
+       @include('member.layout.head')
 
     </head>
 
@@ -144,12 +144,12 @@
 
                     <!-- Sidebar Content -->
 
-                    @include('member.sidebar')
+                    @include('member.layout.sidebar')
 
         <!-- // END Drawer -->
 
         <!-- jQuery -->
-       @include('member.script')
+       @include('member.layout.script')
 
     </body>
 

@@ -4,8 +4,8 @@
       dir="ltr">
 
     <head>
-        
-    @include('member.head')
+
+    @include('member.layout.head')
 
     </head>
 
@@ -34,7 +34,7 @@
 
             <!-- Header -->
 
-            @include('member.header2')
+            @include('member.layout.header2')
 
             <!-- // END Header -->
 
@@ -92,24 +92,24 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-24pt">                               
+                                <div class="mb-24pt">
                                     <span class="chip chip-outline-secondary d-inline-flex align-items-center">Materi Selanjutnya
                                         <i class="material-icons icon--left">arrow_forward</i>
                                     </span>
                                 </div>
 
-                                <p class="lead measure-lead text-70 mb-24pt">Lorem ipsum dolor sit amet, 
-                                    consectetur adipiscing elit. Duis quis viverra enim, vitae porttitor nisl. 
-                                    Praesent rhoncus ligula id felis blandit congue. Mauris interdum enim vel 
-                                    quam consequat efficitur. In commodo magna eget augue interdum, at maximus 
+                                <p class="lead measure-lead text-70 mb-24pt">Lorem ipsum dolor sit amet,
+                                    consectetur adipiscing elit. Duis quis viverra enim, vitae porttitor nisl.
+                                    Praesent rhoncus ligula id felis blandit congue. Mauris interdum enim vel
+                                    quam consequat efficitur. In commodo magna eget augue interdum, at maximus
                                     metus lobortis. Integer at neque sapien. Praesent laoreet elementum maximus.</p>
-                            
+
                                 <div class="accordion js-accordion accordion--boxed "
                                      id="parent">
-                                    <div class="accordion__item">                        
+                                    <div class="accordion__item">
                                         <div class="accordion__menu collapse"
                                              id="course-toc-1">
-                                            <div class="accordion__menu-link">                                               
+                                            <div class="accordion__menu-link">
                                             </div>
                                         </div>
                                     </div>
@@ -153,17 +153,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion__item">                                        
+                                    <div class="accordion__item">
                                         <div class="accordion__menu collapse" id="course-toc-3">
-                                            <div class="accordion__menu-link">                                                
+                                            <div class="accordion__menu-link">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="accordion__item">
-                                        
-                                        <div class="accordion__menu collapse"
-                                             id="course-toc-4">
-                                            <div class="accordion__menu-link">                                                
+                                        <div class="accordion__menu collapse"id="course-toc-4">
+                                            <div class="accordion__menu-link">
                                             </div>
                                         </div>
                                     </div>
@@ -171,7 +169,7 @@
                             </div>
                             <div class="col-lg-4">
 
-                               
+
                                 <div class="page-separator">
                                     <div class="page-separator__text">Author</div>
                                 </div>
@@ -184,30 +182,49 @@
                                         <p class="text-50 lh-1 mb-0">Instructor</p>
                                     </div>
                                 </div>
-                                <p class="text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id 
-                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur. 
-                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer 
+                                <p class="text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id
+                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur.
+                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer
                                     at neque sapien. Praesent laoreet elementum maximus.</p>
 
                                 <a href="teacher-profile.html" class="btn btn-white mb-24pt">Follow</a>
-
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <div class="d-flex mb-8"><a href="" class="avatar avatar-sm mr-12pt"> <span class="avatar-title rounded-circle">LB</span> </a>
+                    <div class="flex">
+                        <div class="form-group">
+                            <label for="comment" class="form-label">Your reply</label>
+                                <textarea class="form-control" name="comment" id="comment" rows="3" placeholder="Type here to reply to Matney ..."></textarea>
+                            </div>
+                        <button class="btn btn-outline-secondary">Post comment</button>
+                    </div>
+                </div>
+                                <div class="pt-3"> <h4>2 Comments</h4>
+                                    <div class="d-flex mb-3"> <a href="" class="avatar avatar-sm mr-12pt">
+                                            <!-- <img src="../../public/images/people/256/256_rsz_karl-s-973833-unsplash.jpg" alt="people" class="avatar-img rounded-circle"> -->
+                                            <span class="avatar-title rounded-circle">JF</span> </a>
+                                        <div class="flex"> <a href="" class="text-body"><strong>Joseph S. Ferland</strong></a><br>
+                                            <p class="mt-1 text-70">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero neque magnam modi corrupti in aliquid odit eligendi pariatur! Ad consequatur illo voluptates, dignissimos tenetur odit magni excepturi! Nesciunt, fuga, vel.</p>
+                                                <div class="d-flex align-items-center">
+                                                    <small class="text-50 mr-2">27 min ago</small>
+                                                <a href="" class="text-50"><small>Liked</small></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                 <div class="page-section bg-alt">
                     <div class="container page__container">
-
                         <div class="page-separator">
                             <div class="page-separator__text">Feedback</div>
                         </div>
 
                         <div class="row">
-
                             <div class="col-sm-6 col-md-4">
-
                                 <div class="card card-feedback card-body">
                                     <blockquote class="blockquote mb-0">
                                         <p class="text-70 small mb-0">A wonderful course on how to start. Eddie beautifully conveys all essentials of a becoming a good Angular developer. Very glad to have taken this course. Thank you Eddie Bryan.</p>
@@ -233,11 +250,9 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="col-sm-6 col-md-4">
-
                                 <div class="card card-feedback card-body">
                                     <blockquote class="blockquote mb-0">
                                         <p class="text-70 small mb-0">A wonderful course on how to start. Eddie beautifully conveys all essentials of a becoming a good Angular developer. Very glad to have taken this course. Thank you Eddie Bryan.</p>
@@ -263,11 +278,9 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="col-sm-6 col-md-4">
-
                                 <div class="card card-feedback card-body">
                                     <blockquote class="blockquote mb-0">
                                         <p class="text-70 small mb-0">A wonderful course on how to start. Eddie beautifully conveys all essentials of a becoming a good Angular developer. Very glad to have taken this course. Thank you Eddie Bryan.</p>
@@ -293,38 +306,14 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
             <!-- // END Header Layout Content -->
 
             <!-- Footer -->
-
-            <div class="bg-dark border-top-2 mt-auto">
-                <div class="container page__container page-section d-flex flex-column">
-                    <p class="text-white-70 brand mb-24pt">
-                        <img class="brand-icon"
-                             src="../../public/images/logo/white-100@2x.png"
-                             width="30"
-                             alt="Luma"> Luma
-                    </p>
-                    <p class="measure-lead-max text-white-50 small mr-8pt">Luma is a beautifully crafted user interface for modern Education Platforms, including Courses & Tutorials, Video Lessons, Student and Teacher Dashboard, Curriculum Management, Earnings and Reporting, ERP, HR, CMS, Tasks, Projects, eCommerce and more.</p>
-                    <p class="mb-8pt d-flex">
-                        <a href=""
-                           class="text-white-70 text-underline mr-8pt small">Terms</a>
-                        <a href=""
-                           class="text-white-70 text-underline small">Privacy policy</a>
-                    </p>
-                    <p class="text-white-50 small mt-n1 mb-0">Copyright 2019 &copy; All rights reserved.</p>
-                </div>
-            </div>
-
-            <!-- // END Footer -->
 
         </div>
         <!-- // END Header Layout -->
@@ -339,7 +328,7 @@
 
                     <!-- Sidebar Content -->
 
-                   @include('member.sidebar')
+                   @include('member.layout.sidebar')
 
                     <!-- // END Sidebar Content -->
 
@@ -350,7 +339,7 @@
         <!-- // END Drawer -->
 
         <!-- jQuery -->
-       @include('member.script')
+       @include('member.layout.script')
 
     </body>
 

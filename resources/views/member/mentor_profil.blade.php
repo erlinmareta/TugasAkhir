@@ -4,8 +4,8 @@
       dir="ltr">
 
     <head>
-       
-    @include('member.head')
+
+    @include('member.layout.head')
 
     </head>
 
@@ -30,8 +30,8 @@
         </div>
 
         <!-- Header Layout -->
-        
-        @include('member.header2')
+
+        @include('member.layout.header2')
 
             <!-- // END Header -->
 
@@ -254,22 +254,22 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                             <div class="col-lg-4">
 
                                 <h4>About me</h4>
-                                <p class="text-70 mb-24pt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id 
-                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur. 
-                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer 
+                                <p class="text-70 mb-24pt">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id
+                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur.
+                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer
                                     at neque sapien. Praesent laoreet elementum maximus.</p>
 
                                 <h4>Connect</h4>
-                                <p class="text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id 
-                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur. 
-                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer 
+                                <p class="text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id
+                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur.
+                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer
                                     at neque sapien. Praesent laoreet elementum maximus.</p>
                                 <div class="d-flex align-items-center mb-24pt">
                                     <a href=""
@@ -286,10 +286,10 @@
 
                                 <div class="mb-8pt d-flex align-items-center">
                                     <a href="student-course.html"
-                                       class="avatar avatar-4by3 overlay overlay--primary mr-12pt">                                       
+                                       class="avatar avatar-4by3 overlay overlay--primary mr-12pt">
                                     </a>
-                                    <div class="flex">                                                                           
-                                </div>                               
+                                    <div class="flex">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -333,7 +333,7 @@
 
                     <!-- Sidebar Content -->
 
-                    @include('member.sidebar')
+                    @include('member.layout.sidebar')
 
                     <!-- // END Sidebar Content -->
 
@@ -344,8 +344,8 @@
         <!-- // END Drawer -->
 
         <!-- jQuery -->
-       @include('member.script') 
-       
+       @include('member.layout.script')
+
     </body>
 
 </html>

@@ -4,7 +4,7 @@
       dir="ltr">
 
     <head>
-       @include('member.head')
+       @include('member.layout.head')
 
     </head>
 
@@ -33,7 +33,7 @@
 
             <!-- Header -->
 
-            @include('member.header2')
+            @include('member.layout.header2')
 
             <!-- // END Header -->
 
@@ -47,7 +47,7 @@
                             <div class="flex d-flex flex-column align-items-center align-items-lg-start mb-16pt mb-lg-0 text-center text-lg-left">
                                 <h1 class="h2 mb-8pt">Pertanyaan </h1>
                                 <div>
-                                    
+
                                 </div>
                             </div>
                             <div class="ml-lg-16pt">
@@ -114,13 +114,13 @@
 
                                 <p class="text-50 mb-0">Note: Pilih jawaban yang benar.</p>
 
-                                
+
 
                             </div>
                             <div class="col-lg-4">
 
                                 <div class="d-flex flex-column mb-24pt">
-                                    <a href="student-quiz-result-details.html" class="btn justify-content-center btn-outline-secondary mb-16pt">Skip Quiz</a>                                
+                                    <a href="student-quiz-result-details.html" class="btn justify-content-center btn-outline-secondary mb-16pt">Skip Quiz</a>
                                     <a href="student-quiz-result-details.html" class="btn justify-content-center btn-accent ">Selesai<i class="material-icons icon--right">keyboard_arrow_right</i></a>
                                 </div>
 
@@ -177,7 +177,7 @@
 
                     <!-- Sidebar Content -->
 
-                    @include('member.sidebar')
+                    @include('member.layout.sidebar')
 
                     <!-- // END Sidebar Content -->
 
@@ -188,7 +188,7 @@
         <!-- // END Drawer -->
 
         <!-- jQuery -->
-        @include('member.script')
+        @include('member.layout.script')
 
     </body>
 

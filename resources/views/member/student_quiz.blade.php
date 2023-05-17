@@ -4,7 +4,7 @@
       dir="ltr">
 
     <head>
-       
+
     @include('member.head')
 
     </head>
@@ -34,7 +34,7 @@
 
             <!-- Header -->
 
-           @include('member.header2')
+           @include('member.layout.header2')
 
             <!-- // END Header -->
 
@@ -370,7 +370,7 @@
                                                       class="material-icons">chevron_right</span>
                                             </a>
                                         </li>
-                                    </ul>                                
+                                    </ul>
                                 </div>
 
                                 <div class="card stack">
@@ -567,12 +567,12 @@
                                 </ul>
                             </div>
 
-                            
+
             <!-- // END Header Layout Content -->
 
             <!-- Footer -->
 
-            
+
         <!-- // END Header Layout -->
 
         <!-- Drawer -->
@@ -585,7 +585,7 @@
 
                     <!-- Sidebar Content -->
 
-                    @include('member.sidebar')
+                    @include('member.layout.sidebar')
 
                     <!-- // END Sidebar Content -->
 
@@ -596,7 +596,7 @@
         <!-- // END Drawer -->
 
         <!-- jQuery -->
-      @include('member.script')
+      @include('member.layout.script')
 
     </body>
 

@@ -4,7 +4,7 @@
       dir="ltr">
 
     <head>
-   @include('member.head')
+   @include('member.layout.head')
 
     </head>
 
@@ -33,7 +33,7 @@
 
             <!-- Header -->
 
-            @include('member.header2')
+            @include('member.layout.header2')
             <!-- // END Header -->
 
             <!-- Header Layout Content -->
@@ -44,7 +44,7 @@
 
                         <div class="d-flex flex-column flex-lg-row align-items-center">
                             <div class="flex d-flex flex-column align-items-center align-items-lg-start mb-16pt mb-lg-0 text-center text-lg-left">
-                                <h1 class="h2 mb-8pt">Manage Courses</h1>                        
+                                <h1 class="h2 mb-8pt">Manage Courses</h1>
                             </div>
                             <div class="ml-lg-16pt">
                                 <a href="{{ url('mentor/instructor_profil') }}"
@@ -58,7 +58,7 @@
                     <div class="container page__container">
 
                         <div class="row">
-                            <div class="col-lg-8">                                
+                            <div class="col-lg-8">
                                 <div class="page-separator">
                                     <div class="page-separator__text">My Courses</div>
                                 </div>
@@ -107,18 +107,18 @@
                                                 <div class="media-left mr-12pt">
                                                 </div>
                                                 <div class="media-body">
-                                                    <div class="card-title mb-0">Sistem Saraf pada manusia</div>                                                   
+                                                    <div class="card-title mb-0">Sistem Saraf pada manusia</div>
                                                 </div>
                                             </div>
 
-                                            <p class="my-16pt text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id 
-                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur. 
-                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer 
-                                    at neque sapien. Praesent laoreet elementum maximus.</p>                        
+                                            <p class="my-16pt text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id
+                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur.
+                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer
+                                    at neque sapien. Praesent laoreet elementum maximus.</p>
 
                                             <div class="row align-items-center">
-                                                <div class="col-auto">                                                    
+                                                <div class="col-auto">
                                                     <div class="d-flex align-items-center mb-4pt">
                                                         <span class="material-icons icon-16pt text-50 mr-4pt">play_circle_outline</span>
                                                         <p class="flex text-50 lh-1 mb-0"><small>12 materi</small></p>
@@ -163,32 +163,32 @@
                                                             <span class="rating__item"><span class="material-icons">star</span></span>
                                                             <span class="rating__item"><span class="material-icons">star</span></span>
                                                             <span class="rating__item"><span class="material-icons">star_border</span></span>
-                                                        </div>                                                        
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="popoverContainer d-none">
                                             <div class="media">
-                                                <div class="media-left mr-12pt">                                                
+                                                <div class="media-left mr-12pt">
                                                 </div>
                                                 <div class="media-body">
-                                                    <div class="card-title mb-0">Sistem Saraf pada Manusia</div>                                                   
+                                                    <div class="card-title mb-0">Sistem Saraf pada Manusia</div>
                                                 </div>
                                             </div>
 
-                                            <p class="my-16pt text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id 
-                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur. 
-                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer 
+                                            <p class="my-16pt text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id
+                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur.
+                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer
                                     at neque sapien. Praesent laoreet elementum maximus.</p>
-                                           
+
                                             <div class="row align-items-center">
-                                                <div class="col-auto">                                                   
+                                                <div class="col-auto">
                                                     <div class="d-flex align-items-center mb-4pt">
                                                         <span class="material-icons icon-16pt text-50 mr-4pt">play_circle_outline</span>
                                                         <p class="flex text-50 lh-1 mb-0"><small>12 lessons</small></p>
-                                                    </div>                                                    
+                                                    </div>
                                                 </div>
                                                 <div class="col text-right">
                                                     <a href="instructor-edit-course.html"
@@ -196,9 +196,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                                                                   
+                                    </div>
 
-                                
+
                                 </div>
 
                             </div>
@@ -238,7 +238,7 @@
         <!-- // END Drawer -->
 
         <!-- jQuery -->
-        @include('member.script')
+        @include('member.layout.script')
 
     </body>
 

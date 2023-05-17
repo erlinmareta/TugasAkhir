@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class MentorController extends Controller
 {
@@ -28,7 +33,13 @@ class MentorController extends Controller
 
     public function InstructorProfil()
     {
-        return view ('mentor/instructor_profil');
+        $user = User::findOrFail(Auth::id());
+        return view ('mentor/instructor_profil', compact('user'));
+    }
+
+    public function UpdateProfilInstruktur()
+    {
+
     }
 
     public function InstructorQuiz()

@@ -20,11 +20,11 @@ class CekLogin
         if (Auth::check()) {
             if (Auth::user()->level == 'admin') {
                 return redirect('admin/dashboard');
-            } elseif (Auth::user()->level == 'instruktur'){
-                return redirect('mentor/dashboard');
+            } elseif (Auth::user()->level == 'mentor'){
+                return redirect('mentor/instructor_dashboard');
             } elseif (Auth::user()->level == 'member') {
-                return redirect('member/browse_course');
-            } 
+                return redirect('member/student_dashboard');
+            }
         }
         else {
             return $next($request);

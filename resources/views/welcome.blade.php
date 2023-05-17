@@ -1,11 +1,11 @@
 
 <!DOCTYPE html>
-<htmlearnly lang="en"
+<html lang="en"
       dir="ltr">
 
     <head>
 
-    @include('member.head')
+    @include('member.layout.head')
 
     </head>
 
@@ -34,22 +34,22 @@
 
             <!-- Header -->
 
-            @include('member.header')
+            @include('member.layout.header')
 
             <!-- // END Header -->
 
             <!-- Header Layout Content -->
-            
-            @include('member.browse_course')
+
+            @include('member.layout.browse_course')
 
             <!-- // END Header Layout Content -->
 
             <!-- Feedback -->
-            
-            @include('member.feedback')
 
-            
-            <!-- Footer -->        
+            @include('member.layout.feedback')
+
+
+            <!-- Footer -->
 
             <!-- // END Footer -->
 
@@ -62,7 +62,7 @@
              id="default-drawer">
             <div class="mdk-drawer__content">
                 <div class="sidebar sidebar-light sidebar-light-dodger-blue sidebar-left"
-                     data-perfect-scrollbar>                   
+                     data-perfect-scrollbar>
                 </div>
             </div>
         </div>
@@ -70,8 +70,8 @@
         <!-- // END Drawer -->
 
         <!-- jQuery -->
-        @include('member.script')
+        @include('member.layout.script')
 
     </body>
 
-</htmlearnly
+</html>

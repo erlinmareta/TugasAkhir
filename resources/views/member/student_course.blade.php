@@ -4,8 +4,8 @@
       dir="ltr">
 
     <head>
-        
-    @include('member.head')
+
+    @include('member.layout.head')
 
     </head>
 
@@ -34,7 +34,7 @@
 
             <!-- Header -->
 
-           @include('member.header2')
+           @include('member.layout.header2')
 
             <!-- // END Header -->
 
@@ -69,15 +69,15 @@
                 <div class="page-section">
                     <div class="container page__container">
                         <div class="row">
-                            <div class="col-lg-8">                               
-                                <div class="card">                                                                                                                                                  
+                            <div class="col-lg-8">
+                                <div class="card">
                                     <div class="card-body d-flex align-items-center justify-content-center fullbleed">
-                                        <div>                                            
+                                        <div>
                                             <div class="d-flex align-items-center mb-16pt justify-content-center">
-                                                <div class="d-flex align-items-center mr-16pt">                                                   
-                                            </div>                                                  
-                                        </div>                                        
-                                    <div class="d-flex align-items-center justify-content-center">                                                
+                                                <div class="d-flex align-items-center mr-16pt">
+                                            </div>
+                                        </div>
+                                    <div class="d-flex align-items-center justify-content-center">
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                                             </div>
                                             <div class="card-footer">
                                                 <div class="row justify-content-between">
-                                                    <div class="col-auto d-flex align-items-center">                                                        
+                                                    <div class="col-auto d-flex align-items-center">
                                                     </div>
                                                     <div class="col-auto d-flex align-items-center">
                                                         <span class="material-icons icon-16pt text-50 mr-4pt">play_circle_outline</span>
@@ -134,7 +134,7 @@
                                         </div>
                                         <div class="popoverContainer d-none">
                                             <div class="media">
-                                                <div class="media-left mr-12pt">                                               
+                                                <div class="media-left mr-12pt">
                                                 </div>
                                                 <div class="media-body">
                                                     <div class="card-title mb-0">Learn Sketch</div>
@@ -145,10 +145,10 @@
                                                 </div>
                                             </div>
 
-                                            <p class="my-16pt text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id 
-                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur. 
-                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer 
+                                            <p class="my-16pt text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id
+                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur.
+                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer
                                     at neque sapien. Praesent laoreet elementum maximus.</p>
 
                                             <div class="mb-16pt">
@@ -159,7 +159,7 @@
                                                 <div class="d-flex align-items-center">
                                                     <span class="material-icons icon-16pt text-50 mr-8pt">check</span>
                                                     <p class="flex text-50 lh-1 mb-0"><small>Peran sistem saraf pada manusia</small></p>
-                                                </div>                                                
+                                                </div>
                                             </div>
 
                                             <div class="my-32pt">
@@ -242,7 +242,7 @@
                                             </div>
                                             <div class="card-footer">
                                                 <div class="row justify-content-between">
-                                                   
+
                                                     <div class="col-auto d-flex align-items-center">
                                                         <span class="material-icons icon-16pt text-50 mr-4pt">play_circle_outline</span>
                                                         <p class="flex text-50 lh-1 mb-0"><small>12 lessons</small></p>
@@ -268,10 +268,10 @@
                                                 </div>
                                             </div>
 
-                                           <p class="my-16pt text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id 
-                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur. 
-                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer 
+                                           <p class="my-16pt text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id
+                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur.
+                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer
                                     at neque sapien. Praesent laoreet elementum maximus.</p>
 
                                             <div class="mb-16pt">
@@ -282,7 +282,7 @@
                                                 <div class="d-flex align-items-center">
                                                     <span class="material-icons icon-16pt text-50 mr-8pt">check</span>
                                                     <p class="flex text-50 lh-1 mb-0"><small>Peran sistem saraf pada manusia</small></p>
-                                                </div>                                                
+                                                </div>
                                             </div>
 
                                             <div class="my-32pt">
@@ -387,10 +387,10 @@
                                                 </div>
                                             </div>
 
-                                            <p class="my-16pt text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id 
-                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur. 
-                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer 
+                                            <p class="my-16pt text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id
+                                    felis blandit congue. Mauris interdum enim vel quam consequat efficitur.
+                                    In commodo magna eget augue interdum, at maximus metus lobortis. Integer
                                     at neque sapien. Praesent laoreet elementum maximus.</p>
 
                                             <div class="mb-16pt">
@@ -401,7 +401,7 @@
                                                 <div class="d-flex align-items-center">
                                                     <span class="material-icons icon-16pt text-50 mr-8pt">check</span>
                                                     <p class="flex text-50 lh-1 mb-0"><small>Peran sistem saraf pada manusia</small></p>
-                                                </div>                                                
+                                                </div>
                                             </div>
 
                                             <div class="my-32pt">
@@ -584,8 +584,8 @@
                                     </ul>
                                 </div>
                             </div>
-                           
-                                
+
+
             <!-- // END Header Layout Content -->
         </div>
         <!-- // END Header Layout -->
@@ -600,7 +600,7 @@
 
                     <!-- Sidebar Content -->
 
-                    @include('member.sidebar')
+                    @include('member.layout.sidebar')
 
                     <!-- // END Sidebar Content -->
 
@@ -611,7 +611,7 @@
         <!-- // END Drawer -->
 
         <!-- jQuery -->
-        @include('member.script')
+        @include('member.layout.script')
 
     </body>
 

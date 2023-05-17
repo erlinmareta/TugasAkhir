@@ -4,7 +4,7 @@
       dir="ltr">
 
     <head>
-    @include('member.head')
+    @include('member.layout.head')
 
     </head>
 
@@ -32,7 +32,7 @@
 
             <!-- Header -->
 
-            @include('member.header2')
+            @include('member.layout.header2')
 
             <!-- // END Header -->
 
@@ -106,9 +106,9 @@
                                     </div>
                                 </div>
 
-                               
-                                
-                                
+
+
+
             <!-- // END Header Layout Content -->
 
             <!-- Footer -->
@@ -129,7 +129,7 @@
         <!-- // END Drawer -->
 
         <!-- jQuery -->
-        @include('member.script')
+        @include('member.layout.script')
 
     </body>
 
