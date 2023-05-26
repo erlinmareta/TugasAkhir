@@ -8,6 +8,10 @@ use App\Http\Controllers\MentorController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\MateriController;
+use App\Http\Controllers\KelasSayaController;
+use App\Http\Controllers\KategoriController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,14 +37,13 @@ Route::middleware(['cekLogin'])->group(function(){
 
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
-Route::prefix('member')->group(function(){
+Route::prefix('member')->middleware(['auth', 'cekLevel:member'])->group(function(){
     Route::get('/dashboard',[MemberController::class,'index']);
     Route::get('/home',[MemberController::class,'Home']);
-    Route::get('/browse_course',[CourseController::class,'BrowseCourse']);
-    Route::get('/class_detail',[CourseController::class,'ClassDetail']);
-    Route::get('/quis_student',[QuizController::class,'TakeQuiz']);
+    Route::get('/class_detail',[MemberController::class,'ClassDetail']);
     Route::get('/mentor_profil',[MemberController::class,'MentorProfil']);
     Route::get('/student_course',[CourseController::class,'StudentCourse']);
+    Route::get('/browse_course',[CourseController::class,'BrowseCourse']);
     Route::get('/student_quiz',[CourseController::class,'StudentQuiz']);
     Route::get('/student_profil',[MemberController::class,'StudentProfil']);
     Route::get('/student_dashboard',[MemberController::class,'StudentDashboard']);
@@ -49,16 +52,36 @@ Route::prefix('member')->group(function(){
 });
 
 //mentor
+Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function(){
+    Route::get('/instructor_dashboard',[MentorController::class,'InstructorDashboard']);
+    Route::get('/profil',[MentorController::class,'InstructorProfil']);
+    Route::put('/profil', [MentorController::class, 'UpdateProfil']);
+    Route::get('/kelas/kelas', [KelasController::class, 'Kelas']);
+    Route::get('/kelas/tambah', [KelasController::class, 'TambahKelas']);
+    Route::get('/hapus/{id}', [KelasController::class,'hapus']);
+    Route::get('/kelas/edit/{id}', [KelasController::class,'edit']);
+    Route::post('/kelas/store', [KelasController::class, 'store']);
+    Route::put('/kelas/{id}', [KelasController::class, 'update']);
+    Route::get('/materi/materi', [MateriController::class, 'materi']);
+    Route::get('/materi/tambah', [MateriController::class, 'TambahMateri']);
+    Route::post('/materi/store', [MateriController::class, 'store']);
+    Route::get('/materi/edit/{id}', [MateriController::class,'edit']);
+    Route::put('/materi/{id}', [MateriController::class, 'update']);
+    Route::get('/hapus/{id}', [MateriController::class,'hapus']);
+    Route::get('/kelas_saya/kelas_saya', [KelasSayaController::class, 'KelasSaya']);
+    Route::get('/kelas_saya/detail/{id}', [KelasSayaController::class, 'DetailKelas']);
 
-    Route::get('mentor/instructor_dashboard',[MentorController::class,'InstructorDashboard']);
-    Route::get('mentor/instructor_course',[MentorController::class,'InstructorCourse']);
-    Route::get('mentor/edit_course',[MentorController::class,'EditCourse']);
-    Route::get('mentor/instructor_profil',[MentorController::class,'InstructorProfil']);
-    Route::get('mentor/instructor_quiz',[MentorController::class,'InstructorQuiz']);
-    Route::get('mentor/edit_quiz',[MentorController::class,'EditQuiz']);
-
+});
 //admin
-
-Route::get('admin/dashboard',[AdminController::class,'index'])->name('dashboard.admin');
-Route::get('admin/akun/user',[AkunController::class,'akun']);
-Route::get('admin/akun/tambah',[AkunController::class,'tambahAkun']);
+Route::prefix('admin')->middleware(['auth', 'cekLevel:admin'])->group(function(){
+    Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard.admin');
+    Route::get('/akun/user',[AkunController::class,'akun']);
+    Route::get('/akun/tambah',[AkunController::class,'tambahAkun']);
+    Route::get('/akun/hapus/{id}', [AkunController::class,'hapus']);
+    Route::get('/kategori/kategori',[KategoriController::class,'Kategori']);
+    Route::get('/kategori/tambah',[KategoriController::class,'TambahKategori']);
+    Route::post('/kategori/store', [KategoriController::class, 'store']);
+    Route::get('/kategori/edit/{id}', [KategoriController::class,'edit']);
+    Route::put('/kategori/{id}', [KategoriController::class, 'update']);
+    Route::get('/hapus/{id}', [KategoriController::class,'hapus']);
+});

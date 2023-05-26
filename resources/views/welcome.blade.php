@@ -5,7 +5,7 @@
 
     <head>
 
-    @include('member.layout.head')
+    @include('layout.head')
 
     </head>
 
@@ -34,19 +34,19 @@
 
             <!-- Header -->
 
-            @include('member.layout.header')
+            @include('layout.header')
 
             <!-- // END Header -->
 
             <!-- Header Layout Content -->
 
-            @include('member.layout.browse_course')
+            @include('layout.browse_course')
 
             <!-- // END Header Layout Content -->
 
             <!-- Feedback -->
 
-            @include('member.layout.feedback')
+            @include('layout.feedback')
 
 
             <!-- Footer -->
@@ -70,7 +70,7 @@
         <!-- // END Drawer -->
 
         <!-- jQuery -->
-        @include('member.layout.script')
+        @include('layout.script')
 
     </body>
 

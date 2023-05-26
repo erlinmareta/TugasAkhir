@@ -24,7 +24,7 @@
         <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Data Master</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="layout-default.html">Kategori</a></li>
+              <li><a class="nav-link" href="{{ url('admin/kategori/kategori') }}">Kategori</a></li>
               <li><a class="nav-link" href="layout-transparent.html">Syarat & Ketentuan</a></li>
             </ul>
           </li>

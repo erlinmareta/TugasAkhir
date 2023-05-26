@@ -31,9 +31,6 @@
       <div class="card">
         <div class="card-header">
           <h4>User Table</h4>
-          <div class="card-header-action">
-                  <a href="{{url ('admin/akun/tambah')}}" class="badge badge-success">Tambah</a>
-                </div>
               </div>
         <div class="card-body p-0">
           <div class="table-responsive">
@@ -57,7 +54,7 @@
                   <td>{{$item->level }}</td>
                   <td>
                     <a class="btn btn-sm btn-success-outline" href="" title="Edit"><span class="fa fa-edit"></span> Edit |</a>
-                    <a class="btn btn-sm btn-success-outline" href="" title="Hapus"><span class="fa fa-trash"></span> Hapus |</a>
+                    <a class="btn btn-sm btn-success-outline" href="{{ url('admin/akun/hapus/' .$item->id) }}" title="Hapus"><span class="fa fa-trash"></span> Hapus |</a>
                     <button class="btn btn-sm btn-success-outline" data-toggle="modal" data-target="#myModal{{ $item->id }}s" ><span class="fa fa-info-circle"></span></button>
                 </td>
                 </tr>

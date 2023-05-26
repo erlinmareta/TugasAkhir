@@ -48,6 +48,13 @@
           </div>
         </div>
         <div class="input-group mb-3">
+            <select class="form-control select2" style="width: 100%;" name="level">
+              <option selected>Registrasi sebagai</option>
+              <option value="Mentor">Mentor</option>
+              <option value="Member">Member</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
           <input type="password" name="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">

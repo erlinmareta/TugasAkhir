@@ -43,7 +43,7 @@ class LoginController extends Controller
         'email' => $request->email,
         'password' => bcrypt($request->password),
         'remember_token' => str::random(60),
-        'level' => "member"
+        'level' => $request->level,
        ]);
 
        return redirect ('/login');

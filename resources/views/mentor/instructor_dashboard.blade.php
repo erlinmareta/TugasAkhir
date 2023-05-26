@@ -1,136 +1,123 @@
 
 <!DOCTYPE html>
-<html lang="en"
-      dir="ltr">
+<html lang="en">
 
-    <head>
-    @include('member.layout.head')
+<head>
+    <title>Dashboard Mentor</title>
+    @include('mentor.layout.head')
+</head>
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    @include('mentor.layout.navbar')
+    <!-- partial -->
 
-    </head>
+    <div class="container-fluid page-body-wrapper">
 
-    <body class="layout-sticky-subnav layout-learnly ">
-        <div class="preloader">
-            <div class="sk-chase">
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-                <div class="sk-chase-dot"></div>
-            </div>
+      <!-- partial:partials/_settings-panel.html -->
+      @include('mentor.layout.setting')
 
-            <!-- <div class="sk-bounce">
-    <div class="sk-bounce-dot"></div>
-    <div class="sk-bounce-dot"></div>
-  </div> -->
-
-            <!-- More spinner examples at https://github.com/tobiasahlin/SpinKit/blob/master/examples.html -->
         </div>
+      </div>
+      <!-- partial -->
 
-        <!-- Header Layout -->
-        <div class="mdk-header-layout js-mdk-header-layout">
+      <!-- partial:partials/_sidebar.html -->
+      @include('mentor.layout.sidebar')
 
-            <!-- Header -->
-
-            @include('member.layout.header2')
-
-            <!-- // END Header -->
-
-            <!-- Header Layout Content -->
-            <div class="mdk-header-layout__content page-content ">
-
-                <div class="page-section bg-alt border-bottom-2">
-                    <div class="container page__container">
-
-                        <div class="d-flex flex-column flex-lg-row align-items-center">
-                            <div class="flex d-flex flex-column align-items-center align-items-lg-start mb-16pt mb-lg-0 text-center text-lg-left">
-                                <h1 class="h2 mb-8pt">Dashboard</h1>
-                                <div>
-
-                                    <span class="chip chip-outline-secondary d-inline-flex align-items-center"
-                                          data-toggle="tooltip"
-                                          data-title="Earnings"
-                                          data-placement="bottom">
-                                        <i class="material-icons icon--left">trending_up</i> &dollar;12.3k
-                                    </span>
-                                    <span class="chip chip-outline-secondary d-inline-flex align-items-center"
-                                          data-toggle="tooltip"
-                                          data-title="Sales"
-                                          data-placement="bottom">
-                                        <i class="material-icons icon--left">receipt</i> 264
-                                    </span>
-
-                                </div>
-                            </div>
-                            <div class="ml-lg-16pt">
-                                <a href="{{ url('mentor/instructor_profil') }}"
-                                   class="btn btn-light">My Profile</a>
-                            </div>
-                        </div>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="row">
+                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                  <h3 class="font-weight-bold">Welcome Aamir</h3>
+                  <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+                </div>
+                <div class="col-12 col-xl-4">
+                 <div class="justify-content-end d-flex">
+                  <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                  </div>
+                 </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card tale-bg">
+                <div class="card-people mt-auto">
+                  <img src="../skydash/images/dashboard/people.svg" alt="people">
+                  <div class="weather-info">
+                    <div class="d-flex">
 
                     </div>
+                  </div>
                 </div>
+              </div>
+            </div>
+            <div class="col-md-6 grid-margin transparent">
+              <div class="row">
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                  <div class="card card-tale">
+                    <div class="card-body">
+                      <p class="mb-4">Today’s Bookings</p>
+                      <p class="fs-30 mb-2">4006</p>
+                      <p>10.00% (30 days)</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                  <div class="card card-dark-blue">
+                    <div class="card-body">
+                      <p class="mb-4">Total Bookings</p>
+                      <p class="fs-30 mb-2">61344</p>
+                      <p>22.00% (30 days)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                  <div class="card card-light-blue">
+                    <div class="card-body">
+                      <p class="mb-4">Number of Meetings</p>
+                      <p class="fs-30 mb-2">34040</p>
+                      <p>2.00% (30 days)</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 stretch-card transparent">
+                  <div class="card card-light-danger">
+                    <div class="card-body">
+                      <p class="mb-4">Number of Clients</p>
+                      <p class="fs-30 mb-2">47033</p>
+                      <p>0.22% (30 days)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+        </div>
 
-                <div class="page-section">
-                    <div class="container page__container">
+      <!-- content-wrapper ends -->
 
-                        <div class="row">
-                            <div class="col-lg-8">
+      <!-- partial:partials/_footer.html -->
+      @include('mentor.layout.footer')
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
 
-                                <div class="mb-24pt">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="card border-1 border-left-3 border-left-accent text-center mb-lg-0">
-                                                <div class="card-body">
-                                                    <h4 class="h2 mb-0">&dollar;1,569.00</h4>
-                                                    <div>Earnings this month</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="card text-center mb-lg-0">
-                                                <div class="card-body">
-                                                    <h4 class="h2 mb-0">&dollar;3,917.80</h4>
-                                                    <div>Account Balance</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="card text-center mb-lg-0">
-                                                <div class="card-body">
-                                                    <h4 class="h2 mb-0">&dollar;10,211.50</h4>
-                                                    <div>Total Sales</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
-            <!-- // END Header Layout Content -->
-
-            <!-- Footer -->
-
-        <!-- // END Header Layout -->
-
-        <!-- Drawer -->
-
-        <div class="mdk-drawer js-mdk-drawer"
-             id="default-drawer">
-            <div class="mdk-drawer__content">
-                <div class="sidebar sidebar-light sidebar-light-dodger-blue sidebar-left"
-                     data-perfect-scrollbar>
-
-                    <!-- Sidebar Content -->
-
-                    @include('mentor.sidebar')
-        <!-- // END Drawer -->
-
-        <!-- jQuery -->
-        @include('member.layout.script')
-
-    </body>
+  @include('mentor.layout.script')
+  <!-- End custom js for this page-->
+</body>
 
 </html>
+

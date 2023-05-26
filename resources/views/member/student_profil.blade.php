@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 
 <head>
-    @include('member.layout.head')
+    @include('layout.head')
 
 </head>
 
@@ -31,7 +31,7 @@
 
         <!-- Header -->
 
-        @include('member.layout.header2')
+        @include('layout.header2')
 
         <!-- // END Header -->
 
@@ -209,12 +209,12 @@
 
                                     <!-- Sidebar Content -->
 
-                                    @include('member.layout.sidebar')
+                                    @include('member.sidebar')
 
                                     <!-- // END Drawer -->
 
                                     <!-- jQuery -->
-                                    @include('member.layout.script')
+                                    @include('layout.script')
 
                                 </body>
                                 </html>

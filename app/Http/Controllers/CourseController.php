@@ -21,8 +21,4 @@ class CourseController extends Controller
         return view('member/student_course');
     }
 
-    public function StudentQuiz()
-    {
-        return view('member/student_quiz');
-    }
 }

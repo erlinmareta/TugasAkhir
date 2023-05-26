@@ -27,6 +27,12 @@ class MemberController extends Controller
         return view('member/home');
     }
 
+    public function ClassDetail()
+    {
+        return view('member/class_detail');
+    }
+
+
     public function StudentDashboard()
     {
         return view ('member/student_dashboard');
