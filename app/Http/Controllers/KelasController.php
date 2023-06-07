@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kelas;
+use App\Models\Kategori;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -12,12 +13,16 @@ class KelasController extends Controller
 {
     public function Kelas(){
 
-        $kelas = DB::table('kelas')->get();
-        return view('mentor/kelas/kelas', ['kelas' => $kelas]);
+        $kategori = Kategori::all();
+		$kelas = Kelas::get();
+        return view('mentor/kelas/kelas', ['kelas' => $kelas, 'kategori' => $kategori]);
     }
 
-    public function TambahKelas(){
-        return view('mentor/kelas/tambah');
+    public function TambahKelas()
+    {
+        $kategori = Kategori::all();
+		$kelas = Kelas::all();
+        return view('mentor/kelas/tambah', ['kategori' => $kategori]);
     }
 
     public function store(Request $request)
@@ -28,6 +33,7 @@ class KelasController extends Controller
 
         Kelas::create([
             'user_id' => Auth::user()->id,
+            'kategori_id' => $request->kategori_id,
             'judul' => $request->judul,
             'gambar' =>$data,
             'deskripsi' =>$request->deskripsi,
@@ -39,8 +45,9 @@ class KelasController extends Controller
 
     public function edit($id)
     {
+        $kategori = Kategori::get();
         $kelas = Kelas::where("id", $id)->first();
-        return view('mentor/kelas/edit',['item' => $kelas]);
+        return view('mentor/kelas/edit',['item' => $kelas , 'kategori' => $kategori]);
 
     }
 
@@ -57,6 +64,7 @@ class KelasController extends Controller
         }
 
         Kelas::where("id", $id)->update([
+            'kategori_id' => $request->kategori_id,
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'status' => $request->status,

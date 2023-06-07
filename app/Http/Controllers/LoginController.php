@@ -24,7 +24,7 @@ class LoginController extends Controller
             if (Auth::user()->level == 'admin') {
                 return redirect('admin/dashboard');
             } else if (Auth::user()->level == 'mentor'){
-                return redirect('mentor/instructor_dashboard');
+                return redirect('mentor/dashboard');
             } else {
                 return redirect('member/student_dashboard');
             }

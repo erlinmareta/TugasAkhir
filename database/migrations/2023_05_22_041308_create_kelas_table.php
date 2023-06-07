@@ -20,7 +20,7 @@ class CreateKelasTable extends Migration
             $table->string('judul');
             $table->string('gambar')->nullable();
             $table->string('deskripsi')->nullable();
-            $table->enum("status", ['pending', 'sukses', 'cancel'])->nullable();
+            $table->enum("status", ['pending', 'proses' , 'sukses', 'cancel'])->nullable();
             $table->timestamps();
         });
     }

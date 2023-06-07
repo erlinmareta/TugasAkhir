@@ -68,13 +68,6 @@
                                     <input name="deskripsi" id="deskripsi" type="text" class="form-control" value="{{ $item->deskripsi }}" required="required">
                                   </div>
                                 <div class="form-group">
-                                    <label for="status">Status</label>
-                                    <select class="form-control" id="status" name="status">
-                                        <option value="pending" {{$item->status=="pending"?"selected" : ""}}>
-                                    Pending</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
                                     <label >Urutan</label>
                                     <input name="urutan" id="urutan" type="text" class="form-control" value="{{ $item->urutan }}" required="required">
                                   </div>

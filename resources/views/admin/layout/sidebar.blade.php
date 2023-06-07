@@ -29,6 +29,12 @@
             </ul>
           </li>
 
-        <li><a class="nav-link" href="credits.html"><i class="fas fa-pencil-ruler"></i> <span>Credits</span></a></li>
+          <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Data Kelas</span></a>
+            <ul class="dropdown-menu">
+              <li><a class="nav-link" href="{{ url('admin/kelas/index') }}">Kelas Masuk</a></li>
+              <li><a class="nav-link" href="{{ url('admin/kelas/berhasil') }}">Kelas Berhasil</a></li>
+            </ul>
+          </li>
       </ul>
   </div>

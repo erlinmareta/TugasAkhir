@@ -12,6 +12,8 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\KelasSayaController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KelasAdminController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,8 +55,8 @@ Route::prefix('member')->middleware(['auth', 'cekLevel:member'])->group(function
 
 //mentor
 Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function(){
-    Route::get('/instructor_dashboard',[MentorController::class,'InstructorDashboard']);
-    Route::get('/profil',[MentorController::class,'InstructorProfil']);
+    Route::get('/dashboard',[MentorController::class,'MentorDashboard']);
+    Route::get('/profil',[MentorController::class,'MentorProfil']);
     Route::put('/profil', [MentorController::class, 'UpdateProfil']);
     Route::get('/kelas/kelas', [KelasController::class, 'Kelas']);
     Route::get('/kelas/tambah', [KelasController::class, 'TambahKelas']);
@@ -67,9 +69,9 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
     Route::post('/materi/store', [MateriController::class, 'store']);
     Route::get('/materi/edit/{id}', [MateriController::class,'edit']);
     Route::put('/materi/{id}', [MateriController::class, 'update']);
-    Route::get('/hapus/{id}', [MateriController::class,'hapus']);
     Route::get('/kelas_saya/kelas_saya', [KelasSayaController::class, 'KelasSaya']);
     Route::get('/kelas_saya/detail/{id}', [KelasSayaController::class, 'DetailKelas']);
+    Route::get('/kelas_saya/publish/{id}', [KelasSayaController::class, 'KelasPublish'])->name('mentor.kelas_saya.publish');
 
 });
 //admin
@@ -84,4 +86,10 @@ Route::prefix('admin')->middleware(['auth', 'cekLevel:admin'])->group(function()
     Route::get('/kategori/edit/{id}', [KategoriController::class,'edit']);
     Route::put('/kategori/{id}', [KategoriController::class, 'update']);
     Route::get('/hapus/{id}', [KategoriController::class,'hapus']);
+    Route::get('/kelas/index',[KelasAdminController::class,'index']);
+    Route::get('/kelas/detail/{id}',[KelasAdminController::class,'Detail'])->name('admin.kelasDetail');
+    Route::get('/kelas/{id}/publish', [KelasAdminController::class, 'KelasPublish']);
+    Route::get('/kelas/berhasil',[KelasAdminController::class,'KelasBerhasil']);
+    Route::get('/profil_admin',[AdminController::class,'profil']);
+    Route::put('/profil/{id}',[AdminController::class,'ProfilUpdate']);
 });

@@ -21,7 +21,6 @@ class CreateMateriTable extends Migration
             $table->string('isi_materi')->nullable();
             $table->string('deskripsi')->nullable();
             $table->string('urutan')->nullable();
-            $table->string('status');
             $table->timestamps();
         });
     }

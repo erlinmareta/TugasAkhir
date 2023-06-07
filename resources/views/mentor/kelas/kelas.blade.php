@@ -41,6 +41,7 @@
                           <?php $no=1; ?>
                           <th>No</th>
                           <th>Judul</th>
+                          <th>Kategori</th>
                           <th>Gambar</th>
                           <th>Deskripsi</th>
                           <th>Status</th>
@@ -52,12 +53,16 @@
                             @foreach ($kelas as $item )
                             <td>{{ $no++ }}</td>
                             <td>{{$item->judul}}</td>
+                            <td>{{$item->kategori->nama}}</td>
                             <td><img src="{{ url('/storage/' .$item->gambar)}}"         ></td>
                             <td>{{$item->deskripsi}}</td>
                             <td>{{$item->status}}</td>
                             <td>
                                 <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/edit/' .$item->id) }}" title="Edit"><span class="fa fa-edit"></span> Edit |</a>
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' .$item->id) }}" title="Hapus"><span class="fa fa-trash"></span> Hapus |</a>
+                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' .$item->id) }}" title="Hapus">
+                                    <span class="fa fa-trash"></span>
+                                    Hapus
+                                |</a>
                             </td>
                         </tr>
                       </tbody>
@@ -72,6 +77,8 @@
   <!-- container-scroller -->
 
   @include('mentor.layout.script')
+
+  @include('sweetalert::alert')
   <!-- End custom js for this page-->
 </body>
 

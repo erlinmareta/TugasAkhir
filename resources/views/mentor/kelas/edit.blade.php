@@ -38,6 +38,18 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" name="gambarLama" value="{{ $item->gambar }}">
                                 <div class="form-group">
+                                    <label class="sr-only" for="kategori_id">Nama Kategori</label>
+                                    <select name="kategori_id" class="form-control mb-2 mr-sm-2" id="kategori_id" required="required">
+                                        <option value="">-- Pilih Kategori --</option>
+                                        @foreach ($kategori as $kategori_item)
+                                            <option value="{{ $kategori_item->id }}"
+                                                {{ $item->kelas_id == $kategori_item->id ? 'selected' : '' }}>
+                                                {{ $kategori_item->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="judul">Judul</label>
                                     <input type="text" class="form-control" id="judul" name="judul"
                                         value="{{ $item->judul }}" required="required">

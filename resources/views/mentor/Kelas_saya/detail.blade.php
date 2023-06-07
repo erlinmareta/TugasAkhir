@@ -43,7 +43,6 @@
                           <th>Kelas</th>
                           <th>Isi Materi</th>
                           <th>Deskripsi</th>
-                          <th>Status</th>
                           <th>Urutan</th>
                         </tr>
                       </thead>
@@ -59,7 +58,6 @@
                                 </video>
                             </td>
                             <td>{{$item->deskripsi}}</td>
-                            <td>{{$item->status}}</td>
                             <td>{{$item->urutan}}</td>
                         </tr>
                       </tbody>

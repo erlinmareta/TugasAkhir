@@ -89,7 +89,10 @@ class MateriController extends Controller
     public function hapus($id)
     {
         DB::table('materi')->where('id',$id)->delete();
-        return back()->with('success', 'Data Berhasil dihapus!');
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        return back();
     }
 
 }

@@ -36,6 +36,15 @@
                 <input name="judul" type="text" class="form-control" id="exampleInputName1" placeholder="Masukkan Judul">
               </div>
               <div class="form-group">
+                <label for="exampleSelectGender">Kategori</label>
+                <select type="text" name="kategori_id" class="form-control mb-2 mr-sm-2" id="kategori_id" required="required">
+                    <option >Pilih Kategori</option>
+                    @foreach ($kategori as $item)
+                    <option value="{{ $item->id}}">{{$item->nama}}</option>
+                    @endforeach
+                 </select>
+                </div>
+              <div class="form-group">
                 <label for="foto">Gambar</label><br>
                 <input type="file" name="gambar" id="gambar" accept="image/*">
                 </div>

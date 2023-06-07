@@ -9,16 +9,7 @@ use App\Models\Kelas;
 class Materi extends Model
 {
     protected $table = "materi" ;
-    protected $fillable = [
-        'id',
-        'user_id',
-        'kelas_id',
-        'judul',
-        'isi_materi',
-        'deskripsi',
-        'urutan',
-        'status',
-    ];
+    protected $guarded = [''];
 
     public function kelas()
     {

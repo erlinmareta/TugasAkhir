@@ -44,7 +44,6 @@
                           <th>Kelas</th>
                           <th>Isi Materi</th>
                           <th>Deskripsi</th>
-                          <th>Status</th>
                           <th>Urutan</th>
                           <th>Action</th>
                         </tr>
@@ -61,11 +60,10 @@
                                 </video>
                             </td>
                             <td>{{$item->deskripsi}}</td>
-                            <td>{{$item->status}}</td>
                             <td>{{$item->urutan}}</td>
                             <td>
                                 <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/materi/edit/' .$item->id) }}" title="Edit"><span class="fa fa-edit"></span> Edit |</a>
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' .$item->id) }}" title="Hapus"><span class="fa fa-trash"></span> Hapus |</a>
+                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' .$item->id) }}" data-confirm-delete="true"><span class="fa fa-trash"></span> Hapus |</a>
                             </td>
                         </tr>
                       </tbody>
@@ -80,6 +78,9 @@
   <!-- container-scroller -->
 
   @include('mentor.layout.script')
+
+  @include('sweetalert::alert')
+
   <!-- End custom js for this page-->
 </body>
 

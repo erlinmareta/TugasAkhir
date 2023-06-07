@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Kelas;
+use App\Models\Materi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -11,14 +13,13 @@ use Illuminate\Support\Facades\Storage;
 
 class MentorController extends Controller
 {
-    public function index()
+    public function MentorDashboard()
     {
-        return view ('mentor/dashboard');
-    }
-
-    public function InstructorDashboard()
-    {
-        return view ('mentor/instructor_dashboard');
+        $user = User::where('level', 'member')->count();
+        $kelas = Kelas::count();
+        $materi = Materi::count();
+        $kelasberhasil = Kelas::where('status', 'sukses')->count();
+        return view ('mentor/dashboard', compact('user', 'kelas', 'materi', 'kelasberhasil'));
     }
 
     public function MentorCourse()
@@ -31,7 +32,7 @@ class MentorController extends Controller
         return view ('mentor/edit_course');
     }
 
-    public function InstructorProfil()
+    public function MentorProfil()
     {
         $user = User::findOrFail(Auth::id());
         return view ('mentor/profil', compact('user'));

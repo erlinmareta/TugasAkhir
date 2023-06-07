@@ -38,7 +38,7 @@
               <div class="form-group">
                 <label for="exampleSelectGender">Kelas</label>
                 <select type="text" name="kelas_id" class="form-control mb-2 mr-sm-2" id="kelas_id" required="required">
-                    <option >Pilih Kelas</option>
+                    <option value="">Pilih Kelas</option>
                     @foreach ($kelas as $item)
                     <option value="{{ $item->id}}">{{$item->judul}}</option>
                     @endforeach
@@ -52,12 +52,6 @@
                     <label for="exampleInputName1">Deskripsi</label>
                     <input name="deskripsi" type="text" class="form-control" id="deskripsi" placeholder="Masukkan Deskripsi">
                 </div>
-                <div class="form-group">
-                    <label for="exampleSelectGender">Status</label>
-                      <select class="form-control" id="status" name="status">
-                        <option>Pending</option>
-                      </select>
-                    </div>
                 <div class="form-group">
                     <label for="exampleInputName1">Urutan</label>
                     <input name="urutan" type="text" class="form-control" id="urutan" placeholder="Masukkan Urutan">

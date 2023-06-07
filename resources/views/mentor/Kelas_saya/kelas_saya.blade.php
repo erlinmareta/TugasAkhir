@@ -31,8 +31,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Basic Table</h4>
-                  <a href="{{ url('mentor/kelas/tambah') }}" class="btn btn-light">Tambah</a>
+                  <h4 class="card-title">Daftar Kelas Saya</h4>
                   </p>
                   <div class="table-responsive">
                     <table class="table">
@@ -57,7 +56,7 @@
                             <td>{{$item->status}}</td>
                             <td>
                                 <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas_saya/detail/' .$item->id) }}" title="detail"><span class="fa fa-edit"></span> Detail |</a>
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/' .$item->id) }}" title="publish"><span class="fa fa-trash"></span> Publish |</a>
+                                <a class="btn btn-sm btn-success-outline" href="{{ route('mentor.kelas_saya.publish', $item->id) }}" title="publish"><span class="fa fa-trash"></span> Publish |</a>
                             </td>
                         </tr>
                       </tbody>
@@ -72,6 +71,8 @@
   <!-- container-scroller -->
 
   @include('mentor.layout.script')
+
+  @include('sweetalert::alert')
   <!-- End custom js for this page-->
 </body>
 

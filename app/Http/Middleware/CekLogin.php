@@ -21,7 +21,7 @@ class CekLogin
             if (Auth::user()->level == 'admin') {
                 return redirect('admin/dashboard');
             } elseif (Auth::user()->level == 'mentor'){
-                return redirect('mentor/instructor_dashboard');
+                return redirect('mentor/dashboard');
             } elseif (Auth::user()->level == 'member') {
                 return redirect('member/student_dashboard');
             }
