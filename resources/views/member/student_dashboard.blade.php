@@ -37,13 +37,6 @@
                             <div class="flex d-flex flex-column align-items-center align-items-lg-start mb-16pt mb-lg-0 text-center text-lg-left">
                                 <h1 class="h2 mb-8pt">Dashboard  {{ Auth::user()->level }}</h1>
                                 <div>
-
-                                    <span class="chip chip-outline-secondary d-inline-flex align-items-center"
-                                          data-toggle="tooltip"
-                                          data-title="Experience IQ"
-                                          data-placement="bottom">
-                                        <i class="material-icons icon--left">opacity</i> 2,300 points
-                                    </span>
                                 </div>
                             </div>
                             <div class="ml-lg-16pt">
@@ -101,11 +94,11 @@
                                                 <div class="row justify-content-between">
                                                     <div class="col-auto d-flex align-items-center">
                                                         <span class="material-icons icon-16pt text-50 mr-4pt">access_time</span>
-                                                        <p class="flex text-50 lh-1 mb-0"><small>6 hours</small></p>
+                                                        <p class="flex text-50 lh-1 mb-0"><small>6 jam</small></p>
                                                     </div>
                                                     <div class="col-auto d-flex align-items-center">
                                                         <span class="material-icons icon-16pt text-50 mr-4pt">play_circle_outline</span>
-                                                        <p class="flex text-50 lh-1 mb-0"><small>12 lessons</small></p>
+                                                        <p class="flex text-50 lh-1 mb-0"><small>12 materi</small></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -135,12 +128,11 @@
                                                     </div>
                                                     <div class="d-flex align-items-center">
                                                         <span class="material-icons icon-16pt text-50 mr-4pt">play_circle_outline</span>
-                                                        <p class="flex text-50 lh-1 mb-0"><small>12 lessons</small></p>
+                                                        <p class="flex text-50 lh-1 mb-0"><small>12 materi</small></p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex align-items-center justify-content-center">
-                                                    <a href="student-take-lesson.html" class="btn btn-primary mr-8pt">Resume</a>
-                                                    <a href="student-take-course.html" class="btn btn-outline-secondary ml-0">Start over</a>
+                                                    <a href="student-take-lesson.html" class="btn btn-primary mr-8pt">Lanjutkan</a>
                                                 </div>
                                             </div>
 
@@ -161,7 +153,7 @@
 
                     <!-- Sidebar Content -->
 
-                    @include('member.sidebar')
+                    @include('layout.sidebar')
 
                     <!-- // END Sidebar Content -->
 

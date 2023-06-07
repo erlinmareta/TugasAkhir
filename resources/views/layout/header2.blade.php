@@ -1,4 +1,4 @@
-<div id="header"
+                <div id="header"
                  class="mdk-header js-mdk-header mb-0"
                  data-fixed
                  data-effects="waterfall">
@@ -12,11 +12,8 @@
                             <!-- Navbar Brand -->
                             <a href="index.html"
                                class="navbar-brand mr-16pt">
-
                                 <span class="avatar avatar-sm navbar-brand-icon mr-0 mr-lg-8pt">
-
-
-                                    </span>
+                            </span>
                                 <span class="d-none d-lg-block">IndLearn</span>
                             </a>
                             <!-- Navbar toggler -->
@@ -29,7 +26,7 @@
 
                             <ul class="nav navbar-nav d-none d-sm-flex flex justify-content-start ml-8pt">
                                 <li class="nav-item active">
-                                    <a href="{{ url('member/home') }}"
+                                    <a href="{{ url('/') }}"
                                        class="nav-link">Home</a>
                                 </li>
                                 @endauth

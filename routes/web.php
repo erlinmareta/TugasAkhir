@@ -13,6 +13,7 @@ use App\Http\Controllers\MateriController;
 use App\Http\Controllers\KelasSayaController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KelasAdminController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +26,8 @@ use App\Http\Controllers\KelasAdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/',[HomeController::class,'Home']);
 
-});
 
 Route::middleware(['cekLogin'])->group(function(){
     Route::get('/login',[LoginController::class,'login'])->name('login');
@@ -41,7 +40,7 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
 Route::prefix('member')->middleware(['auth', 'cekLevel:member'])->group(function(){
     Route::get('/dashboard',[MemberController::class,'index']);
-    Route::get('/home',[MemberController::class,'Home']);
+    Route::get('/welcome',[HomeController::class,'Home']);
     Route::get('/class_detail',[MemberController::class,'ClassDetail']);
     Route::get('/mentor_profil',[MemberController::class,'MentorProfil']);
     Route::get('/student_course',[CourseController::class,'StudentCourse']);

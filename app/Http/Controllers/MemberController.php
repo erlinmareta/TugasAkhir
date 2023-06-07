@@ -22,11 +22,6 @@ class MemberController extends Controller
         return view ('member/mentor_profil');
     }
 
-    public function Home()
-    {
-        return view('member/home');
-    }
-
     public function ClassDetail()
     {
         return view('member/class_detail');

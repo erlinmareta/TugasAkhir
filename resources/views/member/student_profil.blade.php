@@ -37,10 +37,8 @@
 
         <!-- Header Layout Content -->
         <div class="mdk-header-layout__content page-content ">
-
             <div class="page-section bg-alt border-bottom-2">
                 <div class="container page__container">
-
                     <div class="d-flex flex-column flex-lg-row align-items-center">
                         <div
                         class="d-flex flex-column flex-md-row align-items-center flex mb-16pt mb-lg-0 text-center text-md-left">
@@ -58,14 +56,9 @@
                         </div>
                         <div class="flex">
                             <h1 class="h2 mb-8pt">{{ Auth::user()->name }}</h1>
-
                         </div>
                     </div>
-                    <div class="ml-lg-16pt">
-                        <a href="" class="btn btn-light">Follow</a>
-                    </div>
                 </div>
-
             </div>
         </div>
 
@@ -184,12 +177,8 @@
                         <h4>About me</h4>
                         <p class="text-70 mb-24pt">{{ old('deskripsi', Auth::user()->deskripsi) }}</p>
 
-                        <h4>Connect</h4>
-                        <p class="text-70">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Duis quis viverra enim, vitae porttitor nisl. Praesent rhoncus ligula id
-                            felis blandit congue. Mauris interdum enim vel quam consequat efficitur.
-                            In commodo magna eget augue interdum, at maximus metus lobortis. Integer
-                            at neque sapien. Praesent laoreet elementum maximus.</p>
+                        <h4>My sosial media</h4>
+                        <p class="text-70"></p>
                             <div class="d-flex align-items-center mb-24pt">
                                 <a href=""
                                 class="text-accent fab fa-facebook-square font-size-24pt mr-8pt"></a>
@@ -209,7 +198,7 @@
 
                                     <!-- Sidebar Content -->
 
-                                    @include('member.sidebar')
+                                    @include('layout.sidebar')
 
                                     <!-- // END Drawer -->
 
