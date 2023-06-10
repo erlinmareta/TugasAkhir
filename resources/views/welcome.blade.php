@@ -82,7 +82,8 @@
                                         <div class="d-flex">
                                             <div class="flex">
                                                 <a class="card-title"
-                                                   href="student-course.html"></a>
+                                                   href="student-course.html">Sistem Saraf pada manusia</a>
+                                                   <small class="text-50 font-weight-bold mb-4pt">Erlin Maresta</small>
                                             </div>
                                             <a href="student-course.html"data-toggle="tooltip" data-title="Add Favorite" data-placement="top" data-boundary="window"
                                                class="ml-4pt material-icons text-20 card-course__icon-favorite">favorite_border</a>

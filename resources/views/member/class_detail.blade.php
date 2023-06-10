@@ -328,7 +328,7 @@
 
                     <!-- Sidebar Content -->
 
-                   @include('member.sidebar')
+                   @include('layout.sidebar')
 
                     <!-- // END Sidebar Content -->
 
