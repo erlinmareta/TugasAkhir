@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Materi;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -14,29 +15,30 @@ class MemberController extends Controller
 {
     public function index()
     {
-        return view ('member/dashboard');
+        return view('member/dashboard');
     }
 
     public function MentorProfil()
     {
-        return view ('member/mentor_profil');
+        return view('member/mentor_profil');
     }
 
     public function ClassDetail()
     {
-        return view('member/class_detail');
+        $materi = Materi::get()->first();
+        return view('member/class_detail', ['materi' => $materi]);
     }
 
 
     public function StudentDashboard()
     {
-        return view ('member/student_dashboard');
+        return view('member/student_dashboard');
     }
 
     public function StudentProfil()
     {
         $user = User::findOrFail(Auth::id());
-        return view ('member/student_profil', compact('user'));
+        return view('member/student_profil', compact('user'));
     }
 
     public function UpdateProfile(Request $request)
@@ -75,6 +77,4 @@ class MemberController extends Controller
 
         return back();
     }
-
-
 }

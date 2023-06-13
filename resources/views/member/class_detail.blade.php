@@ -86,8 +86,11 @@
                                         </div>
                                         <div class="player__embed d-none">
                                             <iframe class="embed-responsive-item"
-                                                    src="https://player.vimeo.com/video/97243285?title=0&amp;byline=0&amp;portrait=0"
-                                                    allowfullscreen=""></iframe>
+                                            src="{{ url($materi->isi_materi) }}"
+                                                    sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                                                    allowfullscreen="">
+                                                    <video src="{{ url($materi->isi_materi) }}"></video>
+                                                </iframe>
                                         </div>
                                     </div>
                                 </div>
