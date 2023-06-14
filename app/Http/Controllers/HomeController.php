@@ -16,9 +16,9 @@ class HomeController extends Controller
     public function Home()
     {
         $kategori = Kategori::all();
-		$kelas = Kelas::all();
+        $kelas = Kelas::all();
         $user = User::all();
-        $materi = Materi::all();
-        return view('welcome' , ['kelas' => $kelas, 'kategori' => $kategori, 'user' =>$user, 'materi' =>$materi]);
+        $materi = Materi::all()->first();
+        return view('welcome', ['kelas' => $kelas, 'kategori' => $kategori, 'user' => $user, 'materi' => $materi]);
     }
 }
