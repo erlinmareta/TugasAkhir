@@ -123,8 +123,9 @@
                                                 class="icon-holder icon-holder--small icon-holder--dark rounded-circle d-inline-flex icon--left">
                                                 <i class="material-icons icon-16pt">play_circle_outline</i>
                                             </span>
+
                                             <a class="flex"
-                                                href="{{ url('/member/class_detail/' . $item->id) }}">{{ ucwords($item->judul) }}</a>
+                                                href="{{ url('/member/class_detail/' . $item->kelas_id . '/' . $item->id) }}">{{ ucwords($item->judul) }}</a>
                                             {{-- <span class="text-muted">8m 42s</span> --}}
                                     </div>
                                     @endforeach
@@ -156,11 +157,12 @@
                                     class="rounded-circle">
                             </span>
                             <div class="media-body">
-                                <a class="card-title m-0" href="{{ url('member/mentor_profil') }}">Eddie Bryan</a>
+                                <a class="card-title m-0"
+                                    href="{{ url('member/mentor_profil') }}">{{ $materi->user->name }}</a>
                                 <p class="text-50 lh-1 mb-0">Instructor</p>
                             </div>
                         </div>
-                        <p class="text-70">{{ $materi->deskripsi }}</p>
+                        <p class="text-70">{{ $materi->user->deskripsi }}</p>
 
                         <a href="teacher-profile.html" class="btn btn-white mb-24pt">Follow</a>
                     </div>
