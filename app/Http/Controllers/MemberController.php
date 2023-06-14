@@ -23,10 +23,10 @@ class MemberController extends Controller
         return view('member/mentor_profil');
     }
 
-    public function ClassDetail($id)
+    public function ClassDetail($kelas, $materi)
     {
-        $materi = Materi::find($id);
-        $materi_all = Materi::all();
+        $materi = Materi::find($materi);
+        $materi_all = Materi::where('kelas_id', $kelas)->get();
         return view('member/class_detail', ['materi' => $materi, 'materi_all' => $materi_all]);
     }
 
