@@ -163,8 +163,6 @@
                             </div>
                         </div>
                         <p class="text-70">{{ $materi->user->deskripsi }}</p>
-
-                        <a href="teacher-profile.html" class="btn btn-white mb-24pt">Follow</a>
                     </div>
                 </div>
             </div>

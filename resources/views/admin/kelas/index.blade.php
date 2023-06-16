@@ -48,8 +48,8 @@
                   </tr>
                 </thead>
                 <tbody>
+                    @foreach ($kelas as $item )
                   <tr>
-                      @foreach ($kelas as $item )
                       <td>{{ $no++ }}</td>
                       <td>{{$item->user->name}}</td>
                       <td>{{$item->judul}}</td>
@@ -57,13 +57,13 @@
                       <td>{{$item->deskripsi}}</td>
                       <td>{{$item->status}}</td>
                       <td>
-                          <a class="btn btn-sm btn-success-outline" href="{{ route('admin.kelasDetail', $item->id) }}" title="detail"><span class="fa fa-edit"></span> Detail |</a>
+                        <a class="btn btn-sm btn-success-outline" href="{{ route('admin.kelasDetail', $item->id) }}" title="detail"><span class="fa fa-edit"></span> Detail |</a>
                           <a class="btn btn-sm btn-success-outline" href="{{ url('admin/kelas_masuk/' . $item->id) }}/publish" title="publish"> Publish |</a>
-                      </td>
+                          <a class="btn btn-sm btn-success-outline" data-toggle="modal" data-target="#myModals{{$item->id}}" title="reject"> Reject |</a>
+                        </td>
                   </tr>
-                <tr>
+                  @endforeach
               </tbody>
-              @endforeach
             </table>
           </div>
         </div>
@@ -74,6 +74,31 @@
 </section>
 </div>
 
+{{-- modal  --}}
+@foreach ($kelas as $item )
+<div class="modal" tabindex="-1" id="myModals{{$item->id}}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Alasan menolak Kelas ini</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{{url ('/admin/index/'.$item->id.'/reject')}}" method="post">
+            @csrf
+            <div class="modal-body">
+                <input type="text" class="form-control phone-number" name="alasan" id="alasan">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  @endforeach
 {{-- footer       --}}
 @include('admin.layout.footer')
     </div>

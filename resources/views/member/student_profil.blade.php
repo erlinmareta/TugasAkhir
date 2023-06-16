@@ -148,7 +148,6 @@
                                     <div class="form-group">
                                         <label for="foto">Foto Diri</label><br>
                                         @if (Auth::user()->foto == null)
-
                                         @else
                                         <img src="{{ url('/storage/'.Auth::user()->foto) }}" alt="foto" width="90px" height="90px">
                                         @endif

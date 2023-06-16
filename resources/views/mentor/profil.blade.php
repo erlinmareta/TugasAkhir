@@ -162,7 +162,7 @@
                 </div>
                 <!-- /.tab-pane -->
                 <div class="tab-pane" id="settings">
-                  <form class="form-horizontal" action="{{url('/mentor/profil')}}" method="post">
+                  <form class="form-horizontal" action="{{url('/mentor/profil')}}" method="post" enctype="multipart/form-data">
                     @method('put')
                     @csrf
                     @if (Auth::user()->foto == null)
@@ -228,8 +228,9 @@
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="foto" class="col-sm-2 col-form-label">Foto Diri</label>
+                        <label for="inputName2" class="col-sm-2 col-form-label">Foto Diri</label>
                         <div class="col-sm-10">
+                            <label for="foto">Foto Diri</label><br>
                             @if (Auth::user()->foto == null)
                             @else
                             <img src="{{ url('/storage/'.Auth::user()->foto) }}" alt="foto" width="90px" height="90px">

@@ -15,21 +15,12 @@ class MentorController extends Controller
 {
     public function MentorDashboard()
     {
-        $user = User::where('level', 'member')->count();
-        $kelas = Kelas::count();
-        $materi = Materi::count();
-        $kelasberhasil = Kelas::where('status', 'sukses')->count();
+        // dd(Auth::user());
+        $user = User::where('level', 'member')->where('id', Auth::user()->id)->count();
+        $kelas = Kelas::where('user_id', Auth::user()->id)->count();
+        $materi = Materi::where('user_id', Auth::user()->id)->count();
+        $kelasberhasil = Kelas::where('status', 'sukses')->where('user_id', Auth::user()->id)->count();
         return view ('mentor/dashboard', compact('user', 'kelas', 'materi', 'kelasberhasil'));
-    }
-
-    public function MentorCourse()
-    {
-        return view ('mentor/course');
-    }
-
-    public function EditCourse()
-    {
-        return view ('mentor/edit_course');
     }
 
     public function MentorProfil()

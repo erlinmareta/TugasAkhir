@@ -36,6 +36,15 @@ class KelasAdminController extends Controller
     return redirect()->back()->with('success', 'Kelas berhasil dipublish.');
     }
 
+    public function Reject(Request $request , $id)
+    {
+        $kelas = Kelas::findOrFail($id);
+        $kelas->status = 'cancel';
+        $kelas->alasan = $request->alasan;
+        $kelas->save();
+        return redirect()->back();
+    }
+
     public function KelasBerhasil()
     {
         $kelas = Kelas::with('user')->where('status' , 'sukses')->get();

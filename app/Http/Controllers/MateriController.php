@@ -18,8 +18,8 @@ class MateriController extends Controller
 {
     public function Materi()
     {
-        $materi = Materi::get();
-		$kelas = Kelas::all();
+        $materi = Materi::where('user_id', Auth::user()->id)->get();
+		$kelas = Kelas::where('user_id', Auth::user()->id)->get();
         return view('mentor/materi/materi', ['materi' => $materi]);
     }
 

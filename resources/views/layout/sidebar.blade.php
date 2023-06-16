@@ -2,11 +2,10 @@
                        class="sidebar-brand ">
                         <!-- <img class="sidebar-brand-icon" src="../../public/images/illustration/student/128/white.svg" alt="Luma"> -->
                         <span class="avatar avatar-xl sidebar-brand-icon h-auto">
-
-                            <span class="avatar-title rounded bg-primary"><img src="../learnly/public/images/user.png"
+                            @auth
+                            <span class="avatar-title rounded bg-primary"><img src="{{ url('/storage/'.Auth::user()->foto) }}"
                                      class="img-fluid" alt="logo" /></span>
                         </span>
-                        @auth
                         <span>{{ Auth::user()->email }}</span>
 
 

@@ -14,7 +14,7 @@ class KelasController extends Controller
     public function Kelas(){
 
         $kategori = Kategori::all();
-		$kelas = Kelas::get();
+		$kelas = Kelas::where('user_id', Auth::user()->id)->get();
         return view('mentor/kelas/kelas', ['kelas' => $kelas, 'kategori' => $kategori]);
     }
 

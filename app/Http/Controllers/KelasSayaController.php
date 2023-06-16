@@ -15,7 +15,7 @@ class KelasSayaController extends Controller
     public function KelasSaya()
     {
 
-        $kelas = DB::table('kelas')->get();
+        $kelas = Kelas::where('user_id', Auth::user()->id)->get();
         return view ('mentor/Kelas_saya/kelas_saya' , ['kelas' => $kelas]);
     }
 

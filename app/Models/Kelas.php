@@ -18,6 +18,7 @@ class Kelas extends Model
         'gambar',
         'deskripsi',
         'status',
+        'alasan'
     ];
 
     public function materi()
