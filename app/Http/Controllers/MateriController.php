@@ -25,7 +25,7 @@ class MateriController extends Controller
 
     public function TambahMateri()
     {
-        $kelas = Kelas::all();
+        $kelas = Kelas::where("status", "!=", "sukses")->get();
 	    $materi = Materi::all();
         return view('mentor/materi/tambah', ['kelas' => $kelas]);
     }

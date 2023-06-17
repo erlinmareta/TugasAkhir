@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Materi;
 use Illuminate\Http\Request;
 
+use App\Models\Rating;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -25,9 +26,21 @@ class MemberController extends Controller
 
     public function ClassDetail($kelas, $materi)
     {
-        $materi = Materi::find($materi);
+        $datamateri = Materi::findOrFail($materi);
+        $datakelas = $datamateri->kelas_id;
+
+        $sebelumnya = Materi::where("id", "<" , $materi)->where("kelas_id", $datakelas)->orderBy("id", "DESC")->first();
+        $selanjutnya = Materi::where("id", ">", $materi)->where("kelas_id", $datakelas)->orderBy("id", "ASC")->first();
+
         $materi_all = Materi::where('kelas_id', $kelas)->get();
-        return view('member/class_detail', ['materi' => $materi, 'materi_all' => $materi_all]);
+
+        return view('member.class_detail', [
+            "materi" => $datamateri,
+            "materi_all" => $materi_all,
+            "sebelumnya" => $sebelumnya,
+            "selanjutnya" => $selanjutnya,
+            "kelas" => $kelas
+        ]);
     }
 
 
@@ -74,6 +87,20 @@ class MemberController extends Controller
             "pekerjaan" => $request->pekerjaan,
             "deskripsi" => $request->deskripsi,
             "foto" => $foto
+        ]);
+
+        return back();
+    }
+
+    public function rating(Request $request, $id_materi)
+    {
+        $materi = Materi::where("id", $id_materi)->first();
+
+        Rating::create([
+            "kelas_id" => $materi["kelas_id"],
+            "user_id" => Auth::user()->id,
+            "materi_id" => $id_materi,
+            "rating" => $request->rating
         ]);
 
         return back();

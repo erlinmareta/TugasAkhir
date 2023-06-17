@@ -49,6 +49,7 @@ Route::prefix('member')->middleware(['auth', 'cekLevel:member'])->group(function
     Route::get('/student_profil', [MemberController::class, 'StudentProfil']);
     Route::get('/student_dashboard', [MemberController::class, 'StudentDashboard']);
     Route::put('/student_profil', [MemberController::class, 'UpdateProfile']);
+    Route::put("/rating/{id_materi}", [MemberController::class, "rating"]);
 });
 
 //mentor

@@ -56,7 +56,15 @@
                             <td>{{$item->status}}</td>
                             <td>
                                 <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas_saya/detail/' .$item->id) }}" title="detail"><span class="fa fa-edit"></span> Detail |</a>
-                                <a class="btn btn-sm btn-success-outline" href="{{ route('mentor.kelas_saya.publish', $item->id) }}" title="publish"><span class="fa fa-trash"></span> Publish |</a>
+
+                                @if ($item["status"] == "sukses")
+
+                                @else
+                                <a class="btn btn-sm btn-success-outline" href="{{ route('mentor.kelas_saya.publish', $item->id) }}" title="publish">
+                                    <span class="fa fa-trash"></span>
+                                    Publish
+                                |</a>
+                                @endif
                             </td>
                         </tr>
                       </tbody>

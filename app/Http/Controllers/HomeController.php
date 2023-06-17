@@ -19,6 +19,7 @@ class HomeController extends Controller
         $kelas = Kelas::where('status', 'sukses')->get();
         $user = User::all();
         $materi = Materi::all()->first();
+
         return view('welcome', ['kelas' => $kelas, 'kategori' => $kategori, 'user' => $user, 'materi' => $materi]);
     }
 }
