@@ -42,6 +42,8 @@ Route::prefix('member')->middleware(['auth', 'cekLevel:member'])->group(function
     Route::get('/dashboard', [MemberController::class, 'index']);
     Route::get('/welcome', [HomeController::class, 'Home']);
     Route::get('/class_detail/{kelas}/{materi}', [MemberController::class, 'ClassDetail']);
+    Route::put('/class_detail/{kelas}/{materi}/comment', [MemberController::class, 'Comment']);
+    Route::put('/class_detail/{kelas}/{materi}/catatan', [MemberController::class, 'Catatan']);
     Route::get('/mentor_profil', [MemberController::class, 'MentorProfil']);
     Route::get('/student_course', [CourseController::class, 'StudentCourse']);
     Route::get('/browse_course', [CourseController::class, 'BrowseCourse']);
