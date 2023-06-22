@@ -58,6 +58,18 @@ class MemberController extends Controller
                 "materi_id" => $materi,
                 "user_id" => Auth::user()->id,
                 "comment" => $request->comment,
+            ]);
+        }
+        return redirect()->back();
+    }
+    public function Catatan(Request $request, $kelas, $materi)
+    {
+        if ($request->comment !== null) {
+            Catatan::create([
+                "kelas_id" => $kelas,
+                "materi_id" => $materi,
+                "user_id" => Auth::user()->id,
+                "catatan" => $request->catatan,
                 "timestamp" => $request->timestamp
             ]);
         }
