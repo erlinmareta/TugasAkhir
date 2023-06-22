@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Catatan;
+use App\Models\Comment;
 use App\Models\Materi;
 use Illuminate\Http\Request;
 
@@ -29,8 +31,11 @@ class MemberController extends Controller
         $datamateri = Materi::findOrFail($materi);
         $datakelas = $datamateri->kelas_id;
 
-        $sebelumnya = Materi::where("id", "<" , $materi)->where("kelas_id", $datakelas)->orderBy("id", "DESC")->first();
+        $sebelumnya = Materi::where("id", "<", $materi)->where("kelas_id", $datakelas)->orderBy("id", "DESC")->first();
         $selanjutnya = Materi::where("id", ">", $materi)->where("kelas_id", $datakelas)->orderBy("id", "ASC")->first();
+
+        $comments = Comment::where("kelas_id", $kelas)->where("materi_id", $materi)->get();
+        $catatans = Catatan::where("kelas_id", $kelas)->where("materi_id", $materi)->get();
 
         $materi_all = Materi::where('kelas_id', $kelas)->get();
 
@@ -39,8 +44,24 @@ class MemberController extends Controller
             "materi_all" => $materi_all,
             "sebelumnya" => $sebelumnya,
             "selanjutnya" => $selanjutnya,
+            "comments" => $comments,
+            "catatans" => $catatans,
             "kelas" => $kelas
         ]);
+    }
+
+    public function Comment(Request $request, $kelas, $materi)
+    {
+        if ($request->comment !== null) {
+            Comment::create([
+                "kelas_id" => $kelas,
+                "materi_id" => $materi,
+                "user_id" => Auth::user()->id,
+                "comment" => $request->comment,
+                "timestamp" => $request->timestamp
+            ]);
+        }
+        return redirect()->back();
     }
 
 
