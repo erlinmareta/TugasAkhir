@@ -78,7 +78,6 @@ class MateriController extends Controller
             'judul' => $request->judul,
             'isi_materi' => $data,
             'deskripsi' =>$request->deskripsi,
-            'status' =>$request->status,
             'urutan' =>$request->urutan,
 
         ]);

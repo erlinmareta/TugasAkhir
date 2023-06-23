@@ -28,16 +28,16 @@
               </div>
               <div class="card-stats-items">
                 <div class="card-stats-item">
-                  <div class="card-stats-item-count">24</div>
+                  <div class="card-stats-item-count">{{$useradmin}}</div>
                   <div class="card-stats-item-label">Admin</div>
                 </div>
                 <div class="card-stats-item">
-                  <div class="card-stats-item-count">12</div>
+                  <div class="card-stats-item-count">{{$userpeserta}}</div>
                   <div class="card-stats-item-label">Peserta</div>
                 </div>
                 <div class="card-stats-item">
-                  <div class="card-stats-item-count">23</div>
-                  <div class="card-stats-item-label">Instruktor</div>
+                  <div class="card-stats-item-count">{{$usermentor}}</div>
+                  <div class="card-stats-item-label">Mentor</div>
                 </div>
               </div>
             </div>
@@ -49,7 +49,7 @@
                 <h4>Total User</h4>
               </div>
               <div class="card-body">
-                59
+                {{$totaluser}}
               </div>
             </div>
           </div>
@@ -64,7 +64,7 @@
                 <h4>Total kelas masuk hari ini</h4>
               </div>
               <div class="card-body">
-                67
+                {{$kelasmasuk}}
               </div>
             </div>
           </div>
@@ -76,10 +76,10 @@
             </div>
             <div class="card-wrap">
               <div class="card-header">
-                <h4>Total Kelas Gagal hari ini</h4>
+                <h4>Total Kelas berhasil hari ini</h4>
               </div>
               <div class="card-body">
-                29
+                {{$kelasberhasil}}
               </div>
             </div>
           </div>

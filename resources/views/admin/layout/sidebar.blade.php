@@ -15,9 +15,9 @@
         <li class="dropdown">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-user"></i> <span>Data Akun</span></a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="layout-default.html">Admin</a></li>
-            <li><a class="nav-link" href="layout-transparent.html">Peserta</a></li>
-            <li><a class="nav-link" href="layout-top-navigation.html">Mentor</a></li>
+            <li><a class="nav-link" href="{{ url('admin/akun/admin')}}">Admin</a></li>
+            <li><a class="nav-link" href="{{ url('admin/akun/peserta')}}">Peserta</a></li>
+            <li><a class="nav-link" href="{{ url('admin/akun/mentor')}}">Mentor</a></li>
             <li><a class="nav-link" href="{{ url('admin/akun/user') }}">User</a></li>
           </ul>
         </li>
