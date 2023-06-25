@@ -19,15 +19,16 @@ class LoginController extends Controller
 
     public function LoginProses(Request $request)
     {
-        if(Auth::attempt($request->only('email', 'password')))
-        {
+        if (Auth::attempt($request->only('email', 'password'))) {
             if (Auth::user()->level == 'admin') {
                 return redirect('admin/dashboard');
-            } else if (Auth::user()->level == 'mentor'){
+            } else if (Auth::user()->level == 'mentor') {
                 return redirect('mentor/dashboard');
             } else {
                 return redirect('member/student_dashboard');
             }
+        } else {
+            return redirect()->back()->with(['error' => 'Username atau password salah']);
         }
     }
 
@@ -38,18 +39,19 @@ class LoginController extends Controller
 
     public function RegisterUser(Request $request)
     {
-       User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => bcrypt($request->password),
-        'remember_token' => str::random(60),
-        'level' => $request->level,
-       ]);
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'remember_token' => str::random(60),
+            'level' => $request->level,
+        ]);
 
-       return redirect ('/login');
+        return redirect('/login');
     }
 
-    public function Logout(){
+    public function Logout()
+    {
         Auth::Logout();
         return redirect('/');
     }

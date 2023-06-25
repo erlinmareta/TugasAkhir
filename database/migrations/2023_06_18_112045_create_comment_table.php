@@ -18,7 +18,6 @@ class CreateCommentTable extends Migration
             $table->integer("kelas_id");
             $table->integer("user_id");
             $table->integer("materi_id");
-            $table->string("timestamp");
             $table->string("comment");
             $table->timestamps();
         });

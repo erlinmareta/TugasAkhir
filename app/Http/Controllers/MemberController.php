@@ -8,6 +8,7 @@ use App\Models\Materi;
 use Illuminate\Http\Request;
 
 use App\Models\Rating;
+use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -28,6 +29,13 @@ class MemberController extends Controller
 
     public function ClassDetail($kelas, $materi)
     {
+        $isSubscribed = Subscription::where("kelas_id", $kelas)->where("user_id", Auth::user()->id)->first();
+        if ($isSubscribed == null) {
+            Subscription::create([
+                "kelas_id" => $kelas,
+                "user_id" => Auth::user()->id,
+            ]);
+        }
         $datamateri = Materi::findOrFail($materi);
         $datakelas = $datamateri->kelas_id;
 
@@ -36,6 +44,7 @@ class MemberController extends Controller
 
         $comments = Comment::where("kelas_id", $kelas)->where("materi_id", $materi)->get();
         $catatans = Catatan::where("kelas_id", $kelas)->where("materi_id", $materi)->get();
+        $ratings = Rating::where("kelas_id", $kelas)->where("materi_id", $materi)->orderBy('rating', 'desc')->limit(3)->get();
 
         $materi_all = Materi::where('kelas_id', $kelas)->get();
 
@@ -46,7 +55,8 @@ class MemberController extends Controller
             "selanjutnya" => $selanjutnya,
             "comments" => $comments,
             "catatans" => $catatans,
-            "kelas" => $kelas
+            "kelas" => $kelas,
+            "ratings" => $ratings
         ]);
     }
 
@@ -57,14 +67,14 @@ class MemberController extends Controller
                 "kelas_id" => $kelas,
                 "materi_id" => $materi,
                 "user_id" => Auth::user()->id,
-                "comment" => $request->comment,
+                "comment" => $request->comment
             ]);
         }
         return redirect()->back();
     }
     public function Catatan(Request $request, $kelas, $materi)
     {
-        if ($request->comment !== null) {
+        if ($request->catatan !== null) {
             Catatan::create([
                 "kelas_id" => $kelas,
                 "materi_id" => $materi,
@@ -79,7 +89,11 @@ class MemberController extends Controller
 
     public function StudentDashboard()
     {
-        return view('member/student_dashboard');
+        $datakelas = Subscription::where('user_id', Auth::user()->id)->get();
+
+        return view('member/student_dashboard', [
+            'datakelas' => $datakelas
+        ]);
     }
 
     public function StudentProfil()
@@ -133,6 +147,7 @@ class MemberController extends Controller
             "kelas_id" => $materi["kelas_id"],
             "user_id" => Auth::user()->id,
             "materi_id" => $id_materi,
+            "ulasan" => $request->ulasan,
             "rating" => $request->rating
         ]);
 

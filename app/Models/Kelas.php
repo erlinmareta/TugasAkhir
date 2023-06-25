@@ -25,15 +25,22 @@ class Kelas extends Model
     {
         return $this->hasMany(Materi::class);
     }
+    public function rating()
+    {
+        return $this->hasMany(Rating::class);
+    }
+    public function subscription()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class,'kategori_id');
+        return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
-
 }

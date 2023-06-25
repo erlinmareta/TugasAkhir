@@ -61,9 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ml-lg-16pt">
-                            <a href="courses.html" class="btn btn-light">Library</a>
-                        </div>
+
                     </div>
 
                 </div>
@@ -87,7 +85,7 @@
                                     <div class="player__embed d-none">
                                         {{-- <iframe class="" id="aa"
                                             src="{{ url('/storage/' . $materi->isi_materi) }}"
-                                            sandbox="allow-same-origin allow-popups allow-forms">
+                                        sandbox="allow-same-origin allow-popups allow-forms">
                                         </iframe> --}}
                                         <video src="{{ url('/storage/' . $materi->isi_materi) }}" id="media"
                                             name="media" controls></video>
@@ -198,10 +196,27 @@
                             </div>
                         </div>
                         <p class="text-70">{{ $materi->user->deskripsi }}</p>
+                        <div class="flex">
+                            <form id="catatanForm" name="catatanForm"
+                                action="{{ url('/member/class_detail/' . $kelas . '/' . $materi->id) . '/catatan' }}"
+                                method="POST">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="timestamp" id="timestamp">
 
-                        <a href="teacher-profile.html" class="btn btn-white mb-24pt">Follow</a>
+                                <div class="form-group">
+                                    <label for="catatan" class="form-label">Add Catatan</label>
+                                    <textarea class="form-control" name="catatan" id="catatan" rows="3"
+                                        placeholder="Type here to reply to mentor ..." required=""></textarea>
+                                </div>
+                                <button class="btn btn-outline-secondary" onclick="submitCatatan()">Tambah
+                                    Catatan</button>
 
-                        <div class="accordion js-accordion accordion--boxed " id="parent">
+                            </form>
+
+                        </div>
+
+                        <div class="accordion js-accordion accordion--boxed pt-3" id="parent">
 
                             <div class="accordion__item open">
                                 <a href="#" class="accordion__toggle" data-toggle="collapse"
@@ -247,134 +262,87 @@
                         method="POST">
                         @csrf
                         @method('PUT')
-                        <input type="hidden" name="timestamp" id="timestamp">
                         <div class="form-group">
-                            <label for="comment" class="form-label">Your reply</label>
+                            <label for="comment" class="form-label">Your comment</label>
                             <textarea class="form-control" name="comment" id="comment" rows="3"
-                                placeholder="Type here to reply to {{ $materi->user->name }} ..." required></textarea>
+                                placeholder="Type here to comment {{ $materi->user->name }} ..." required></textarea>
                         </div>
-                        <button class="btn btn-outline-secondary" onclick="submitComment()">Post comment</button>
+                        <button class="btn btn-outline-secondary" ">Post comment</button>
 
-                    </form>
+                            </form>
+                        </div>
+                    </div>
+                    <div class=" pt-3">
+                                    <h4>{{ $comments->count() }} Comments</h4>
+                                                @foreach ($comments as $item)
+                            <div class="d-flex mb-3"> <a href="" class="avatar avatar-sm mr-12pt">
+                                    <!-- <img src="../../public/images/people/256/256_rsz_karl-s-973833-unsplash.jpg" alt="people" class="avatar-img rounded-circle"> -->
+                                    <span class="avatar-title rounded-circle">JF</span>
+                                </a>
+                                <div class="flex username"> <a href=""
+                                        class="text-body"><strong>{{ $item->user->name }}</strong></a> <br>
+                                    <p class="mt-1 text-70">{{ $item->comment }}</p>
+                                    <div class="d-flex align-items-center">
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
                 </div>
             </div>
-            <div class="pt-3">
-                <h4>{{ $comments->count() }} Comments</h4>
-                @foreach ($comments as $item)
-                    <div class="d-flex mb-3"> <a href="" class="avatar avatar-sm mr-12pt">
-                            <!-- <img src="../../public/images/people/256/256_rsz_karl-s-973833-unsplash.jpg" alt="people" class="avatar-img rounded-circle"> -->
-                            <span class="avatar-title rounded-circle">JF</span>
-                        </a>
-                        <div class="flex username"> <a href=""
-                                class="text-body"><strong>{{ $item->user->name }}</strong></a> <br>
-                            <p class="mt-1 text-70">{{ $item->comment }}</p>
-                            <div class="d-flex align-items-center">
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
 
 
 
-        <div class="page-section bg-alt">
-            <div class="container page__container">
-                <div class="page-separator">
-                    <div class="page-separator__text">Feedback</div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6 col-md-4">
-                        <div class="card card-feedback card-body">
-                            <blockquote class="blockquote mb-0">
-                                <p class="text-70 small mb-0">A wonderful course on how to start. Eddie beautifully
-                                    conveys all essentials of a becoming a good Angular developer. Very glad to have
-                                    taken this course. Thank you Eddie Bryan.</p>
-                            </blockquote>
-                        </div>
-                        <div class="media ml-12pt">
-                            <div class="media-left mr-12pt">
-                                <a href="student-profile.html" class="avatar avatar-sm">
-                                    <!-- <img src="public/images/people/110/guy-.jpg" width="40" alt="avatar" class="rounded-circle"> -->
-                                    <span class="avatar-title rounded-circle">UK</span>
-                                </a>
-                            </div>
-                            <div class="media-body media-middle">
-                                <a href="student-profile.html" class="card-title">Umberto Kass</a>
-                                <div class="rating mt-4pt">
-                                    <span class="rating__item"><span class="material-icons">star</span></span>
-                                    <span class="rating__item"><span class="material-icons">star</span></span>
-                                    <span class="rating__item"><span class="material-icons">star</span></span>
-                                    <span class="rating__item"><span class="material-icons">star</span></span>
-                                    <span class="rating__item"><span class="material-icons">star_border</span></span>
-                                </div>
-                            </div>
-                        </div>
+            <div class="page-section bg-alt">
+                <div class="container page__container">
+                    <div class="page-separator">
+                        <div class="page-separator__text">Feedback</div>
                     </div>
 
-                    <div class="col-sm-6 col-md-4">
-                        <div class="card card-feedback card-body">
-                            <blockquote class="blockquote mb-0">
-                                <p class="text-70 small mb-0">A wonderful course on how to start. Eddie beautifully
-                                    conveys all essentials of a becoming a good Angular developer. Very glad to have
-                                    taken this course. Thank you Eddie Bryan.</p>
-                            </blockquote>
-                        </div>
-                        <div class="media ml-12pt">
-                            <div class="media-left mr-12pt">
-                                <a href="student-profile.html" class="avatar avatar-sm">
-                                    <!-- <img src="public/images/people/110/guy-.jpg" width="40" alt="avatar" class="rounded-circle"> -->
-                                    <span class="avatar-title rounded-circle">UK</span>
-                                </a>
-                            </div>
-                            <div class="media-body media-middle">
-                                <a href="student-profile.html" class="card-title">Umberto Kass</a>
-                                <div class="rating mt-4pt">
-                                    <span class="rating__item"><span class="material-icons">star</span></span>
-                                    <span class="rating__item"><span class="material-icons">star</span></span>
-                                    <span class="rating__item"><span class="material-icons">star</span></span>
-                                    <span class="rating__item"><span class="material-icons">star</span></span>
-                                    <span class="rating__item"><span class="material-icons">star_border</span></span>
+                    <div class="row">
+                        @foreach ($ratings as $rating)
+                            <div class="col-sm-6 col-md-4">
+                                <div class="card card-feedback card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p class="text-70 small mb-0">{{ $rating->ulasan }}</p>
+                                    </blockquote>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-sm-6 col-md-4">
-                        <div class="card card-feedback card-body">
-                            <blockquote class="blockquote mb-0">
-                                <p class="text-70 small mb-0">A wonderful course on how to start. Eddie beautifully
-                                    conveys all essentials of a becoming a good Angular developer. Very glad to have
-                                    taken this course. Thank you Eddie Bryan.</p>
-                            </blockquote>
-                        </div>
-                        <div class="media ml-12pt">
-                            <div class="media-left mr-12pt">
-                                <a href="student-profile.html" class="avatar avatar-sm">
-                                    <!-- <img src="public/images/people/110/guy-.jpg" width="40" alt="avatar" class="rounded-circle"> -->
-                                    <span class="avatar-title rounded-circle">UK</span>
-                                </a>
-                            </div>
-                            <div class="media-body media-middle">
-                                <a href="student-profile.html" class="card-title">Umberto Kass</a>
-                                <div class="rating mt-4pt">
-                                    <span class="rating__item"><span class="material-icons">star</span></span>
-                                    <span class="rating__item"><span class="material-icons">star</span></span>
-                                    <span class="rating__item"><span class="material-icons">star</span></span>
-                                    <span class="rating__item"><span class="material-icons">star</span></span>
-                                    <span class="rating__item"><span class="material-icons">star_border</span></span>
+                                <div class="media ml-12pt">
+                                    <div class="media-left mr-12pt">
+                                        <a href="student-profile.html" class="avatar avatar-sm">
+                                            <!-- <img src="public/images/people/110/guy-.jpg" width="40" alt="avatar" class="rounded-circle"> -->
+                                            <span class="avatar-title rounded-circle">UK</span>
+                                        </a>
+                                    </div>
+                                    <div class="media-body media-middle">
+                                        <a href="student-profile.html"
+                                            class="card-title">{{ $rating->user->name }}</a>
+                                        <div class="rating mt-4pt">
+                                            {{ $rating->rating }}
+
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @if ($i <= $rating->rating)
+                                                    <span class="rating__item"><span
+                                                            class="material-icons">star</span></span>
+                                                @else
+                                                    <span class="rating__item"><span
+                                                            class="material-icons">star_border</span></span>
+                                                @endif
+                                            @endfor
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- // END Header Layout Content -->
+        <!-- // END Header Layout Content -->
 
-    <!-- Footer -->
+        <!-- Footer -->
 
     </div>
     <!-- // END Header Layout -->
@@ -482,6 +450,12 @@
                                 <i class="fa fa-star"></i>
                             </div>
                         </div>
+                        <div class="input-group">
+                            <div class="flex input-group-text">
+                                <textarea class="form-control" name="ulasan" id="ulasan" rows="3"
+                                    placeholder="Berikan ulasan terkait kelas ini ..."></textarea>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-secondary">
@@ -504,7 +478,7 @@
     video.seekable.start();
     video.seekable.end();
 
-    function submitComment(e) {
+    function submitCatatan(e) {
         let timestamp = document.getElementById("timestamp");
         timestamp.value = video.currentTime;
         e.preventDefault();

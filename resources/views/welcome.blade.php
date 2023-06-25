@@ -94,10 +94,7 @@
                                                         class="text-50 font-weight-bold mb-4pt">{{ $class->user->name }}
                                                     </small>
                                                 </div>
-                                                <a href="student-course.html"data-toggle="tooltip"
-                                                    data-title="Add Favorite" data-placement="top"
-                                                    data-boundary="window"
-                                                    class="ml-4pt material-icons text-20 card-course__icon-favorite">favorite_border</a>
+                                                <!-- <a href="student-course.html" data-toggle="tooltip" data-title="Add Favorite" data-placement="top" data-boundary="window" class="ml-4pt material-icons text-20 card-course__icon-favorite">favorite_border</a> -->
                                             </div>
                                             <div class="d-flex">
                                                 <div class="rating flex">
@@ -212,7 +209,10 @@
                                                 <div class="col-auto d-flex align-items-center">
                                                     <span
                                                         class="material-icons icon-16pt text-50 mr-4pt">account_circle</span>
-                                                    <p class="flex text-50 lh-1 mb-0"><small>7 siswa</small></p>
+                                                    <p class="flex text-50 lh-1 mb-0">
+                                                        <small>{{ $class->subscription->count() }} siswa
+                                                        </small>
+                                                    </p>
                                                 </div>
                                                 <div class="col-auto d-flex align-items-center">
                                                     <span
@@ -239,8 +239,7 @@
                                             </div>
                                         </div>
 
-                                        <p class="my-16pt text-70">{{ $class->deskripsi }}. kelas ini dibagi
-                                            ke
+                                        <p class="my-16pt text-70">{{ $class->deskripsi }}. kelas ini dibagi ke
                                             beberapa bab, diantaranya :
                                         </p>
 
@@ -249,7 +248,7 @@
                                                 <div class="d-flex align-items-center">
                                                     <span class="material-icons icon-16pt text-50 mr-8pt">check</span>
                                                     <p class="flex text-50 lh-1 mb-0">
-                                                        <small>{{ $class->materi }}</small>
+                                                        <small>{{ $materi->judul }}</small>
                                                     </p>
                                                 </div>
                                             @endforeach
@@ -296,9 +295,9 @@
                                     manusia</a>
                                     <small class="text-50 font-weight-bold mb-4pt">Erlin Maresta</small>
                                 </div>
-                                <a href="student-course.html"data-toggle="tooltip" data-title="Add Favorite"
+                                <!-- <a href="student-course.html"data-toggle="tooltip" data-title="Add Favorite"
                                 data-placement="top" data-boundary="window"
-                                class="ml-4pt material-icons text-20 card-course__icon-favorite">favorite_border</a>
+                                class="ml-4pt material-icons text-20 card-course__icon-favorite">favorite_border</a> -->
                             </div>
                             <div class="d-flex">
                                 <div class="rating flex">
@@ -323,56 +322,54 @@
                                             <span
                                             class="material-icons icon-16pt text-50 mr-4pt">play_circle_outline</span>
                                             <p class="flex text-50 lh-1 mb-0"><small>12 Materi</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="popoverContainer d-none">
-                                <div class="media">
-                                    <div class="media-left mr-12pt">
-                                        <img src="../learnly/public/images/Lymphoma-bro.png" alt="course"
-                                        width="40" height="40" alt="Angular" class="rounded">
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="card-title mb-0">Sistem Saraf Pada Manusia</div>
-                                        <div class="card-title mb-0"></div>
-                                        <p class="lh-1 mb-0">
-                                            <span class="text-50 small">by</span>
-                                            <span class="text-50 small font-weight-bold">Erlin Maresta</span>
-                                        </p>
-                                    </div>
-                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popoverContainer d-none">
+            <div class="media">
+                <div class="media-left mr-12pt">
+                    <img src="../learnly/public/images/Lymphoma-bro.png" alt="course" width="40" height="40" alt="Angular" class="rounded">
+                </div>
+                <div class="media-body">
+                    <div class="card-title mb-0">Sistem Saraf Pada Manusia</div>
+                    <div class="card-title mb-0"></div>
+                    <p class="lh-1 mb-0">
+                        <span class="text-50 small">by</span>
+                        <span class="text-50 small font-weight-bold">Erlin Maresta</span>
+                    </p>
+                </div>
+            </div>
 
-                                <p class="my-16pt text-70">Kelas ini berisi tentang materi Sistem Saraf pada
-                                    manusia,dari segala kalangan bisa mengikuti kelas ini,
-                                    materi belajar yang menarik yang disajikan menggunakan video. kelas ini dibagi ke
-                                    beberapa bab, diantaranya :
-                                </p>
+            <p class="my-16pt text-70">Kelas ini berisi tentang materi Sistem Saraf pada
+                manusia,dari segala kalangan bisa mengikuti kelas ini,
+                materi belajar yang menarik yang disajikan menggunakan video. kelas ini dibagi ke
+                beberapa bab, diantaranya :
+            </p>
 
-                                <div class="mb-16pt">
-                                    <div class="d-flex align-items-center">
-                                        <span class="material-icons icon-16pt text-50 mr-8pt">check</span>
-                                        <p class="flex text-50 lh-1 mb-0"><small>peran sistem saraf pada
-                                            manusia</small></p>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <span class="material-icons icon-16pt text-50 mr-8pt">check</span>
-                                            <p class="flex text-50 lh-1 mb-0"><small>fungsi sistem saraf pada tubuh
-                                                manusia</small></p>
-                                            </div>
-                                        </div>
+            <div class="mb-16pt">
+                <div class="d-flex align-items-center">
+                    <span class="material-icons icon-16pt text-50 mr-8pt">check</span>
+                    <p class="flex text-50 lh-1 mb-0"><small>peran sistem saraf pada
+                            manusia</small></p>
+                </div>
+                <div class="d-flex align-items-center">
+                    <span class="material-icons icon-16pt text-50 mr-8pt">check</span>
+                    <p class="flex text-50 lh-1 mb-0"><small>fungsi sistem saraf pada tubuh
+                            manusia</small></p>
+                </div>
+            </div>
 
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                            </div>
-                                            <div class="col text-right">
-                                                <a href="{{ url('member/class_detail/' . $materi->id) }}"
-                                                    class="btn btn-primary">Mulai
-                                                    Belajar</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
+            <div class="row align-items-center">
+                <div class="col-auto">
+                </div>
+                <div class="col text-right">
+                    <a href="{{ url('member/class_detail/' . $materi->id) }}" class="btn btn-primary">Mulai
+                        Belajar</a>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
 
                     </div>
                 </div>
@@ -383,35 +380,34 @@
 
                 <!-- Feedback -->
 
-                @include('layout.feedback')
 
 
                 <!-- Footer -->
 
                 <!-- // END Footer -->
 
-            </div>
-            <!-- // END Header Layout -->
+                <!-- // END Header Layout -->
 
-            <!-- Drawer -->
+                <!-- Drawer -->
 
-            <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
-                <div class="mdk-drawer__content">
-                    <div class="sidebar sidebar-light sidebar-light-dodger-blue sidebar-left" data-perfect-scrollbar>
+                <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
+                    <div class="mdk-drawer__content">
+                        <div class="sidebar sidebar-light sidebar-light-dodger-blue sidebar-left"
+                            data-perfect-scrollbar>
 
-                        <!-- Sidebar Content -->
+                            <!-- Sidebar Content -->
 
-                        @include('layout.sidebar')
+                            @include('layout.sidebar')
 
-                        <!-- // END Sidebar Content -->
+                            <!-- // END Sidebar Content -->
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- // END Drawer -->
+                <!-- // END Drawer -->
 
-            <!-- jQuery -->
-            @include('layout.script')
+                <!-- jQuery -->
+                @include('layout.script')
 
 </body>
 
