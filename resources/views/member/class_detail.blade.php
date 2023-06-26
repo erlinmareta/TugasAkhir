@@ -147,7 +147,7 @@
                                             <a class="flex"
                                                 href="{{ url('/member/class_detail/' . $item->kelas_id . '/' . $item->id) }}">{{ ucwords($item->judul) }}</a>
                                             {{-- <span class="text-muted">8m 42s</span> --}}
-                                        </div>
+                                    </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -190,8 +190,9 @@
                                     class="rounded-circle">
                             </span>
                             <div class="media-body">
-                                <a class="card-title m-0"
-                                    href="{{ url('member/mentor_profil') }}">{{ $materi->user->name }}</a>
+                                <a class="card-title m-0" href="{{ url('member/mentor_profil/' . $materi->user->id) }}">
+                                    {{ $materi->user->name }}
+                                </a>
                                 <p class="text-50 lh-1 mb-0">Instructor</p>
                             </div>
                         </div>
@@ -274,7 +275,7 @@
                     </div>
                     <div class=" pt-3">
                                     <h4>{{ $comments->count() }} Comments</h4>
-                                                @foreach ($comments as $item)
+                                                    @foreach ($comments as $item)
                             <div class="d-flex mb-3"> <a href="" class="avatar avatar-sm mr-12pt">
                                     <!-- <img src="../../public/images/people/256/256_rsz_karl-s-973833-unsplash.jpg" alt="people" class="avatar-img rounded-circle"> -->
                                     <span class="avatar-title rounded-circle">JF</span>
