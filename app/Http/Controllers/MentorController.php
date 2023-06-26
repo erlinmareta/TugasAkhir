@@ -15,18 +15,17 @@ class MentorController extends Controller
 {
     public function MentorDashboard()
     {
-        // dd(Auth::user());
         $user = User::where('level', 'member')->where('id', Auth::user()->id)->count();
         $kelas = Kelas::where('user_id', Auth::user()->id)->count();
         $materi = Materi::where('user_id', Auth::user()->id)->count();
         $kelasberhasil = Kelas::where('status', 'sukses')->where('user_id', Auth::user()->id)->count();
-        return view ('mentor/dashboard', compact('user', 'kelas', 'materi', 'kelasberhasil'));
+        return view('mentor/dashboard', compact('user', 'kelas', 'materi', 'kelasberhasil'));
     }
 
     public function MentorProfil()
     {
         $user = User::findOrFail(Auth::id());
-        return view ('mentor/profil', compact('user'));
+        return view('mentor/profil', compact('user'));
     }
 
     public function UpdateProfil(Request $request)
@@ -65,5 +64,4 @@ class MentorController extends Controller
 
         return back();
     }
-
 }
