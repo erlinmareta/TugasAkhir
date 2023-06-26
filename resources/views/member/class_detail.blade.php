@@ -329,13 +329,11 @@
                                                             class="material-icons">star_border</span></span>
                                                 @endif
                                             @endfor
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
                 </div>
             </div>
@@ -365,7 +363,6 @@
 
     <!-- // END Drawer -->
 
-    <!-- jQuery -->
     <div class="modal fade" id="staticBackdrop-{{ $materi->id }}" data-backdrop="static" data-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -389,7 +386,9 @@
                                 </div>
                             </div>
                             <div class="ml-2 mt-1">
-                                <i class="fa fa-star"></i>
+                                <span class="rating__item">
+                                    <span class="material-icons">star</span>
+                                </span>
                             </div>
                         </div>
                         <br>
@@ -401,8 +400,10 @@
                                 </div>
                             </div>
                             <div class="ml-2 mt-1">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                                <span class="rating__item">
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                </span>
                             </div>
                         </div>
                         <br>
@@ -414,9 +415,11 @@
                                 </div>
                             </div>
                             <div class="ml-2 mt-1">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                                <span class="rating__item">
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                </span>
                             </div>
                         </div>
                         <br>
@@ -428,10 +431,12 @@
                                 </div>
                             </div>
                             <div class="ml-2 mt-1">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                                <span class="rating__item">
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                </span>
                             </div>
                         </div>
                         <br>
@@ -443,11 +448,13 @@
                                 </div>
                             </div>
                             <div class="ml-2 mt-1">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                                <span class="rating__item">
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                    <span class="material-icons">star</span>
+                                </span>
                             </div>
                         </div>
                         <div class="input-group">

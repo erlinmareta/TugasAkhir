@@ -47,7 +47,6 @@ Route::prefix('member')->middleware(['auth', 'cekLevel:member'])->group(function
     Route::get('/mentor_profil', [MemberController::class, 'MentorProfil']);
     Route::get('/student_course', [CourseController::class, 'StudentCourse']);
     Route::get('/browse_course', [CourseController::class, 'BrowseCourse']);
-    Route::get('/student_quiz', [CourseController::class, 'StudentQuiz']);
     Route::get('/student_profil', [MemberController::class, 'StudentProfil']);
     Route::get('/student_dashboard', [MemberController::class, 'StudentDashboard']);
     Route::put('/student_profil', [MemberController::class, 'UpdateProfile']);
