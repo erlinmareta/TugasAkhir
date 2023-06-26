@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Catatan;
 use App\Models\Comment;
+use App\Models\Kelas;
 use App\Models\Materi;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,13 @@ class MemberController extends Controller
         return view('member/dashboard');
     }
 
-    public function MentorProfil()
+    public function MentorProfil($id)
     {
-        return view('member/mentor_profil');
+        $datakelas = Kelas::where('user_id', $id)->get();
+        $datamentor = User::where('id', $id)->first();
+        $jumlahsubscribe = Subscription::where('user_id', $id)->count();
+
+        return view('member/mentor_profil', ['datakelas' => $datakelas, 'datamentor' => $datamentor, 'jumlahsubscribe' => $jumlahsubscribe]);
     }
 
     public function ClassDetail($kelas, $materi)
@@ -43,8 +48,8 @@ class MemberController extends Controller
         $selanjutnya = Materi::where("id", ">", $materi)->where("kelas_id", $datakelas)->orderBy("id", "ASC")->first();
 
         $comments = Comment::where("kelas_id", $kelas)->where("materi_id", $materi)->get();
-        $catatans = Catatan::where("kelas_id", $kelas)->where("materi_id", $materi)->get();
-        $ratings = Rating::where("kelas_id", $kelas)->where("materi_id", $materi)->orderBy('rating', 'desc')->limit(3)->get();
+        $catatans = Catatan::where("kelas_id", $kelas)->where("materi_id", $materi)->where('user_id', Auth::user()->id)->get();
+        $ratings = Rating::where("kelas_id", $kelas)->orderBy('rating', 'desc')->limit(3)->get();
 
         $materi_all = Materi::where('kelas_id', $kelas)->get();
 

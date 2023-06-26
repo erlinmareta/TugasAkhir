@@ -33,7 +33,6 @@
                         <div class="card-body">
                             <h4 class="card-title">Basic Table</h4>
                             <a href="{{ url('mentor/materi/tambah') }}" class="btn btn-light">Tambah</a>
-                            </p>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -51,23 +50,28 @@
                                     <tbody>
                                         <tr>
                                             @foreach ($materi as $item)
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $item->judul }}</td>
-                                            <td>{{ $item->kelas->judul }}</td>
-                                            <td>
-                                                <video id="video{{ $item->id }}" width="350" height="190" controls autoplay>
-                                                    <source src="{{ url('/storage/' . $item->isi_materi) }}" type="video/mp4">
-                                                </video>
-                                            </td>å
-                                            <td><button onclick="time()">{{ $item->id }}</button></td>
-                                            <td>{{ $item->deskripsi }}</td>
-                                            <td>{{ $item->urutan }}</td>
-                                            <td>
-                                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/materi/edit/' . $item->id) }}" title="Edit"><span class="fa fa-edit"></span> Edit |</a>
-                                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' . $item->id) }}" data-confirm-delete="true"><span class="fa fa-trash"></span>
-                                                    Hapus
-                                                    |</a>
-                                            </td>
+                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $item->judul }}</td>
+                                                <td>{{ $item->kelas->judul }}</td>
+                                                <td>
+                                                    <video id="video{{ $item->id }}" width="350" height="190"
+                                                        controls autoplay>
+                                                        <source src="{{ url('/storage/' . $item->isi_materi) }}"
+                                                            type="video/mp4">
+                                                    </video>
+                                                </td>
+                                                <td>{{ $item->deskripsi }}</td>
+                                                <td>{{ $item->urutan }}</td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-success-outline"
+                                                        href="{{ url('mentor/materi/edit/' . $item->id) }}"
+                                                        title="Edit"><span class="fa fa-edit"></span> Edit |</a>
+                                                    <a class="btn btn-sm btn-success-outline"
+                                                        href="{{ url('mentor/hapus/' . $item->id) }}"
+                                                        data-confirm-delete="true"><span class="fa fa-trash"></span>
+                                                        Hapus
+                                                        |</a>
+                                                </td>
                                         </tr>
                                     </tbody>
                                     @endforeach
