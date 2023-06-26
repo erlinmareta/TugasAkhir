@@ -147,7 +147,7 @@
                                             <a class="flex"
                                                 href="{{ url('/member/class_detail/' . $item->kelas_id . '/' . $item->id) }}">{{ ucwords($item->judul) }}</a>
                                             {{-- <span class="text-muted">8m 42s</span> --}}
-                                    </div>
+                                        </div>
                                     @endforeach
                                 </div>
                             </div>

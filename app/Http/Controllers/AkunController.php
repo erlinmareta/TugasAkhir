@@ -40,9 +40,27 @@ class AkunController extends Controller
         return redirect('/admin/akun/user')->with('success', 'Data Berhasil diubah!');
     }
 
-    public function hapus($id)
-    {
-        DB::table('users')->where('id',$id)->delete();
-        return back()->with('success', 'Data Berhasil dihapus!');
-    }
+        public function hapus($id)
+        {
+            DB::table('users')->where('id',$id)->delete();
+            return back()->with('success', 'Data Berhasil dihapus!');
+        }
+
+        public function DataMentor()
+        {
+            $user = User::where("level", "mentor")->get();
+            return view('admin/akun/mentor', ['user' => $user]);
+        }
+
+        public function DataPeserta()
+        {
+            $user = User::where("level", "member")->get();
+            return view('admin/akun/peserta', ['user' => $user]);
+        }
+
+        public function DataAdmin()
+        {
+            $user = User::where("level", "admin")->get();
+            return view('admin/akun/admin', ['user' => $user]);
+        }
 }

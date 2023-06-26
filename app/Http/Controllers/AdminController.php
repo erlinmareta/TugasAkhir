@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Kelas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,8 +13,13 @@ class AdminController extends Controller
 {
     public function index()
     {
-
-    	return view('admin/dashboard');
+        $userpeserta = User::where('level', 'member')->count();
+        $usermentor = User::where('level', 'mentor')->count();
+        $useradmin = User::where('level', 'admin')->count();
+        $totaluser = User::count();
+        $kelasmasuk = Kelas::where('status', 'proses')->count();
+        $kelasberhasil = Kelas::where('status', 'sukses')->count();
+    	return view('admin/dashboard', compact('userpeserta', 'usermentor', 'useradmin', 'totaluser', 'kelasmasuk', 'kelasberhasil'));
     }
 
     public function Profil()
@@ -55,6 +61,6 @@ class AdminController extends Controller
             "foto" => $foto
         ]);
 
-        return back();
+        return back()->with('success', 'Profil berhasil diperbarui.');
     }
 }

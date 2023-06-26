@@ -78,6 +78,9 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
 Route::prefix('admin')->middleware(['auth', 'cekLevel:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard.admin');
     Route::get('/akun/user', [AkunController::class, 'akun']);
+    Route::get('/akun/mentor', [AkunController::class, 'DataMentor']);
+    Route::get('/akun/peserta', [AkunController::class, 'DataPeserta']);
+    Route::get('/akun/admin', [AkunController::class, 'DataAdmin']);
     Route::get('/akun/tambah', [AkunController::class, 'tambahAkun']);
     Route::get('/akun/hapus/{id}', [AkunController::class, 'hapus']);
     Route::get('/kategori/kategori', [KategoriController::class, 'Kategori']);
