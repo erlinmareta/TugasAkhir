@@ -34,6 +34,7 @@
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{ url('admin/kelas/index') }}">Kelas Masuk</a></li>
               <li><a class="nav-link" href="{{ url('admin/kelas/berhasil') }}">Kelas Berhasil</a></li>
+              <li><a class="nav-link" href="{{ url('admin/kelas/ditolak') }}">Kelas Ditolak</a></li>
             </ul>
           </li>
       </ul>

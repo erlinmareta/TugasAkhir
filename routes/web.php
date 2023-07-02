@@ -93,6 +93,7 @@ Route::prefix('admin')->middleware(['auth', 'cekLevel:admin'])->group(function (
     Route::get('/kelas_masuk/{id}/publish', [KelasAdminController::class, 'KelasPublish']);
     Route::post('/index/{id}/reject', [KelasAdminController::class, 'Reject']);
     Route::get('/kelas/berhasil', [KelasAdminController::class, 'KelasBerhasil']);
+    Route::get('/kelas/ditolak', [KelasAdminController::class, 'KelasDitolak']);
     Route::get('/profil_admin', [AdminController::class, 'profil']);
     Route::put('/profil/{id}', [AdminController::class, 'ProfilUpdate']);
 });

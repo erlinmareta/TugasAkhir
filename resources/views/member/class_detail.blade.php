@@ -193,7 +193,6 @@
                                 <a class="card-title m-0" href="{{ url('member/mentor_profil/' . $materi->user->id) }}">
                                     {{ $materi->user->name }}
                                 </a>
-                                <p class="text-50 lh-1 mb-0">Instructor</p>
                             </div>
                         </div>
                         <p class="text-70">{{ $materi->user->deskripsi }}</p>
@@ -205,24 +204,23 @@
                                 @method('PUT')
                                 <input type="hidden" name="timestamp" id="timestamp">
 
+                                <div class="page-separator">
+                                    <div class="page-separator__text"></div>
+                                </div>
                                 <div class="form-group">
                                     <label for="catatan" class="form-label">Add Catatan</label>
                                     <textarea class="form-control" name="catatan" id="catatan" rows="3"
-                                        placeholder="Type here to reply to mentor ..." required=""></textarea>
+                                        placeholder="Ketik disini untuk menambahkan catatan ..." required=""></textarea>
                                 </div>
-                                <button class="btn btn-outline-secondary" onclick="submitCatatan()">Tambah
-                                    Catatan</button>
-
+                                <button class="btn btn-outline-secondary" onclick="submitCatatan()">Tambah Catatan</button>
                             </form>
-
                         </div>
 
-                        <div class="accordion js-accordion accordion--boxed pt-3" id="parent">
-
+                        <div class="accordion js-accordion accordion--boxed pt-3" id="parents">
                             <div class="accordion__item open">
                                 <a href="#" class="accordion__toggle" data-toggle="collapse"
-                                    data-target="#course-toc-2" data-parent="#parent">
-                                    <span class="flex">Catatan</span>
+                                    data-target="#course-toc-2" data-parent="#parents">
+                                    <span class="flex">Daftar Catatan</span>
                                     <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
                                 </a>
                                 <div class="accordion__menu collapse show" id="course-toc-2">
@@ -230,10 +228,10 @@
                                         <div class="accordion__menu-link">
                                             <div class="d-flex mb-3"> <a href=""
                                                     class="avatar avatar-sm mr-12pt">
-                                                    <span class="avatar-title rounded-circle">JF</span>
+                                                    <span class="avatar-title rounded-circle"></span>
                                                 </a>
                                             </div>
-                                            <div class="flex username"> <a href=""
+                                            <div class="flex username"> <a
                                                     class="text-body"><strong>{{ $item->user->name }}</strong></a>
                                                 <br>
                                                 <div class="d-flex align-items-center">
@@ -266,37 +264,39 @@
                         <div class="form-group">
                             <label for="comment" class="form-label">Your comment</label>
                             <textarea class="form-control" name="comment" id="comment" rows="3"
-                                placeholder="Type here to comment {{ $materi->user->name }} ..." required></textarea>
+                                placeholder="Ketik disini untuk mengomentari materi ini ..." required></textarea>
                         </div>
-                        <button class="btn btn-outline-secondary" ">Post comment</button>
+                        <button class="btn btn-outline-secondary" >Post comment</button>
 
                             </form>
                         </div>
                     </div>
                     <div class=" pt-3">
-                                    <h4>{{ $comments->count() }} Comments</h4>
-                                                    @foreach ($comments as $item)
+                        <h4>{{ $comments->count() }} Comments</h4>
+                        @foreach ($comments as $item)
                             <div class="d-flex mb-3"> <a href="" class="avatar avatar-sm mr-12pt">
-                                    <!-- <img src="../../public/images/people/256/256_rsz_karl-s-973833-unsplash.jpg" alt="people" class="avatar-img rounded-circle"> -->
-                                    <span class="avatar-title rounded-circle">JF</span>
+                                <span class="avatar-title rounded-circle"></span>
                                 </a>
                                 <div class="flex username"> <a href=""
                                         class="text-body"><strong>{{ $item->user->name }}</strong></a> <br>
                                     <p class="mt-1 text-70">{{ $item->comment }}</p>
                                     <div class="d-flex align-items-center">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="comment" class="form-label">Your comment</label>
+                                        <textarea class="form-control" name="comment" id="comment" rows="3"
+                                            placeholder="Ketik disini untuk membalas komentar ..." required></textarea>
+                                    </div>
                                 </div>
                             </div>
-                            @endforeach
+                        @endforeach
                 </div>
             </div>
-
-
 
             <div class="page-section bg-alt">
                 <div class="container page__container">
                     <div class="page-separator">
-                        <div class="page-separator__text">Feedback</div>
+                        <div class="page-separator__text">Rating Kelas</div>
                     </div>
 
                     <div class="row">
@@ -310,9 +310,8 @@
 
                                 <div class="media ml-12pt">
                                     <div class="media-left mr-12pt">
-                                        <a href="student-profile.html" class="avatar avatar-sm">
-                                            <!-- <img src="public/images/people/110/guy-.jpg" width="40" alt="avatar" class="rounded-circle"> -->
-                                            <span class="avatar-title rounded-circle">UK</span>
+                                        <a class="avatar avatar-sm">
+                                            <span class="avatar-title rounded-circle"></span>
                                         </a>
                                     </div>
                                     <div class="media-body media-middle">
@@ -340,13 +339,7 @@
             </div>
         </div>
         <!-- // END Header Layout Content -->
-
-        <!-- Footer -->
-
     </div>
-    <!-- // END Header Layout -->
-
-    <!-- Drawer -->
 
     <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
         <div class="mdk-drawer__content">
@@ -362,7 +355,7 @@
         </div>
     </div>
 
-    <!-- // END Drawer -->
+    <!-- Modal Rating -->
 
     <div class="modal fade" id="staticBackdrop-{{ $materi->id }}" data-backdrop="static" data-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

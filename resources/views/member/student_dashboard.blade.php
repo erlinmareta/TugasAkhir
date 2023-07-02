@@ -61,7 +61,7 @@
                                             data-toggle="popover" data-trigger="click">
                                             <a href="student-take-course.html" class="card-img-top js-image"
                                                 data-position="" data-height="140">
-                                                <img src="../learnly/public/images/Lymphoma-bro.png" alt="course">
+                                               <img src="{{ url('/storage/' . $datakelass->kelas->gambar) }}" style="width:70px" width="40" height="40" alt="Angular" class="rounded">
                                                 <span class="overlay__content">
                                                     <span class="overlay__action d-flex flex-column text-center">
                                                         <i class="material-icons icon-32pt">play_circle_outline</i>
@@ -113,7 +113,7 @@
                                         <div class="popoverContainer d-none">
                                             <div class="media">
                                                 <div class="media-left mr-12pt">
-                                                    <img src="../learnly/public/images/Lymphoma-bro.png" width="40"
+                                                    <img src="{{ url('/storage/' . $datakelass->kelas->gambar) }}" class="rounded" width="40"
                                                         height="40" alt="Angular" class="rounded">
                                                 </div>
                                                 <div class="media-body">
@@ -121,7 +121,7 @@
                                                     <p class="lh-1 mb-0">
                                                         <span class="text-50 small">with</span>
                                                         <span class="text-50 small font-weight-bold">
-                                                            {{ $datakelass->user->name }}</span>
+                                                            {{ $datakelass->kelas->user->name }}</span>
                                                     </p>
                                                 </div>
                                             </div>

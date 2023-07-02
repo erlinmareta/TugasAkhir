@@ -89,12 +89,12 @@
                                 <div class="col-sm-6 card-group-row__col">
                                     <div class="card card-sm card-group-row__card">
                                         <div class="card-body d-flex align-items-center">
-                                            <a href="course.html"
+                                            <div
                                                 class="avatar avatar-4by3 overlay overlay--primary mr-12pt">
-                                                <img src="{{ url('/learnly/public/images/Lymphoma-bro.png') }}"
+                                                <img src="{{ url('/storage/' . $kelas->gambar) }}"
                                                     alt="Angular Routing In-Depth" class="avatar-img rounded">
                                                 <span class="overlay__content"></span>
-                                            </a>
+                                            </div>
                                             <div class="flex">
                                                 <a class="card-title mb-4pt" href="course.html">{{ $kelas->judul }}</a>
                                                 <div class="d-flex align-items-center">

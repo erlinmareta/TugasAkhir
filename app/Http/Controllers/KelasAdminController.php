@@ -51,4 +51,10 @@ class KelasAdminController extends Controller
     	return view('admin/kelas/berhasil' , ['kelas' => $kelas]);
     }
 
+    public function KelasDitolak()
+    {
+        $kelas = Kelas::with('user')->where('status' , 'cancel')->get();
+    	return view('admin/kelas/ditolak' , ['kelas' => $kelas]);
+    }
+
 }

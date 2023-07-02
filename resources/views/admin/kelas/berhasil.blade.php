@@ -22,8 +22,6 @@
         <h1>Table</h1>
         <div class="section-header-breadcrumb">
           <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-          <div class="breadcrumb-item"><a href="#">Components</a></div>
-          <div class="breadcrumb-item">Table</div>
         </div>
       </div>
 <div class="row">
@@ -55,10 +53,9 @@
                       <td>{{$item->judul}}</td>
                       <td><img src="{{ url('/storage/' .$item->gambar)}}" style="width:70px" ></td>
                       <td>{{$item->deskripsi}}</td>
-                      <td>{{$item->status}}</td>
+                      <td><div class="badge badge-success">{{$item->status}}</div></td>
                       <td>
                         <a class="btn btn-sm btn-success-outline" href="{{ route('admin.kelasDetail', $item->id) }}" title="detail"><span class="fa fa-edit"></span> Detail |</a>
-                          <a class="btn btn-sm btn-success-outline" href="{{ url('admin/kelas_masuk/' . $item->id) }}/publish" title="publish"> Publish |</a>
                       </td>
                   </tr>
                 <tr>

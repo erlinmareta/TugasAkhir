@@ -25,7 +25,7 @@ class MemberController extends Controller
 
     public function MentorProfil($id)
     {
-        $datakelas = Kelas::where('user_id', $id)->get();
+        $datakelas = Kelas::where('user_id', $id)->where('status', 'sukses')->get();
         $datamentor = User::where('id', $id)->first();
         $jumlahsubscribe = Subscription::where('user_id', $id)->count();
 
@@ -90,7 +90,6 @@ class MemberController extends Controller
         }
         return redirect()->back();
     }
-
 
     public function StudentDashboard()
     {
