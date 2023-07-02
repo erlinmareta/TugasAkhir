@@ -90,13 +90,14 @@
                                     <div class="card card-sm card-group-row__card">
                                         <div class="card-body d-flex align-items-center">
                                             <div
-                                                class="avatar avatar-4by3 overlay overlay--primary mr-12pt">
+                                            <a href="{{ url('member/class_detail/' . $kelas->id) . '/' . $kelas->materi->first()->id }}"
                                                 <img src="{{ url('/storage/' . $kelas->gambar) }}"
                                                     alt="Angular Routing In-Depth" class="avatar-img rounded">
                                                 <span class="overlay__content"></span>
                                             </div>
                                             <div class="flex">
-                                                <a class="card-title mb-4pt" href="course.html">{{ $kelas->judul }}</a>
+                                                <a class="card-title mb-4pt"
+                                                    href="{{ url('member/class_detail/' . $kelas->id) . '/' . $kelas->materi->first()->id }}">{{ $kelas->judul }}</a>
                                                 <div class="d-flex align-items-center">
                                                     <div class="rating mr-8pt">
 
