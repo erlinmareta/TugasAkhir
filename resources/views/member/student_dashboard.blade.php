@@ -3,6 +3,7 @@
 
 <head>
     @include('layout.head')
+    <title>My Dashboard || Student</title>
 </head>
 
 <body class="layout-sticky-subnav layout-learnly ">

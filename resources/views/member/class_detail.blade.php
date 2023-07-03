@@ -7,11 +7,10 @@
 <head>
 
     @include('layout.head')
-
+    <title>Class Detail || Student</title>
 </head>
 
 <body class="layout-sticky-subnav layout-learnly ">
-
     <div class="preloader">
         <div class="sk-chase">
             <div class="sk-chase-dot"></div>
@@ -21,13 +20,6 @@
             <div class="sk-chase-dot"></div>
             <div class="sk-chase-dot"></div>
         </div>
-
-        <!-- <div class="sk-bounce">
-    <div class="sk-bounce-dot"></div>
-    <div class="sk-bounce-dot"></div>
-  </div> -->
-
-        <!-- More spinner examples at https://github.com/tobiasahlin/SpinKit/blob/master/examples.html -->
     </div>
 
     <!-- Header Layout -->
@@ -52,27 +44,16 @@
                             </div>
                             <div class="flex">
                                 <h1 class="h2 m-0">{{ ucwords($materi->judul) }}</h1>
-                                <div class="rating mb-8pt d-inline-flex">
-                                    <div class="rating__item"><i class="material-icons">star</i></div>
-                                    <div class="rating__item"><i class="material-icons">star</i></div>
-                                    <div class="rating__item"><i class="material-icons">star</i></div>
-                                    <div class="rating__item"><i class="material-icons">star</i></div>
-                                    <div class="rating__item"><i class="material-icons">star_border</i></div>
-                                </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
 
             <div class="page-section">
                 <div class="container page__container">
-
                     <div class="row">
                         <div class="col-lg-8">
-
                             <div class="js-player card bg-primary embed-responsive embed-responsive-16by9 mb-24pt">
                                 <div class="player embed-responsive-item">
                                     <div class="player__content">
@@ -125,7 +106,6 @@
                             <p class="lead measure-lead text-70 mb-24pt">{{ $materi->deskripsi }}</p>
 
                             <div class="accordion js-accordion accordion--boxed " id="parent">
-
                                 <div class="accordion__item open">
                                     <a href="#" class="accordion__toggle" data-toggle="collapse"
                                         data-target="#course-toc-2" data-parent="#parent">
@@ -245,7 +225,6 @@
                                         </div>
                                     @endforeach
                                 </div>
-
                             </div>
                         </div>
                     </div>

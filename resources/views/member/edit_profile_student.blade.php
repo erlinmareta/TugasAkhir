@@ -5,7 +5,7 @@
 
     <head>
        @include('member.layout.head')
-
+       <title>Edit Profil || Student</title>
     </head>
 
     <body class="layout-sticky-subnav layout-learnly ">

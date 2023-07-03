@@ -3,6 +3,7 @@
 
 <head>
     @include('layout.head')
+    <title>My Profile || Student</title>
 
 </head>
 

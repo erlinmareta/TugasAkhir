@@ -100,6 +100,16 @@ class MemberController extends Controller
         ]);
     }
 
+    public function StudentCourse()
+
+    {
+        $datakelas = Subscription::where('user_id', Auth::user()->id)->get();
+
+        return view('member/student_course', [
+            'datakelas' => $datakelas
+        ]);
+    }
+
     public function StudentProfil()
     {
         $user = User::findOrFail(Auth::id());

@@ -4,11 +4,11 @@
 <head>
 
     @include('layout.head')
+    <title>Mentor Profil || Student</title>
 
 </head>
 
 <body class="layout-sticky-subnav layout-learnly ">
-
     <div class="preloader">
         <div class="sk-chase">
             <div class="sk-chase-dot"></div>
@@ -89,12 +89,13 @@
                                 <div class="col-sm-6 card-group-row__col">
                                     <div class="card card-sm card-group-row__card">
                                         <div class="card-body d-flex align-items-center">
-                                            <div
-                                            <a href="{{ url('member/class_detail/' . $kelas->id) . '/' . $kelas->materi->first()->id }}"
+                                            <div>
+                                            <a href="{{ url('member/class_detail/' . $kelas->id) . '/' . $kelas->materi->first()->id }}">
                                                 <img src="{{ url('/storage/' . $kelas->gambar) }}"
                                                     alt="Angular Routing In-Depth" class="avatar-img rounded">
                                                 <span class="overlay__content"></span>
                                             </div>
+
                                             <div class="flex">
                                                 <a class="card-title mb-4pt"
                                                     href="{{ url('member/class_detail/' . $kelas->id) . '/' . $kelas->materi->first()->id }}">{{ $kelas->judul }}</a>

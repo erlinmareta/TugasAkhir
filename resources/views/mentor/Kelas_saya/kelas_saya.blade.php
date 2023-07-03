@@ -53,7 +53,7 @@
                             <td>{{$item->judul}}</td>
                             <td><img src="{{ url('/storage/' .$item->gambar)}}"         ></td>
                             <td>{{$item->deskripsi}}</td>
-                            <td>{{$item->status}}</td>
+                            <td><label class="badge badge-success">{{$item->status}}</label></td>
                             <td>
                                 <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas_saya/detail/' .$item->id) }}" title="detail"><span class="fa fa-edit"></span> Detail |</a>
 
@@ -61,9 +61,7 @@
 
                                 @else
                                 <a class="btn btn-sm btn-success-outline" href="{{ route('mentor.kelas_saya.publish', $item->id) }}" title="publish">
-                                    <span class="fa fa-trash"></span>
-                                    Publish
-                                |</a>
+                                    <label class="badge badge-info">Publish</label></a>
                                 @endif
                             </td>
                         </tr>

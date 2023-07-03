@@ -54,15 +54,12 @@
                             <td>{{ $no++ }}</td>
                             <td>{{$item->judul}}</td>
                             <td>{{$item->kategori->nama}}</td>
-                            <td><img src="{{ url('/storage/' .$item->gambar)}}"         ></td>
+                            <td><img src="{{ url('/storage/' .$item->gambar)}}"></td>
                             <td>{{$item->deskripsi}}</td>
-                            <td>{{$item->status}}</td>
+                            <td><label class="badge badge-success">{{$item->status}}</label></td>
                             <td>
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/edit/' .$item->id) }}" title="Edit"><span class="fa fa-edit"></span> Edit |</a>
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' .$item->id) }}" title="Hapus">
-                                    <span class="fa fa-trash"></span>
-                                    Hapus
-                                |</a>
+                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/edit/' .$item->id) }}" title="Edit"><label class="badge badge-info">Edit |</label></a>
+                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' .$item->id) }}" title="Hapus"><label class="badge badge-warning">Hapus |</label></a>
                             </td>
                         </tr>
                       </tbody>

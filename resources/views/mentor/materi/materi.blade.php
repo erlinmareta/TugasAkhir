@@ -63,14 +63,8 @@
                                                 <td>{{ $item->deskripsi }}</td>
                                                 <td>{{ $item->urutan }}</td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-success-outline"
-                                                        href="{{ url('mentor/materi/edit/' . $item->id) }}"
-                                                        title="Edit"><span class="fa fa-edit"></span> Edit |</a>
-                                                    <a class="btn btn-sm btn-success-outline"
-                                                        href="{{ url('mentor/hapus/' . $item->id) }}"
-                                                        data-confirm-delete="true"><span class="fa fa-trash"></span>
-                                                        Hapus
-                                                        |</a>
+                                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/materi/edit/' . $item->id) }}" title="Edit"><label class="badge badge-info">Edit |</label></a>
+                                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' . $item->id) }}" data-confirm-delete="true"><label class="badge badge-warning">Hapus |</label></a>
                                                 </td>
                                         </tr>
                                     </tbody>
