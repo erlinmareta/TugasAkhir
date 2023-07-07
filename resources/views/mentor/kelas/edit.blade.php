@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <label for="gambar"> Gambar </label>
                                     <br><br>
-                                    <img src="{{ url('/storage/' .$item->gambar)}}" style="width: 35%;"><br><br>
+                                    <img src="{{ url('/storage/' .$item->gambar)}}" style="width: 10%;"><br><br>
                                     <input type="file" class="form-control" name="gambar" id="gambar">
                                 </div>
                                 <div class="form-group">

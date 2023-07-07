@@ -88,8 +88,9 @@
                                             <ol>
                                                 <li>Bersungguh-sungguh dalam menjalankan perannya sebagai Instruktor</li>
                                                 <li>Video yang diunggah tidak mengandung unsur SARA, kekerasan, pornografi dan hal-hal negatif lainnya.</li>
-                                                <li>Tidak menyalahgunakan akun untuk kepentingan konten</li>
-                                                <li></li>
+                                                <li>Tidak menyalahgunakan akun</li>
+                                                <li>Apabila ditemukannya ketidaksesuain atau melanggar syarat dan ketentuan berlaku saya siap
+                                                    menanggung konsekuensi yang sudah ditetapkan.</li>
                                             </ol>
                                         </div>
                                         <div class="modal-footer">

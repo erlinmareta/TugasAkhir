@@ -51,10 +51,11 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="page-separator">
-                                <div class="page-separator__text">Courses</div>
+                                <div class="page-separator__text">Kelas Pembelajaran</div>
                             </div>
 
                             <div class="row card-group-row">
+                                @if ($datakelas->count() > 0)
                                 @foreach ($datakelas as $datakelass)
                                     <div class="col-sm-6 col-xl-4 card-group-row__col">
                                         <div class="card card-sm card--elevated p-relative o-hidden overlay overlay--primary-dodger-
@@ -160,6 +161,11 @@
                                         </div>
                                     </div>
                                 @endforeach
+                                @else
+                        <div class="alert alert-primary" role="alert">
+                            Belum ada ada kelas pembelajaran !
+                    </div>
+                    @endif
 
                             </div>
                         </div>

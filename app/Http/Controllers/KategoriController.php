@@ -49,7 +49,7 @@ class KategoriController extends Controller
         return redirect('admin/kategori/kategori')->with('success', 'Kelas berhasil diperbarui.');
     }
 
-    public function hapus($id)
+    public function Delete($id)
     {
         DB::table('kategori')->where('id',$id)->delete();
         return back()->with('success', 'Data Berhasil dihapus!');

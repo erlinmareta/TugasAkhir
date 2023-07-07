@@ -51,7 +51,7 @@
                   <td>{{$item->nama}}</td>
                   <td>
                     <a class="btn btn-sm btn-success-outline" href="{{ url('admin/kategori/edit/' .$item->id) }}" title="Edit"><span class="fa fa-edit"></span> Edit |</a>
-                    <a class="btn btn-sm btn-success-outline" href="{{ url('admin/hapus/' .$item->id) }}" title="Hapus"><span class="fa fa-trash"></span> Hapus |</a>
+                    <a class="btn btn-sm btn-success-outline" href="{{ url('admin/hapuskategori/' .$item->id) }}" title="Hapus"><span class="fa fa-trash"></span> Hapus |</a>
                 </td>
                 </tr>
                 <tr>
@@ -74,6 +74,7 @@
 
 {{-- script --}}
 @include('admin.layout.script')
+@include('sweetalert::alert')
 
 </body>
 </html>

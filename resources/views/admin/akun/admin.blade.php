@@ -20,8 +20,6 @@
       <div class="section-header">
         <h1>Table</h1>
         <div class="section-header-breadcrumb">
-          <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-          <div class="breadcrumb-item"><a href="#">Components</a></div>
           <div class="breadcrumb-item">Table</div>
         </div>
       </div>
@@ -29,7 +27,8 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h4>User Table</h4>
+          <h2>Data Admin</h2><br>
+          <a href="{{ url('admin/akun/tambah') }}" class="btn btn-outline-primary">Tambah</a>
               </div>
         <div class="card-body p-0">
           <div class="table-responsive">
@@ -52,7 +51,7 @@
                   <td>{{$item->email}}</td>
                   <td>{{$item->level }}</td>
                   <td>
-                    <a class="btn btn-sm btn-success-outline" href="" title="Edit"><span class="fa fa-edit"></span> Edit |</a>
+                    <a class="btn btn-sm btn-success-outline" href="{{ url('admin/akun/edit/' .$item->id) }}" title="Edit"><span class="fa fa-edit"></span> Edit |</a>
                     <a class="btn btn-sm btn-success-outline" href="{{ url('admin/akun/hapus/' .$item->id) }}" title="Hapus"><span class="fa fa-trash"></span> Hapus |</a>
                     <button class="btn btn-sm btn-success-outline" data-toggle="modal" data-target="#myModal{{ $item->id }}s" ><span class="fa fa-info-circle"></span></button>
                 </td>

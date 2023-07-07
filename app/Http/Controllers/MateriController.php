@@ -20,7 +20,7 @@ class MateriController extends Controller
     {
         $materi = Materi::where('user_id', Auth::user()->id)->get();
 		$kelas = Kelas::where('user_id', Auth::user()->id)->get();
-        return view('mentor/materi/materi', ['materi' => $materi]);
+        return view('mentor/materi/materi', ['materi' => $materi , 'kelas' => $kelas]);
     }
 
     public function TambahMateri()

@@ -50,7 +50,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputName1">Deskripsi</label>
-                    <input name="deskripsi" type="text" class="form-control" id="exampleInputName1" placeholder="Masukkan Judul">
+                    <input name="deskripsi" type="text" class="form-control" id="exampleInputName1" placeholder="Masukkan Deskripsi">
                   </div>
               <div class="form-group">
                 <label for="exampleSelectGender">Status</label>

@@ -25,7 +25,7 @@
                             <a class="sidebar-menu-button"
                                href="{{ url('member/student_dashboard') }}">
                                 <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">account_box</span>
-                                <span class="sidebar-menu-text">Student Dashboard</span>
+                                <span class="sidebar-menu-text"> Dashboard</span>
                             </a>
                         </li>
 
@@ -33,7 +33,7 @@
                             <a class="sidebar-menu-button"
                                href="{{ url('member/student_course') }}">
                                 <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">class</span>
-                                <span class="sidebar-menu-text">Kursus Saya</span>
+                                <span class="sidebar-menu-text">Kelas Saya</span>
                             </a>
                         </li>
 
@@ -41,7 +41,7 @@
                             <a class="sidebar-menu-button"
                                href="student-take-lesson.html">
                                 <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">import_contacts</span>
-                                <span class="sidebar-menu-text">Achievement</span>
+                                <span class="sidebar-menu-text">Sertifikat</span>
                             </a>
                         </li>
                     </ul>

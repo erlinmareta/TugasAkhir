@@ -31,7 +31,7 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Basic Table</h4>
+                            <h4 class="card-title">Data Materi</h4>
                             <a href="{{ url('mentor/materi/tambah') }}" class="btn btn-light">Tambah</a>
                             <div class="table-responsive">
                                 <table class="table">
@@ -54,7 +54,7 @@
                                                 <td>{{ $item->judul }}</td>
                                                 <td>{{ $item->kelas->judul }}</td>
                                                 <td>
-                                                    <video id="video{{ $item->id }}" width="350" height="190"
+                                                    <video id="video{{ $item->id }}" width="270" height="110"
                                                         controls autoplay>
                                                         <source src="{{ url('/storage/' . $item->isi_materi) }}"
                                                             type="video/mp4">

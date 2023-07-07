@@ -28,7 +28,7 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h4>Data Kelas Berhasil di Publish</h4><br>
+          <h4>Data Kelas Berhasil ditolak</h4><br>
               </div>
         <div class="card-body p-0">
           <div class="table-responsive">

@@ -55,15 +55,6 @@
               <h3 class="profile-username text-center">{{ Auth::user()->name }} </h3>
 
               <p class="text-muted text-center">{{ Auth::user()->pekerjaan }} </p>
-
-              <ul class="list-group list-group-unbordered mb-3">
-                <li class="list-group-item">
-                  <b>Partisipan</b> <a class="float-right">1,322</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Following</b> <a class="float-right">543</a>
-                </li>
-              </ul>
             </div>
             <!-- /.card-body -->
           </div>
@@ -82,7 +73,7 @@
               <p class="text-muted">{{ Auth::user()->alamat }} </p>
               <hr>
               <strong><i class="far fa-file-alt mr-1"></i>Email</strong>
-              <p class="text-muted">{{ Auth::user()->alamat }} </p>
+              <p class="text-muted">{{ Auth::user()->email }} </p>
             </div>
             <!-- /.card-body -->
           </div>

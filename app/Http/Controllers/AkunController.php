@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 class AkunController extends Controller
@@ -17,17 +18,21 @@ class AkunController extends Controller
     }
 
     public function edit($id)
-    {
-        $user = DB::table('users')->where('id',$id)->get();
-        return view('admin/akun/edit',['user' => $user]);
-
-    }
+{
+    $user = DB::table('users')->where('id', $id)->first();
+    return view('admin.akun.edit', ['item' => $user]);
+}
 
     public function update(Request $request)
     {
+        if($request->file("foto")) {
+            $data = $request->file("foto")->store("profil");
+        }
         $user = User::where('id', Auth::user()->id)->update([
             "name" => $request->name,
             "email" => $request->email,
+            "level" => $request->level,
+            "password" => $request->password,
             "tempat_lahir" => $request->tempat_lahir,
             "jenis_kelamin" => $request->jenis_kelamin,
             "tanggal_lahir" => $request->tanggal_lahir,
@@ -35,9 +40,9 @@ class AkunController extends Controller
             "alamat" => $request->alamat,
             "pekerjaan" => $request->pekerjaan,
             "deskripsi" => $request->deskripsi,
-            "foto" => $foto
+            "foto" => $data
         ]);
-        return redirect('/admin/akun/user')->with('success', 'Data Berhasil diubah!');
+        return redirect('/admin/akun/admin')->with('success', 'Data Berhasil diubah!');
     }
 
         public function hapus($id)
@@ -63,4 +68,37 @@ class AkunController extends Controller
             $user = User::where("level", "admin")->get();
             return view('admin/akun/admin', ['user' => $user]);
         }
+
+        public function TambahAdmin()
+        {
+            return view('admin/akun/tambah');
+        }
+
+        public function store(Request $request)
+    {
+        $data = null;
+        if($request->file("foto")) {
+            $data = $request->file("foto")->store("profil");
+        }
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'level' => $request->level,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'nomor_telepon' => $request->nomor_telepon,
+            'foto' =>$data,
+            'pekerjaan' => $request->pekerjaan,
+            'alamat' => $request->alamat,
+            'deskripsi' =>$request->deskripsi,
+
+        ]);
+        return redirect('admin/akun/admin')->with('success', 'Berhasil ditambahkan!');
+
+    }
+
+
 }

@@ -10,16 +10,7 @@ use App\Models\User;
 
 class Kelas extends Model
 {
-    protected $fillable = [
-        'id',
-        'user_id',
-        'kategori_id',
-        'judul',
-        'gambar',
-        'deskripsi',
-        'status',
-        'alasan'
-    ];
+    protected $guarded = [''];
 
     public function materi()
     {

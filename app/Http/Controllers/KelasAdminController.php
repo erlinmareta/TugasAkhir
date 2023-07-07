@@ -36,6 +36,12 @@ class KelasAdminController extends Controller
     return redirect()->back()->with('success', 'Kelas berhasil dipublish.');
     }
 
+    public function HapusKelas($id)
+    {
+        Kelas::find($id)->delete();
+        return back()->with('success', 'Data Berhasil dihapus!');
+    }
+
     public function Reject(Request $request , $id)
     {
         $kelas = Kelas::findOrFail($id);

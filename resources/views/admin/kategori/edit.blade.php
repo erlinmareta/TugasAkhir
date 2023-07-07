@@ -1,57 +1,66 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>Dashboard Mentor</title>
-    @include('mentor.layout.head')
+
+@include('admin.layout.head')
+
 </head>
 
 <body>
-    <div class="container-scroller">
-        <!-- partial:partials/_navbar.html -->
-        @include('mentor.layout.navbar')
-        <!-- partial -->
 
-        <div class="container-fluid page-body-wrapper">
+{{-- navbar --}}
+@include('admin.layout.navbar')
 
-            <!-- partial:partials/_settings-panel.html -->
-            @include('mentor.layout.setting')
+{{-- sidebar --}}
+@include('admin.layout.sidebar')
 
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-header-breadcrumb">
+          <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+          <div class="breadcrumb-item"><a href="#">Forms</a></div>
+          <div class="breadcrumb-item">Form Tambah Admin</div>
         </div>
-    </div>
-    <!-- partial -->
+      </div>
 
-    <!-- partial:partials/_sidebar.html -->
-    @include('mentor.layout.sidebar')
-
-    <!-- partial -->
-    <div class="main-panel">
-        <div class="content-wrapper">
-            <div class="row">
-                <div class="col-lg-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Edit Kategori</h4>
-                            <form method="post" action="{{ url('/admin/kategori/'.$item->id) }}"
-                                enctype="multipart/form-data">
-                                @method('PUT')
-                                {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label for="judul">Nama</label>
-                                    <input type="text" class="form-control" id="nama" name="nama"
-                                        value="{{ $item->nama }}" required="required">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </form>
-                        </div>
-                    </div>
+      <div class="section-body">
+        <h2 class="section-title">Edit Data Admin</h2>
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                  <h4>Data</h4>
                 </div>
+                <form method="post" action="{{ url('/admin/kategori/'.$item->id) }}"
+                    enctype="multipart/form-data">
+                    @method('PUT')
+                     {{ csrf_field() }}
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>Nama</label>
+                    <input class="form-control" type="text" name="nama" id="nama" value="{{ $item->nama }}" required="required">
+                  </div>
+                <div class="card-footer text-right">
+                  <button class="btn btn-primary">Submit</button>
+                </div>
+              </form>
             </div>
+          </div>
         </div>
     </div>
+</div>
+</section>
+</div>
+{{-- footer       --}}
+@include('admin.layout.footer')
+    </div>
+  </div>
 
-    @include('mentor.layout.script')
-    <!-- End custom js for this page-->
+{{-- script --}}
+@include('admin.layout.script')
+
 </body>
-
 </html>

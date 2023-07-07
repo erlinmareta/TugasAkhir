@@ -188,7 +188,7 @@
                                     <div class="page-separator__text"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="catatan" class="form-label">Add Catatan</label>
+                                    <label for="catatan" class="form-label">Tambah Catatan</label>
                                     <textarea class="form-control" name="catatan" id="catatan" rows="3"
                                         placeholder="Ketik disini untuk menambahkan catatan ..." required=""></textarea>
                                 </div>
@@ -233,7 +233,7 @@
         </div>
         <div class="container page__container">
             <div class="d-flex mb-8"><a href="" class="avatar avatar-sm mr-12pt"> <span
-                        class="avatar-title rounded-circle">LB</span> </a>
+                        class="avatar-title rounded-circle"></span> </a>
                 <div class="flex">
                     <form id="commentForm" name="commentForm"
                         action="{{ url('/member/class_detail/' . $kelas . '/' . $materi->id) . '/comment' }}"
@@ -241,17 +241,17 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="comment" class="form-label">Your comment</label>
+                            <label for="comment" class="form-label">Komentar</label>
                             <textarea class="form-control" name="comment" id="comment" rows="3"
                                 placeholder="Ketik disini untuk mengomentari materi ini ..." required></textarea>
                         </div>
-                        <button class="btn btn-outline-secondary" >Post comment</button>
+                        <button class="btn btn-outline-secondary" >Tambah Komentar</button>
 
                             </form>
                         </div>
                     </div>
                     <div class=" pt-3">
-                        <h4>{{ $comments->count() }} Comments</h4>
+                        <h4>{{ $comments->count() }} Komentar</h4>
                         @foreach ($comments as $item)
                             <div class="d-flex mb-3"> <a href="" class="avatar avatar-sm mr-12pt">
                                 <span class="avatar-title rounded-circle"></span>
@@ -262,7 +262,7 @@
                                     <div class="d-flex align-items-center">
                                     </div>
                                     <div class="form-group">
-                                        <label for="comment" class="form-label">Your comment</label>
+                                        <label for="comment" class="form-label"></label>
                                         <textarea class="form-control" name="comment" id="comment" rows="3"
                                             placeholder="Ketik disini untuk membalas komentar ..." required></textarea>
                                     </div>
