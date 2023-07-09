@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Catatan;
 use App\Models\Comment;
 use App\Models\Kelas;
+use App\Models\History;
 use App\Models\Materi;
 use Illuminate\Http\Request;
-
 use App\Models\Rating;
 use App\Models\Subscription;
 use App\Models\User;
@@ -34,6 +34,30 @@ class MemberController extends Controller
 
     public function ClassDetail($kelas, $materi)
     {
+        $history = History::where("user_id", Auth::user()->id)->first();
+
+        if (empty($history)) {
+            History::create([
+                "kelas_id" => $kelas,
+                "user_id" => Auth::user()->id,
+                "materi_id" => $materi,
+                "status" => "1"
+            ]);
+        } else {
+            $history = History::where("kelas_id", $kelas)->where("materi_id", $materi)->where("user_id", Auth::user()->id)->first();
+
+            if ($history) {
+
+            } else {
+                History::create([
+                    "kelas_id" => $kelas,
+                    "user_id" => Auth::user()->id,
+                    "materi_id" => $materi,
+                    "status" => "1"
+                ]);
+            }
+        }
+
         $isSubscribed = Subscription::where("kelas_id", $kelas)->where("user_id", Auth::user()->id)->first();
         if ($isSubscribed == null) {
             Subscription::create([
@@ -95,8 +119,10 @@ class MemberController extends Controller
     {
         $datakelas = Subscription::where('user_id', Auth::user()->id)->get();
 
+        $history = History::where("user_id", Auth::user()->id)->pluck("materi_id")->toArray();
         return view('member/student_dashboard', [
-            'datakelas' => $datakelas
+            'datakelas' => $datakelas ,
+            'history' => $history
         ]);
     }
 

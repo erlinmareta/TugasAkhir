@@ -18,13 +18,6 @@
             <div class="sk-chase-dot"></div>
             <div class="sk-chase-dot"></div>
         </div>
-
-        <!-- <div class="sk-bounce">
-            <div class="sk-bounce-dot"></div>
-            <div class="sk-bounce-dot"></div>
-        </div> -->
-
-        <!-- More spinner examples at https://github.com/tobiasahlin/SpinKit/blob/master/examples.html -->
     </div>
 
     <!-- Header Layout -->
@@ -65,7 +58,6 @@
 
         <div class="page-section">
             <div class="container page__container">
-
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="page-separator">
@@ -155,17 +147,14 @@
                                         <br>
                                         <input type="file" name="foto" id="foto" accept="image/*">
                                     </div>
-
                                     <button type="submit" class="btn btn-primary" >Submit</button>
                                 </form>
-                                <div>
-                                </div>
-
-                            </div>
+                            <div>
+                        </div>
+                    </div>
                             <div class="col-md-6 card-group-row__col">
                                 <div>
                                     <div class="card-header d-flex align-items-center border-0">
-
                                     </div>
                                 </div>
                             </div>
@@ -173,23 +162,8 @@
                     </div>
 
                     <div class="col-lg-4">
-
-                        <h4>About me</h4>
-                        <p class="text-70 mb-24pt">{{ old('deskripsi', Auth::user()->deskripsi) }}</p>
-
-                        <h4>My sosial media</h4>
-                        <p class="text-70"></p>
-                            <div class="d-flex align-items-center mb-24pt">
-                                <a href=""
-                                class="text-accent fab fa-facebook-square font-size-24pt mr-8pt"></a>
-                                <a href="" class="text-accent fab fa-twitter-square font-size-24pt mr-8pt"></a>
-                                <a href="" class="text-accent fab fa-instagram-square font-size-24pt"></a>
-                            </div>
-
-
-                            <!-- // END Header Layout -->
-
-                            <!-- Drawer -->
+                        <h4>Tentang Saya </h4>
+                        <p class="text-70 mb-24pt">Hi ! {{ old('deskripsi', Auth::user()->deskripsi) }}</p>
 
                             <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
                                 <div class="mdk-drawer__content">

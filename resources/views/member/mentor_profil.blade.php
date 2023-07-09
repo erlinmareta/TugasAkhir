@@ -49,11 +49,7 @@
                         <div class="flex">
                             <h1 class="h2 mb-0">{{ $datamentor->name }}</h1>
                             <div class="rating mb-16pt d-inline-flex">
-                                <div class="rating__item"><i class="material-icons">star</i></div>
-                                <div class="rating__item"><i class="material-icons">star</i></div>
-                                <div class="rating__item"><i class="material-icons">star</i></div>
-                                <div class="rating__item"><i class="material-icons">star</i></div>
-                                <div class="rating__item"><i class="material-icons">star_border</i></div>
+
                             </div>
                             <div>
                                 <span class="chip chip-outline-secondary d-inline-flex align-items-center"

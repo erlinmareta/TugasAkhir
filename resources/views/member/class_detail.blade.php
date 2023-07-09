@@ -329,13 +329,11 @@
                 @include('layout.sidebar')
 
                 <!-- // END Sidebar Content -->
-
             </div>
         </div>
     </div>
 
     <!-- Modal Rating -->
-
     <div class="modal fade" id="staticBackdrop-{{ $materi->id }}" data-backdrop="static" data-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
