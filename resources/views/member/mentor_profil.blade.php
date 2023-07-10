@@ -79,27 +79,40 @@
                 <div class="row">
                     <div class="col-lg-8">
 
-                        <div class="row card-group-row mb-8pt">
 
-                            @foreach ($datakelas as $kelas)
-                                <div class="col-sm-6 card-group-row__col">
-                                    <div class="card card-sm card-group-row__card">
-                                        <div class="card-body d-flex align-items-center">
-                                            <div>
-                                            <a href="{{ url('member/class_detail/' . $kelas->id) . '/' . $kelas->materi->first()->id }}">
-                                                <img src="{{ url('/storage/' . $kelas->gambar) }}"
-                                                    alt="Angular Routing In-Depth" class="avatar-img rounded">
-                                                <span class="overlay__content"></span>
-                                            </div>
+                        <div class="row card-group-row">
+                            @if ($datakelas->count() > 0)
+                                @foreach ($datakelas as $datakelass)
+                                    <div class="col-sm-6 col-xl-4 card-group-row__col">
+                                        <div class="card card-sm card--elevated p-relative o-hidden overlay overlay--primary-dodger-
+                                        blue js-overlay card-group-row__card undefined"
+                                            data-toggle="popover" data-trigger="click">
+                                            <a href="{{ url('member/class_detail/' . $datakelass->id) . '/' . $datakelass->materi->first()->id }}"
+                                                class="card-img-top js-image" data-position="" data-height="140">
+                                                <img src="{{ url('/storage/' . $datakelass->gambar) }}"
+                                                    style="width:70px" width="40" height="40" alt="Angular"
+                                                    class="rounded">
+                                                <span class="overlay__content">
+                                                    <span class="overlay__action d-flex flex-column text-center">
+                                                        <i class="material-icons icon-32pt">play_circle_outline</i>
+                                                        <span class="card-title text-white">Resume</span>
+                                                    </span>
+                                                </span>
+                                            </a>
 
-                                            <div class="flex">
-                                                <a class="card-title mb-4pt"
-                                                    href="{{ url('member/class_detail/' . $kelas->id) . '/' . $kelas->materi->first()->id }}">{{ $kelas->judul }}</a>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="rating mr-8pt">
+                                            <div class="card-body flex">
+                                                <div class="d-flex">
+                                                    <div class="flex">
+                                                        <a class="card-title"
+                                                            href="{{ url('member/class_detail/' . $datakelass->id) . '/' . $datakelass->materi->first()->id }}">
+                                                            {{ $datakelass->judul }}</a>
+                                                    </div>
 
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="rating flex">
                                                         @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($i <= $kelas->rating->avg('rating'))
+                                                            @if ($i <= $datakelass->rating->avg('rating'))
                                                                 <span class="rating__item"><span
                                                                         class="material-icons">star</span></span>
                                                             @else
@@ -109,13 +122,26 @@
                                                         @endfor
                                                     </div>
                                                     <small
-                                                        class="text-muted">{{ round($kelas->rating->avg('rating')) }}/5</small>
+                                                        class="text-muted">{{ floor($datakelass->rating->avg('rating')) }}/5
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="row justify-content-between">
+                                                    <div class="col-auto d-flex align-items-center">
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
+                                @endforeach
+                            @else
+                                <div class="alert alert-primary" role="alert">
+                                    Belum ada ada kelas pembelajaran !
                                 </div>
-                            @endforeach
+                            @endif
 
                         </div>
 
@@ -136,12 +162,6 @@
                             <div class="page-separator__text"></div>
                         </div>
 
-                        <div class="mb-8pt d-flex align-items-center">
-                            <a href="student-course.html" class="avatar avatar-4by3 overlay overlay--primary mr-12pt">
-                            </a>
-                            <div class="flex">
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
