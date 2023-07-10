@@ -21,7 +21,11 @@ class HomeController extends Controller
         $user = User::all();
         $materi = Materi::all()->first();
 
+        $history = [];
+
+    if (Auth::check()) {
         $history = History::where("user_id", Auth::user()->id)->pluck("materi_id")->toArray();
+    }
 
         return view('welcome', ['kelas' => $kelas, 'kategori' => $kategori, 'user' => $user, 'materi' => $materi, "history" => $history]);
     }

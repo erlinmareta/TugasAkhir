@@ -309,20 +309,6 @@ use App\Models\Materi;
                             </div>
                         </div>
 
-
-
-                        <!-- // END Header Layout Content -->
-
-                        <!-- Feedback -->
-
-
-
-                        <!-- Footer -->
-
-                        <!-- // END Footer -->
-
-                        <!-- // END Header Layout -->
-
                         <!-- Drawer -->
 
                         <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
@@ -340,9 +326,6 @@ use App\Models\Materi;
 
                         <!-- // END Drawer -->
 
-                        <!-- jQuery -->
                         @include('layout.script')
-
                     </body>
-
-                    </html>
+                </html>
