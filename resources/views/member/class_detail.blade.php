@@ -192,7 +192,8 @@
                                     <textarea class="form-control" name="catatan" id="catatan" rows="3"
                                         placeholder="Ketik disini untuk menambahkan catatan ..." required=""></textarea>
                                 </div>
-                                <button class="btn btn-outline-secondary" onclick="submitCatatan()">Tambah Catatan</button>
+                                <button class="btn btn-outline-secondary" onclick="submitCatatan()">Tambah
+                                    Catatan</button>
                             </form>
                         </div>
 
@@ -245,79 +246,108 @@
                             <textarea class="form-control" name="comment" id="comment" rows="3"
                                 placeholder="Ketik disini untuk mengomentari materi ini ..." required></textarea>
                         </div>
-                        <button class="btn btn-outline-secondary" >Tambah Komentar</button>
+                        <button class="btn btn-outline-secondary">Tambah Komentar</button>
 
-                            </form>
-                        </div>
-                    </div>
-                    <div class=" pt-3">
-                        <h4>{{ $comments->count() }} Komentar</h4>
-                        @foreach ($comments as $item)
-                            <div class="d-flex mb-3"> <a href="" class="avatar avatar-sm mr-12pt">
-                                <span class="avatar-title rounded-circle"></span>
-                                </a>
-                                <div class="flex username"> <a href=""
-                                        class="text-body"><strong>{{ $item->user->name }}</strong></a> <br>
-                                    <p class="mt-1 text-70">{{ $item->comment }}</p>
-                                    <div class="d-flex align-items-center">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="comment" class="form-label"></label>
-                                        <textarea class="form-control" name="comment" id="comment" rows="3"
-                                            placeholder="Ketik disini untuk membalas komentar ..." required></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                    </form>
                 </div>
             </div>
+            <div class=" pt-3">
+                <h4>{{ $comments->count() }} Komentar</h4>
+                @foreach ($comments as $item)
+                    <form id="commentForm" name="commentForm"
+                        action="{{ url('/member/class_detail/' . $kelas . '/' . $materi->id) . '/comment' }}"
+                        method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="reply" value="{{ $item->id }}">
 
-            <div class="page-section bg-alt">
-                <div class="container page__container">
-                    <div class="page-separator">
-                        <div class="page-separator__text">Rating Kelas</div>
-                    </div>
-
-                    <div class="row">
-                        @foreach ($ratings as $rating)
-                            <div class="col-sm-6 col-md-4">
-                                <div class="card card-feedback card-body">
-                                    <blockquote class="blockquote mb-0">
-                                        <p class="text-70 small mb-0">{{ $rating->ulasan }}</p>
-                                    </blockquote>
+                        <div class="d-flex mb-3"> <a href="" class="avatar avatar-sm mr-12pt">
+                                <span class="avatar-title rounded-circle"></span>
+                            </a>
+                            <div class="flex username"> <a href=""
+                                    class="text-body"><strong>{{ $item->user->name }}</strong></a> <br>
+                                <p class="mt-1 text-70">{{ $item->comment }}</p>
+                                <div class="d-flex align-items-center">
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment" class="form-label"></label>
+                                    <textarea class="form-control" name="comment" id="comment" rows="3"
+                                        placeholder="Ketik disini untuk membalas komentar ..."></textarea>
                                 </div>
 
-                                <div class="media ml-12pt">
-                                    <div class="media-left mr-12pt">
-                                        <a class="avatar avatar-sm">
+                                @foreach ($item->reply as $replied)
+                                    <div class="d-flex mb-3"> <a href="" class="avatar avatar-sm mr-12pt">
                                             <span class="avatar-title rounded-circle"></span>
                                         </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <a href="student-profile.html"
-                                            class="card-title">{{ $rating->user->name }}</a>
-                                        <div class="rating mt-4pt">
-                                            {{ $rating->rating }}
+                                        <div class="flex username"> <a href=""
+                                                class="text-body"><strong>{{ $replied->user->name }}</strong></a> <br>
+                                            <p class="mt-1 text-70">{{ $replied->comment }}</p>
+                                            <div class="d-flex align-items-center">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="comment" class="form-label"></label>
+                                                <textarea class="form-control" name="comment" id="comment" rows="3"
+                                                    placeholder="Ketik disini untuk membalas komentar ..."></textarea>
+                                            </div>
 
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                @if ($i <= $rating->rating)
-                                                    <span class="rating__item"><span
-                                                            class="material-icons">star</span></span>
-                                                @else
-                                                    <span class="rating__item"><span
-                                                            class="material-icons">star_border</span></span>
-                                                @endif
-                                            @endfor
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
+                                @endforeach
+                                <button class="btn btn-outline-secondary">Tambah Komentar</button>
+                    </form>
+
+
+
             </div>
         </div>
-        <!-- // END Header Layout Content -->
+        @endforeach
+    </div>
+    </div>
+
+    <div class="page-section bg-alt">
+        <div class="container page__container">
+            <div class="page-separator">
+                <div class="page-separator__text">Rating Kelas</div>
+            </div>
+
+            <div class="row">
+                @foreach ($ratings as $rating)
+                    <div class="col-sm-6 col-md-4">
+                        <div class="card card-feedback card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p class="text-70 small mb-0">{{ $rating->ulasan }}</p>
+                            </blockquote>
+                        </div>
+
+                        <div class="media ml-12pt">
+                            <div class="media-left mr-12pt">
+                                <a class="avatar avatar-sm">
+                                    <span class="avatar-title rounded-circle"></span>
+                                </a>
+                            </div>
+                            <div class="media-body media-middle">
+                                <a href="student-profile.html" class="card-title">{{ $rating->user->name }}</a>
+                                <div class="rating mt-4pt">
+                                    {{ $rating->rating }}
+
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $rating->rating)
+                                            <span class="rating__item"><span class="material-icons">star</span></span>
+                                        @else
+                                            <span class="rating__item"><span
+                                                    class="material-icons">star_border</span></span>
+                                        @endif
+                                    @endfor
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- // END Header Layout Content -->
     </div>
 
     <div class="mdk-drawer js-mdk-drawer" id="default-drawer">

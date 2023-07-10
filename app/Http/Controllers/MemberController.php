@@ -71,10 +71,9 @@ class MemberController extends Controller
         $sebelumnya = Materi::where("id", "<", $materi)->where("kelas_id", $datakelas)->orderBy("id", "DESC")->first();
         $selanjutnya = Materi::where("id", ">", $materi)->where("kelas_id", $datakelas)->orderBy("id", "ASC")->first();
 
-        $comments = Comment::where("kelas_id", $kelas)->where("materi_id", $materi)->get();
+        $comments = Comment::where("kelas_id", $kelas)->where("materi_id", $materi)->where("reply_id", null)->with('reply')->get();
         $catatans = Catatan::where("kelas_id", $kelas)->where("materi_id", $materi)->where('user_id', Auth::user()->id)->get();
         $ratings = Rating::where("kelas_id", $kelas)->orderBy('rating', 'desc')->limit(3)->get();
-
         $materi_all = Materi::where('kelas_id', $kelas)->get();
 
         return view('member.class_detail', [
@@ -96,7 +95,8 @@ class MemberController extends Controller
                 "kelas_id" => $kelas,
                 "materi_id" => $materi,
                 "user_id" => Auth::user()->id,
-                "comment" => $request->comment
+                "reply_id" => $request->reply,
+                "comment" => $request->comment,
             ]);
         }
         return redirect()->back();
