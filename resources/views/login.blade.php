@@ -1,96 +1,87 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      dir="ltr">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Log in</title>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible"
+              content="IE=edge">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Login</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../AdminLTE/plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../AdminLTE/dist/css/adminlte.min.css">
-</head>
+        <!-- Prevent the demo from appearing in search engines -->
+        @include('layout.head')
 
-<body class="hold-transition login-page">
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="../../index2.html"><b>Login</b></a>
-        </div>
-        @if ($message = Session::get('error'))
+    </head>
+
+    <body class="layout-default layout-login-centered-boxed">
+
+        <div class="layout-login-centered-boxed__form card">
+            <div class="d-flex flex-column justify-content-center align-items-center mb-5 navbar-light">
+                <a class="navbar-brand flex-column mb-2 align-items-center mr-0" style="min-width: 0">
+                    <span >
+                        <center><img src="{{ asset('img/login.jpg') }}" alt="logo" width="50%" /></center>
+                    </span>
+                </a>
+                <p class="m-0">Login Untuk mengakses Aplikasi </p>
+            </div>
+
+            <div class="alert alert-soft-success d-flex"
+                 role="alert">
+                <i class="material-icons mr-12pt">check_circle</i>
+                <div class="text-body">Akun anda berhasil diferivikasi silahkan login untuk mengakses aplikasi</div>
+            </div>
+
+            <div class="page-separator justify-content-center">
+
+            </div>
+            @if ($message = Session::get('error'))
             <div class="alert alert-danger">
                 {{ $message }}
             </div>
         @endif
-        <!-- /.login-logo -->
-        <div class="card">
-            <div class="card-body login-card-body">
-                <form action="/loginproses" method="get">
-                    @csrf
-                    <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
-                        <div class="input-group-append">
+            <form action="/loginproses" method="get">
+                @csrf
+                <div class="form-group">
+                    <label class="text-label"
+                           for="email_2">Email:</label>
+                    <div class="input-group input-group-merge">
+                        <input id="email" name="email" type="email" class="form-control form-control-prepended" placeholder="example@gmail.com">
+                        <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                <span class="far fa-envelope"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me <a href=""></a>
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
-
-                <div class="social-auth-links text-center mb-3">
-                    <p>- OR -</p>
-                    <!-- <a href="#" class="btn btn-block btn-danger"> -->
-                    <!-- <i class="fab fa-google-plus mr-2"></i> Sign in using Google+ -->
-                    </a>
                 </div>
-                <!-- /.social-auth-links -->
-
-                <p class="mb-1">
-                    <!-- <a href="forgot-password.html">Lupa Password ?</a> -->
-                </p>
-                <p class="mb-0">
-                    <a href="/registrasi" class="text-center">Belum punya akun</a>
-                </p>
-            </div>
-            <!-- /.login-card-body -->
+                <div class="form-group">
+                    <label class="text-label"
+                           for="password_2">Password:</label>
+                    <div class="input-group input-group-merge">
+                        <input id="password" name="password" type="password" class="form-control form-control-prepended" placeholder="Masukkan Password">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <span class="fa fa-key"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-block btn-primary"
+                            type="submit">Login</button>
+                </div>
+                <div class="form-group text-center">
+                    <a href="">Lupa password?</a> <br>
+                    Belum Punya Akun? <a class="text-body text-underline"
+                       href="signup.html">Register!</a>
+                </div>
+            </form>
         </div>
-    </div>
-    <!-- /.login-box -->
 
-    <!-- jQuery -->
-    <script src="../../AdminLTE/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../AdminLTE/dist/js/adminlte.min.js"></script>
-</body>
+        <!-- jQuery -->
+        @include('layout.script')
+    </body>
 
 </html>

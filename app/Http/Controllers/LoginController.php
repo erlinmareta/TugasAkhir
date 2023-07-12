@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 
 use Illuminate\Http\Request;
 
@@ -39,6 +41,15 @@ class LoginController extends Controller
 
     public function RegisterUser(Request $request)
     {
+        $password = $request->password;
+
+    if (strlen($password) < 8) {
+        return redirect()->back()
+        ->with(['error' => 'Password yang dimasukkan minimal 8 karakter'])
+        ->withInput();
+
+    }
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -48,6 +59,7 @@ class LoginController extends Controller
         ]);
 
         return redirect('/login');
+
     }
 
     public function Logout()

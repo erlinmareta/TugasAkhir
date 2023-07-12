@@ -147,6 +147,12 @@ return [
         ],
     ],
 
+    'custom' => [
+        'password' => [
+            'min' => 'Password harus memiliki minimal :min karakter.',
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes

@@ -48,6 +48,7 @@ use App\Models\Materi;
                         <div class="ml-lg-16pt">
                             <a href="{{ url('member/student_profil') }}" class="btn btn-light">My Profile</a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -81,7 +82,7 @@ use App\Models\Materi;
                                             <div class="card-body flex">
                                                 <div class="d-flex">
                                                     <div class="flex">
-                                                        <a class="card-title" href="student-take-course.html">
+                                                        <a class="card-title" >
                                                             {{ $datakelass->kelas->judul }}</a>
                                                         <small class="text-50 font-weight-bold mb-4pt">
                                                             {{ $datakelass->kelas->user->name }}</small>

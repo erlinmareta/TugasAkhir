@@ -36,13 +36,5 @@
                                 <span class="sidebar-menu-text">Kelas Saya</span>
                             </a>
                         </li>
-
-                        <li class="sidebar-menu-item">
-                            <a class="sidebar-menu-button"
-                               href="student-take-lesson.html">
-                                <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">import_contacts</span>
-                                <span class="sidebar-menu-text">Sertifikat</span>
-                            </a>
-                        </li>
                     </ul>
                     @endauth

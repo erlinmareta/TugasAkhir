@@ -148,6 +148,8 @@
                                 @if ($rating)
                                     <button type="button" class="btn btn-success">
                                         <i class="fa fa-thumbs-up"></i> Anda Sudah Memberikan Rating Di Kelas Ini
+                                    </button><br>
+                                    <a href="{{ url('member/sertifikat/' .$kelas ) }}" class="btn btn-danger">Sertifikat</a>
                                     </button>
                                 @else
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -295,14 +297,11 @@
                                 @endforeach
                                 <button class="btn btn-outline-secondary">Tambah Komentar</button>
                     </form>
-
-
-
+                </div>
             </div>
-        </div>
         @endforeach
     </div>
-    </div>
+</div>
 
     <div class="page-section bg-alt">
         <div class="container page__container">

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class MemberController extends Controller
 {
@@ -193,4 +194,22 @@ class MemberController extends Controller
 
         return back();
     }
+
+    public function getSertifikat($id)
+    {
+        $user = User::find(Auth::user()->id);
+        $kelas = Kelas::findOrFail($id);
+        $mentor = $kelas->user;
+
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        $pdf = PDF::loadView('member.sertifikat', ['user' => $user , 'kelas' => $kelas])->setPaper('a4', 'landscape');
+        return $pdf->stream();
+    }
+
+
+
 }

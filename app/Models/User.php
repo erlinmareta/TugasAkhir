@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Kelas::class);
     }
+
+    public function materi()
+    {
+        return $this->hasMany(Materi::class, 'user_id');
+    }
 }
