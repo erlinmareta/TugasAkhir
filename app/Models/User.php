@@ -31,6 +31,7 @@ class User extends Authenticatable
         'alamat',
         'pekerjaan',
         'deskripsi',
+        'email_verified',
     ];
 
     /**
@@ -60,5 +61,10 @@ class User extends Authenticatable
     public function materi()
     {
         return $this->hasMany(Materi::class, 'user_id');
+    }
+
+    public function VerifyUser()
+    {
+        return $this->hasMany(Kelas::class);
     }
 }

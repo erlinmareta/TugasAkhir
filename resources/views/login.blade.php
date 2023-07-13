@@ -30,8 +30,6 @@
 
             <div class="alert alert-soft-success d-flex"
                  role="alert">
-                <i class="material-icons mr-12pt">check_circle</i>
-                <div class="text-body">Akun anda berhasil diferivikasi silahkan login untuk mengakses aplikasi</div>
             </div>
 
             <div class="page-separator justify-content-center">
@@ -42,13 +40,30 @@
                 {{ $message }}
             </div>
         @endif
+        @if ($message = Session::get('info'))
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+        @endif
+        @if ($message = Session::get('fail'))
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+        @endif
+        @if ($message = Session::get('success'))
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+        @endif
             <form action="/loginproses" method="get">
                 @csrf
                 <div class="form-group">
                     <label class="text-label"
                            for="email_2">Email:</label>
                     <div class="input-group input-group-merge">
-                        <input id="email" name="email" type="email" class="form-control form-control-prepended" placeholder="example@gmail.com">
+                        <input id="email" name="email" type="email" class="form-control form-control-prepended" placeholder="example@gmail.com"
+                        value="{{Session::get('verifiedEmail') ? Session::get('verifiedEmail') : old('email')}}">
+                        <span class="text-danger">@error('email'){{ $massage }}@enderror</span>
                         <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <span class="far fa-envelope"></span>

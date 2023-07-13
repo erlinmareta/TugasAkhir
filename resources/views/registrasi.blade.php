@@ -45,6 +45,16 @@
                 {{ $message }}
             </div>
         @endif
+        @if ($message = Session::get('fail'))
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+        @endif
+        @if ($message = Session::get('success'))
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+        @endif
             <form action="/registeruser" method="post">
                 @csrf
                 <div class="form-group">
@@ -62,6 +72,7 @@
                     <label class="text-label" for="email">Email:</label>
                     <div class="input-group input-group-merge">
                         <input id="email" name="email" type="email" class="form-control form-control-prepended" placeholder="example@gmail.com">
+                        <span class="text-danger">@error('email'){{ $massage }}@enderror</span>
                         <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <span class="far fa-envelope"></span>
