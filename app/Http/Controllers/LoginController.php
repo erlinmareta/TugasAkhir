@@ -20,19 +20,33 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function LoginProses(Request $request)
-    {
-        if (Auth::attempt($request->only('email', 'password'))) {
-            if (Auth::user()->level == 'admin') {
-                return redirect('admin/dashboard');
-            } else if (Auth::user()->level == 'mentor') {
-                return redirect('mentor/dashboard');
-            } else {
-                return redirect('member/student_dashboard');
-            }
+    public function loginProses(Request $request)
+{
+    $validatedData = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+        'captcha' => 'required|captcha',
+    ]);
+
+    if (Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']], $request->has('remember'))) {
+        $user = Auth::user();
+        if ($user->level == 'admin') {
+            return redirect('admin/dashboard');
+        } else if ($user->level == 'mentor') {
+            return redirect('mentor/dashboard');
         } else {
-            return redirect()->back()->with(['error' => 'Username atau password salah']);
+            return redirect('member/student_dashboard');
         }
+    } else {
+        return redirect()->back()->with(['error' => 'Username atau password salah']);
+    }
+}
+
+
+
+    public function Reload()
+    {
+        return response()->json(['captcha'=>captcha_img()]);
     }
 
     public function registrasi()

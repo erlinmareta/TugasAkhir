@@ -10,6 +10,9 @@
         <meta name="viewport"
               content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Login</title>
+        <script
+			  src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
 
         <!-- Prevent the demo from appearing in search engines -->
         @include('layout.head')
@@ -28,13 +31,6 @@
                 <p class="m-0">Login Untuk mengakses Aplikasi </p>
             </div>
 
-            <div class="alert alert-soft-success d-flex"
-                 role="alert">
-            </div>
-
-            <div class="page-separator justify-content-center">
-
-            </div>
             @if ($message = Session::get('error'))
             <div class="alert alert-danger">
                 {{ $message }}
@@ -63,7 +59,7 @@
                     <div class="input-group input-group-merge">
                         <input id="email" name="email" type="email" class="form-control form-control-prepended" placeholder="example@gmail.com"
                         value="{{Session::get('verifiedEmail') ? Session::get('verifiedEmail') : old('email')}}">
-                        <span class="text-danger">@error('email'){{ $massage }}@enderror</span>
+                        {{-- <span class="text-danger">@error('email'){{ $massage }}@enderror</span> --}}
                         <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <span class="far fa-envelope"></span>
@@ -83,6 +79,19 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <span id="captcha-img">
+                        {!!captcha_img('math')!!}
+                    </span>
+                    <button id="reload" class="btn btn-primary reload">&#x21bb;</button>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="captcha" name="captcha" placeholder="captcha">
+                    @error('captcha')
+                        <label for="captcha" class="text-danger">{{ $message}}</label>
+                    @enderror
+                </div>
                 <div class="form-group">
                     <button class="btn btn-block btn-primary"
                             type="submit">Login</button>
@@ -93,6 +102,20 @@
                        href="signup.html">Register!</a>
                 </div>
             </form>
+
+            <script>
+                $('#reload').click(function (e)){
+                    e.preventDevault();
+                    $.ajax({
+                        type:'GET',
+                        url: 'reload',
+                        succsess:function (res){
+                            $('#captcha_img').html(res.captcha);
+                        }
+                    });
+                };
+            </script>
+
         </div>
 
         <!-- jQuery -->

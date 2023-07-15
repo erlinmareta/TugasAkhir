@@ -35,6 +35,8 @@ Route::middleware(['cekLogin'])->group(function () {
     Route::post('/registeruser', [LoginController::class, 'registeruser'])->name('registeruser');
     Route::get('/loginproses', [LoginController::class, 'loginproses'])->name('loginproses');
     Route::get('/verify' , [LoginController::class, 'verify'])->name('user.verify');
+    Route::get('/reload' , [LoginController::class, 'Reload'])->name('Reload');
+
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
