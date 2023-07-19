@@ -4,6 +4,12 @@
 
 <head>
     <title>Dashboard Mentor</title>
+    <script src="path/to/ckeditor/ckeditor.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      CKEDITOR.replace('exampleInputName1');
+    });
+  </script>
     @include('mentor.layout.head')
 </head>
 <body>
@@ -50,8 +56,15 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputName1">Deskripsi</label>
-                    <input name="deskripsi" type="text" class="form-control" id="exampleInputName1" placeholder="Masukkan Deskripsi">
+                    <textarea name="deskripsi" class="form-control"  placeholder="Masukkan Deskripsi" id="deskripsiTextarea"></textarea>
                   </div>
+
+                  <style>
+                    #deskripsiTextarea {
+                      height: 150px; /* Atur tinggi textarea sesuai kebutuhan */
+                    }
+                  </style>
+
               <div class="form-group">
                 <label for="exampleSelectGender">Status</label>
                   <select class="form-control" id="exampleSelectGender" name="status">

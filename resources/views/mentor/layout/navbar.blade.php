@@ -47,10 +47,6 @@
             <img src="{{ url('/storage/'.Auth::user()->foto) }}">
           </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-            <a href="{{url ('mentor/profil')}}" class="dropdown-item">
-              <i class="ti-settings text-primary"></i>
-              Profil
-            </a>
             <a href="{{url ('logout')}}" class="dropdown-item">
               <i class="ti-power-off text-primary"></i>
               Logout

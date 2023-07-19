@@ -61,6 +61,7 @@ Route::prefix('member')->middleware(['auth', 'cekLevel:member'])->group(function
 Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function () {
     Route::get('/dashboard', [MentorController::class, 'MentorDashboard']);
     Route::get('/profil', [MentorController::class, 'MentorProfil']);
+    Route::get('/profil/profil', [MentorController::class, 'ProfileMentor']);
     Route::put('/profil', [MentorController::class, 'UpdateProfil']);
     Route::get('/kelas/kelas', [KelasController::class, 'Kelas']);
     Route::get('/kelas/tambah', [KelasController::class, 'TambahKelas']);
@@ -76,6 +77,9 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
     Route::get('/kelas_saya/kelas_saya', [KelasSayaController::class, 'KelasSaya']);
     Route::get('/kelas_saya/detail/{id}', [KelasSayaController::class, 'DetailKelas']);
     Route::get('/kelas_saya/publish/{id}', [KelasSayaController::class, 'KelasPublish'])->name('mentor.kelas_saya.publish');
+    route::get('/member/member', [MentorController::class, 'DataMember']);
+    route::get('/member/member_kelas', [MentorController::class, 'MemberKelas']);
+    route::get('member/member_kelas/{id}/student', [MentorController::class, 'Student']);
 });
 //admin
 Route::prefix('admin')->middleware(['auth', 'cekLevel:admin'])->group(function () {

@@ -32,7 +32,6 @@
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">Welcome {{ Auth::user()->name }} !</h3>
-                  <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
                 </div>
                 <div class="col-12 col-xl-4">
                  <div class="justify-content-end d-flex">
@@ -46,8 +45,8 @@
           <div class="row">
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card tale-bg">
-                <div class="card-people mt-auto">
-                  <img src="../skydash/images/dashboard/people.svg" alt="people">
+                <div >
+
                   <div class="weather-info">
                     <div class="d-flex">
 
@@ -56,48 +55,65 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6 grid-margin transparent">
-              <div class="row">
-                <div class="col-md-6 mb-4 stretch-card transparent">
-                  <div class="card card-tale">
-                    <div class="card-body">
-                      <p class="mb-4">Data Member</p>
-                      <p class="fs-30 mb-2">{{$user}}</p>
+
+            <div class="container">
+                <div class="row">
+                  <div class="col-md-3 mb-4 stretch-card transparent">
+                    <div class="card card-tale">
+                      <div class="card-body">
+                        <p class="mb-4">Data Member</p>
+                        <p class="fs-30 mb-2">{{$totalstudent}}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-6 mb-4 stretch-card transparent">
-                  <div class="card card-dark-blue">
-                    <div class="card-body">
-                      <p class="mb-4">Data Materi</p>
-                      <p class="fs-30 mb-2">{{$materi}}</p>
+                  <div class="col-md-3 mb-4 stretch-card transparent">
+                    <div class="card card-dark-blue">
+                      <div class="card-body">
+                        <p class="mb-4">Data Materi</p>
+                        <p class="fs-30 mb-2">{{$materi}}</p>
+                      </div>
                     </div>
                   </div>
+                  <div class="col-md-3 mb-4 stretch-card transparent">
+                    <div class="card card-light-blue">
+                      <div class="card-body">
+                        <p class="mb-4">Data Kelas</p>
+                        <p class="fs-30 mb-2">{{$kelas}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 mb-4 stretch-card transparent">
+                    <div class="card card-light-danger">
+                      <div class="card-body">
+                        <p class="mb-4">Data Kelas Berhasil</p>
+                        <p class="fs-30 mb-2">{{$kelasberhasil}}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-16 stretch-card grid-margin">
+                    <div class="card">
+                      <div class="card-body">
+                        <p class="card-title">Notifikasi</p>
+                        <ul class="icon-data-list">
+                          <li>
+                            <div class="d-flex">
+                                {{-- @foreach ( as ) --}}
+
+                                <img src="{{ asset('/img/user.jpg')}}" alt="user">
+                                <div>
+                                  <p class="text-info mb-1">Isabella Becker</p>
+                                  <p class="mb-0">Sales dashboard have been created</p>
+                                  <small>9:30 am</small>
+                                </div>
+                              </div>
+                            </li>
+                                {{-- @endforeach --}}
+
+
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                  <div class="card card-light-blue">
-                    <div class="card-body">
-                      <p class="mb-4">Data Kelas</p>
-                      <p class="fs-30 mb-2">{{$kelas}}</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 stretch-card transparent">
-                  <div class="card card-light-danger">
-                    <div class="card-body">
-                      <p class="mb-4">Data Kelas Berhasil</p>
-                      <p class="fs-30 mb-2">{{$kelasberhasil}}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-        </div>
+
 
       <!-- content-wrapper ends -->
 

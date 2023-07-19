@@ -32,7 +32,6 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Data Kelas</h4>
-                  <a href="{{ url('mentor/kelas/tambah') }}" class="btn btn-light">Tambah</a>
                   </p>
                   <div class="table-responsive">
                     <table class="table">
@@ -42,32 +41,23 @@
                           <th>No</th>
                           <th>Judul</th>
                           <th>Kategori</th>
-                          <th>Gambar</th>
-                          <th>Deskripsi</th>
-                          <th>Status</th>
+                          <th>Total</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                            @foreach ($kelas as $item )
-                            <td>{{ $no++ }}</td>
-                            <td>{{$item->judul}}</td>
-                            <td>{{$item->kategori->nama}}</td>
-                            <td><img src="{{ url('/storage/' .$item->gambar)}}"></td>
-                            <td>{{$item->deskripsi}}</td>
-                            <td><label class="badge badge-success">{{$item->status}}</label></td>
-                            <td>
-                                @if ($item["status"] == "sukses" || $item["status"] == "proses")
-
-                                @else
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/edit/' .$item->id) }}" title="Edit"><label class="badge badge-info">Edit |</label></a>
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' .$item->id) }}" title="Hapus"><label class="badge badge-warning">Hapus |</label></a>
-                                @endif
-                            </td>
-                        </tr>
+                        @foreach ($kelas as $item )
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->judul }}</td>
+                                <td>{{ $item->kategori->nama}}</td>
+                                <td>{{ count($item->subscription) }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/member/member_kelas/' .$item->id. '/student' )}}" title="Hapus"><label class="badge badge-warning">Detail |</label></a>
+                                </td>
+                            </tr>
+                        @endforeach
                       </tbody>
-                      @endforeach
                     </table>
                   </div>
                 </div>
@@ -84,3 +74,5 @@
 </body>
 
 </html>
+
+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\Kategori;
+use App\Models\Materi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -81,4 +82,6 @@ class KelasController extends Controller
         DB::table('kelas')->where('id',$id)->delete();
         return back()->with('success', 'Data Berhasil dihapus!');
     }
+
+
 }
