@@ -53,7 +53,7 @@
                             <td>{{$item->judul}}</td>
                             <td><img src="{{ url('/storage/' .$item->gambar)}}"         ></td>
                             <td>{{$item->deskripsi}}</td>
-                            <td><label class="badge badge-success">{{$item->status}}</label></td>
+                            <td><label class="badge badge-secondary">{{$item->status}}</label></td>
                             <td>
                                 <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas_saya/detail/' .$item->id) }}" title="detail"><span class="fa fa-edit"></span> Detail |</a>
 

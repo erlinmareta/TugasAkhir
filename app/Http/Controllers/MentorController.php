@@ -22,15 +22,19 @@ class MentorController extends Controller
         $materi = Materi::where('user_id', Auth::user()->id)->count();
         $kelasberhasil = Kelas::where('status', 'sukses')->where('user_id', Auth::user()->id)->count();
         $totalstudent = DB::table('kelas')
-                    ->select(DB::raw('count(distinct subscription.user_id) as total_student'))
-                    ->join('users', 'users.id', '=', 'kelas.user_id')
-                    ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
-                    ->where('kelas.user_id', Auth::user()->id)
-                    ->groupBy('kelas.id', 'name')
-                    ->get();
+                           ->select(DB::raw('count(distinct subscription.user_id) as total_student'))
+                           ->join('users', 'users.id', '=', 'kelas.user_id') //join get id mentor
+                           ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
+                           ->where('kelas.user_id', Auth::user()->id)
+                           ->groupBy('kelas.id', 'name')
+                           ->count();
+       $infomember = Kelas::select('kelas.id AS mentor', 'users.name', 'kelas.judul', 'subscription.created_at AS created_at')
+                           ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
+                           ->join('users', 'users.id', '=', 'subscription.user_id')
+                           ->where('kelas.user_id', Auth::user()->id)
+                           ->get();
 
-
-        return view('mentor/dashboard', compact('user', 'kelas', 'materi', 'kelasberhasil', 'totalstudent'));
+        return view('mentor/dashboard', compact('user', 'kelas', 'materi', 'kelasberhasil', 'totalstudent', 'infomember'));
 
     }
 
@@ -101,5 +105,7 @@ class MentorController extends Controller
         $data['subscription'] = Subscription::where('kelas_id', $id_kelas)->get();
         return view('mentor/member/student', $data);
     }
+
+
 
 }

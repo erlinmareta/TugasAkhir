@@ -91,24 +91,28 @@
                     </div>
                   </div>
 
-                  <div class="col-md-16 stretch-card grid-margin">
+                  <div class="col-md-6">
                     <div class="card">
                       <div class="card-body">
                         <p class="card-title">Notifikasi</p>
                         <ul class="icon-data-list">
-                          <li>
-                            <div class="d-flex">
-                                {{-- @foreach ( as ) --}}
-
-                                <img src="{{ asset('/img/user.jpg')}}" alt="user">
-                                <div>
-                                  <p class="text-info mb-1">Isabella Becker</p>
-                                  <p class="mb-0">Sales dashboard have been created</p>
-                                  <small>9:30 am</small>
+                            @foreach ($infomember as $item)
+                            <li>
+                                <div class="d-flex">
+                                    <img src="{{ asset('/img/user.jpg')}}" alt="user">
+                                    <div>
+                                        <p class="text-info mb-1"><b>{{ $item->name }}</b></p>
+                                        <p class="mb-0">Telah mengikuti Kelas <b>{{$item->judul}}</b></p>
+                                        <small>{{ \Carbon\Carbon::parse($item->created_at)->format('h:i A')}}</small>
+                                    </div>
                                 </div>
-                              </div>
                             </li>
-                                {{-- @endforeach --}}
+                            @endforeach
+                        </ul>
+                      </div>
+                    </div>
+
+
 
 
                 </div>

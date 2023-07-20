@@ -15,7 +15,7 @@ class KelasSayaController extends Controller
     public function KelasSaya()
     {
 
-        $kelas = Kelas::where('user_id', Auth::user()->id)->get();
+        $kelas = Kelas::where('user_id', Auth::user()->id)->where('status', 'pending')->get();
         return view ('mentor/Kelas_saya/kelas_saya' , ['kelas' => $kelas]);
     }
 

@@ -56,7 +56,17 @@
                             <td>{{$item->kategori->nama}}</td>
                             <td><img src="{{ url('/storage/' .$item->gambar)}}"></td>
                             <td>{{$item->deskripsi}}</td>
-                            <td><label class="badge badge-success">{{$item->status}}</label></td>
+                            <td>
+                                @if ($item->status === 'sukses')
+                                    <label class="badge badge-success">{{ $item->status }}</label>
+                                @elseif ($item->status === 'proses')
+                                    <label class="badge badge-primary">{{ $item->status }}</label>
+                                @elseif ($item->status === 'cancel')
+                                    <label class="badge badge-danger">{{ $item->status }}</label>
+                                @else
+                                    <label class="badge badge-secondary">{{ $item->status }}</label>
+                                @endif
+                            </td>
                             <td>
                                 @if ($item["status"] == "sukses" || $item["status"] == "proses")
 
