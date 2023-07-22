@@ -69,6 +69,10 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
     Route::get('/kelas/edit/{id}', [KelasController::class, 'edit']);
     Route::post('/kelas/store', [KelasController::class, 'store']);
     Route::put('/kelas/{id}', [KelasController::class, 'update']);
+    Route::get('/kelas/add_materi/{id}', [KelasController::class, 'AddMateri']);
+    // Route::put('/kelas/StoreMateri{id}', [KelasController::class, 'StoreMateri'])->name('mentor.kelas.store_materi');
+    Route::put('/kelas/StoreMateri/{id}', [KelasController::class, 'StoreMateri'])->name('mentor.kelas.store_materi');
+    Route::get('/kelas/detail/{id}', [KelasController::class, 'detail']);
     Route::get('/materi/materi', [MateriController::class, 'materi']);
     Route::get('/materi/tambah', [MateriController::class, 'TambahMateri']);
     Route::post('/materi/store', [MateriController::class, 'store']);

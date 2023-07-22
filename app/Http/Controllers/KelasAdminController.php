@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Models\Kelas;
 use App\Models\Materi;
 use App\Models\User;

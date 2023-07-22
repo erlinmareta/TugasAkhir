@@ -49,7 +49,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->user->name }}</td>
                                 <td>
-                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/member/member_kelas/' .$item->id. '/student' )}}" title="Hapus"><label class="badge badge-warning">Detail |</label></a>
+                                    <a class="btn btn-sm btn-success-outline" href=><label class="badge badge-warning">Detail |</label></a>
                                 </td>
                             </tr>
                         @endforeach

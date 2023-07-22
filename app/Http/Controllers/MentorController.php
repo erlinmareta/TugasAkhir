@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Kelas;
@@ -37,12 +36,6 @@ class MentorController extends Controller
         return view('mentor/dashboard', compact('user', 'kelas', 'materi', 'kelasberhasil', 'totalstudent', 'infomember'));
 
     }
-
-    // public function MentorProfil()
-    // {
-    //     $user = User::findOrFail(Auth::id());
-    //     return view('mentor/profil', compact('user'));
-    // }
 
     public function ProfileMentor()
     {
@@ -88,10 +81,15 @@ class MentorController extends Controller
         return back();
     }
 
-    public function DataMember(){
+    public function DataMember()
+    {
 
-        $user = User::where("level", "member")->get();
-        return view('mentor/member/member', ['user' => $user]);
+        $student = Kelas::select('kelas.id AS mentor', 'users.name', 'kelas.judul', 'subscription.created_at AS created_at')
+                           ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
+                           ->join('users', 'users.id', '=', 'subscription.user_id')
+                           ->where('kelas.user_id', Auth::user()->id)
+                           ->get();
+        return view('mentor/member/member', compact('student'));
     }
 
     public function MemberKelas()

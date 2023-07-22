@@ -31,7 +31,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Data Kelas</h4>
+                  <h4 class="card-title">Detail Kelas</h4>
                   </p>
                   <div class="table-responsive">
                     <table class="table">
@@ -39,24 +39,29 @@
                         <tr>
                           <?php $no=1; ?>
                           <th>No</th>
-                          <th>Nama</th>
                           <th>Judul</th>
-                          <th>Action</th>
+                          <th>Kelas</th>
+                          <th>Isi Materi</th>
+                          <th>Deskripsi</th>
+                          <th>Urutan</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                            @foreach ($student as $item )
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{$item->name}}</td>
+                            @foreach ($materi as $item )
+                            <td>{{ $no++ }}</td>
                             <td>{{$item->judul}}</td>
-                            <td></td>
+                            <td>{{$item->kelas->judul}}</td>
                             <td>
-                                <a class="btn btn-sm btn-success-outline" href="" title="Hapus"><label class="badge badge-warning">Detail |</label></a>
+                                <video width="150" height="90" controls>
+                                    <source src="{{ url('/storage/' . $item->isi_materi) }}" type="video/mp4">
+                                </video>
                             </td>
+                            <td>{{$item->deskripsi}}</td>
+                            <td>{{$item->urutan}}</td>
                         </tr>
-                        @endforeach
                       </tbody>
+                      @endforeach
                     </table>
                   </div>
                 </div>
@@ -67,11 +72,8 @@
   <!-- container-scroller -->
 
   @include('mentor.layout.script')
-
-  @include('sweetalert::alert')
   <!-- End custom js for this page-->
 </body>
 
 </html>
-
 

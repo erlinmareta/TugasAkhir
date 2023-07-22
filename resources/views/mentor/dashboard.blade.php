@@ -32,7 +32,18 @@
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">Welcome {{ Auth::user()->name }} !</h3>
-                </div>
+                  <div class="btn btn-secondary">
+                    <i class="fas fa-graduation-cap"></i>
+                    @if ($totalstudent > 50)
+                      Profesional
+                    @elseif ($totalstudent > 20)
+                      Advance
+                    @else
+                      Beginner
+                    @endif
+                  </div>
+
+
                 <div class="col-12 col-xl-4">
                  <div class="justify-content-end d-flex">
                   <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
@@ -46,7 +57,6 @@
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card tale-bg">
                 <div >
-
                   <div class="weather-info">
                     <div class="d-flex">
 
@@ -58,38 +68,33 @@
 
             <div class="container">
                 <div class="row">
-                  <div class="col-md-3 mb-4 stretch-card transparent">
-                    <div class="card card-tale">
-                      <div class="card-body">
-                        <p class="mb-4">Data Member</p>
-                        <p class="fs-30 mb-2">{{$totalstudent}}</p>
-                      </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card card-tale">
+                            <div class="card-body">
+                                <p class="mb-4">Data Member</p>
+                                <p class="fs-30 mb-2">{{$totalstudent}}</p>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-md-3 mb-4 stretch-card transparent">
-                    <div class="card card-dark-blue">
-                      <div class="card-body">
-                        <p class="mb-4">Data Materi</p>
-                        <p class="fs-30 mb-2">{{$materi}}</p>
-                      </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card card-dark-blue">
+                            <div class="card-body">
+                                <p class="mb-4">Data Materi</p>
+                                <p class="fs-30 mb-2">{{$materi}}</p>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-md-3 mb-4 stretch-card transparent">
-                    <div class="card card-light-blue">
-                      <div class="card-body">
-                        <p class="mb-4">Data Kelas</p>
-                        <p class="fs-30 mb-2">{{$kelas}}</p>
-                      </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card card-light-danger">
+                            <div class="card-body">
+                                <p class="mb-4">Data Kelas Berhasil</p>
+                                <p class="fs-30 mb-2">{{$kelasberhasil}}</p>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-md-3 mb-4 stretch-card transparent">
-                    <div class="card card-light-danger">
-                      <div class="card-body">
-                        <p class="mb-4">Data Kelas Berhasil</p>
-                        <p class="fs-30 mb-2">{{$kelasberhasil}}</p>
-                      </div>
-                    </div>
-                  </div>
+                </div>
+            </div>
+
 
                   <div class="col-md-6">
                     <div class="card">

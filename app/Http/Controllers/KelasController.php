@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\Kategori;
@@ -15,14 +14,14 @@ class KelasController extends Controller
     public function Kelas(){
 
         $kategori = Kategori::all();
-		$kelas = Kelas::where('user_id', Auth::user()->id)->get();
+        $kelas = Kelas::where('user_id', Auth::user()->id)->get();
         return view('mentor/kelas/kelas', ['kelas' => $kelas, 'kategori' => $kategori]);
     }
 
     public function TambahKelas()
     {
         $kategori = Kategori::all();
-		$kelas = Kelas::all();
+        $kelas = Kelas::all();
         return view('mentor/kelas/tambah', ['kategori' => $kategori]);
     }
 
@@ -73,7 +72,7 @@ class KelasController extends Controller
 
         ]);
 
-        return redirect('mentor/kelas/kelas')->with('success', 'Kelas berhasil diperbarui.');
+        return redirect('mentor/kelas/kelas')->with('success', 'Kelas berhasil diperbaruiii.');
     }
 
 
@@ -83,5 +82,75 @@ class KelasController extends Controller
         return back()->with('success', 'Data Berhasil dihapus!');
     }
 
+    public function AddMateri($id)
+    {
+        $kelas = Kelas::where("id", $id)->first();
+        $materi = Materi::all();
+        return view('mentor/kelas/add_materi', ['kelas' => $kelas]);
+    }
 
-}
+
+    // public function AddMateri($id)
+    // {
+        //     $kelas = Kelas::where("id", $id)->first();
+        //     $materi = Materi::all();
+        //     return view('mentor/kelas/add_materi', ['kelas' => $kelas]);
+        // }
+
+
+        public function StoreMateri(Request $request, $id)
+        {
+            $kelas_id = $id; // Tambahkan baris ini untuk memberikan nilai $id ke $kelas_id.
+
+            $videoPath = null;
+
+            if ($request->hasFile('isi_materi')) {
+                $video = $request->file('isi_materi');
+                $videoPath = $video->store('materi');
+            }
+            $kelas = Kelas::findOrFail($id);
+            $materi = $kelas->materi()->orderBy('urutan')->get();
+            Materi::create([
+                'user_id' => Auth::user()->id,
+                'kelas_id' => $kelas_id,
+                'judul' => $request->judul,
+                'isi_materi' => $videoPath,
+                'deskripsi' => $request->deskripsi,
+                'urutan' => $request->urutan,
+            ]);
+
+            // return redirect('mentor/kelas/detail')->with('success', 'Berhasil ditambahkan!');
+            return view('mentor/kelas/detail', ['materi' => $materi]);
+        }
+
+        // public function StoreMateri(Request $request, $id)
+        // {
+
+            //     $videoPath = null;
+
+            //     if ($request->hasFile('isi_materi')) {
+                //         $video = $request->file('isi_materi');
+                //         $videoPath = $video->store('materi');
+                //     }
+                //     Materi::create([
+                    //         'user_id' => Auth::user()->id,
+                    //         'kelas_id' => $kelas_id,
+                    //         'judul' => $request->judul,
+                    //         'isi_materi' => $videoPath,
+                    //         'deskripsi' =>$request->deskripsi,
+                    //         'urutan' =>$request->urutan,
+                    //     ]);
+                    //     return redirect('mentor/kelas/detail')->with('success', 'Berhasil ditambahkan!');
+
+                    // }
+
+                    public function detail($id)
+                    {
+                        $kelas = Kelas::findOrFail($id);
+                        $materi = $kelas->materi()->orderBy('urutan')->get();
+                        return view('mentor/kelas/detail', ['materi' => $materi]);
+                    }
+
+
+
+                }

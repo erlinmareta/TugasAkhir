@@ -69,8 +69,10 @@
                             </td>
                             <td>
                                 @if ($item["status"] == "sukses" || $item["status"] == "proses")
-
+                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/detail/' .$item->id) }}" title="Tambah"><label class="badge badge-info"> + Detail |</label></a>
                                 @else
+                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/add_materi/' .$item->id) }}" title="Tambah"><label class="badge badge-info"> + Tambah |</label></a>
+                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/detail/' .$item->id) }}" title="Tambah"><label class="badge badge-info"> + Detail |</label></a>
                                 <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/edit/' .$item->id) }}" title="Edit"><label class="badge badge-info">Edit |</label></a>
                                 <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' .$item->id) }}" title="Hapus"><label class="badge badge-warning">Hapus |</label></a>
                                 @endif
