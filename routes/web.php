@@ -62,32 +62,41 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
     Route::get('/profil', [MentorController::class, 'MentorProfil']);
     Route::get('/profil/profil', [MentorController::class, 'ProfileMentor']);
     Route::put('/profil', [MentorController::class, 'UpdateProfil']);
+
+    //CRUD Kelas
     Route::get('/kelas/kelas', [KelasController::class, 'Kelas']);
     Route::get('/kelas/tambah', [KelasController::class, 'TambahKelas']);
     Route::get('/hapus/{id}', [KelasController::class, 'hapus']);
     Route::get('/kelas/edit/{id}', [KelasController::class, 'edit']);
     Route::post('/kelas/store', [KelasController::class, 'store']);
     Route::put('/kelas/{id}', [KelasController::class, 'update']);
-    Route::get('/kelas/add_materi/{id}', [KelasController::class, 'AddMateri']);
-    // Route::put('/kelas/StoreMateri{id}', [KelasController::class, 'StoreMateri'])->name('mentor.kelas.store_materi');
-    Route::put('/kelas/StoreMateri/{id}', [KelasController::class, 'StoreMateri'])->name('mentor.kelas.store_materi');
 
+    //CRUD Materi
+    Route::get('/kelas/add_materi/{id}', [KelasController::class, 'AddMateri']);
+    Route::put('/kelas/StoreMateri/{id}', [KelasController::class, 'StoreMateri'])->name('mentor.kelas.store_materi');
     Route::get('/kelas/detail/{id}', [KelasController::class, 'detail']);
-    Route::get('/materi/materi', [MateriController::class, 'materi']);
-    Route::get('/materi/tambah', [MateriController::class, 'TambahMateri']);
     Route::post('/materi/store', [MateriController::class, 'store']);
     Route::get('/materi/edit/{id}', [MateriController::class, 'edit']);
     Route::put('/materi/{id}', [MateriController::class, 'update']);
+
+    //Kelas Publish
     Route::get('/kelas_saya/kelas_saya', [KelasSayaController::class, 'KelasSaya']);
     Route::get('/kelas_saya/detail/{id}', [KelasSayaController::class, 'DetailKelas']);
     Route::get('/kelas_saya/publish/{id}', [KelasSayaController::class, 'KelasPublish'])->name('mentor.kelas_saya.publish');
+
+    //CRUD Member
     route::get('/member/member', [MentorController::class, 'DataMember']);
     route::get('/member/member_kelas', [MentorController::class, 'MemberKelas']);
     route::get('member/member_kelas/{id}/student', [MentorController::class, 'Student']);
+
+    //Pendidikan
+    route::get('/pendidikan/pendidikan', [MentorController::class, 'Pendidikan']);
 });
+
 //admin
 Route::prefix('admin')->middleware(['auth', 'cekLevel:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard.admin');
+    //user
     Route::get('/akun/user', [AkunController::class, 'akun']);
     Route::get('/akun/mentor', [AkunController::class, 'DataMentor']);
     Route::get('/akun/peserta', [AkunController::class, 'DataPeserta']);
@@ -97,12 +106,16 @@ Route::prefix('admin')->middleware(['auth', 'cekLevel:admin'])->group(function (
     Route::get('/akun/hapus/{id}', [AkunController::class, 'hapus']);
     Route::get('/akun/edit/{id}', [AkunController::class, 'edit']);
     Route::put('/admin/{id}', [AkunController::class, 'update']);
+
+    //kategori
     Route::get('/kategori/kategori', [KategoriController::class, 'Kategori']);
     Route::get('/kategori/tambah', [KategoriController::class, 'TambahKategori']);
     Route::post('/kategori/store', [KategoriController::class, 'store']);
     Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit']);
     Route::put('/kategori/{id}', [KategoriController::class, 'update']);
     Route::get('/hapuskategori/{id}', [KategoriController::class, 'Delete']);
+
+    //kelas
     Route::get('/kelas/index', [KelasAdminController::class, 'index']);
     Route::get('/kelas/detail/{id}', [KelasAdminController::class, 'Detail'])->name('admin.kelasDetail');
     Route::get('/hapus/{id}', [KelasAdminController::class, 'HapusKelas']);
@@ -110,6 +123,8 @@ Route::prefix('admin')->middleware(['auth', 'cekLevel:admin'])->group(function (
     Route::post('/index/{id}/reject', [KelasAdminController::class, 'Reject']);
     Route::get('/kelas/berhasil', [KelasAdminController::class, 'KelasBerhasil']);
     Route::get('/kelas/ditolak', [KelasAdminController::class, 'KelasDitolak']);
+
+    //profil
     Route::get('/profil_admin', [AdminController::class, 'profil']);
     Route::put('/profil/{id}', [AdminController::class, 'ProfilUpdate']);
 });

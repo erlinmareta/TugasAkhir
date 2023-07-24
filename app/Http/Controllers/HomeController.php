@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
-    public function Home()
+    public function Home(Request $request)
     {
         $kategori = Kategori::all();
         $kelas = Kelas::where('status', 'sukses')->get();
@@ -26,7 +26,15 @@ class HomeController extends Controller
             $history = History::where("user_id", Auth::user()->id)->pluck("materi_id")->toArray();
         }
 
+        $searchResults = [];
 
-        return view('welcome', ['kelas' => $kelas, 'kategori' => $kategori, 'user' => $user, 'materi' => $materi, "history" => $history]);
+    if ($request->has('search')) {
+        $searchTerm = $request->input('search');
+        // Ganti 'nama_field' dengan nama field yang ingin Anda cari dalam model Materi
+        $searchResults = Kelas::where('judul', 'LIKE', '%' . $searchTerm . '%')->get();
+    }
+
+        return view('welcome', ['kelas' => $kelas, 'kategori' => $kategori, 'user' => $user, 'materi' => $materi, "history" => $history,
+                                'searchResults' => $searchResults, $data]);
     }
 }

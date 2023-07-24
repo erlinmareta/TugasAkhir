@@ -55,7 +55,7 @@
         <div class="collapse" id="profile">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{{ url('mentor/profil/profil') }}">Profil</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{ url('mentor/kelas_saya/kelas_saya') }}">Riwayat Pendidikan</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ url('mentor/pendidikan/pendidikan') }}">Riwayat Pendidikan</a></li>
           </ul>
         </div>
       </li>

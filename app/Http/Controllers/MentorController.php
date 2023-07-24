@@ -104,6 +104,11 @@ class MentorController extends Controller
         return view('mentor/member/student', $data);
     }
 
+    public function Pendidikan()
+    {
+        return view('mentor/pendidikan/pendidikan');
+    }
+
 
 
 }

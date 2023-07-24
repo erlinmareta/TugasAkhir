@@ -18,3 +18,5 @@
 <!-- Custom js for this page-->
 <script src="{{ asset('skydash/js/dashboard.js') }}"></script>
 <script src="{{ asset('skydash/js/Chart.roundedBarCharts.js') }}"></script>
+<script src="{{ asset('skydash/js/chart.js')}}"></script>
+{{-- <script src="{{ asset('skydash/vendors/chart.js/Chart.min.js')}}"></script> --}}

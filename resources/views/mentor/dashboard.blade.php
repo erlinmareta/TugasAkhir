@@ -5,6 +5,7 @@
 <head>
     <title>Dashboard Mentor</title>
     @include('mentor.layout.head')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container-scroller">
@@ -95,7 +96,6 @@
                 </div>
             </div>
 
-
                   <div class="col-md-6">
                     <div class="card">
                       <div class="card-body">
@@ -116,28 +116,70 @@
                         </ul>
                       </div>
                     </div>
-
-
-
-
+                </div>
+                <div class="col-lg-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Grafik Kelas Terbanyak Dikuti</h4>
+                        <canvas id="barChart"></canvas>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-
-      <!-- content-wrapper ends -->
-
-      <!-- partial:partials/_footer.html -->
       @include('mentor.layout.footer')
-        <!-- partial -->
       </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
 
   @include('mentor.layout.script')
+  <script>
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    var kelasData = <?php echo json_encode($kelas); ?>;
+
+    var kelasTerbanyak = {};
+    kelasData.forEach(function (kelas) {
+        if (kelasTerbanyak[kelas.nama]) {
+            kelasTerbanyak[kelas.nama]++;
+        } else {
+            kelasTerbanyak[kelas.nama] = 1;
+        }
+    });
+
+    var labels = Object.keys(kelasTerbanyak);
+    var data = Object.values(kelasTerbanyak);
+
+    var ctx = document.getElementById("barChart").getContext("2d");
+    var barChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "Jumlah Peserta",
+                    data: data,
+                    backgroundColor: "rgba(54, 162, 235, 0.8)",
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    borderWidth: 1,
+                },
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
+});
+
+  </script>
   <!-- End custom js for this page-->
+
 </body>
 
 </html>

@@ -18,19 +18,31 @@
                             </a>
                             <!-- Navbar toggler -->
                             @auth
-                            <button class="navbar-toggler w-auto mr-16pt d-block rounded-0"
-                                    type="button"
-                                    data-toggle="sidebar">
-                                <span class="material-icons">short_text</span>
-                            </button>
 
                             <ul class="nav navbar-nav d-none d-sm-flex flex justify-content-start ml-8pt">
                                 <li class="nav-item active">
                                     <a href="{{ url('/') }}"
                                        class="nav-link">Home</a>
                                 </li>
+                                <li class="nav-item active">
+                                    <a href="{{ url('member/student_course') }}"
+                                       class="nav-link">Kursus Saya</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a href="{{ url('member/student_dashboard') }}"
+                                       class="nav-link">Dashboard</a>
+                                </li>
                                 @endauth
                             </ul>
+                            <form class="search-form form-control-rounded navbar-search d-none d-lg-flex mr-16pt"
+                            action="{{ url('/') }}"
+                                  style="max-width: 230px">
+                                <button class="btn"
+                                        type="submit"><i class="material-icons">search</i></button>
+                                <input type="text" name="search"
+                                       class="form-control"
+                                       placeholder="Search ...">
+                            </form>
 
                             <ul class="nav navbar-nav ml-auto mr-0">
                                 @auth
