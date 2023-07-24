@@ -113,14 +113,14 @@ class KelasController extends Controller
             Materi::create([
                 'user_id' => Auth::user()->id,
                 'kelas_id' => $kelas_id,
-                'judul' => $request->judul,
+                'judul' => $request->judul_materi,
                 'isi_materi' => $videoPath,
                 'deskripsi' => $request->deskripsi,
                 'urutan' => $request->urutan,
             ]);
 
-            // return redirect('mentor/kelas/detail')->with('success', 'Berhasil ditambahkan!');
-            return view('mentor/kelas/detail', ['materi' => $materi]);
+            return redirect("/mentor/kelas/detail/".$id);
+            //return view('mentor/kelas/detail', ['materi' => $materi])->with('success', 'Berhasil ditambahkan!');
         }
 
         // public function StoreMateri(Request $request, $id)
@@ -150,7 +150,5 @@ class KelasController extends Controller
                         $materi = $kelas->materi()->orderBy('urutan')->get();
                         return view('mentor/kelas/detail', ['materi' => $materi]);
                     }
-
-
 
                 }

@@ -157,34 +157,22 @@ use App\Models\Materi;
                                                     </div>
                                                 </div>
                                                 <div class="d-flex align-items-center justify-content-center">
-                                                    @php
-                                                    $materi = Materi::where("kelas_id", $datakelass->kelas->id)->whereNotIn("id", $history)->first();
+                                                    @if (!empty(Auth::user()))
+                                                @php
+                                                $history = History::where("kelas_id", $datakelass->id)
+                                                ->where("user_id", Auth::user()->id)
+                                                ->latest('materi_id')
+                                                ->first();
                                                 @endphp
-                                                @if (empty($materi->id))
-                                                    @php
-                                                        $history = History::where("kelas_id", $datakelass->kelas->id)
-                                                        ->where("user_id", Auth::user()->id)
-                                                        ->latest('materi_id')
-                                                        ->first();
-                                                    @endphp
-                                                    <a href="{{ url('/member/class_detail/' . $datakelass->kelas->id . '/' . $history->materi_id ) }}" class="btn btn-primary">
-                                                        Kelas Sudah Selesai
-                                                    </a>
+                                                @if (empty($history))
+                                                <a href="{{ url('/member/class_detail/' . $datakelass->id . '/' . $materi->id) }}" class="btn btn-primary">
+                                                    Mulai Belajar
+                                                </a>
                                                 @else
-                                                    @php
-                                                        $cekhistory = History::where("kelas_id", $datakelass->kelas->id)
-                                                        ->where("user_id", Auth::user()->id)
-                                                        ->first();
-                                                    @endphp
-                                                    @if (empty($cekhistory))
-                                                    <a href="{{ url('/member/class_detail/' . $datakelass->kelas->id . '/' .$materi->id) }}" class="btn btn-primary">
-                                                        Mulai Belajar
-                                                    </a>
-                                                    @else
-                                                    <a href="{{ url('/member/class_detail/' . $datakelass->kelas->id . '/' .$materi->id) }}" class="btn btn-primary">
-                                                        Lanjutkan Belajar
-                                                    </a>
-                                                    @endif
+                                                <a href="{{ url('/member/class_detail/' . $datakelass->id . '/' . $history->materi_id ) }}" class="btn btn-primary">
+                                                    Lanjutkan Belajar
+                                                </a>
+                                                @endif
                                                 @endif
                                                 </div>
                                             </div>

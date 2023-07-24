@@ -22,9 +22,10 @@ class HomeController extends Controller
 
         $history = [];
 
-    if (Auth::check()) {
-        $history = History::where("user_id", Auth::user()->id)->pluck("materi_id")->toArray();
-    }
+        if (!empty(Auth::user())) {
+            $history = History::where("user_id", Auth::user()->id)->pluck("materi_id")->toArray();
+        }
+
 
         return view('welcome', ['kelas' => $kelas, 'kategori' => $kategori, 'user' => $user, 'materi' => $materi, "history" => $history]);
     }

@@ -34,7 +34,7 @@
                 {{ csrf_field() }}
               <div class="form-group">
                 <label for="exampleInputName1">Judul</label>
-                <input name="judul" type="text" class="form-control" id="exampleInputName1" placeholder="Masukkan Judul">
+                <input name="judul_materi" type="text" class="form-control" id="judul_materi" placeholder="Masukkan Judul">
               </div>
               <div class="form-group">
                 <label for="exampleInputName1">Kelas</label>

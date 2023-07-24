@@ -100,7 +100,9 @@ use App\Models\Materi;
                                     <div class="card-body flex">
                                         <div class="d-flex">
                                             <div class="flex">
-                                                <a class="card-title" href="student-course.html">{{ $class->judul }}</a>
+                                                <a class="card-title" href="student-course.html">
+                                                    {{ $class->judul }}
+                                                </a>
                                                 <small class="text-50 font-weight-bold mb-4pt">{{ $class->user->name }}
                                                 </small>
                                             </div>
@@ -248,7 +250,9 @@ use App\Models\Materi;
                                             <img src="{{ url('/storage/' . $class->gambar) }}" style="width:70px" width="40" height="40" alt="Angular" class="rounded">
                                         </div>
                                         <div class="media-body">
-                                            <div class="card-title mb-0">{{ $class->judul }}</div>
+                                            <div class="card-title mb-0">
+                                                {{ $class->judul }}
+                                            </div>
                                             <div class="card-title mb-0"></div>
                                             <p class="lh-1 mb-0">
                                                 <span class="text-50 small">by</span>
@@ -278,23 +282,22 @@ use App\Models\Materi;
                                             <div class="col-auto">
                                             </div>
                                             <div class="col text-right">
+                                                @if (!empty(Auth::user()))
                                                 @php
-                                                    $materi = Materi::where("kelas_id", $class->id)->whereNotIn("id", $history)->first();
+                                                $history = History::where("kelas_id", $class->id)
+                                                ->where("user_id", Auth::user()->id)
+                                                ->latest('materi_id')
+                                                ->first();
                                                 @endphp
-                                                @if (empty($materi->id))
-                                                    @php
-                                                        $history = History::where("kelas_id", $class->id)
-                                                        ->where("user_id", Auth::user()->id)
-                                                        ->latest('materi_id')
-                                                        ->first();
-                                                    @endphp
-                                                    <a href="{{ url('/member/class_detail/' . $class->id . '/' . $history->materi_id ) }}" class="btn btn-primary">
-                                                        Lanjutkan Belajar
-                                                    </a>
-                                                @else
-                                                <a href="{{ url('/member/class_detail/' . $class->id . '/' .$materi->id) }}" class="btn btn-primary">
+                                                @if (empty($history))
+                                                <a href="{{ url('/member/class_detail/' . $class->id . '/' . $class->materi_class->id) }}" class="btn btn-primary">
                                                     Mulai Belajar
                                                 </a>
+                                                @else
+                                                <a href="{{ url('/member/class_detail/' . $class->id . '/' . $history->materi_id ) }}" class="btn btn-primary">
+                                                    Lanjutkan Belajar
+                                                </a>
+                                                @endif
                                                 @endif
                                             </div>
                                         </div>
@@ -328,4 +331,4 @@ use App\Models\Materi;
 
                         @include('layout.script')
                     </body>
-                </html>
+                    </html>

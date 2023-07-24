@@ -34,9 +34,8 @@ Route::middleware(['cekLogin'])->group(function () {
     Route::get('/registrasi', [LoginController::class, 'registrasi'])->name('registrasi');
     Route::post('/registeruser', [LoginController::class, 'registeruser'])->name('registeruser');
     Route::get('/loginproses', [LoginController::class, 'loginproses'])->name('loginproses');
-    Route::get('/verify' , [LoginController::class, 'verify'])->name('user.verify');
     Route::get('/reload' , [LoginController::class, 'Reload'])->name('Reload');
-
+    Route::get('/verify' , [LoginController::class, 'verify'])->name('user.verify');
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -72,6 +71,7 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
     Route::get('/kelas/add_materi/{id}', [KelasController::class, 'AddMateri']);
     // Route::put('/kelas/StoreMateri{id}', [KelasController::class, 'StoreMateri'])->name('mentor.kelas.store_materi');
     Route::put('/kelas/StoreMateri/{id}', [KelasController::class, 'StoreMateri'])->name('mentor.kelas.store_materi');
+
     Route::get('/kelas/detail/{id}', [KelasController::class, 'detail']);
     Route::get('/materi/materi', [MateriController::class, 'materi']);
     Route::get('/materi/tambah', [MateriController::class, 'TambahMateri']);

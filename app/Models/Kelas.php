@@ -16,6 +16,12 @@ class Kelas extends Model
     {
         return $this->hasMany(Materi::class);
     }
+
+    public function materi_class()
+    {
+        return $this->hasOne(Materi::class);
+    }
+
     public function rating()
     {
         return $this->hasMany(Rating::class);
