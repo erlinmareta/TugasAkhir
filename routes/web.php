@@ -91,6 +91,7 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
 
     //Pendidikan
     route::get('/pendidikan/pendidikan', [MentorController::class, 'Pendidikan']);
+    Route::put('/pendidikan', [MentorController::class, 'StorePendidikan']);
 });
 
 //admin

@@ -35,6 +35,6 @@ class HomeController extends Controller
     }
 
         return view('welcome', ['kelas' => $kelas, 'kategori' => $kategori, 'user' => $user, 'materi' => $materi, "history" => $history,
-                                'searchResults' => $searchResults, $data]);
+                                'searchResults' => $searchResults]);
     }
 }

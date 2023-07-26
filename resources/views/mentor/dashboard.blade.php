@@ -80,15 +80,15 @@
                     <div class="col-md-4 mb-4">
                         <div class="card card-dark-blue">
                             <div class="card-body">
-                                <p class="mb-4">Data Materi</p>
-                                <p class="fs-30 mb-2">{{$materi}}</p>
+                                <p class="mb-4">Data Kelas</p>
+                                <p class="fs-30 mb-2">{{$kelas}}</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="card card-light-danger">
                             <div class="card-body">
-                                <p class="mb-4">Data Kelas Berhasil</p>
+                                <p class="mb-4">Data Kelas Publish</p>
                                 <p class="fs-30 mb-2">{{$kelasberhasil}}</p>
                             </div>
                         </div>
@@ -134,51 +134,69 @@
   </div>
 
   @include('mentor.layout.script')
+  @php
+  // Use PHP to manually encode the data as JSON
+  $labels = $kelasCounts['labels'];
+  $data = $kelasCounts['data'];
+  @endphp
+
   <script>
+    $(function() {
+      'use strict';
 
+      // Create the data object using PHP-encoded variables
+      var data = {
+        labels: {!! json_encode($labels) !!},
+        datasets: [{
+          label: 'Jumlah Peserta',
+          data: {!! json_encode($data) !!},
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+          ],
+          borderWidth: 1,
+          fill: false
+        }]
+      };
 
-document.addEventListener("DOMContentLoaded", function () {
-    var kelasData = <?php echo json_encode($kelas); ?>;
-
-    var kelasTerbanyak = {};
-    kelasData.forEach(function (kelas) {
-        if (kelasTerbanyak[kelas.nama]) {
-            kelasTerbanyak[kelas.nama]++;
-        } else {
-            kelasTerbanyak[kelas.nama] = 1;
-        }
-    });
-
-    var labels = Object.keys(kelasTerbanyak);
-    var data = Object.values(kelasTerbanyak);
-
-    var ctx = document.getElementById("barChart").getContext("2d");
-    var barChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: "Jumlah Peserta",
-                    data: data,
-                    backgroundColor: "rgba(54, 162, 235, 0.8)",
-                    borderColor: "rgba(54, 162, 235, 1)",
-                    borderWidth: 1,
-                },
-            ],
-        },
-        options: {
+      // Replace the chart data
+      if ($("#barChart").length) {
+        var barChartCanvas = $("#barChart").get(0).getContext("2d");
+        var barChart = new Chart(barChartCanvas, {
+          type: 'bar',
+          data: data,
+          options: {
             scales: {
-                y: {
-                    beginAtZero: true,
-                },
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
             },
-        },
+            legend: {
+              display: true
+            },
+            elements: {
+              point: {
+                radius: 0
+              }
+            }
+          }
+        });
+      }
     });
-});
-
   </script>
-  <!-- End custom js for this page-->
+
 
 </body>
 
