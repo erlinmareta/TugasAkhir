@@ -57,11 +57,11 @@
         <div class="col-lg-4 col-md-4 col-sm-12">
           <div class="card card-statistic-2">
             <div class="card-icon shadow-primary bg-primary">
-              <i class="fas fa-dollar-sign"></i>
+                <i class='fas fa-file-alt'></i>
             </div>
             <div class="card-wrap">
               <div class="card-header">
-                <h4>Total kelas masuk hari ini</h4>
+                <h4>Total Kelas </h4>
               </div>
               <div class="card-body">
                 {{$kelasmasuk}}
@@ -76,71 +76,74 @@
             </div>
             <div class="card-wrap">
               <div class="card-header">
-                <h4>Total Kelas berhasil hari ini</h4>
+                {{-- <h4>Total Kelas berhasil hari ini</h4>
               </div>
               <div class="card-body">
-                {{$kelasberhasil}}
+                {{$kelasberhasil}} --}}
               </div>
             </div>
           </div>
         </div>
 
         <div class="row">
-            <div class="col-12 col-sm-12 col-lg-6">
-              <div class="card">
-                <div class="card-header">
-                  <h4>Informasi</h4>
-                </div>
-                <div class="card-body">
-                  <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
-                    <li class="media">
-                      <img alt="image" class="mr-3 rounded-circle" width="70" src="assets/img/avatar/avatar-1.png">
-                      <div class="media-body">
-                        <div class="media-title mb-1">Rizal Fakhri</div>
-                        <div class="text-time">Yesterday</div>
-                        <div class="media-description text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                        <div class="media-links">
-                          <a href="#">View</a>
-                          <div class="bullet"></div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="media">
-                      <img alt="image" class="mr-3 rounded-circle" width="70" src="assets/img/avatar/avatar-2.png">
-                      <div class="media-body">
-                        <div class="media-title mb-1">Bambang Uciha</div>
-                        <div class="text-time">Yesterday</div>
-                        <div class="media-description text-muted">Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                        <div class="media-links">
-                          <a href="#">View</a>
-                          <div class="bullet"></div>
-                        </div>
-                      </div>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6">
+            <div class="col-lg-12">
                 <div class="card">
-                  <div class="card-header">
-                    <h4>Bar Chart</h4>
-                  </div>
-                  <div class="card-body">
-                    <canvas id="myChart2"></canvas>
-                  </div>
+                    <div class="card-header">
+                        <h4>Informasi Registrasi mentor</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
+                            @foreach ($info as $item)
+                            <li class="media">
+                                <img alt="image" class="mr-3 rounded-circle" width="70" src="assets/img/avatar/avatar-1.png">
+                                <div class="media-body">
+                                    <div class="media-title text-truncate">{{$item->name}}</div>
+                                    <div class="text-time">{{$item->created_at}}</div>
+                                    <p class="text-truncate">Telah registrasi sebagai {{$item->level}}</p>
+                                    <div class="media-links">
+                                        <a href="#">View</a>
+                                    </div>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                        <div class="dropdown-footer text-center">
+                            <a href="#" id="viewAllUsers">View All <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
+        </div>
+        <script>
+            document.getElementById('viewAllUsers').addEventListener('click', function(e) {
+                e.preventDefault();
+                var list = document.querySelector('.list-unstyled-border');
+                list.innerHTML = ''; // Clear the list to remove current data
+                @foreach ($allUsers as $user)
+                var li = document.createElement('li');
+                li.className = 'media';
+                li.innerHTML = `
+                    <img alt="image" class="mr-3 rounded-circle" width="70" src="assets/img/avatar/avatar-1.png">
+                    <div class="media-body">
+                        <div class="media-title text-truncate">{{$user->name}}</div>
+                        <div class="text-time">{{$user->created_at}}</div>
+                        <p class="text-truncate">Telah registrasi sebagai {{$user->level}}</p>
+                        <div class="media-links">
+                            <a href="#">View</a>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(li);
+                @endforeach
+                // Hide the "View All" link
+                document.querySelector('.dropdown-footer').style.display = 'none';
+            });
+        </script>
 
 
 
-      </div>
-    </section>
-  </div>
+
+
 
 
 {{-- footer       --}}

@@ -18,7 +18,12 @@ class AdminController extends Controller
         $totaluser = User::count();
         $kelasmasuk = Kelas::where('status', 'proses')->count();
         $kelasberhasil = Kelas::where('status', 'sukses')->count();
-    	return view('admin/dashboard', compact('userpeserta', 'usermentor', 'useradmin', 'totaluser', 'kelasmasuk', 'kelasberhasil'));
+
+        $info = User::where('level', '!=', 'admin')->latest()->take(10)->get();
+        $allUsers = User::where('level', '!=', 'admin')->get();
+
+    	return view('admin/dashboard', compact('userpeserta', 'usermentor', 'useradmin', 'totaluser', 'kelasmasuk',
+        'kelasberhasil', 'info', 'allUsers'));
     }
 
     public function Profil()

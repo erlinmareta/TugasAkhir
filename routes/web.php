@@ -62,6 +62,8 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
     Route::get('/profil', [MentorController::class, 'MentorProfil']);
     Route::get('/profil/profil', [MentorController::class, 'ProfileMentor']);
     Route::put('/profil', [MentorController::class, 'UpdateProfil']);
+    Route::get('/reset_password', [MentorController::class, 'ResetPassword']);
+    Route::post('/reset_password', [MentorController::class, 'NewPassword']);
 
     //CRUD Kelas
     Route::get('/kelas/kelas', [KelasController::class, 'Kelas']);

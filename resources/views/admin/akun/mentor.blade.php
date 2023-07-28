@@ -27,6 +27,14 @@
       <div class="card">
         <div class="card-header">
           <h2>Data Mentor</h2>
+          <form action="{{ url('admin/akun/mentor')}}" method="get">
+            <div class="input-group">
+              <input type="text" class="form-control" name="search" placeholder="Search" value="{{ $searchQuery }}">
+              <div class="input-group-btn">
+                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </form>
               </div>
         <div class="card-body p-0">
           <div class="table-responsive">
@@ -42,6 +50,7 @@
                 </tr>
               </thead>
               <tbody>
+                @if($user->count() > 0)
                 @foreach ($user as $item )
                 <tr>
                   <td>{{ $no++ }}</td>
@@ -60,6 +69,11 @@
                   $id = $item->id;
               @endphp
               @endforeach
+              @else
+              <tr>
+                  <td colspan="7" class="text-center">Data tidak ada</td>
+              </tr>
+          @endif
             </table>
           </div>
         </div>

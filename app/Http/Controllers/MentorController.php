@@ -157,6 +157,37 @@ class MentorController extends Controller
         return back();
     }
 
+    public function ResetPassword()
+    {
+        return view('mentor/reset_password');
+    }
+
+    public function NewPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        // Verifikasi email
+        if ($request->email !== $user->email) {
+            return redirect()->back()->with('error', 'Email tidak cocok.');
+        }
+
+        // Verifikasi password lama
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()->with('error', 'Password lama tidak cocok.');
+        }
+
+        // Update password baru
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Password berhasil diubah.');
+    }
 
 
 

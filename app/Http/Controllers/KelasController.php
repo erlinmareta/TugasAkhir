@@ -11,11 +11,22 @@ use Illuminate\Support\Facades\Storage;
 
 class KelasController extends Controller
 {
-    public function Kelas(){
+    public function Kelas(Request $request){
 
+        $searchQuery = $request->input('search');
+
+        // Fetch kategori and kelas data
         $kategori = Kategori::all();
-        $kelas = Kelas::where('user_id', Auth::user()->id)->get();
-        return view('mentor/kelas/kelas', ['kelas' => $kelas, 'kategori' => $kategori]);
+
+        // Query to fetch kelas data based on the search query if it exists, otherwise fetch all data
+        $kelasQuery = Kelas::where('user_id', Auth::user()->id)
+            ->when($searchQuery, function ($query, $searchQuery) {
+                return $query->where('judul', 'like', '%' . $searchQuery . '%');
+            });
+
+        // Paginate the results (e.g., 10 items per page)
+        $kelas = $kelasQuery->paginate(2);
+        return view('mentor/kelas/kelas', ['kelas' => $kelas, 'kategori' => $kategori , 'searchQyery' => $searchQuery]);
     }
 
     public function TambahKelas()

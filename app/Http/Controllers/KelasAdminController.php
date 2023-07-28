@@ -49,10 +49,19 @@ class KelasAdminController extends Controller
         return redirect()->back();
     }
 
-    public function KelasBerhasil()
-    {
-        $kelas = Kelas::with('user')->where('status' , 'sukses')->get();
-    	return view('admin/kelas/berhasil' , ['kelas' => $kelas]);
+    public function KelasBerhasil(Request $request)
+{
+    $searchQuery = $request->input('search');
+
+    // Fetch data based on search query if it exists, otherwise fetch all data
+    $kelas = Kelas::with('user')
+        ->where('status', 'sukses')
+        ->when($searchQuery, function ($query, $searchQuery) {
+            return $query->where('judul', 'like', '%' . $searchQuery . '%');
+        })
+        ->paginate(2);
+
+    	return view('admin/kelas/berhasil' , ['kelas' => $kelas , 'searchQuery' => $searchQuery]);
     }
 
     public function KelasDitolak()

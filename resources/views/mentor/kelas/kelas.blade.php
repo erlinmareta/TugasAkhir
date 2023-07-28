@@ -5,6 +5,60 @@
 <head>
     <title>Dashboard Mentor</title>
     @include('mentor.layout.head')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Pagination Styles */
+        .pagination-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pagination li {
+            margin: 0 2px;
+        }
+
+        .pagination li a,
+        .pagination li span {
+            display: block;
+            padding: 6px 12px;
+            text-decoration: none;
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination li a:hover {
+            background-color: #f5f5f5;
+        }
+
+        .pagination li.active span {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .pagination li.disabled span {
+            color: #ddd;
+        }
+
+        /* Optional: Center the pagination on small screens */
+        @media (max-width: 576px) {
+            .pagination-container {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
   <div class="container-scroller">
@@ -27,11 +81,21 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Data Kelas</h4>
+            <div class="row">
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="card-title">Data Kelas</h4>
+                                <form action="{{ url('mentor/kelas/kelas') }}" method="get" class="form-inline">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="search" placeholder="Search">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                   <a href="{{ url('mentor/kelas/tambah') }}" class="btn btn-light">Tambah</a>
                   </p>
                   <div class="table-responsive">
@@ -55,7 +119,9 @@
                             <td>{{$item->judul}}</td>
                             <td>{{$item->kategori->nama}}</td>
                             <td><img src="{{ url('/storage/' .$item->gambar)}}"></td>
-                            <td>{{$item->deskripsi}}</td>
+                            <td style="max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                                {{ $item->deskripsi }}
+                            </td>
                             <td>
                                 @if ($item->status === 'sukses')
                                     <label class="badge badge-success">{{ $item->status }}</label>
@@ -82,6 +148,13 @@
                       @endforeach
                     </table>
                   </div>
+                  <div class="pagination-container">
+                    <ul class="pagination">
+                        <!-- Anggap $kelas adalah objek pagination dari controller -->
+                        {!! $kelas->links('pagination.bootstrap-4') !!}
+                    </ul>
+                </div>
+                </div>
                 </div>
               </div>
             </div>

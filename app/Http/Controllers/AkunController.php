@@ -10,10 +10,17 @@ use Illuminate\Support\Facades\Storage;
 
 class AkunController extends Controller
 {
-    public function Akun()
+    public function Akun(Request $request)
     {
-        $user = DB::table('users')->get();
-        return view ('admin/akun/user', ['user' => $user]);
+        $searchQuery = $request->input('search');
+
+        $user = DB::table('users')
+        ->when($searchQuery, function ($query, $searchQuery) {
+            return $query->where('name', 'like', '%' . $searchQuery . '%')
+                ->orWhere('email', 'like', '%' . $searchQuery . '%');
+        })
+        ->paginate(5);
+        return view ('admin/akun/user', ['user' => $user, 'searchQuery' => $searchQuery]);
     }
 
     public function edit($id)
@@ -50,19 +57,40 @@ class AkunController extends Controller
             return back()->with('success', 'Data Berhasil dihapus!');
         }
 
-        public function DataMentor()
+        public function DataMentor(Request $request)
         {
-            $user = User::where("level", "mentor")->get();
-            return view('admin/akun/mentor', ['user' => $user]);
+            $searchQuery = $request->input('search');
+
+            $user = User::when($searchQuery, function ($query, $searchQuery) {
+            return $query->where('level', 'mentor')
+                         ->where(function ($query) use ($searchQuery) {
+                             $query->where('name', 'like', '%' . $searchQuery . '%')
+                                   ->orWhere('email', 'like', '%' . $searchQuery . '%');
+                         });
+        })
+        ->where('level', 'mentor')
+        ->paginate(10);
+            return view('admin/akun/mentor', ['user' => $user , 'searchQuery' => $searchQuery]);
         }
 
-        public function DataPeserta()
+        public function DataPeserta(Request $request)
         {
-            $user = User::where("level", "member")->get();
-            return view('admin/akun/peserta', ['user' => $user]);
+            $searchQuery = $request->input('search');
+
+            $user = User::when($searchQuery, function ($query, $searchQuery) {
+            return $query->where('level', 'member')
+                         ->where(function ($query) use ($searchQuery) {
+                             $query->where('name', 'like', '%' . $searchQuery . '%')
+                                   ->orWhere('email', 'like', '%' . $searchQuery . '%');
+                         });
+        })
+        ->where('level', 'member')
+        ->paginate(10);
+
+            return view('admin/akun/peserta', ['user' => $user , 'searchQuery' => $searchQuery]);
         }
 
-        public function DataAdmin()
+        public function DataAdmin(Request $request)
         {
             $user = User::where("level", "admin")->get();
             return view('admin/akun/admin', ['user' => $user]);
