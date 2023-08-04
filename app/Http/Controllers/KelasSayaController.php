@@ -10,10 +10,17 @@ use Illuminate\Support\Facades\Storage;
 
 class KelasSayaController extends Controller
 {
-    public function KelasSaya()
+    public function KelasSaya(Request $request)
     {
 
-        $kelas = Kelas::where('user_id', Auth::user()->id)->where('status', 'pending')->get();
+        $search = $request->input('search');
+        $query = Kelas::where('user_id', Auth::user()->id)->where('status', 'pending');
+
+        if ($search) {
+        $query->where('judul', 'like', '%' . $search . '%');
+    }
+
+    $kelas = $query->paginate(10);
         return view ('mentor/Kelas_saya/kelas_saya' , ['kelas' => $kelas]);
     }
 
@@ -25,13 +32,17 @@ class KelasSayaController extends Controller
     }
 
     public function KelasPublish($id)
-    {
-        $kelas = Kelas::findOrFail($id);
-        $kelas->status = 'proses';
-        $kelas->save();
+{
+    $kelas = Kelas::findOrFail($id);
 
-        // Lanjutkan dengan logika untuk memindahkan data ke dashboard admin
-
-        return redirect()->back()->with('success', 'Kelas berhasil dipublish dan data terkirim ke dashboard admin.');
+    if ($kelas->status === 'sukses' || $kelas->status === 'proses' || $kelas->materi->count() === 0) {
+        return redirect()->back()->with('error', 'Kelas tidak dapat dipublish, lengkapi terlebih dahulu materi pada kelas tersebut');
     }
+
+    $kelas->status = 'proses';
+    $kelas->save();
+
+    return redirect()->back()->with('success', 'Kelas berhasil dipublish dan data terkirim ke dashboard admin.');
+}
+
 }

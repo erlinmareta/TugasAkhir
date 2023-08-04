@@ -55,7 +55,7 @@
                 @if($user->count() > 0)
                 @foreach ($user as $item )
                 <tr>
-                    <td>{{ $user->firstItem() + $loop->index }}</td>
+                  <td>{{ $user->firstItem() + $loop->index }}</td>
                   <td>{{$item->name}}</td>
                   <td>{{$item->email}}</td>
                   <td>{{$item->level }}</td>
@@ -122,7 +122,7 @@
 </div>
 </section>
 </div>
-@foreach ($user as $item )
+@foreach ($user as $item)
 <div class="modal" tabindex="-1" id="myModal{{ $item->id }}s">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -133,17 +133,24 @@
           </button>
         </div>
         <div class="modal-body">
+          @if ($item->foto)
+          <img src="{{ url('/storage/'.Auth::user()->foto) }}" style="width: 150px; height:150px"
+          class="img-thumbnail rounded-circle mx-auto d-block">
+          @else
+            <img src="{{ asset('img/90x90.jpg') }}" alt="Placeholder Image" style="width: 150px; height:150px"
+            class="img-thumbnail rounded-circle mx-auto d-block">
+          @endif
           <p>Alamat : {{$item->alamat}}</p>
           <p>Jenis Kelamin : {{$item->jenis_kelamin}}</p>
           <p>Nomor Telepon : {{$item->nomor_telepon}}</p>
           <p>Pekerjaan : {{$item->pekerjaan}}</p>
-          <p>Deskripsi : {{$item->deskripsi}}</p>
+          <p>Deskripsi : {!! $item->deskripsi !!}</p>
         </div>
         <div class="modal-footer">
         </div>
       </div>
     </div>
-  </div>
+</div>
 @endforeach
 {{-- footer       --}}
 @include('admin.layout.footer')

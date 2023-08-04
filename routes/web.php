@@ -36,6 +36,10 @@ Route::middleware(['cekLogin'])->group(function () {
     Route::get('/loginproses', [LoginController::class, 'loginproses'])->name('loginproses');
     Route::get('/reload' , [LoginController::class, 'Reload'])->name('Reload');
     Route::get('/verify' , [LoginController::class, 'verify'])->name('user.verify');
+    Route::get('/forgot' , [LoginController::class, 'ForgotForm']);
+    Route::post('/forgot' , [LoginController::class, 'SendLinkForgot']);
+    Route::get('/password/reset/{token}', [LoginController::class, 'ShowResetForm'])->name('reset.password.form');
+    Route::post('/password/reset', [LoginController::class, 'ResetPassword']);
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -72,14 +76,14 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
     Route::get('/kelas/edit/{id}', [KelasController::class, 'edit']);
     Route::post('/kelas/store', [KelasController::class, 'store']);
     Route::put('/kelas/{id}', [KelasController::class, 'update']);
+    Route::get('/kelas/info/{id}', [KelasController::class, 'info']);
 
     //CRUD Materi
     Route::get('/kelas/add_materi/{id}', [KelasController::class, 'AddMateri']);
     Route::put('/kelas/StoreMateri/{id}', [KelasController::class, 'StoreMateri'])->name('mentor.kelas.store_materi');
     Route::get('/kelas/detail/{id}', [KelasController::class, 'detail']);
-    Route::post('/materi/store', [MateriController::class, 'store']);
-    Route::get('/materi/edit/{id}', [MateriController::class, 'edit']);
-    Route::put('/materi/{id}', [MateriController::class, 'update']);
+    Route::get('/kelas/editmateri/{classId}/{id}', [KelasController::class, 'editMateri']);
+    Route::put('/kelas/materi/{classId}/{id}', [KelasController::class, 'updateMateri']);
 
     //Kelas Publish
     Route::get('/kelas_saya/kelas_saya', [KelasSayaController::class, 'KelasSaya']);
@@ -126,8 +130,18 @@ Route::prefix('admin')->middleware(['auth', 'cekLevel:admin'])->group(function (
     Route::post('/index/{id}/reject', [KelasAdminController::class, 'Reject']);
     Route::get('/kelas/berhasil', [KelasAdminController::class, 'KelasBerhasil']);
     Route::get('/kelas/ditolak', [KelasAdminController::class, 'KelasDitolak']);
+    Route::get('/kelas/info/{id}', [KelasAdminController::class, 'Info']);
+
 
     //profil
     Route::get('/profil_admin', [AdminController::class, 'profil']);
     Route::put('/profil/{id}', [AdminController::class, 'ProfilUpdate']);
+
+    //syarat dan ketentuan
+    Route::get('/s&k/s&k', [AdminController::class, 'SyaratdanKetentuan']);
+    Route::get('/s&k/tambah', [AdminController::class, 'AddSyaratdanKetentuan']);
+    Route::post('/s&k/store', [AdminController::class, 'store']);
+    Route::get('/s&k/edit/{id}', [AdminController::class, 'editKetentuan']);
+    Route::put('/s&k/{id}', [AdminController::class, 'updateKetentuan']);
+    Route::get('/hapusketentuan/{id}', [AdminController::class, 'DeleteKetentuan']);
 });

@@ -31,8 +31,17 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Detail Kelas</h4>
-                  </p>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-title">Data Materi </h4>
+                          <form action="{{ url('mentor/kelas/detail', ['id' => $kelas->id]) }}" method="get" class="form-inline">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                          </form>
+                        </div>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
@@ -44,6 +53,9 @@
                           <th>Isi Materi</th>
                           <th>Deskripsi</th>
                           <th>Urutan</th>
+                          @if ($kelas->status === 'pending')
+                          <th>Action</th>
+                          @endif
                         </tr>
                       </thead>
                       <tbody>
@@ -57,12 +69,28 @@
                                     <source src="{{ url('/storage/' . $item->isi_materi) }}" type="video/mp4">
                                 </video>
                             </td>
-                            <td>{{$item->deskripsi}}</td>
+                            <td style="max-width: 400px; max-height: 3em; overflow: hidden; white-space: normal; text-overflow: ellipsis;">
+                                {!! $item->deskripsi !!}
+                            </td>
                             <td>{{$item->urutan}}</td>
+                            @if ($kelas->status === 'pending')
+                            <td>
+                                <a class="btn btn-sm btn-primary" href="{{ url('mentor/kelas/editmateri/' . $kelas->id .'/'. $item->id) }}" title="Edit">
+                                    Edit
+                                </a>
+                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' . $item->id) }}" data-confirm-delete="true"><label class="badge badge-warning">Hapus |</label></a>
+                            </td>
+                            @endif
                         </tr>
                       </tbody>
                       @endforeach
                     </table>
+                  </div>
+                  <div class="pagination-container">
+                    <ul class="pagination">
+                        <!-- Anggap $kelas adalah objek pagination dari controller -->
+                        {!! $materi->links('pagination.bootstrap-4') !!}
+                    </ul>
                   </div>
                 </div>
               </div>

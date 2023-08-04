@@ -9,7 +9,7 @@
               content="IE=edge">
         <meta name="viewport"
               content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Login</title>
+        <title>Reset Password</title>
         <script
 			  src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
@@ -28,38 +28,32 @@
                         <center><img src="{{ asset('img/login.jpg') }}" alt="logo" width="50%" /></center>
                     </span>
                 </a>
-                <p class="m-0">Login Untuk mengakses Aplikasi </p>
+                <p class="m-0">Form Ubah Password</p>
             </div>
 
-            @if ($message = Session::get('error'))
+            <form action="{{ url('/password/reset')}}" method="post">
+
+                @if ($message = Session::get('fail'))
             <div class="alert alert-danger">
                 {{ $message }}
             </div>
-        @endif
-        @if ($message = Session::get('info'))
-            <div class="alert alert-danger">
+            @endif
+            @if ($message = Session::get('susscess'))
+            <div   div class="alert alert-success">
                 {{ $message }}
             </div>
         @endif
-        @if ($message = Session::get('fail'))
-            <div class="alert alert-danger">
-                {{ $message }}
-            </div>
-        @endif
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                {{ $message }}
-            </div>
-        @endif
-            <form action="/loginproses" method="get">
                 @csrf
+                <input type="hidden" name="token" value="{{ $token }}">
                 <div class="form-group">
                     <label class="text-label"
                            for="email_2">Email:</label>
                     <div class="input-group input-group-merge">
                         <input id="email" name="email" type="email" class="form-control form-control-prepended" placeholder="example@gmail.com"
-                        value="{{Session::get('verifiedEmail') ? Session::get('verifiedEmail') : old('email')}}">
-                        {{-- <span class="text-danger">@error('email'){{ $massage }}@enderror</span> --}}
+                        value="{{ $email ?? old ('email')}}">
+                        @error('email')
+                        <label for="email" class="text-danger">{{ $message}}</label>
+                    @enderror
                         <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <span class="far fa-envelope"></span>
@@ -72,6 +66,9 @@
                            for="password_2">Password:</label>
                     <div class="input-group input-group-merge">
                         <input id="password" name="password" type="password" class="form-control form-control-prepended" placeholder="Masukkan Password">
+                        @error('password')
+                        <label for="password" class="text-danger">{{ $message}}</label>
+                        @enderror
                         <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <span class="fa fa-key"></span>
@@ -81,40 +78,30 @@
                 </div>
 
                 <div class="form-group">
-                    <span id="captcha-img">
-                        {!!captcha_img('math')!!}
-                    </span>
-                    <button id="reload" class="btn btn-primary reload">&#x21bb;</button>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="captcha" name="captcha" placeholder="captcha">
-                    @error('captcha')
-                        <label for="captcha" class="text-danger">{{ $message}}</label>
+                    <label class="text-label"
+                           for="password_2">Konfirmasi Password:</label>
+                    <div class="input-group input-group-merge">
+                        <input id="password_confirmation" name="password_confirmation" type="password" class="form-control form-control-prepended" placeholder="Masukkan Password">
+                        @error('password_confirmation')
+                        <label for="password_confirmation" class="text-danger">{{ $message}}</label>
                     @enderror
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <span class="fa fa-key"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="form-group">
                     <button class="btn btn-block btn-primary"
-                            type="submit">Login</button>
+                            type="submit">Reset</button>
                 </div>
                 <div class="form-group text-center">
-                    <a href="{{ url('/forgot')}}">Lupa password?</a> <br>
                     Belum Punya Akun? <a class="text-body text-underline"
-                       href="{{ url('/registrasi')}}">Register!</a>
+                       href="{{ url('/login')}}">Login</a>
                 </div>
             </form>
-
-            <script>
-                $('#reload').click(function (e)){
-                    e.preventDevault();
-                    $.ajax({
-                        type:'GET',
-                        url: 'reload',
-                        succsess:function (res){
-                            $('#captcha_img').html(res.captcha);
-                        }
-                    });
-                };
-            </script>
 
         </div>
 

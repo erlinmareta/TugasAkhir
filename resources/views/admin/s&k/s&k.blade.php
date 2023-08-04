@@ -22,13 +22,15 @@
         <h1>Table</h1>
         <div class="section-header-breadcrumb">
           <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+          <div class="breadcrumb-item">Table</div>
         </div>
       </div>
 <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h4>Daftar Materi Kelas</h4><br>
+          <h4>Data Syarat dan Ketentuan</h4><br>
+            <a href="{{ url('admin/s&k/tambah') }}" class="btn btn-outline-primary">Tambah</a>
               </div>
         <div class="card-body p-0">
           <div class="table-responsive">
@@ -36,28 +38,21 @@
               <thead>
                 <tr>
                     <?php $no=1; ?>
-                    <th>No</th>
-                    <th>Judul</th>
-                    <th>Kelas</th>
-                    <th>Isi Materi</th>
-                    <th>Deskripsi</th>
-                    <th>Urutan</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                      @foreach ($materi as $item )
-                      <td>{{ $no++ }}</td>
-                      <td>{{$item->judul}}</td>
-                      <td>{{$item->kelas->judul}}</td>
-                      <td>
-                          <video width="150" height="90" controls>
-                              <source src="{{ url('/storage/' . $item->isi_materi) }}" type="video/mp4">
-                          </video>
-                      </td>
-                      <td>{{$item->deskripsi}}</td>
-                      <td>{{$item->urutan}}</td>
-                  </tr>
+                  <th>No</th>
+                  <th>Keterangan</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($ketentuan as $item )
+                <tr>
+                  <td>{{ $no++ }}</td>
+                  <td>{{$item->keterangan}}</td>
+                  <td>
+                    <a class="btn btn-sm btn-success-outline" href="{{ url('admin/s&k/edit/' .$item->id) }}" title="Edit"><span class="fa fa-edit"></span> Edit |</a>
+                    <a class="btn btn-sm btn-success-outline" href="{{ url('admin/hapusketentuan/' .$item->id) }}" title="Hapus"><span class="fa fa-trash"></span> Hapus |</a>
+                </td>
+                </tr>
                 <tr>
               </tbody>
               @endforeach
@@ -78,6 +73,7 @@
 
 {{-- script --}}
 @include('admin.layout.script')
+@include('sweetalert::alert')
 
 </body>
 </html>

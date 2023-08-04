@@ -4,6 +4,7 @@
 <head>
     <title>Dashboard Mentor</title>
     @include('mentor.layout.head')
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -61,9 +62,9 @@
                                     <input type="file" class="form-control" name="gambar" id="gambar">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Deskripsi</label>
-                                    <input name="deskripsi" id="deskripsi" type="text" class="form-control" value="{{ $item->deskripsi }}" required="required">
-                                  </div>
+                                    <label for="deskripsi">Deskripsi</label>
+                                    <textarea name="deskripsi"  id="deskripsiTextarea" class="form-control" required>{!! $item->deskripsi !!}</textarea>
+                                </div>
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select class="form-control" id="status" name="status">
@@ -81,6 +82,11 @@
     </div>
 
     @include('mentor.layout.script')
+    <script>
+        CKEDITOR.replace('deskripsiTextarea', {
+            height: 300,
+        });
+    </script>
     <!-- End custom js for this page-->
 </body>
 

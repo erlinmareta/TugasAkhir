@@ -4,13 +4,8 @@
 
 <head>
     <title>Dashboard Mentor</title>
-    <script src="path/to/ckeditor/ckeditor.js"></script>
-  <script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-      CKEDITOR.replace('exampleInputName1');
-    });
-  </script>
     @include('mentor.layout.head')
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 <body>
   <div class="container-scroller">
@@ -35,7 +30,16 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Tambah Data Kelas</h4>
-            <form action="/mentor/kelas/store" method="post" enctype="multipart/form-data" class="forms-sample">
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+            <form action="{{ url('/mentor/kelas/store') }}" method="post" enctype="multipart/form-data" class="forms-sample">
                 @csrf
               <div class="form-group">
                 <label for="exampleInputName1">Judul</label>
@@ -56,14 +60,8 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputName1">Deskripsi</label>
-                    <textarea name="deskripsi" class="form-control"  placeholder="Masukkan Deskripsi" id="deskripsiTextarea"></textarea>
-                  </div>
-
-                  <style>
-                    #deskripsiTextarea {
-                      height: 150px; /* Atur tinggi textarea sesuai kebutuhan */
-                    }
-                  </style>
+                    <textarea name="deskripsi" class="form-control" placeholder="Masukkan Deskripsi" id="deskripsiTextarea"></textarea>
+                </div>
 
               <div class="form-group">
                 <label for="exampleSelectGender">Status</label>
@@ -73,27 +71,25 @@
                 </div>
 
               <button type="submit" class="btn btn-primary mr-2">Submit</button>
-              <button class="btn btn-light">Cancel</button>
             </form>
           </div>
         </div>
       </div>
     </div>
 
-      <!-- content-wrapper ends -->
-
-      <!-- partial:partials/_footer.html -->
       @include('mentor.layout.footer')
-        <!-- partial -->
+
       </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
+
 
   @include('mentor.layout.script')
-  <!-- End custom js for this page-->
+  <script>
+    CKEDITOR.replace('deskripsiTextarea', {
+        height: 300,
+    });
+</script>
 </body>
 
 </html>

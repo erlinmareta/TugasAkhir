@@ -31,7 +31,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Data Kelas</h4>
+                  <h4 class="card-title">Data Member Perkelas</h4>
                   </p>
                   <div class="table-responsive">
                     <table class="table">
@@ -39,8 +39,7 @@
                         <tr>
                           <?php $no=1; ?>
                           <th>No</th>
-                          <th>Judul</th>
-                          <th>Action</th>
+                          <th>Nama Member</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -48,14 +47,17 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->user->name }}</td>
-                                <td>
-                                    <a class="btn btn-sm btn-success-outline" href=><label class="badge badge-warning">Detail |</label></a>
-                                </td>
                             </tr>
                         @endforeach
                       </tbody>
                     </table>
                   </div>
+                  <div class="pagination-container">
+                    <ul class="pagination">
+                        <!-- Anggap $kelas adalah objek pagination dari controller -->
+                        {!! $subscription->links('pagination.bootstrap-4') !!}
+                    </ul>
+                </div>
                 </div>
               </div>
             </div>

@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\Materi;
 use App\Models\User;
+use App\Models\Subscription;
+use App\Models\Rating;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -53,7 +55,6 @@ class KelasAdminController extends Controller
 {
     $searchQuery = $request->input('search');
 
-    // Fetch data based on search query if it exists, otherwise fetch all data
     $kelas = Kelas::with('user')
         ->where('status', 'sukses')
         ->when($searchQuery, function ($query, $searchQuery) {
@@ -64,10 +65,26 @@ class KelasAdminController extends Controller
     	return view('admin/kelas/berhasil' , ['kelas' => $kelas , 'searchQuery' => $searchQuery]);
     }
 
-    public function KelasDitolak()
+    public function KelasDitolak(Request $request)
+{
+    $searchQuery = $request->input('search');
+
+    $kelas = Kelas::with('user')
+                ->where('status', 'cancel')
+                ->when($searchQuery, function ($query) use ($searchQuery) {
+                    return $query->where('nama_kelas', 'LIKE', '%' . $searchQuery . '%');
+                })
+                ->paginate(10);
+
+    return view('admin/kelas/ditolak', ['kelas' => $kelas, 'searchQuery' => $searchQuery]);
+}
+
+    public function Info($id)
     {
-        $kelas = Kelas::with('user')->where('status' , 'cancel')->get();
-    	return view('admin/kelas/ditolak' , ['kelas' => $kelas]);
+        $kelas = Kelas::find($id);
+        $subscription = Subscription::where('kelas_id', $id)->first();
+        $rating = Rating::where('kelas_id', $id)->paginate(10);
+        return view('admin/kelas/info' , ['kelas' => $kelas , 'subscription' => $subscription , 'rating' => $rating]);
     }
 
 }

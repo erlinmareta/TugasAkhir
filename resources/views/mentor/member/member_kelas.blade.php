@@ -4,6 +4,7 @@
 
 <head>
     <title>Dashboard Mentor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     @include('mentor.layout.head')
 </head>
 <body>
@@ -31,15 +32,24 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Data Kelas</h4>
-                  </p>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-title">Data Kelas</h4>
+                          <form action="{{ url('mentor/member/member_kelas') }}" method="get" class="form-inline">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                          </form>
+                        </div>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
                         <tr>
                           <?php $no=1; ?>
                           <th>No</th>
-                          <th>Judul</th>
+                          <th>Judul Kelas</th>
                           <th>Kategori</th>
                           <th>Total</th>
                           <th>Action</th>
@@ -53,13 +63,21 @@
                                 <td>{{ $item->kategori->nama}}</td>
                                 <td>{{ count($item->subscription) }}</td>
                                 <td>
-                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/member/member_kelas/' .$item->id. '/student' )}}" title="Hapus"><label class="badge badge-warning">Detail |</label></a>
+                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/member/member_kelas/' .$item->id. '/student' )}}" title="Hapus">
+                                        <i class="fas fa-info-circle"></i> Detail
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
                       </tbody>
                     </table>
                   </div>
+                  <div class="pagination-container">
+                    <ul class="pagination">
+                        <!-- Anggap $kelas adalah objek pagination dari controller -->
+                        {!! $kelas->links('pagination.bootstrap-4') !!}
+                    </ul>
+                </div>
                 </div>
               </div>
             </div>

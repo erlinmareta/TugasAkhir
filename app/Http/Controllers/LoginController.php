@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\VerifyUser;
+use Carbon\Carbon;
 
 class LoginController extends Controller
 {
@@ -126,6 +128,72 @@ class LoginController extends Controller
             }
         }
     }
+
+    public function ForgotForm()
+    {
+        return view('/forgot');
+    }
+
+    public function SendLinkForgot(Request $request)
+    {
+       $request-> validate([
+            'email' => 'required|email|exists:users,email',
+       ]);
+
+       $token = \Str::random(60);
+       \DB::table('password_resets')->insert([
+        'email' =>$request->email,
+        'token' =>$token,
+        'created_at' =>Carbon::now(),
+       ]);
+
+       $action_link = route('reset.password.form', ['token'=>$token, 'email'=>$request->email]);
+       $body = "kami telah menerima request untuk mengubah passsword untuk aplikasi <b> IndLearn </b>
+       pada akun terkait ".$request->email.". kamu bisa mengubah password anda dengan meng klik link ini";
+
+       \Mail::send('email_forgot', ['action_link'=>$action_link, 'body'=>$body], function($messege) use ($request){
+            $messege->from('IndLearnku@gmail.com', 'IndLearn');
+            $messege->to($request->email, 'name')
+                    ->subject('Reset Password');
+       });
+
+       return back()->with('success', 'we telah mengirimkan untuk mengubah password link pada email anda ');
+
+    }
+
+    public function ShowResetForm(Request $request, $token = null)
+    {
+        return view('/reset_form')->with(['token' =>$token, 'email'=>$request->email]);
+    }
+
+    public function ResetPassword(Request $request)
+    {
+        $request->validate([
+            'email'=>'required|email|exists:users,email',
+            'password'=>'required|min:8|confirmed',
+            'password_confirmation'=>'required',
+        ]);
+
+        $check_token = \DB::table('password_resets')->where([
+            'email'=>$request->email,
+            'token'=>$request->token,
+        ])->first();
+
+        if(!$check_token){
+            return back()->withInput()->with('fail', 'Invalid token');
+        }else{
+            User::where('email', $request->email)->update([
+                'password'=>\Hash::make($request->password)
+            ]);
+
+            \DB::table('password_resets')->where([
+                'email'=>$request->email
+            ])->delete();
+
+            return redirect()->route('login')->with('info', 'Password Berhasil di perbarui silahkan Login dengan Password baru');
+        }
+    }
+
 
 
     public function Logout()

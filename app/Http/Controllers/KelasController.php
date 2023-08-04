@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\Kategori;
 use App\Models\Materi;
+use App\Models\Subscription;
+use App\Models\Rating;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -15,17 +17,13 @@ class KelasController extends Controller
 
         $searchQuery = $request->input('search');
 
-        // Fetch kategori and kelas data
         $kategori = Kategori::all();
-
-        // Query to fetch kelas data based on the search query if it exists, otherwise fetch all data
         $kelasQuery = Kelas::where('user_id', Auth::user()->id)
             ->when($searchQuery, function ($query, $searchQuery) {
                 return $query->where('judul', 'like', '%' . $searchQuery . '%');
             });
 
-        // Paginate the results (e.g., 10 items per page)
-        $kelas = $kelasQuery->paginate(2);
+        $kelas = $kelasQuery->paginate(10);
         return view('mentor/kelas/kelas', ['kelas' => $kelas, 'kategori' => $kategori , 'searchQyery' => $searchQuery]);
     }
 
@@ -37,22 +35,33 @@ class KelasController extends Controller
     }
 
     public function store(Request $request)
-    {
-        if($request->file("gambar")) {
-            $data = $request->file("gambar")->store("kelas");
-        }
+{
+    $request->validate([
+        'kategori_id' => 'required|integer',
+        'judul' => 'required|string|max:255',
+        'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'deskripsi' => 'required|string|max:255',
+        'status' => 'required',
+    ]);
 
-        Kelas::create([
-            'user_id' => Auth::user()->id,
-            'kategori_id' => $request->kategori_id,
-            'judul' => $request->judul,
-            'gambar' =>$data,
-            'deskripsi' =>$request->deskripsi,
-            'status' =>$request->status,
-        ]);
-        return redirect('mentor/kelas/kelas')->with('success', 'Berhasil ditambahkan!');
 
+
+    $data = null;
+    if ($request->file("gambar")) {
+        $data = $request->file("gambar")->store("kelas");
     }
+
+    Kelas::create([
+        'user_id' => Auth::user()->id,
+        'kategori_id' => $request->kategori_id,
+        'judul' => $request->judul,
+        'gambar' => $data,
+        'deskripsi' => $request->deskripsi,
+        'status' => $request->status,
+    ]);
+
+    return redirect('mentor/kelas/kelas')->with('success', 'Berhasil ditambahkan!');
+}
 
     public function edit($id)
     {
@@ -102,7 +111,7 @@ class KelasController extends Controller
 
     public function StoreMateri(Request $request, $id)
     {
-        $kelas_id = $id; // Tambahkan baris ini untuk memberikan nilai $id ke $kelas_id.
+        $kelas_id = $id;
 
         $videoPath = null;
 
@@ -121,17 +130,65 @@ class KelasController extends Controller
                 'urutan' => $request->urutan,
         ]);
 
-            return redirect("/mentor/kelas/detail/".$id);
+            return redirect("/mentor/kelas/kelas/");
         }
 
+        public function detail(Request $request , $id)
+        {
+            $search = $request->input('search');
 
-    public function detail($id)
+            $kelas = Kelas::findOrFail($id);
+            $query = $kelas->materi()->orderBy('urutan');
+
+            if ($search) {
+                $query->where('judul', 'like', '%' . $search . '%');
+            }
+
+            $materi = $query->paginate(10);
+
+        return view('mentor/kelas/detail', ['materi' => $materi , 'kelas' => $kelas]);
+
+        }
+
+    public function editMateri($classId, $id)
     {
-        $kelas = Kelas::findOrFail($id);
-        $materi = $kelas->materi()->orderBy('urutan')->get();
+        $kelas = Kelas::findOrFail($classId);
+        $materi = Materi::findOrFail($id);
+        return view('mentor/kelas/editmateri' , ['kelas' => $kelas , 'item' => $materi]);
+    }
 
-    return view('mentor/kelas/detail', ['materi' => $materi]);
+    public function updateMateri(Request $request, $classId, $id)
+    {
+        $materi = Materi::findOrFail($id);
 
+        if ($request->isi_materi) {
+            if ($request->materiLama) {
+                Storage::delete($request->materiLama);
+            }
+
+        $data = $request->file("isi_materi")->store("materi");
+    } else {
+        $data = $request->materiLama;
+    }
+
+    $materi->update([
+        'user_id' => Auth::user()->id,
+        'kelas_id' => $request->kelas_id,
+        'judul' => $request->judul,
+        'isi_materi' => $data,
+        'deskripsi' => $request->deskripsi,
+        'urutan' => $request->urutan,
+    ]);
+
+    return redirect('/mentor/kelas/detail/' . $classId)->with('success', 'Materi berhasil diperbarui.');
+}
+
+    public function info($id)
+    {
+        $subscription = Subscription::where('kelas_id', $id)->first();
+        $kelas = Kelas::where('user_id', Auth::user()->id)->where('status','sukses')->find($id);
+        $rating = Rating::where('kelas_id', $id)->paginate(10);
+        return view('mentor/kelas/info' , ['subscription' => $subscription , 'kelas' => $kelas, 'rating' => $rating]);
     }
 
 }

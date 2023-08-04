@@ -28,7 +28,15 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h4>Data Kelas Berhasil ditolak</h4><br>
+          <h4>Data Kelas Ditolak</h4><br>
+          <form action="{{ url('admin/kelas/ditolak')}}" method="get">
+            <div class="input-group">
+              <input type="text" class="form-control" name="search" placeholder="Search" value="{{ $searchQuery }}">
+              <div class="input-group-btn">
+                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </form>
               </div>
         <div class="card-body p-0">
           <div class="table-responsive">

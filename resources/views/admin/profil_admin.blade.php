@@ -4,6 +4,7 @@
 <head>
 
 @include('admin.layout.head')
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 
 </head>
 
@@ -49,12 +50,21 @@
                 <div class="profile-widget-name">{{ Auth::user()->name }}<div class="text-muted d-inline font-weight-normal">
                     <div class="slash"></div>{{ Auth::user()->pekerjaan }}</div>
                 </div>
-                {{ Auth::user()->deskripsi }}
+                {!! Auth::user()->deskripsi !!}
               </div>
             </div>
           </div>
           <div class="col-12 col-md-12 col-lg-7">
             <div class="card">
+                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
               <form method="post" action="{{url('/admin/profil/index')}}" enctype="multipart/form-data">
                 @method('put')
                 @csrf
@@ -120,12 +130,10 @@
                         <input type="file" name="foto" id="foto" accept="image/*">
                       </div>
                     <div class="row">
-                      <div class="form-group col-12">
-                        <label for="exampleInputPassword1" class="form-label">Deskripsi</label>
-                                        <input type="text" name="deskripsi" class="form-control"
-                                        value="{{ old('deskripsi', Auth::user()->deskripsi) }}">
-                      </div>
-                    </div>
+                        <div class="form-group col-12">
+                            <label for="exampleInputPassword1" class="form-label">Deskripsi</label>
+                            <textarea name="deskripsi" id="editor">{{ old('deskripsi', Auth::user()->deskripsi) }}</textarea>
+                        </div>
                 <div class="card-footer text-right">
                   <button class="btn btn-primary">Simpan</button>
                 </div>
@@ -144,6 +152,11 @@
 
 {{-- script --}}
 @include('admin.layout.script')
+<script>
+    CKEDITOR.replace('editor', {
+        // You can configure CKEditor options here, if needed.
+    });
+</script>
 
 @include('sweetalert::alert')
 

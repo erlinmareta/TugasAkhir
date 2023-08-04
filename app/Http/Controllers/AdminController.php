@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Kelas;
+use App\Models\Ketentuan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class AdminController extends Controller
@@ -16,14 +19,20 @@ class AdminController extends Controller
         $usermentor = User::where('level', 'mentor')->count();
         $useradmin = User::where('level', 'admin')->count();
         $totaluser = User::count();
-        $kelasmasuk = Kelas::where('status', 'proses')->count();
+
+        $tanggalSekarang = Carbon::today();
+        $totalDataKelasmasukPerHari = Kelas::where('status', 'proses')
+                                           ->whereDate('created_at', $tanggalSekarang)
+                                           ->count();
+
         $kelasberhasil = Kelas::where('status', 'sukses')->count();
-
-        $info = User::where('level', '!=', 'admin')->latest()->take(10)->get();
+        $info = User::where('level', '!=', 'admin')->latest()->paginate(4);
         $allUsers = User::where('level', '!=', 'admin')->get();
+        $infokelasToday = Kelas::where('status', 'proses')->get();
 
-    	return view('admin/dashboard', compact('userpeserta', 'usermentor', 'useradmin', 'totaluser', 'kelasmasuk',
-        'kelasberhasil', 'info', 'allUsers'));
+
+    	return view('admin/dashboard', compact('userpeserta', 'usermentor', 'useradmin', 'totaluser',
+        'totalDataKelasmasukPerHari', 'kelasberhasil', 'info', 'allUsers', 'infokelasToday'));
     }
 
     public function Profil()
@@ -33,6 +42,19 @@ class AdminController extends Controller
 
     public function ProfilUpdate(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required',
+            'nomor_telepon' => 'required',
+            'alamat' => 'required|string|max:255',
+            'pekerjaan' => 'required|string|max:20',
+            'deskripsi' => 'required|string|max:255',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+
+
+        ]);
         $cek = $request->foto;
 
         if (empty($cek)) {
@@ -67,4 +89,51 @@ class AdminController extends Controller
 
         return back()->with('success', 'Profil berhasil diperbarui.');
     }
+
+    public function SyaratdanKetentuan()
+    {
+        $ketentuan = DB::table('ketentuan')->get();
+        return view('admin/s&k/s&k', ['ketentuan'=> $ketentuan]);
+    }
+
+    public function AddSyaratdanKetentuan()
+    {
+        return view('admin/s&k/tambah');
+    }
+
+    public function store(Request $request)
+    {
+
+        Ketentuan::create([
+            'keterangan' => $request->keterangan,
+
+        ]);
+        return redirect('admin/s&k/s&k')->with('success', 'Berhasil ditambahkan!');
+
+    }
+
+    public function editKetentuan($id)
+    {
+        $ketentuan = Ketentuan::where("id", $id)->first();
+        return view('admin/s&k/edit', ['item' => $ketentuan]);
+    }
+
+    public function updateKetentuan(Request $request, $id)
+    {
+
+        Ketentuan::where("id", $id)->update([
+            'keterangan' => $request->keterangan,
+        ]);
+
+        return redirect('admin/s&k/s&k')->with('success', 'Kelas berhasil diperbarui.');
+    }
+
+    public function DeleteKetentuan($id)
+    {
+        DB::table('ketentuan')->where('id',$id)->delete();
+        return back()->with('success', 'Data Berhasil dihapus!');
+    }
+
+
+
 }

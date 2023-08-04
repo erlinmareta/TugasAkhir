@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('pekerjaan')->nullable();
             $table->string('deskripsi')->nullable();
             $table->rememberToken();
+            $table->integer('email_verified')->default(0);
             $table->timestamps();
         });
     }

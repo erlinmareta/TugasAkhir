@@ -4,6 +4,7 @@
 <head>
     <title>Dashboard Mentor</title>
     @include('mentor.layout.head')
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -31,9 +32,8 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Edit Kelas</h4>
-                            <form method="post" action="{{ url('/mentor/materi/'.$item->id) }}"
-                                enctype="multipart/form-data">
+                            <h4 class="card-title">Edit Materi</h4>
+                            <form action="{{ url('/mentor/kelas/materi/' . $kelas->id . '/' . $item->id) }}" method="POST" enctype="multipart/form-data">
                                 @method('PUT')
                                 {{ csrf_field() }}
                                 <input type="hidden" name="materiLama" value="{{ $item->isi_materi }}">
@@ -43,16 +43,9 @@
                                         value="{{ $item->judul }}" required="required">
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="kelas_id">Nama Kelas</label>
-                                    <select name="kelas_id" class="form-control mb-2 mr-sm-2" id="kelas_id" required="required">
-                                        <option value="">-- Pilih kelas --</option>
-                                        @foreach ($kelas as $kelas_item)
-                                            <option value="{{ $kelas_item->id }}"
-                                                {{ $item->kelas_id == $kelas_item->id ? 'selected' : '' }}>
-                                                {{ $kelas_item->judul }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <label for="exampleInputName1">Nama Kelas</label>
+                                    <input type="hidden" name="kelas_id" value="{{ $kelas->id }}">
+                                    <input type="text" class="form-control" value="{{ $kelas->judul }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="video">Materi</label>
@@ -64,9 +57,9 @@
                                     <input type="file" class="form-control" name="isi_materi" id="isi_materi" accept="video/*">
                                 </div>
                                 <div class="form-group">
-                                    <label>Deskripsi</label>
-                                    <input name="deskripsi" id="deskripsi" type="text" class="form-control" value="{{ $item->deskripsi }}" required="required">
-                                  </div>
+                                    <label for="deskripsi">Deskripsi</label>
+                                    <textarea name="deskripsi"  id="deskripsiTextarea" class="form-control" required>{!! $item->deskripsi !!}</textarea>
+                                </div>
                                 <div class="form-group">
                                     <label >Urutan</label>
                                     <input name="urutan" id="urutan" type="text" class="form-control" value="{{ $item->urutan }}" required="required">
@@ -81,6 +74,11 @@
     </div>
 
     @include('mentor.layout.script')
+    <script>
+        CKEDITOR.replace('deskripsiTextarea', {
+            height: 300,
+        });
+    </script>
     <!-- End custom js for this page-->
 </body>
 

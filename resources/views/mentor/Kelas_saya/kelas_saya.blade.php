@@ -4,6 +4,7 @@
 
 <head>
     <title>Dashboard Mentor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     @include('mentor.layout.head')
 </head>
 <body>
@@ -31,8 +32,17 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Daftar Kelas Saya</h4>
-                  </p>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-title">Data Kelas Publish</h4>
+                        <form action="{{ url('mentor/kelas/kelas') }}" method="get" class="form-inline">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
@@ -52,18 +62,22 @@
                             <td>{{ $no++ }}</td>
                             <td>{{$item->judul}}</td>
                             <td><img src="{{ url('/storage/' .$item->gambar)}}"         ></td>
-                            <td>{{$item->deskripsi}}</td>
+                            <td>{!! $item->deskripsi !!}</td>
                             <td><label class="badge badge-secondary">{{$item->status}}</label></td>
                             <td>
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas_saya/detail/' .$item->id) }}" title="detail"><span class="fa fa-edit"></span> Detail |</a>
+                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas_saya/detail/' .$item->id) }}" title="detail">
+                                    <i class="fa fa-eye"></i> Detail
+                                </a>
 
                                 @if ($item["status"] == "sukses" || $item["status"] == "proses")
 
                                 @else
-                                <a class="btn btn-sm btn-success-outline" href="{{ route('mentor.kelas_saya.publish', $item->id) }}" title="publish">
-                                    <label class="badge badge-info">Publish</label></a>
+                                    <a class="btn btn-sm btn-success-outline" href="{{ route('mentor.kelas_saya.publish', $item->id) }}" title="publish">
+                                        <span class="badge badge-info">Publish</span>
+                                    </a>
                                 @endif
                             </td>
+
                         </tr>
                       </tbody>
                       @endforeach

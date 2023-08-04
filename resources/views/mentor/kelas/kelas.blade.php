@@ -96,6 +96,7 @@
                                     </div>
                                 </form>
                             </div>
+
                   <a href="{{ url('mentor/kelas/tambah') }}" class="btn btn-light">Tambah</a>
                   </p>
                   <div class="table-responsive">
@@ -113,14 +114,14 @@
                         </tr>
                       </thead>
                       <tbody>
+                          @foreach ($kelas as $item )
                         <tr>
-                            @foreach ($kelas as $item )
                             <td>{{ $no++ }}</td>
                             <td>{{$item->judul}}</td>
                             <td>{{$item->kategori->nama}}</td>
                             <td><img src="{{ url('/storage/' .$item->gambar)}}"></td>
-                            <td style="max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-                                {{ $item->deskripsi }}
+                            <td style="max-width: 400px; max-height: 3em; overflow: hidden; white-space: normal; text-overflow: ellipsis;">
+                                {!! $item->deskripsi !!}
                             </td>
                             <td>
                                 @if ($item->status === 'sukses')
@@ -135,17 +136,31 @@
                             </td>
                             <td>
                                 @if ($item["status"] == "sukses" || $item["status"] == "proses")
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/detail/' .$item->id) }}" title="Tambah"><label class="badge badge-info"> + Detail |</label></a>
+                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/detail/' .$item->id) }}" title="Detail">
+                                        <i class="fas fa-info-circle"></i> Detail
+                                    </a>
+                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/info/' .$item->id) }}" title="Info">
+                                        <i class="fas fa-info-circle"></i> Info
+                                    </a>
                                 @else
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/add_materi/' .$item->id) }}" title="Tambah"><label class="badge badge-info"> + Tambah |</label></a>
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/detail/' .$item->id) }}" title="Tambah"><label class="badge badge-info"> + Detail |</label></a>
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/edit/' .$item->id) }}" title="Edit"><label class="badge badge-info">Edit |</label></a>
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' .$item->id) }}" title="Hapus"><label class="badge badge-warning">Hapus |</label></a>
+                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/add_materi/' .$item->id) }}" title="Tambah">
+                                        <i class="fas fa-plus-circle"></i> Tambah
+                                    </a>
+                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/detail/' .$item->id) }}" title="Detail">
+                                        <i class="fas fa-info-circle"></i> Detail
+                                    </a>
+                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/edit/' .$item->id) }}" title="Edit">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' .$item->id) }}" title="Hapus">
+                                        <i class="fas fa-trash-alt"></i> Hapus
+                                    </a>
                                 @endif
                             </td>
+
                         </tr>
-                      </tbody>
-                      @endforeach
+                        @endforeach
+                    </tbody>
                     </table>
                   </div>
                   <div class="pagination-container">

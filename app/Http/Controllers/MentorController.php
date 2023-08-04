@@ -101,25 +101,42 @@ class MentorController extends Controller
         return back();
     }
 
-    public function DataMember()
+    public function DataMember(Request $request)
     {
+        $search = $request->input('search');
+
         $student = Kelas::select('kelas.id AS mentor', 'users.name', 'kelas.judul', 'subscription.created_at AS created_at')
-                           ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
-                           ->join('users', 'users.id', '=', 'subscription.user_id')
-                           ->where('kelas.user_id', Auth::user()->id)
-                           ->get();
+                    ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
+                    ->join('users', 'users.id', '=', 'subscription.user_id')
+                    ->where('kelas.user_id', Auth::user()->id)
+                    ->when($search, function ($query, $search) {
+                        return $query->where('users.name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('kelas.judul', 'LIKE', '%' . $search . '%');
+                    })
+                    ->paginate(10);
         return view('mentor/member/member', compact('student'));
     }
 
-    public function MemberKelas()
+    public function MemberKelas(Request $request)
     {
-        $data['kelas'] = Kelas::where('user_id', Auth::user()->id)->where('status','sukses')->get();
+        $search = $request->input('search');
+
+        $query = Kelas::where('user_id', Auth::user()->id)
+            ->where('status', 'sukses');
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('judul', 'like', '%' . $search . '%');
+            });
+        }
+
+        $data['kelas'] = $query->paginate(10);
         return view('mentor/member/member_kelas' , $data);
     }
 
     public function Student($id_kelas)
     {
-        $data['subscription'] = Subscription::where('kelas_id', $id_kelas)->get();
+        $data['subscription'] = Subscription::where('kelas_id', $id_kelas)->paginate(10);
         return view('mentor/member/student', $data);
     }
 
@@ -167,7 +184,7 @@ class MentorController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            'new_password' => 'required|string|min:8|confirmed',
+            'new_password' => 'required|string|min:8',
         ]);
 
         $user = Auth::user();

@@ -9,7 +9,7 @@
       <ul class="sidebar-menu">
         <li class="menu-header">Dashboard</li>
         <li class="dropdown active">
-          <a href="#" class="nav-link "><i class="fas fa-fire"></i><span>Dashboard</span></a>
+          <a href="{{url('admin/dashboard')}}" class="nav-link "><i class="fas fa-fire"></i><span>Dashboard</span></a>
         </li>
         <li class="menu-header">Data </li>
         <li class="dropdown">
@@ -25,7 +25,7 @@
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Data Master</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{ url('admin/kategori/kategori') }}">Kategori</a></li>
-              <li><a class="nav-link" href="layout-transparent.html">Syarat & Ketentuan</a></li>
+              <li><a class="nav-link" href="{{ url('admin/s&k/s&k')}}">Syarat & Ketentuan</a></li>
             </ul>
           </li>
 
