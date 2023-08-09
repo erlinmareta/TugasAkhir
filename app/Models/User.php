@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany(Materi::class, 'user_id');
     }
 
+    public function pendidikan()
+    {
+        return $this->hasMany(Pendidikan::class, 'user_id');
+    }
+
     public function VerifyUser()
     {
         return $this->hasMany(Kelas::class);

@@ -55,7 +55,7 @@
                               <source src="{{ url('/storage/' . $item->isi_materi) }}" type="video/mp4">
                           </video>
                       </td>
-                      <td>{{$item->deskripsi}}</td>
+                      <td>{!! $item->deskripsi !!}</td>
                       <td>{{$item->urutan}}</td>
                   </tr>
                 <tr>

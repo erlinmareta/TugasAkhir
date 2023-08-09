@@ -19,7 +19,7 @@ class CreateMateriTable extends Migration
             $table->integer('kelas_id')->nullable();
             $table->string('judul');
             $table->string('isi_materi')->nullable();
-            $table->string('deskripsi')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->string('urutan')->nullable();
             $table->timestamps();
         });

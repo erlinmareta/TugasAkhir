@@ -15,6 +15,7 @@ class HomeController extends Controller
 {
     public function Home(Request $request)
     {
+        // dd($kelas);
         $kategori = Kategori::all();
         $kelas = Kelas::where('status', 'sukses')->get();
         $user = User::all();
@@ -34,7 +35,11 @@ class HomeController extends Controller
         $searchResults = Kelas::where('judul', 'LIKE', '%' . $searchTerm . '%')->get();
     }
 
+
+
         return view('welcome', ['kelas' => $kelas, 'kategori' => $kategori, 'user' => $user, 'materi' => $materi, "history" => $history,
                                 'searchResults' => $searchResults]);
+
+
     }
 }

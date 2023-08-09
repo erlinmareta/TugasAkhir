@@ -101,6 +101,34 @@ class MentorController extends Controller
         return back();
     }
 
+    public function Signature(Request $request)
+    {
+        $user = User::query()->findOrFail(auth()->user()->id);
+
+        if ($user !== NULL) {
+            $dataURL = $request->input('signature');
+            $imageName = time() . '.png'; // Nama file gambar dengan timestamp untuk menghindari nama yang sama
+            $path = public_path('storage/signature/' . $imageName);
+            // Menghapus header yang digenerate oleh metode toDataURL()
+            $dataURL = str_replace('data:image/png;base64,', '', $dataURL);
+            $dataURL = str_replace(' ', '+', $dataURL);
+
+            // Simpan gambar ke server
+            file_put_contents($path, base64_decode($dataURL));
+            if ($user['signature']) {
+                Storage::delete($user['signature']);
+            }
+            User::query()
+            ->findOrFail(auth()->user()->id)
+                ->update([
+                    'signature' => 'signature/' . $imageName
+                ]);
+            return response()->json(['message' => 'Tanda tangan berhasil disimpan'], 200);
+        } else {
+            return response()->json(['message' => 'Harap mengisi berkas terlebih dahulu sebelum melakukan tanda tangan'], 500);
+        }
+    }
+
     public function DataMember(Request $request)
     {
         $search = $request->input('search');

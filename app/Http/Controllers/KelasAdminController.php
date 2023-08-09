@@ -60,7 +60,7 @@ class KelasAdminController extends Controller
         ->when($searchQuery, function ($query, $searchQuery) {
             return $query->where('judul', 'like', '%' . $searchQuery . '%');
         })
-        ->paginate(2);
+        ->paginate(10);
 
     	return view('admin/kelas/berhasil' , ['kelas' => $kelas , 'searchQuery' => $searchQuery]);
     }

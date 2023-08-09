@@ -61,12 +61,11 @@
                       <td>{{$item->user->name}}</td>
                       <td>{{$item->judul}}</td>
                       <td><img src="{{ url('/storage/' .$item->gambar)}}" style="width:70px" ></td>
-                      <td>{{$item->deskripsi}}</td>
+                      <td>{!! $item->deskripsi !!}</td>
                       <td><div class="badge badge-success">{{$item->status}}</div></td>
                       <td>
                         <a class="btn btn-sm btn-success-outline" href="{{ url('admin/kelas/info/' .$item->id) }}" title="info"><span class="fa fa-info"></span> Info |</a>
                         <a class="btn btn-sm btn-success-outline" href="{{ route('admin.kelasDetail', $item->id) }}" title="detail"><span class="fa fa-edit"></span> Detail |</a>
-                        <a class="btn btn-sm btn-success-outline" href="{{ url('admin/hapus/' .$item->id) }}" title="Hapus"><span class="fa fa-trash"></span> Hapus |</a>
                       </td>
                   </tr>
                   @endforeach

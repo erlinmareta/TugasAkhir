@@ -49,7 +49,7 @@ use App\Models\Materi;
 
             <div class="mdk-box mdk-box--bg-white-35 bg-white js-mdk-box mb-0" data-effects="parallax-background blend-background">
                 <div class="mdk-box__bg">
-                    <div class="mdk-box__bg-front" style="background-image: url(../learnly/public/images/study.jpeg);">
+                    <div class="mdk-box__bg-front" style="background-image: url(../img/kursus.jpg);">
                     </div>
                 </div>
                 @auth
@@ -71,7 +71,7 @@ use App\Models\Materi;
                             <h1>Solusi Belajar Mandiri Online </h1>
                             <p class="lead measure-lead mx-auto mb-32pt">Semua solusi dari masalah belajar anda ada
                                 disini </p>
-                                <a href="/login" class="btn btn-lg btn-accent btn--raised mb-16pt">yuk mulai </a>
+                                <a href="{{ url('/login')}}" class="btn btn-lg btn-accent btn--raised mb-16pt">yuk mulai </a>
                             </div>
                         </div>
                     </div>
@@ -225,7 +225,7 @@ use App\Models\Materi;
                                                 <span>/ {{ $class->rating->count() }}</span>
                                                 @endif
                                             </div>
-                                            <!-- <small class="text-50">6 hours</small> -->
+                                            <small class="text-50">{{$class->kategori->nama}}</small>
                                         </div>
                                     </div>
                                     <div class="card-footer">
@@ -262,7 +262,7 @@ use App\Models\Materi;
                                             </div>
                                         </div>
 
-                                        <p class="my-16pt text-70">{{ $class->deskripsi }}. kelas ini dibagi ke
+                                        <p class="my-16pt text-70">{!! $class->deskripsi !!}. kelas ini dibagi ke
                                             beberapa bab, diantaranya :
                                         </p>
 

@@ -6,6 +6,7 @@
     <title>Dashboard Mentor</title>
     @include('mentor.layout.head')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         /* Pagination Styles */
         .pagination-container {
@@ -87,7 +88,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <h4 class="card-title">Data Kelas</h4>
-                                <form action="{{ url('mentor/kelas/kelas') }}" method="get" class="form-inline">
+                                <form action="{{ url('mentor/kelas_saya/ditolak') }}" method="get" class="form-inline">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="search" placeholder="Search">
                                         <div class="input-group-append">
@@ -96,9 +97,8 @@
                                     </div>
                                 </form>
                             </div>
+                        </p>
 
-                  <a href="{{ url('mentor/kelas/tambah') }}" class="btn btn-light">Tambah</a>
-                  </p>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
@@ -133,33 +133,19 @@
                                 @endif
                             </td>
                             <td>
-                                @if ($item["status"] == "sukses")
-                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/detail/' . $item->id) }}" title="Detail">
+                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/detail/' .$item->id) }}" title="Detail">
                                         <i class="fas fa-info-circle"></i> Detail
                                     </a>
-                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/info/' . $item->id) }}" title="Info">
-                                        <i class="fas fa-info-circle"></i> Info
-                                    </a>
-                                @elseif ($item["status"] == "proses")
-                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/detail/' . $item->id) }}" title="Detail">
-                                        <i class="fas fa-info-circle"></i> Detail
-                                    </a>
-                                    <!-- Tidak menampilkan tautan "Info" karena status adalah "proses" -->
-                                @else
-                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/add_materi/' . $item->id) }}" title="Tambah">
-                                        <i class="fas fa-plus-circle"></i> Tambah
-                                    </a>
-                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/detail/' . $item->id) }}" title="Detail">
-                                        <i class="fas fa-info-circle"></i> Detail
-                                    </a>
-                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/edit/' . $item->id) }}" title="Edit">
+                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/edit/' .$item->id) }}" title="Edit">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
-                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' . $item->id) }}" title="Hapus">
+                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' .$item->id) }}" title="Hapus">
                                         <i class="fas fa-trash-alt"></i> Hapus
                                     </a>
-                                @endif
-                            </td>
+                                    <a class="btn btn-sm btn-success-outline" href="#" title="publish" onclick="publishConfirmation('{{ route('mentor.kelas_saya.publish', $item->id) }}')">
+                                        <span class="badge badge-info">Publish</span>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     @endforeach
@@ -177,6 +163,22 @@
 </div>
 
   @include('mentor.layout.script')
+  <script>
+    function publishConfirmation(url) {
+        Swal.fire({
+            title: "Konfirmasi Publish",
+            text: "Apakah anda yakin untuk menerbitkan kelas ini, apakah materi yang diinputkan sudah sesuai?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Iya, publish sekarang!",
+            cancelButtonText: "Cancel",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
+</script>
 
   @include('sweetalert::alert')
   <!-- End custom js for this page-->

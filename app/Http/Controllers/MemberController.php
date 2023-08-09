@@ -9,12 +9,14 @@ use App\Models\History;
 use App\Models\Materi;
 use Illuminate\Http\Request;
 use App\Models\Rating;
+use App\Models\Pendidikan;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
 use PDF;
 
 class MemberController extends Controller
@@ -29,8 +31,15 @@ class MemberController extends Controller
         $datakelas = Kelas::where('user_id', $id)->where('status', 'sukses')->get();
         $datamentor = User::where('id', $id)->first();
         $jumlahsubscribe = Subscription::where('user_id', $id)->count();
+        $pendidikan = Pendidikan::where('user_id', $id)->get();
 
-        return view('member/mentor_profil', ['datakelas' => $datakelas, 'datamentor' => $datamentor, 'jumlahsubscribe' => $jumlahsubscribe]);
+        return view('member/mentor_profil',
+            [
+                'datakelas' => $datakelas,
+                'datamentor' => $datamentor,
+                'jumlahsubscribe' => $jumlahsubscribe,
+                'pendidikan' => $pendidikan,
+        ]);
     }
 
     public function ClassDetail($kelas, $materi)
@@ -118,22 +127,27 @@ class MemberController extends Controller
 
     public function StudentDashboard()
     {
-        $datakelas = Subscription::where('user_id', Auth::user()->id)->get();
+        $datakelas = Subscription::where('user_id', Auth::user()->id)
+                                //   ->where('kelas_id' ,$id)
+                                  ->get();
 
         $history = History::where("user_id", Auth::user()->id)->pluck("materi_id")->toArray();
         return view('member/student_dashboard', [
             'datakelas' => $datakelas ,
-            'history' => $history
+            'history' => $history,
         ]);
-    }
+
+}
 
     public function StudentCourse()
 
     {
         $datakelas = Subscription::where('user_id', Auth::user()->id)->get();
+        $history = History::where("user_id", Auth::user()->id)->pluck("materi_id")->toArray();
 
         return view('member/student_course', [
-            'datakelas' => $datakelas
+            'datakelas' => $datakelas,
+            'history' => $history
         ]);
     }
 
@@ -182,6 +196,11 @@ class MemberController extends Controller
 
     public function rating(Request $request, $id_materi)
     {
+        $request->validate([
+            'ulasan' => 'required|string|max:255', // Anda dapat menyesuaikan aturan validasi sesuai kebutuhan
+            'rating' => 'required|integer|min:1|max:5', // Contoh validasi untuk field rating
+        ]);
+
         $materi = Materi::where("id", $id_materi)->first();
 
         Rating::create([

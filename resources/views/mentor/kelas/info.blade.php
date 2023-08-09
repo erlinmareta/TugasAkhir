@@ -101,23 +101,33 @@
 
             <br>
             <hr>
-            <ul class="icon-data-list">
-                <h4>Daftar Rating Peserta</h4>
-              <li>
-                <div class="d-flex">
-                  <img src="images/faces/face1.jpg" alt="user">
-                  @foreach ($rating as $item)
-                  <div>
-                    <p class="text-info mb-1">{{$item->user->name}} /  {{ $item->rating }}</p>
-                    <p class="mb-0">{{$item->kelas->judul}}</p>
-                    <p>{{$item->ulasan}}</p>
-                    <small>{{$item->created_at}}</small>
-                  </div>
-                  @endforeach
+            <div class="col-md-16 stretch-card grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Daftar Rating Peserta</h4>
+                        <ul class="icon-data-list">
+                            @foreach ($rating as $item)
+                            <li class="d-flex mb-3">
+                                @if ($item->user->foto)
+                                <img src="{{ url('/storage/'.$item->user->foto) }}" style="width: 50px; height:50px"
+                                class="img-thumbnail rounded-circle mx-auto d-block">
+                                @else
+                                  <img src="{{ asset('img/user.jpg') }}" alt="Placeholder Image" style="width: 50px; height:50px"
+                                  class="img-thumbnail rounded-circle mx-auto d-block">
+                                @endif
+                                <div class="ml-3">
+                                    <p class="text-info mb-1">{{$item->user->name}} / {{ $item->rating }}</p>
+                                    <p class="mb-0">{{$item->kelas->judul}}</p>
+                                    <p>{{$item->ulasan}}</p>
+                                    <small>{{$item->created_at}}</small>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
-              </li>
-              </li>
-            </ul>
+            </div>
+
             <div class="pagination-container">
                 <ul class="pagination">
                     <!-- Anggap $kelas adalah objek pagination dari controller -->

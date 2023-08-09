@@ -103,7 +103,7 @@
                                 @endif
                             </div>
 
-                            <p class="lead measure-lead text-70 mb-24pt">{{ $materi->deskripsi }}</p>
+                            <p class="lead measure-lead text-70 mb-24pt">{!! $materi->deskripsi !!}</p>
 
                             <div class="accordion js-accordion accordion--boxed " id="parent">
                                 <div class="accordion__item open">
@@ -177,7 +177,7 @@
                                 </a>
                             </div>
                         </div>
-                        <p class="text-70">{{ $materi->user->deskripsi }}</p>
+                        <p class="text-70">{!! $materi->user->deskripsi !!}</p>
                         <div class="flex">
                             <form id="catatanForm" name="catatanForm"
                                 action="{{ url('/member/class_detail/' . $kelas . '/' . $materi->id) . '/catatan' }}"
@@ -459,11 +459,17 @@
                         </div>
                         <div class="input-group">
                             <div class="flex input-group-text">
-                                <textarea class="form-control" name="ulasan" id="ulasan" rows="3"
-                                    placeholder="Berikan ulasan terkait kelas ini ..."></textarea>
+                                <textarea class="form-control @error('ulasan') is-invalid @enderror" name="ulasan" id="ulasan" rows="3"
+                                    placeholder="Berikan ulasan terkait kelas ini ...">{{ old('ulasan') }}</textarea>
                             </div>
                         </div>
+                        @error('ulasan')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
+
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-secondary">
                             Batal

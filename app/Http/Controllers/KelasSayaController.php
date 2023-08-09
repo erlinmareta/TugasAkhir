@@ -45,4 +45,17 @@ class KelasSayaController extends Controller
     return redirect()->back()->with('success', 'Kelas berhasil dipublish dan data terkirim ke dashboard admin.');
 }
 
+public function Ditolak(Request $request)
+{
+    $search = $request->input('search');
+        $query = Kelas::where('user_id', Auth::user()->id)->where('status', 'cancel');
+
+        if ($search) {
+        $query->where('judul', 'like', '%' . $search . '%');
+    }
+
+    $kelas = $query->paginate(10);
+    return view('mentor/kelas_saya/ditolak', ['kelas' => $kelas , ]);
+}
+
 }

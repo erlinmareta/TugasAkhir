@@ -58,7 +58,7 @@ use App\Models\Materi;
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="page-separator">
-                                <div class="page-separator__text">Kelas Pembelajaran</div>
+                                <div class="page-separator__text">Kelas yang sedang berjalan</div>
                             </div>
 
                             <div class="row card-group-row">
@@ -134,7 +134,7 @@ use App\Models\Materi;
                                                     </p>
                                                 </div>
                                             </div>
-                                            <p class="my-16pt text-70">{{ $datakelass->kelas->deskripsi }}.
+                                            <p class="my-16pt text-70">{!! $datakelass->kelas->deskripsi !!}.
                                                 kelas ini dibagi ke beberapa bab, diantaranya :.</p>
                                             <div class="mb-16pt">
                                                 @foreach ($datakelass->kelas->materi as $materi)

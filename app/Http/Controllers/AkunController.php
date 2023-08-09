@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Pendidikan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -61,17 +62,25 @@ class AkunController extends Controller
         {
             $searchQuery = $request->input('search');
 
-            $user = User::when($searchQuery, function ($query, $searchQuery) {
-            return $query->where('level', 'mentor')
-                         ->where(function ($query) use ($searchQuery) {
-                             $query->where('name', 'like', '%' . $searchQuery . '%')
-                                   ->orWhere('email', 'like', '%' . $searchQuery . '%');
-                         });
-        })
-        ->where('level', 'mentor')
-        ->paginate(10);
-            return view('admin/akun/mentor', ['user' => $user , 'searchQuery' => $searchQuery]);
+            $user = User::when($searchQuery, function ($query) use ($searchQuery) {
+                return $query->where('level', 'mentor')
+                             ->where(function ($query) use ($searchQuery) {
+                                 $query->where('name', 'like', '%' . $searchQuery . '%')
+                                       ->orWhere('email', 'like', '%' . $searchQuery . '%');
+                             });
+            })
+            ->where('level', 'mentor')
+            ->paginate(10);
+
+            $userIds = $user->pluck('id');
+
+            // Load the 'pendidikan' relationship for the retrieved user IDs
+            $pendidikan = Pendidikan::whereIn('user_id', $userIds)->get()->groupBy('user_id');
+
+
+            return view('admin/akun/mentor', ['user' => $user, 'searchQuery' => $searchQuery , 'pendidikan' => $pendidikan]);
         }
+
 
         public function DataPeserta(Request $request)
         {

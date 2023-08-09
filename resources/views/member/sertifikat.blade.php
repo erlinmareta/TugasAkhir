@@ -75,12 +75,26 @@
             font-family: "Tahoma", sans-serif;
         }
 
-        .date {
-            font-size: 20px;
-            margin-top: 20px;
+        .date-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
             margin-bottom: 50px;
-            text-align: center;
+        }
+
+        .best-regards {
+            font-size: 20px;
             color: #444444;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-family: "Courier New", monospace;
+            font-family: "Arial", sans-serif;
+        }
+
+        .date {
+            font-size: 18px;
+            color: #444444;
+            text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             font-family: "Courier New", monospace;
         }
@@ -112,12 +126,19 @@
                 Yang telah menyelesaikan kursus <b>{{$kelas->judul}}</b> dalam program kursus
                 Pembelajaran Mandiri pada Platform Indlearn
             </div>
-            <div class="date">
-                <?php echo date('d F Y'); ?>
+            <div class="date-container">
+                <div class="best-regards">
+                    Best Regards,
+                    {{-- <img src="{{ asset('/storage/' . $kelas->user->signature) }}" style="width: 150px; height: 150px" alt="User Signature"> --}}
+                </div>
+                <div class="date">
+                    {{ date('d F Y') }}
+                </div>
             </div>
             <div class="mentor">
-                {{$kelas->user->name}}
+                {{ $kelas->user->name }}
             </div>
+
         </div>
     </body>
 

@@ -51,7 +51,7 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="page-separator">
-                                <div class="page-separator__text">Courses</div>
+                                <div class="page-separator__text">Daftar Kursus yang telah diikuti</div>
                             </div>
 
                             <div class="row card-group-row">

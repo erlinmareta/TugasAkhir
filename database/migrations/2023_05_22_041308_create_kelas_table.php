@@ -19,7 +19,7 @@ class CreateKelasTable extends Migration
             $table->integer('kategori_id')->nullable();
             $table->string('judul');
             $table->string('gambar')->nullable();
-            $table->string('deskripsi')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->enum("status", ['pending', 'proses' , 'sukses', 'cancel'])->nullable();
             $table->timestamps();
         });

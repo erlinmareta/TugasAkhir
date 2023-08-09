@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('deskripsi')->nullable();
             $table->rememberToken();
             $table->integer('email_verified')->default(0);
+            $table->string('signature')->nullable();
             $table->timestamps();
         });
     }

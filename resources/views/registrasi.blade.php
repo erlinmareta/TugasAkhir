@@ -137,8 +137,7 @@
 
                 </style>
 
-
-                {{-- modal --}}
+                {{-- modal
                 <div class="modal" tabindex="-1" id="myModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -161,7 +160,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="form-group text-center">
                     <button class="btn btn-primary mb-2"

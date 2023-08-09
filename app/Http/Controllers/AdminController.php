@@ -20,15 +20,16 @@ class AdminController extends Controller
         $useradmin = User::where('level', 'admin')->count();
         $totaluser = User::count();
 
-        $tanggalSekarang = Carbon::today();
         $totalDataKelasmasukPerHari = Kelas::where('status', 'proses')
-                                           ->whereDate('created_at', $tanggalSekarang)
+                                           ->whereDate('created_at', now()->format('Y-m-d'))
                                            ->count();
 
         $kelasberhasil = Kelas::where('status', 'sukses')->count();
         $info = User::where('level', '!=', 'admin')->latest()->paginate(4);
         $allUsers = User::where('level', '!=', 'admin')->get();
-        $infokelasToday = Kelas::where('status', 'proses')->get();
+        $infokelasToday = Kelas::whereDate('created_at', now()->format('Y-m-d'))
+                                ->where('status', '!=', 'pending')
+                                ->get();
 
 
     	return view('admin/dashboard', compact('userpeserta', 'usermentor', 'useradmin', 'totaluser',
@@ -46,6 +47,7 @@ class AdminController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'tempat_lahir' => 'required|string',
+            'jenis_kelamin' =>'required',
             'tanggal_lahir' => 'required',
             'nomor_telepon' => 'required',
             'alamat' => 'required|string|max:255',

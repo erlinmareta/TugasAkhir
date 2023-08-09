@@ -39,6 +39,9 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('mentor/kelas_saya/kelas_saya*') ? 'active' : '' }}" href="{{ url('mentor/kelas_saya/kelas_saya') }}">Kelas Publish</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('mentor/kelas_saya/ditolak*') ? 'active' : '' }}" href="{{ url('mentor/kelas_saya/ditolak') }}">Kelas Ditolak</a>
+                    </li>
                 </ul>
             </div>
         </li>

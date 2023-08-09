@@ -41,39 +41,39 @@
                 @csrf
               <div class="form-group">
                 <label for="exampleInputName1">Sekolah Dasar - SD</label>
-                <input type="text" name="sd"  class="form-control" id="sd" placeholder="Masukkan nama Sekolah Dasar" value="{{ old('sd', $pendidikan->sd) }}">
+                <input autocomplete="off" type="text" name="sd"  class="form-control" id="sd" placeholder="Masukkan nama Sekolah Dasar" value="{{ old('sd', $pendidikan->sd) }}">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail3">Sekolah Menengah Pertama - SMP</label>
-                <input type="text" name="smp" class="form-control" id="smp" placeholder="Masukkan nama Sekolah Menengah Pertama" value="{{ old('smp', $pendidikan->smp) }}">
+                <input autocomplete="off" type="text" name="smp" class="form-control" id="smp" placeholder="Masukkan nama Sekolah Menengah Pertama" value="{{ old('smp', $pendidikan->smp) }}">
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">Sekolah Menengan Atas - SMA</label>
-                <input type="text" name="sma" class="form-control" id="sma" placeholder="Masukkan nama Sekolah Menengah Atas" value="{{ old('sma', $pendidikan->sma) }}">
+                <input autocomplete="off" type="text" name="sma" class="form-control" id="sma" placeholder="Masukkan nama Sekolah Menengah Atas" value="{{ old('sma', $pendidikan->sma) }}">
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">Diploma 1 - D1</label>
-                <input type="text" name="d1" class="form-control" id="d1" placeholder="Masukkan Pendidikan Diploma 1" value="{{ old('d1', $pendidikan->d1) }}">
+                <input autocomplete="off" type="text" name="d1" class="form-control" id="d1" placeholder="Nama Perguruan Tinggi - Jurusan" value="{{ old('d1', $pendidikan->d1) }}">
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">Diploma 2 - D2</label>
-                <input type="text" name="d2" class="form-control" id="d2" placeholder="Masukkan Pendidikan Diploma 2" value="{{ old('d2', $pendidikan->d2) }}">
+                <input autocomplete="off" type="text" name="d2" class="form-control" id="d2" placeholder="Nama Perguruan Tinggi - Jurusan" value="{{ old('d2', $pendidikan->d2) }}">
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">Diploma 3 - D3</label>
-                <input type="text" name="d3" class="form-control" id="d3" placeholder="Masukkan Pendidikan Diploma 3" value="{{ old('d3', $pendidikan->d3) }}">
+                <input autocomplete="off" type="text" name="d3" class="form-control" id="d3" placeholder="Nama Perguruan Tinggi - Jurusan" value="{{ old('d3', $pendidikan->d3) }}">
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">Diploma 4/S1</label>
-                <input type="text" name="d4" class="form-control" id="d4" placeholder="Masukkan Pendidikan Diploma 4" value="{{ old('d4', $pendidikan->d4) }}">
+                <input autocomplete="off" type="text" name="d4" class="form-control" id="d4" placeholder="Nama Perguruan Tinggi - Jurusan" value="{{ old('d4', $pendidikan->d4) }}">
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">S2</label>
-                <input type="text" name="s2" class="form-control" id="s2" placeholder="Masukkan Pendidikan Pascasarjana" value="{{ old('s2', $pendidikan->s2) }}">
+                <input autocomplete="off" type="text" name="s2" class="form-control" id="s2" placeholder="Nama Perguruan Tinggi - Jurusan" value="{{ old('s2', $pendidikan->s2) }}">
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">S3</label>
-                <input type="text" name="s3" class="form-control" id="s3" placeholder="Masukkan Pendidikan Doctor" value="{{ old('s3', $pendidikan->s3) }}">
+                <input autocomplete="off" type="text" name="s3" class="form-control" id="s3" placeholder="Nama Perguruan Tinggi - Jurusan" value="{{ old('s3', $pendidikan->s3) }}">
               </div>
               <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 

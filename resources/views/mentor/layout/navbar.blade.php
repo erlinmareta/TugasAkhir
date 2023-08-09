@@ -47,10 +47,6 @@
             <img src="{{ url('/storage/'.Auth::user()->foto) }}">
           </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-            <a href="{{url ('mentor/reset_password')}}" class="dropdown-item">
-              <i class="ti-lock text-primary"></i>
-              Ubah Password
-            </a>
             <a href="{{ url('mentor/profil/profil') }}" class="dropdown-item">
                 <i class="ti-settings text-primary"></i>
                 Profil

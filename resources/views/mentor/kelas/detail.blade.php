@@ -5,6 +5,7 @@
 <head>
     <title>Dashboard Mentor</title>
     @include('mentor.layout.head')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
   <div class="container-scroller">
@@ -75,10 +76,10 @@
                             <td>{{$item->urutan}}</td>
                             @if ($kelas->status === 'pending')
                             <td>
-                                <a class="btn btn-sm btn-primary" href="{{ url('mentor/kelas/editmateri/' . $kelas->id .'/'. $item->id) }}" title="Edit">
-                                    Edit
+                                <a href="{{ url('mentor/kelas/editmateri/' . $kelas->id .'/'. $item->id) }}" title="Edit">
+                                    <i class="fas fa-edit"></i>Edit |
                                 </a>
-                                <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' . $item->id) }}" data-confirm-delete="true"><label class="badge badge-warning">Hapus |</label></a>
+                                <a href="{{ url('mentor/hapus/' . $item->id) }}" data-confirm-delete="true"><i class="fas fa-trash-alt"></i> Hapus</a>
                             </td>
                             @endif
                         </tr>
@@ -88,20 +89,20 @@
                   </div>
                   <div class="pagination-container">
                     <ul class="pagination">
-                        <!-- Anggap $kelas adalah objek pagination dari controller -->
+
                         {!! $materi->links('pagination.bootstrap-4') !!}
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
+        </div>
+
 
   @include('mentor.layout.script')
-  <!-- End custom js for this page-->
-</body>
 
+  @include('sweetalert::alert')
+
+    </body>
 </html>
 

@@ -27,22 +27,6 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(60),
         ]);
 
-        User::Create([
-            'name' => 'erlin',
-            'email' => 'erlin@gmail.com',
-            'password' => bcrypt('erlin123'),
-            'level' => 'member',
-            'remember_token' => Str::random(60),
-        ]);
-
-        User::Create([
-            'name' => 'maresta',
-            'email' => 'maresta@gmail.com',
-            'password' => bcrypt('maresta123'),
-            'level' => 'mentor',
-            'remember_token' => Str::random(60),
-        ]);
-
 
 
 

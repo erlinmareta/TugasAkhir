@@ -43,7 +43,7 @@
                 @csrf
               <div class="form-group">
                 <label for="exampleInputName1">Judul</label>
-                <input name="judul" type="text" class="form-control" id="exampleInputName1" placeholder="Masukkan Judul">
+                <input autocomplete="off" name="judul" type="text" class="form-control" id="exampleInputName1" placeholder="Masukkan Judul">
               </div>
               <div class="form-group">
                 <label for="exampleSelectGender">Kategori</label>

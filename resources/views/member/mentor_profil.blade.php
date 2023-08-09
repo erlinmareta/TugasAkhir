@@ -142,56 +142,75 @@
                                     Belum ada ada kelas pembelajaran !
                                 </div>
                             @endif
-
                         </div>
-
-
                     </div>
+
                     <div class="col-lg-4">
-
-                        <h4>About me</h4>
+                        <h4>Tentang Saya</h4>
                         <p class="text-70 mb-24pt">{{ $datamentor->deskripsi }}</p>
-
-                        <div class="d-flex align-items-center mb-24pt">
-                            <a href="" class="text-accent fab fa-facebook-square font-size-24pt mr-8pt"></a>
-                            <a href="" class="text-accent fab fa-twitter-square font-size-24pt mr-8pt"></a>
-                            <a href="" class="text-accent fab fa-instagram-square font-size-24pt"></a>
-                        </div>
 
                         <div class="page-separator">
                             <div class="page-separator__text"></div>
                         </div>
 
+                        <h4>Riwayat Pendidikan</h4>
+                    <ul>
+                        @if(isset($pendidikan))
+                            @foreach ($pendidikan as $pendidikanItem)
+                            @if ($pendidikanItem->sd)
+                            <li><i class="fas fa-graduation-cap"></i> SD: {{ $pendidikanItem->sd }}</li>
+                        @endif
+                        @if ($pendidikanItem->smp)
+                            <li><i class="fas fa-graduation-cap"></i> SMP: {{ $pendidikanItem->smp }}</li>
+                        @endif
+                        @if ($pendidikanItem->sma)
+                            <li><i class="fas fa-graduation-cap"></i> SMA: {{ $pendidikanItem->sma }}</li>
+                        @endif
+                        @if ($pendidikanItem->d1)
+                            <li><i class="fas fa-graduation-cap"></i> Diploma 1/D1: {{ $pendidikanItem->d1 }}</li>
+                        @endif
+                        @if ($pendidikanItem->d2)
+                            <li><i class="fas fa-graduation-cap"></i> Diploma 2/D2: {{ $pendidikanItem->d2 }}</li>
+                        @endif
+                        @if ($pendidikanItem->d3)
+                            <li><i class="fas fa-graduation-cap"></i> Diploma 3/D3: {{ $pendidikanItem->smp }}</li>
+                        @endif
+                        @if ($pendidikanItem->d4)
+                            <li><i class="fas fa-graduation-cap"></i> Sarjana/S1: {{ $pendidikanItem->d4 }}</li>
+                        @endif
+                        @if ($pendidikanItem->s2)
+                            <li><i class="fas fa-graduation-cap"></i> Pascasarjana/S2: {{ $pendidikanItem->s2 }}</li>
+                        @endif
+                        @if ($pendidikanItem->s3)
+                            <li><i class="fas fa-graduation-cap"></i> Doctor/S3: {{ $pendidikanItem->s3 }}</li>
+                        @endif
+                            @endforeach
+                        @endif
+                    </ul>
+                    <div class="page-separator">
+                        <div class="page-separator__text"></div>
+                    </div>
+
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> <span class="icon-text">Email:</span> {{ $datamentor->email }}</p>
+                    <p><i class="fas fa-phone"></i> <span class="icon-text">Phone:</span> {{ $datamentor->nomor_telepon }}</p>
+                </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- // END Header Layout Content -->
-
     </div>
-    <!-- // END Header Layout -->
-
-    <!-- Drawer -->
 
     <div class="mdk-drawer js-mdk-drawer" id="default-drawer">
         <div class="mdk-drawer__content">
             <div class="sidebar sidebar-light sidebar-light-dodger-blue sidebar-left" data-perfect-scrollbar>
 
-                <!-- Sidebar Content -->
-
-                @include('layout.sidebar')
-
-                <!-- // END Sidebar Content -->
-
             </div>
         </div>
     </div>
 
-    <!-- // END Drawer -->
-
     <!-- jQuery -->
     @include('layout.script')
 
-</body>
-
+    </body>
 </html>

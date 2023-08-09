@@ -10,4 +10,9 @@ class pendidikan extends Model
     protected $table = "pendidikan";
     protected $guarded = [''];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
+

@@ -46,21 +46,20 @@
               <div class="table-responsive">
                 <ul class="icon-data-list">
                     <h4>Daftar Rating Peserta</h4>
-                  <li>
-                    <div class="d-flex">
-                      <img src="images/faces/face1.jpg" alt="user">
-                      @foreach ($rating as $item)
-                      <div>
-                        <p class="text-info mb-1">{{$item->user->name}} /  {{ $item->rating }}</p>
-                        <p class="mb-0">{{$item->kelas->judul}}</p>
-                        <p>{{$item->ulasan}}</p>
-                        <small>{{$item->created_at}}</small>
+                    @foreach ($rating as $item)
+                    <li>
+                      <div class="d-flex">
+                        <img src="images/faces/face1.jpg" alt="user">
+                        <div class="ml-3">
+                          <p class="text-info mb-1">{{$item->user->name}} /  {{ $item->rating }}</p>
+                          <p class="mb-0">{{$item->kelas->judul}}</p>
+                          <p>{{$item->ulasan}}</p>
+                          <small>{{$item->created_at}}</small>
+                        </div>
                       </div>
-                      @endforeach
-                    </div>
-                  </li>
-                  </li>
-                </ul>
+                    </li>
+                    @endforeach
+                  </ul>
               </div>
             </div>
           </div>

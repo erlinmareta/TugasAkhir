@@ -105,7 +105,6 @@ class LoginController extends Controller
             return redirect()->back()->with('fail', 'something went wrong, failed register');
         }
 
-        // return redirect('/login');
     }
 
     public function Verify(Request $request)

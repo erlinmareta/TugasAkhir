@@ -5,6 +5,7 @@
 <head>
     <title>Dashboard Mentor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @include('mentor.layout.head')
 </head>
 <body>
@@ -51,7 +52,6 @@
                           <th>No</th>
                           <th>Judul</th>
                           <th>Gambar</th>
-                          <th>Deskripsi</th>
                           <th>Status</th>
                           <th>Action</th>
                         </tr>
@@ -62,7 +62,6 @@
                             <td>{{ $no++ }}</td>
                             <td>{{$item->judul}}</td>
                             <td><img src="{{ url('/storage/' .$item->gambar)}}"         ></td>
-                            <td>{!! $item->deskripsi !!}</td>
                             <td><label class="badge badge-secondary">{{$item->status}}</label></td>
                             <td>
                                 <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas_saya/detail/' .$item->id) }}" title="detail">
@@ -72,9 +71,9 @@
                                 @if ($item["status"] == "sukses" || $item["status"] == "proses")
 
                                 @else
-                                    <a class="btn btn-sm btn-success-outline" href="{{ route('mentor.kelas_saya.publish', $item->id) }}" title="publish">
-                                        <span class="badge badge-info">Publish</span>
-                                    </a>
+                                <a class="btn btn-sm btn-success-outline" href="#" title="publish" onclick="publishConfirmation('{{ route('mentor.kelas_saya.publish', $item->id) }}')">
+                                    <span class="badge badge-info">Publish</span>
+                                </a>
                                 @endif
                             </td>
 
@@ -91,6 +90,29 @@
   <!-- container-scroller -->
 
   @include('mentor.layout.script')
+  <script>
+    function publishConfirmation(url) {
+        Swal.fire({
+            title: "Konfirmasi Publish",
+            text: "Apakah anda yakin untuk menerbitkan kelas ini, apakah materi yang diinputkan sudah sesuai?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Iya, publish sekarang!",
+            cancelButtonText: "Cancel",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+
 
   @include('sweetalert::alert')
   <!-- End custom js for this page-->

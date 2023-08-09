@@ -97,7 +97,7 @@
         </div>
         <div class="modal-body">
           @if ($item->foto)
-          <img src="{{ url('/storage/'.Auth::user()->foto) }}" style="width: 150px; height:150px"
+          <img src="{{ url('/storage/'.$item->foto) }}" style="width: 150px; height:150px"
           class="img-thumbnail rounded-circle mx-auto d-block">
           @else
             <img src="{{ asset('img/90x90.jpg') }}" alt="Placeholder Image" style="width: 150px; height:150px"
@@ -108,6 +108,41 @@
           <p>Nomor Telepon : {{$item->nomor_telepon}}</p>
           <p>Pekerjaan : {{$item->pekerjaan}}</p>
           <p>Deskripsi : {{$item->deskripsi}}</p>
+          <p>Riwayat Pendidikan :</p>
+          <ul>
+            @if(isset($pendidikan[$item->id]))
+            @foreach ($pendidikan[$item->id] as $pendidikanItem)
+            @if ($pendidikanItem->sd)
+                <li>SD: {{ $pendidikanItem->sd }}</li>
+            @endif
+            @if ($pendidikanItem->smp)
+                <li>SMP: {{ $pendidikanItem->smp }}</li>
+            @endif
+            @if ($pendidikanItem->sma)
+                <li>SMA: {{ $pendidikanItem->sma }}</li>
+            @endif
+            @if ($pendidikanItem->d1)
+                <li>Diploma 1/D1: {{ $pendidikanItem->d1 }}</li>
+            @endif
+            @if ($pendidikanItem->d2)
+                <li>Diploma 2/D2: {{ $pendidikanItem->d2 }}</li>
+            @endif
+            @if ($pendidikanItem->d3)
+                <li>Diploma 3/D3: {{ $pendidikanItem->smp }}</li>
+            @endif
+            @if ($pendidikanItem->d4)
+                <li>Sarjana/S1: {{ $pendidikanItem->d4 }}</li>
+            @endif
+            @if ($pendidikanItem->s2)
+                <li>Pascasarjana/S2: {{ $pendidikanItem->s2 }}</li>
+            @endif
+            @if ($pendidikanItem->s3)
+                <li>Doctor/S3: {{ $pendidikanItem->s3 }}</li>
+            @endif
+
+            @endforeach
+        @endif
+        </ul>
         </div>
         <div class="modal-footer">
         </div>

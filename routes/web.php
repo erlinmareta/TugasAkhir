@@ -26,8 +26,8 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'Home']);
 
+Route::get('/', [HomeController::class, 'Home']);
 
 Route::middleware(['cekLogin'])->group(function () {
     Route::get('/login', [LoginController::class, 'login'])->name('login');
@@ -54,7 +54,7 @@ Route::prefix('member')->middleware(['auth', 'cekLevel:member'])->group(function
     Route::get('/student_course', [MemberController::class, 'StudentCourse']);
     Route::get('/browse_course', [CourseController::class, 'BrowseCourse']);
     Route::get('/student_profil', [MemberController::class, 'StudentProfil']);
-    Route::get('/student_dashboard', [MemberController::class, 'StudentDashboard']);
+    Route::get('/student_dashboard/{kelas}/{materi}', [MemberController::class, 'StudentDashboard']);
     Route::put('/student_profil', [MemberController::class, 'UpdateProfile']);
     Route::put("/rating/{id_materi}", [MemberController::class, "rating"]);
     Route::get('/sertifikat/{kelas}', [MemberController::class, "getSertifikat"]);
@@ -66,6 +66,7 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
     Route::get('/profil', [MentorController::class, 'MentorProfil']);
     Route::get('/profil/profil', [MentorController::class, 'ProfileMentor']);
     Route::put('/profil', [MentorController::class, 'UpdateProfil']);
+    Route::post('/profil-signature', [MentorController::class, 'Signature'])->name('profil-signature.upload');
     Route::get('/reset_password', [MentorController::class, 'ResetPassword']);
     Route::post('/reset_password', [MentorController::class, 'NewPassword']);
 
@@ -89,6 +90,7 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
     Route::get('/kelas_saya/kelas_saya', [KelasSayaController::class, 'KelasSaya']);
     Route::get('/kelas_saya/detail/{id}', [KelasSayaController::class, 'DetailKelas']);
     Route::get('/kelas_saya/publish/{id}', [KelasSayaController::class, 'KelasPublish'])->name('mentor.kelas_saya.publish');
+    Route::get('kelas_saya/ditolak' , [KelasSayaController::class, 'Ditolak']);
 
     //CRUD Member
     route::get('/member/member', [MentorController::class, 'DataMember']);
@@ -129,9 +131,7 @@ Route::prefix('admin')->middleware(['auth', 'cekLevel:admin'])->group(function (
     Route::get('/kelas_masuk/{id}/publish', [KelasAdminController::class, 'KelasPublish']);
     Route::post('/index/{id}/reject', [KelasAdminController::class, 'Reject']);
     Route::get('/kelas/berhasil', [KelasAdminController::class, 'KelasBerhasil']);
-    Route::get('/kelas/ditolak', [KelasAdminController::class, 'KelasDitolak']);
     Route::get('/kelas/info/{id}', [KelasAdminController::class, 'Info']);
-
 
     //profil
     Route::get('/profil_admin', [AdminController::class, 'profil']);

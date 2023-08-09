@@ -90,7 +90,6 @@
                       <div class="form-group col-md-6 col-12">
                         <label for="">jenis kelamin</label>
                         <select class="form-select form-control form-select-sm" aria-label=".form-select-sm example" name="jenis_kelamin">
-                            <option selected>Pilih jenis kelamin</option>
                             <option value="Laki-Laki" {{Auth::user()->jenis_kelamin=="Laki-Laki"?"selected" : ""}}>Laki-Laki</option>
                             <option value="Perempuan" {{Auth::user()->jenis_kelamin=="Perempuan"?"selected" : ""}}>Perempuan</option>
                         </select>

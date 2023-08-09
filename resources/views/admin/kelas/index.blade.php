@@ -52,8 +52,8 @@
                       <td>{{$item->user->name}}</td>
                       <td>{{$item->judul}}</td>
                       <td><img src="{{ url('/storage/' .$item->gambar)}}" style="width:70px" ></td>
-                      <td>{{$item->deskripsi}}</td>
-                      <div class="badge badge-success"><td>{{$item->status}}</td>
+                      <td>{!! $item->deskripsi !!}</td>
+                      <div class="badge badge-success"><td><div class="badge badge-primer">{{$item->status}}</div></td>
                       <td>
                         <a class="btn btn-sm btn-success-outline" href="{{ route('admin.kelasDetail', $item->id) }}" title="detail"><span class="fa fa-edit"></span> Detail |</a>
                           <a class="btn btn-sm btn-success-outline" href="{{ url('admin/kelas_masuk/' . $item->id) }}/publish" title="publish"> Publish |</a>

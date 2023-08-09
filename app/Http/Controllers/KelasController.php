@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
+
 class KelasController extends Controller
 {
     public function Kelas(Request $request){
@@ -39,8 +40,8 @@ class KelasController extends Controller
     $request->validate([
         'kategori_id' => 'required|integer',
         'judul' => 'required|string|max:255',
-        'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'deskripsi' => 'required|string|max:255',
+        'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'deskripsi' => 'required|string',
         'status' => 'required',
     ]);
 
