@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Hashids\Hashids;
 use App\Models\Kelas;
 use App\Models\Materi;
-use App\Models\Subscription;
 use App\Models\Pendidikan;
+use App\Models\Subscription;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +17,11 @@ use Illuminate\Support\Facades\Storage;
 
 class MentorController extends Controller
 {
+    public function __construct()
+    {
+        $this->hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
+    }
+
     public function MentorDashboard()
     {
         // decode
