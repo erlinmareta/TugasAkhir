@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Kelas;
@@ -17,31 +18,32 @@ class MentorController extends Controller
 {
     public function MentorDashboard()
     {
-        $user = User::where('level', 'member')->where('id', Auth::user()->id)->count();
-        $kelas = Kelas::where('user_id', Auth::user()->id)->count();
-        $materi = Materi::where('user_id', Auth::user()->id)->count();
-        $kelasberhasil = Kelas::where('status', 'sukses')->where('user_id', Auth::user()->id)->count();
-        $totalstudent = DB::table('kelas')
-                           ->select(DB::raw('count(distinct subscription.user_id) as total_student'))
-                           ->join('users', 'users.id', '=', 'kelas.user_id') //join get id mentor
-                           ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
-                           ->where('kelas.user_id', Auth::user()->id)
-                           ->groupBy('kelas.id', 'name')
-                           ->count();
-       $infomember = Kelas::select('kelas.id AS mentor', 'users.name', 'kelas.judul', 'subscription.created_at AS created_at')
-                           ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
-                           ->join('users', 'users.id', '=', 'subscription.user_id')
-                           ->where('kelas.user_id', Auth::user()->id)
-                           ->get();
+        // decode
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
 
-        $kelasCounts = DB::table('kelas')
-        ->select('kelas.judul AS label', DB::raw('count(distinct subscription.user_id) as data'))
-        ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
-        ->where('kelas.user_id', Auth::user()->id)
-        ->groupBy('kelas.id', 'kelas.judul')
-        ->orderByDesc('data')
-        ->take(5) // Ambil 5 kelas terbanyak
-        ->get();
+        $user = User::where('level', 'member')->where('id', $idUser)->count();
+        $kelas = Kelas::where('user_id', $idUser)->count();
+        $materi = Materi::where('user_id', $idUser)->count();
+        $kelasberhasil = Kelas::where('status', 'sukses')->where('user_id', $idUser)->count();
+        $totalstudent = Kelas::select(DB::raw('count(distinct subscription.user_id) as total_student'))
+            ->join('users', 'users.id', '=', 'kelas.user_id') //join get id mentor
+            ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
+            ->where('kelas.user_id', $idUser)
+            ->groupBy('kelas.id', 'name')
+            ->count();
+        $infomember = Kelas::select('kelas.id AS mentor', 'users.name', 'kelas.judul', 'subscription.created_at AS created_at')
+            ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
+            ->join('users', 'users.id', '=', 'subscription.user_id')
+            ->where('kelas.user_id', $idUser)
+            ->get();
+
+        $kelasCounts = Kelas::select('kelas.judul AS label', DB::raw('count(distinct subscription.user_id) as data'))
+            ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
+            ->where('kelas.user_id', $idUser)
+            ->groupBy('kelas.id', 'kelas.judul')
+            ->orderByDesc('data')
+            ->take(5) // Ambil 5 kelas terbanyak
+            ->get();
 
         // Proses data untuk dikirim ke view
         $labels = $kelasCounts->pluck('label')->toArray();
@@ -50,18 +52,26 @@ class MentorController extends Controller
         $kelasCounts = [
             'labels' => $labels,
             'data' => $data,
-    ];
+        ];
 
-        return view('mentor/dashboard', compact('user', 'kelas', 'materi', 'kelasberhasil', 'totalstudent',
-        'infomember', 'kelasCounts'));
-
+        return view('mentor/dashboard', compact(
+            'user',
+            'kelas',
+            'materi',
+            'kelasberhasil',
+            'totalstudent',
+            'infomember',
+            'kelasCounts'
+        ));
     }
 
     public function ProfileMentor()
     {
-        $user = User::findOrFail(Auth::id());
-        return view('mentor/profil/profil', compact('user'));
+        // decode
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
 
+        $user = User::findOrFail($idUser);
+        return view('mentor/profil/profil', compact('user'));
     }
 
     public function UpdateProfil(Request $request)
@@ -84,8 +94,9 @@ class MentorController extends Controller
                 $foto = $request->gambarLama;
             }
         }
-
-        $user = User::where('id', Auth::user()->id)->update([
+        // decode
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
+        $user = User::where('id', $idUser)->update([
             "name" => $request->name,
             "email" => $request->email,
             "tempat_lahir" => $request->tempat_lahir,
@@ -103,7 +114,8 @@ class MentorController extends Controller
 
     public function Signature(Request $request)
     {
-        $user = User::query()->findOrFail(auth()->user()->id);
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
+        $user = User::query()->findOrFail($idUser);
 
         if ($user !== NULL) {
             $dataURL = $request->input('signature');
@@ -119,7 +131,7 @@ class MentorController extends Controller
                 Storage::delete($user['signature']);
             }
             User::query()
-            ->findOrFail(auth()->user()->id)
+                ->findOrFail($idUser)
                 ->update([
                     'signature' => 'signature/' . $imageName
                 ]);
@@ -131,25 +143,29 @@ class MentorController extends Controller
 
     public function DataMember(Request $request)
     {
-        $search = $request->input('search');
+        // decode
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
 
+        $search = $request->input('search');
         $student = Kelas::select('kelas.id AS mentor', 'users.name', 'kelas.judul', 'subscription.created_at AS created_at')
-                    ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
-                    ->join('users', 'users.id', '=', 'subscription.user_id')
-                    ->where('kelas.user_id', Auth::user()->id)
-                    ->when($search, function ($query, $search) {
-                        return $query->where('users.name', 'LIKE', '%' . $search . '%')
-                            ->orWhere('kelas.judul', 'LIKE', '%' . $search . '%');
-                    })
-                    ->paginate(10);
+            ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
+            ->join('users', 'users.id', '=', 'subscription.user_id')
+            ->where('kelas.user_id', $idUser)
+            ->when($search, function ($query, $search) {
+                return $query->where('users.name', 'LIKE', '%' . $search . '%')
+                    ->orWhere('kelas.judul', 'LIKE', '%' . $search . '%');
+            })
+            ->paginate(10);
         return view('mentor/member/member', compact('student'));
     }
 
     public function MemberKelas(Request $request)
     {
-        $search = $request->input('search');
+        // decode
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
 
-        $query = Kelas::where('user_id', Auth::user()->id)
+        $search = $request->input('search');
+        $query = Kelas::where('user_id', $idUser)
             ->where('status', 'sukses');
 
         if ($search) {
@@ -159,24 +175,32 @@ class MentorController extends Controller
         }
 
         $data['kelas'] = $query->paginate(10);
-        return view('mentor/member/member_kelas' , $data);
+        return view('mentor/member/member_kelas', $data);
     }
 
     public function Student($id_kelas)
     {
-        $data['subscription'] = Subscription::where('kelas_id', $id_kelas)->paginate(10);
+        // decode
+        $idKelas = $this->hashids->decode($id_kelas)[0];
+
+        $data['subscription'] = Subscription::where('kelas_id', $idKelas)->paginate(10);
         return view('mentor/member/student', $data);
     }
 
     public function Pendidikan()
     {
-        $pendidikan = Pendidikan::firstOrCreate(['user_id' => Auth::id()]);
+        // decode
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
+
+        $pendidikan = Pendidikan::firstOrCreate(['user_id' => $idUser]);
         return view('mentor/pendidikan/pendidikan', compact('pendidikan'));
     }
 
     public function StorePendidikan(Request $request)
     {
-        $user_id = Auth::user()->id;
+        // decode
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
+        $user_id = $idUser;
 
         $pendidikan = Pendidikan::where('user_id', $user_id)->first();
 
@@ -214,6 +238,7 @@ class MentorController extends Controller
             'password' => 'required',
             'new_password' => 'required|string|min:8',
         ]);
+        // decode
 
         $user = Auth::user();
 
@@ -233,7 +258,4 @@ class MentorController extends Controller
 
         return redirect()->back()->with('success', 'Password berhasil diubah.');
     }
-
-
-
 }
