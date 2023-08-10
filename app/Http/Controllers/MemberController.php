@@ -33,13 +33,15 @@ class MemberController extends Controller
         $jumlahsubscribe = Subscription::where('user_id', $id)->count();
         $pendidikan = Pendidikan::where('user_id', $id)->get();
 
-        return view('member/mentor_profil',
+        return view(
+            'member/mentor_profil',
             [
                 'datakelas' => $datakelas,
                 'datamentor' => $datamentor,
                 'jumlahsubscribe' => $jumlahsubscribe,
                 'pendidikan' => $pendidikan,
-        ]);
+            ]
+        );
     }
 
     public function ClassDetail($kelas, $materi)
@@ -57,7 +59,6 @@ class MemberController extends Controller
             $history = History::where("kelas_id", $kelas)->where("materi_id", $materi)->where("user_id", Auth::user()->id)->first();
 
             if ($history) {
-
             } else {
                 History::create([
                     "kelas_id" => $kelas,
@@ -127,17 +128,16 @@ class MemberController extends Controller
 
     public function StudentDashboard()
     {
+        dd('ok');
         $datakelas = Subscription::where('user_id', Auth::user()->id)
-                                //   ->where('kelas_id' ,$id)
-                                  ->get();
-
+            // ->where('kelas_id', $id)
+            ->get();
         $history = History::where("user_id", Auth::user()->id)->pluck("materi_id")->toArray();
         return view('member/student_dashboard', [
-            'datakelas' => $datakelas ,
+            'datakelas' => $datakelas,
             'history' => $history,
         ]);
-
-}
+    }
 
     public function StudentCourse()
 
@@ -225,10 +225,7 @@ class MemberController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        $pdf = PDF::loadView('member.sertifikat', ['user' => $user , 'kelas' => $kelas])->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('member.sertifikat', ['user' => $user, 'kelas' => $kelas])->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
-
-
-
 }

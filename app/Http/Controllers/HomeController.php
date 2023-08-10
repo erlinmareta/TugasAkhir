@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\Kategori;
@@ -15,12 +16,10 @@ class HomeController extends Controller
 {
     public function Home(Request $request)
     {
-        // dd($kelas);
         $kategori = Kategori::all();
         $kelas = Kelas::where('status', 'sukses')->get();
         $user = User::all();
         $materi = Materi::all()->first();
-
         $history = [];
 
         if (!empty(Auth::user())) {
@@ -29,17 +28,17 @@ class HomeController extends Controller
 
         $searchResults = [];
 
-    if ($request->has('search')) {
-        $searchTerm = $request->input('search');
-        // Ganti 'nama_field' dengan nama field yang ingin Anda cari dalam model Materi
-        $searchResults = Kelas::where('judul', 'LIKE', '%' . $searchTerm . '%')->get();
-    }
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            // Ganti 'nama_field' dengan nama field yang ingin Anda cari dalam model Materi
+            $searchResults = Kelas::where('judul', 'LIKE', '%' . $searchTerm . '%')->get();
+        }
 
 
 
-        return view('welcome', ['kelas' => $kelas, 'kategori' => $kategori, 'user' => $user, 'materi' => $materi, "history" => $history,
-                                'searchResults' => $searchResults]);
-
-
+        return view('welcome', [
+            'kelas' => $kelas, 'kategori' => $kategori, 'user' => $user, 'materi' => $materi, "history" => $history,
+            'searchResults' => $searchResults
+        ]);
     }
 }

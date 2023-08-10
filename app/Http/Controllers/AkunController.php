@@ -1,41 +1,55 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+
 use App\Models\User;
+use Hashids\Hashids;
 use App\Models\Pendidikan;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
 class AkunController extends Controller
 {
+    public function __construct()
+    {
+        $this->hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
+    }
+
     public function Akun(Request $request)
     {
         $searchQuery = $request->input('search');
 
         $user = DB::table('users')
-        ->when($searchQuery, function ($query, $searchQuery) {
-            return $query->where('name', 'like', '%' . $searchQuery . '%')
-                ->orWhere('email', 'like', '%' . $searchQuery . '%');
-        })
-        ->paginate(5);
-        return view ('admin/akun/user', ['user' => $user, 'searchQuery' => $searchQuery]);
+            ->when($searchQuery, function ($query, $searchQuery) {
+                return $query->where('name', 'like', '%' . $searchQuery . '%')
+                    ->orWhere('email', 'like', '%' . $searchQuery . '%');
+            })
+            ->paginate(5);
+        return view('admin/akun/user', ['user' => $user, 'searchQuery' => $searchQuery]);
     }
 
     public function edit($id)
-{
-    $user = DB::table('users')->where('id', $id)->first();
-    return view('admin.akun.edit', ['item' => $user]);
-}
+    {
+        $idUser = $this->hashids->decode($id)[0];
+        $user = DB::table('users')->where('id', $idUser)->first();
+        return view('admin.akun.edit', ['item' => $user]);
+    }
 
     public function update(Request $request)
     {
-        if($request->file("foto")) {
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
+        $user = User::whereId($idUser)->first();
+        if ($request->hasFile("foto")) {
+            Storage::delete($user->foto);
             $data = $request->file("foto")->store("profil");
+        } else {
+            $data = $user->foto;
         }
-        $user = User::where('id', Auth::user()->id)->update([
+
+        $user->update([
             "name" => $request->name,
             "email" => $request->email,
             "level" => $request->level,
@@ -52,68 +66,68 @@ class AkunController extends Controller
         return redirect('/admin/akun/admin')->with('success', 'Data Berhasil diubah!');
     }
 
-        public function hapus($id)
-        {
-            DB::table('users')->where('id',$id)->delete();
-            return back()->with('success', 'Data Berhasil dihapus!');
-        }
+    public function hapus($id)
+    {
+        $idUser = $this->hashids->decode($id)[0];
+        DB::table('users')->where('id', $idUser)->delete();
+        return back()->with('success', 'Data Berhasil dihapus!');
+    }
 
-        public function DataMentor(Request $request)
-        {
-            $searchQuery = $request->input('search');
+    public function DataMentor(Request $request)
+    {
+        $searchQuery = $request->input('search');
 
-            $user = User::when($searchQuery, function ($query) use ($searchQuery) {
-                return $query->where('level', 'mentor')
-                             ->where(function ($query) use ($searchQuery) {
-                                 $query->where('name', 'like', '%' . $searchQuery . '%')
-                                       ->orWhere('email', 'like', '%' . $searchQuery . '%');
-                             });
-            })
+        $user = User::when($searchQuery, function ($query) use ($searchQuery) {
+            return $query->where('level', 'mentor')
+                ->where(function ($query) use ($searchQuery) {
+                    $query->where('name', 'like', '%' . $searchQuery . '%')
+                        ->orWhere('email', 'like', '%' . $searchQuery . '%');
+                });
+        })
             ->where('level', 'mentor')
             ->paginate(10);
 
-            $userIds = $user->pluck('id');
+        $userIds = $user->pluck('id');
 
-            // Load the 'pendidikan' relationship for the retrieved user IDs
-            $pendidikan = Pendidikan::whereIn('user_id', $userIds)->get()->groupBy('user_id');
+        // Load the 'pendidikan' relationship for the retrieved user IDs
+        $pendidikan = Pendidikan::whereIn('user_id', $userIds)->get()->groupBy('user_id');
+
+        return view('admin/akun/mentor', ['user' => $user, 'searchQuery' => $searchQuery, 'pendidikan' => $pendidikan]);
+    }
 
 
-            return view('admin/akun/mentor', ['user' => $user, 'searchQuery' => $searchQuery , 'pendidikan' => $pendidikan]);
-        }
+    public function DataPeserta(Request $request)
+    {
+        $searchQuery = $request->input('search');
 
-
-        public function DataPeserta(Request $request)
-        {
-            $searchQuery = $request->input('search');
-
-            $user = User::when($searchQuery, function ($query, $searchQuery) {
+        $user = User::when($searchQuery, function ($query, $searchQuery) {
             return $query->where('level', 'member')
-                         ->where(function ($query) use ($searchQuery) {
-                             $query->where('name', 'like', '%' . $searchQuery . '%')
-                                   ->orWhere('email', 'like', '%' . $searchQuery . '%');
-                         });
+                ->where(function ($query) use ($searchQuery) {
+                    $query->where('name', 'like', '%' . $searchQuery . '%')
+                        ->orWhere('email', 'like', '%' . $searchQuery . '%');
+                });
         })
-        ->where('level', 'member')
-        ->paginate(10);
+            ->where('level', 'member')
+            ->paginate(10);
 
-            return view('admin/akun/peserta', ['user' => $user , 'searchQuery' => $searchQuery]);
-        }
+        return view('admin/akun/peserta', ['user' => $user, 'searchQuery' => $searchQuery]);
+    }
 
-        public function DataAdmin(Request $request)
-        {
-            $user = User::where("level", "admin")->get();
-            return view('admin/akun/admin', ['user' => $user]);
-        }
+    public function DataAdmin(Request $request)
+    {
+        $user = User::where("level", "admin")->get();
+        return view('admin/akun/admin', ['user' => $user]);
+    }
 
-        public function TambahAdmin()
-        {
-            return view('admin/akun/tambah');
-        }
+    public function TambahAdmin()
+    {
+        return view('admin/akun/tambah');
+    }
 
-        public function store(Request $request)
+    public function store(Request $request)
     {
         $data = null;
-        if($request->file("foto")) {
+        if ($request->file("foto")) {
             $data = $request->file("foto")->store("profil");
         }
 
@@ -126,15 +140,12 @@ class AkunController extends Controller
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'nomor_telepon' => $request->nomor_telepon,
-            'foto' =>$data,
+            'foto' => $data,
             'pekerjaan' => $request->pekerjaan,
             'alamat' => $request->alamat,
-            'deskripsi' =>$request->deskripsi,
+            'deskripsi' => $request->deskripsi,
 
         ]);
         return redirect('admin/akun/admin')->with('success', 'Berhasil ditambahkan!');
-
     }
-
-
 }

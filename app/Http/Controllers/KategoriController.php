@@ -1,16 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+
+use Hashids\Hashids;
 use App\Models\Kategori;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class KategoriController extends Controller
 {
+    public function __construct()
+    {
+        $this->hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
+    }
+
     public function Kategori()
     {
-        $kategori = DB::table('kategori')->get();
+        $kategori = Kategori::get();
         return view('admin/kategori/kategori', ['kategori' => $kategori]);
     }
 
@@ -27,20 +34,21 @@ class KategoriController extends Controller
 
         ]);
         return redirect('admin/kategori/kategori')->with('success', 'Berhasil ditambahkan!');
-
     }
 
     public function edit($id)
     {
-        $kategori = Kategori::where("id", $id)->first();
-        return view('admin/kategori/edit',['item' => $kategori]);
-
+        // decode
+        $idKategori = $this->hashids->decode($id)[0];
+        $kategori = Kategori::where("id", $idKategori)->first();
+        return view('admin/kategori/edit', ['item' => $kategori]);
     }
 
     public function update(Request $request, $id)
     {
-
-        Kategori::where("id", $id)->update([
+        // decode
+        $idKategori = $this->hashids->decode($id)[0];
+        Kategori::where("id", $idKategori)->update([
             'nama' => $request->nama,
         ]);
 
@@ -49,7 +57,9 @@ class KategoriController extends Controller
 
     public function Delete($id)
     {
-        DB::table('kategori')->where('id',$id)->delete();
+        // decode
+        $idKategori = $this->hashids->decode($id)[0];
+        DB::table('kategori')->where('id', $idKategori)->delete();
         return back()->with('success', 'Data Berhasil dihapus!');
     }
 }

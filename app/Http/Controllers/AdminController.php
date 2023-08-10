@@ -1,18 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+
+use Carbon\Carbon;
 use App\Models\User;
+use Hashids\Hashids;
 use App\Models\Kelas;
 use App\Models\Ketentuan;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
+    }
+
     public function index()
     {
         $userpeserta = User::where('level', 'member')->count();
@@ -21,19 +29,28 @@ class AdminController extends Controller
         $totaluser = User::count();
 
         $totalDataKelasmasukPerHari = Kelas::where('status', 'proses')
-                                           ->whereDate('created_at', now()->format('Y-m-d'))
-                                           ->count();
+            ->whereDate('created_at', now()->format('Y-m-d'))
+            ->count();
 
         $kelasberhasil = Kelas::where('status', 'sukses')->count();
         $info = User::where('level', '!=', 'admin')->latest()->paginate(4);
         $allUsers = User::where('level', '!=', 'admin')->get();
         $infokelasToday = Kelas::whereDate('created_at', now()->format('Y-m-d'))
-                                ->where('status', '!=', 'pending')
-                                ->get();
+            ->where('status', '!=', 'pending')
+            ->get();
 
 
-    	return view('admin/dashboard', compact('userpeserta', 'usermentor', 'useradmin', 'totaluser',
-        'totalDataKelasmasukPerHari', 'kelasberhasil', 'info', 'allUsers', 'infokelasToday'));
+        return view('admin/dashboard', compact(
+            'userpeserta',
+            'usermentor',
+            'useradmin',
+            'totaluser',
+            'totalDataKelasmasukPerHari',
+            'kelasberhasil',
+            'info',
+            'allUsers',
+            'infokelasToday'
+        ));
     }
 
     public function Profil()
@@ -47,7 +64,7 @@ class AdminController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'tempat_lahir' => 'required|string',
-            'jenis_kelamin' =>'required',
+            'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required',
             'nomor_telepon' => 'required',
             'alamat' => 'required|string|max:255',
@@ -95,7 +112,7 @@ class AdminController extends Controller
     public function SyaratdanKetentuan()
     {
         $ketentuan = DB::table('ketentuan')->get();
-        return view('admin/s&k/s&k', ['ketentuan'=> $ketentuan]);
+        return view('admin/s&k/s&k', ['ketentuan' => $ketentuan]);
     }
 
     public function AddSyaratdanKetentuan()
@@ -111,19 +128,21 @@ class AdminController extends Controller
 
         ]);
         return redirect('admin/s&k/s&k')->with('success', 'Berhasil ditambahkan!');
-
     }
 
     public function editKetentuan($id)
     {
-        $ketentuan = Ketentuan::where("id", $id)->first();
+        // decode
+        $idKetentuan = $this->hashids->decode($id)[0];
+        $ketentuan = Ketentuan::where("id", $idKetentuan)->first();
         return view('admin/s&k/edit', ['item' => $ketentuan]);
     }
 
     public function updateKetentuan(Request $request, $id)
     {
-
-        Ketentuan::where("id", $id)->update([
+        // decode
+        $idKetentuan = $this->hashids->decode($id)[0];
+        Ketentuan::where("id", $idKetentuan)->update([
             'keterangan' => $request->keterangan,
         ]);
 
@@ -132,10 +151,9 @@ class AdminController extends Controller
 
     public function DeleteKetentuan($id)
     {
-        DB::table('ketentuan')->where('id',$id)->delete();
+        // decode
+        $idKetentuan = $this->hashids->decode($id)[0];
+        DB::table('ketentuan')->where('id', $idKetentuan)->delete();
         return back()->with('success', 'Data Berhasil dihapus!');
     }
-
-
-
 }

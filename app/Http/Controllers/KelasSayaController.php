@@ -1,61 +1,75 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+
+use Hashids\Hashids;
 use App\Models\Kelas;
 use App\Models\Materi;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class KelasSayaController extends Controller
 {
-    public function KelasSaya(Request $request)
+    public function __construct()
     {
-
-        $search = $request->input('search');
-        $query = Kelas::where('user_id', Auth::user()->id)->where('status', 'pending');
-
-        if ($search) {
-        $query->where('judul', 'like', '%' . $search . '%');
+        $this->hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
     }
 
-    $kelas = $query->paginate(10);
-        return view ('mentor/Kelas_saya/kelas_saya' , ['kelas' => $kelas]);
+    public function KelasSaya(Request $request)
+    {
+        // decode
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
+
+        $search = $request->input('search');
+        $query = Kelas::where('user_id', $idUser)->where('status', 'pending');
+
+        if ($search) {
+            $query->where('judul', 'like', '%' . $search . '%');
+        }
+
+        $kelas = $query->paginate(10);
+        return view('mentor/Kelas_saya/kelas_saya', ['kelas' => $kelas]);
     }
 
     public function DetailKelas($id)
     {
-        $kelas = Kelas::findOrFail($id);
+        // decode
+        $idKelas = $this->hashids->decode($id)[0];
+        $kelas = Kelas::findOrFail($idKelas);
         $materi = $kelas->materi()->orderBy('urutan')->get();
         return view('mentor/kelas_saya/detail', ['materi' => $materi]);
     }
 
     public function KelasPublish($id)
-{
-    $kelas = Kelas::findOrFail($id);
+    {
+        // decode
+        $idKelas = $this->hashids->decode($id)[0];
+        $kelas = Kelas::findOrFail($idKelas);
 
-    if ($kelas->status === 'sukses' || $kelas->status === 'proses' || $kelas->materi->count() === 0) {
-        return redirect()->back()->with('error', 'Kelas tidak dapat dipublish, lengkapi terlebih dahulu materi pada kelas tersebut');
+        if ($kelas->status === 'sukses' || $kelas->status === 'proses' || $kelas->materi->count() === 0) {
+            return redirect()->back()->with('error', 'Kelas tidak dapat dipublish, lengkapi terlebih dahulu materi pada kelas tersebut');
+        }
+
+        $kelas->status = 'proses';
+        $kelas->save();
+
+        return redirect()->back()->with('success', 'Kelas berhasil dipublish dan data terkirim ke dashboard admin.');
     }
 
-    $kelas->status = 'proses';
-    $kelas->save();
-
-    return redirect()->back()->with('success', 'Kelas berhasil dipublish dan data terkirim ke dashboard admin.');
-}
-
-public function Ditolak(Request $request)
-{
-    $search = $request->input('search');
-        $query = Kelas::where('user_id', Auth::user()->id)->where('status', 'cancel');
+    public function Ditolak(Request $request)
+    {
+        // decode
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
+        $search = $request->input('search');
+        $query = Kelas::where('user_id', $idUser)->where('status', 'cancel');
 
         if ($search) {
-        $query->where('judul', 'like', '%' . $search . '%');
+            $query->where('judul', 'like', '%' . $search . '%');
+        }
+
+        $kelas = $query->paginate(10);
+        return view('mentor/kelas_saya/ditolak', ['kelas' => $kelas,]);
     }
-
-    $kelas = $query->paginate(10);
-    return view('mentor/kelas_saya/ditolak', ['kelas' => $kelas , ]);
-}
-
 }

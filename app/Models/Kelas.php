@@ -2,15 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use Hashids\Hashids;
 use App\Models\Materi;
 use App\Models\Kategori;
-use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kelas extends Model
 {
     protected $guarded = [''];
+
+    public function getIdAttribute()
+    {
+        $hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
+
+        return $hashids->encode($this->attributes['id']);
+    }
 
     public function materi()
     {

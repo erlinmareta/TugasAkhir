@@ -34,10 +34,10 @@ Route::middleware(['cekLogin'])->group(function () {
     Route::get('/registrasi', [LoginController::class, 'registrasi'])->name('registrasi');
     Route::post('/registeruser', [LoginController::class, 'registeruser'])->name('registeruser');
     Route::get('/loginproses', [LoginController::class, 'loginproses'])->name('loginproses');
-    Route::get('/reload' , [LoginController::class, 'Reload'])->name('Reload');
-    Route::get('/verify' , [LoginController::class, 'verify'])->name('user.verify');
-    Route::get('/forgot' , [LoginController::class, 'ForgotForm']);
-    Route::post('/forgot' , [LoginController::class, 'SendLinkForgot']);
+    Route::get('/reload', [LoginController::class, 'Reload'])->name('Reload');
+    Route::get('/verify', [LoginController::class, 'verify'])->name('user.verify');
+    Route::get('/forgot', [LoginController::class, 'ForgotForm']);
+    Route::post('/forgot', [LoginController::class, 'SendLinkForgot']);
     Route::get('/password/reset/{token}', [LoginController::class, 'ShowResetForm'])->name('reset.password.form');
     Route::post('/password/reset', [LoginController::class, 'ResetPassword']);
 });
@@ -90,7 +90,7 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
     Route::get('/kelas_saya/kelas_saya', [KelasSayaController::class, 'KelasSaya']);
     Route::get('/kelas_saya/detail/{id}', [KelasSayaController::class, 'DetailKelas']);
     Route::get('/kelas_saya/publish/{id}', [KelasSayaController::class, 'KelasPublish'])->name('mentor.kelas_saya.publish');
-    Route::get('kelas_saya/ditolak' , [KelasSayaController::class, 'Ditolak']);
+    Route::get('kelas_saya/ditolak', [KelasSayaController::class, 'Ditolak']);
 
     //CRUD Member
     route::get('/member/member', [MentorController::class, 'DataMember']);
@@ -114,7 +114,7 @@ Route::prefix('admin')->middleware(['auth', 'cekLevel:admin'])->group(function (
     Route::post('/akun/store', [AkunController::class, 'store']);
     Route::get('/akun/hapus/{id}', [AkunController::class, 'hapus']);
     Route::get('/akun/edit/{id}', [AkunController::class, 'edit']);
-    Route::put('/admin/{id}', [AkunController::class, 'update']);
+    Route::put('/akun/{id}', [AkunController::class, 'update']);
 
     //kategori
     Route::get('/kategori/kategori', [KategoriController::class, 'Kategori']);

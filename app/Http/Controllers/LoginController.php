@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Redirect;
@@ -19,32 +20,31 @@ class LoginController extends Controller
     }
 
     public function loginProses(Request $request)
-{
-    $validatedData = $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-        'captcha' => 'required|captcha',
-    ]);
-
-    if (Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']], $request->has('remember'))) {
-        $user = Auth::user();
-        if ($user->level == 'admin') {
-            return redirect('admin/dashboard');
-        } else if ($user->level == 'mentor') {
-            return redirect('mentor/dashboard');
+    {
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'captcha' => 'required|captcha',
+        ]);
+        if (Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']], $request->has('remember'))) {
+            $user = Auth::user();
+            if ($user->level == 'admin') {
+                return redirect()->route('dashboard.admin');
+            } else if ($user->level == 'mentor') {
+                return redirect('mentor/dashboard');
+            } else {
+                return redirect('member/student_dashboard');
+            }
         } else {
-            return redirect('member/student_dashboard');
+            return redirect()->back()->with(['error' => 'Username atau password salah']);
         }
-    } else {
-        return redirect()->back()->with(['error' => 'Username atau password salah']);
     }
-}
 
 
 
     public function Reload()
     {
-        return response()->json(['captcha'=>captcha_img()]);
+        return response()->json(['captcha' => captcha_img()]);
     }
 
     public function registrasi()
@@ -57,12 +57,11 @@ class LoginController extends Controller
 
         $password = $request->password;
 
-    if (strlen($password) < 8) {
-        return redirect()->back()
-        ->with(['error' => 'Password yang dimasukkan minimal 8 karakter'])
-        ->withInput();
-
-    }
+        if (strlen($password) < 8) {
+            return redirect()->back()
+                ->with(['error' => 'Password yang dimasukkan minimal 8 karakter'])
+                ->withInput();
+        }
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -71,57 +70,55 @@ class LoginController extends Controller
         $save = $user->save();
         $last_id = $user->id;
 
-        $token = $last_id.hash('sha256', \Str::random(120));
-        $verifyURL = route('user.verify', ['token'=>$token, 'service'=>'Email_verification' ]);
+        $token = $last_id . hash('sha256', \Str::random(120));
+        $verifyURL = route('user.verify', ['token' => $token, 'service' => 'Email_verification']);
 
         VerifyUser::create([
-            'user_id'=>$last_id,
+            'user_id' => $last_id,
             'token' => $token,
         ]);
 
-        $message = 'Dear <b>'.$request->name.'</b>';
-        $message.= 'Thanks for signing up, we just need you to verify your email address to complete setting up your account.';
+        $message = 'Dear <b>' . $request->name . '</b>';
+        $message .= 'Thanks for signing up, we just need you to verify your email address to complete setting up your account.';
 
         $mail_data = [
             'recipient' => $request->email,
             'fromEmail' => $request->email,
             'fromName' => $request->name,
-            'subject' =>'Email Verification',
+            'subject' => 'Email Verification',
             'body' => $message,
             'actionLink' => $verifyURL,
 
         ];
 
-        \Mail::send('email_template', $mail_data, function($message) use ($mail_data){
+        \Mail::send('email_template', $mail_data, function ($message) use ($mail_data) {
             $message->to($mail_data['recipient'])
-                    ->from($mail_data['fromEmail'], $mail_data['fromName'])
-                    ->subject($mail_data['subject']);
+                ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                ->subject($mail_data['subject']);
         });
 
-        if($save){
+        if ($save) {
             return redirect()->back()->with('success', 'you need to verify your account, we have sent you an activation
             link, please check your email');
-        }else{
+        } else {
             return redirect()->back()->with('fail', 'something went wrong, failed register');
         }
-
     }
 
     public function Verify(Request $request)
     {
         $token = $request->token;
         $verifyUser = VerifyUser::where('token', $token)->first();
-        if(!is_null($verifyUser)){
+        if (!is_null($verifyUser)) {
             $user = $verifyUser->user;
 
-            if(!$user->email_verified){
+            if (!$user->email_verified) {
                 $verifyUser->user->email_verified = 1;
                 $verifyUser->user->save();
 
                 return redirect()->route('login')->with('success', 'Email berhasil terverifikasi,
                 anda bisa login sekarang !')->with('verifiedEmail', $user->email);
-
-            }else{
+            } else {
                 return redirect()->route('/login')->with('success', 'Email berhasil terverifikasi,
                 anda bisa login sekarang !')->with('verifiedEmail', $user->email);;
             }
@@ -135,58 +132,57 @@ class LoginController extends Controller
 
     public function SendLinkForgot(Request $request)
     {
-       $request-> validate([
+        $request->validate([
             'email' => 'required|email|exists:users,email',
-       ]);
+        ]);
 
-       $token = \Str::random(60);
-       \DB::table('password_resets')->insert([
-        'email' =>$request->email,
-        'token' =>$token,
-        'created_at' =>Carbon::now(),
-       ]);
+        $token = \Str::random(60);
+        \DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => Carbon::now(),
+        ]);
 
-       $action_link = route('reset.password.form', ['token'=>$token, 'email'=>$request->email]);
-       $body = "kami telah menerima request untuk mengubah passsword untuk aplikasi <b> IndLearn </b>
-       pada akun terkait ".$request->email.". kamu bisa mengubah password anda dengan meng klik link ini";
+        $action_link = route('reset.password.form', ['token' => $token, 'email' => $request->email]);
+        $body = "kami telah menerima request untuk mengubah passsword untuk aplikasi <b> IndLearn </b>
+       pada akun terkait " . $request->email . ". kamu bisa mengubah password anda dengan meng klik link ini";
 
-       \Mail::send('email_forgot', ['action_link'=>$action_link, 'body'=>$body], function($messege) use ($request){
+        \Mail::send('email_forgot', ['action_link' => $action_link, 'body' => $body], function ($messege) use ($request) {
             $messege->from('IndLearnku@gmail.com', 'IndLearn');
             $messege->to($request->email, 'name')
-                    ->subject('Reset Password');
-       });
+                ->subject('Reset Password');
+        });
 
-       return back()->with('success', 'we telah mengirimkan untuk mengubah password link pada email anda ');
-
+        return back()->with('success', 'we telah mengirimkan untuk mengubah password link pada email anda ');
     }
 
     public function ShowResetForm(Request $request, $token = null)
     {
-        return view('/reset_form')->with(['token' =>$token, 'email'=>$request->email]);
+        return view('/reset_form')->with(['token' => $token, 'email' => $request->email]);
     }
 
     public function ResetPassword(Request $request)
     {
         $request->validate([
-            'email'=>'required|email|exists:users,email',
-            'password'=>'required|min:8|confirmed',
-            'password_confirmation'=>'required',
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|min:8|confirmed',
+            'password_confirmation' => 'required',
         ]);
 
         $check_token = \DB::table('password_resets')->where([
-            'email'=>$request->email,
-            'token'=>$request->token,
+            'email' => $request->email,
+            'token' => $request->token,
         ])->first();
 
-        if(!$check_token){
+        if (!$check_token) {
             return back()->withInput()->with('fail', 'Invalid token');
-        }else{
+        } else {
             User::where('email', $request->email)->update([
-                'password'=>\Hash::make($request->password)
+                'password' => \Hash::make($request->password)
             ]);
 
             \DB::table('password_resets')->where([
-                'email'=>$request->email
+                'email' => $request->email
             ])->delete();
 
             return redirect()->route('login')->with('info', 'Password Berhasil di perbarui silahkan Login dengan Password baru');
