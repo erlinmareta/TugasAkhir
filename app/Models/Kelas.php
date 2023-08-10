@@ -15,9 +15,12 @@ class Kelas extends Model
 
     public function getIdAttribute()
     {
-        $hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
-
-        return $hashids->encode($this->attributes['id']);
+        if (!request()->routeIs('home') && !request()->routeIs('student_course')) :
+            $hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
+            return $hashids->encode($this->attributes['id']);
+        else :
+            return $this->attributes['id'];
+        endif;
     }
 
     public function materi()

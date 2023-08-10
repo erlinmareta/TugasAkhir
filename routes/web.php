@@ -27,7 +27,7 @@ use App\Http\Controllers\HomeController;
 */
 
 
-Route::get('/', [HomeController::class, 'Home']);
+Route::get('/', [HomeController::class, 'Home'])->name('home');
 
 Route::middleware(['cekLogin'])->group(function () {
     Route::get('/login', [LoginController::class, 'login'])->name('login');
@@ -51,10 +51,10 @@ Route::prefix('member')->middleware(['auth', 'cekLevel:member'])->group(function
     Route::put('/class_detail/{kelas}/{materi}/comment', [MemberController::class, 'Comment']);
     Route::put('/class_detail/{kelas}/{materi}/catatan', [MemberController::class, 'Catatan']);
     Route::get('/mentor_profil/{id}', [MemberController::class, 'MentorProfil']);
-    Route::get('/student_course', [MemberController::class, 'StudentCourse']);
+    Route::get('/student_course', [MemberController::class, 'StudentCourse'])->name('student_course');
     Route::get('/browse_course', [CourseController::class, 'BrowseCourse']);
     Route::get('/student_profil', [MemberController::class, 'StudentProfil']);
-    Route::get('/student_dashboard', [MemberController::class, 'StudentDashboard']);
+    Route::get('/student_dashboard', [MemberController::class, 'StudentDashboard'])->name('studentdashboard');
     Route::put('/student_profil', [MemberController::class, 'UpdateProfile']);
     Route::put("/rating/{id_materi}", [MemberController::class, "rating"]);
     Route::get('/sertifikat/{kelas}', [MemberController::class, "getSertifikat"]);

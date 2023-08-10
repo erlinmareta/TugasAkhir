@@ -62,7 +62,9 @@
                                             data-toggle="popover" data-trigger="click">
                                             <a href="student-take-course.html" class="card-img-top js-image"
                                                 data-position="" data-height="140">
-                                               <img src="{{ url('/storage/' . $datakelass->kelas->gambar) }}" style="width:70px" width="40" height="40" alt="Angular" class="rounded">
+                                                <img src="{{ url('/storage/' . $datakelass->kelas->gambar) }}"
+                                                    style="width:70px" width="40" height="40" alt="Angular"
+                                                    class="rounded">
                                                 <span class="overlay__content">
                                                     <span class="overlay__action d-flex flex-column text-center">
                                                         <i class="material-icons icon-32pt">play_circle_outline</i>
@@ -114,8 +116,9 @@
                                         <div class="popoverContainer d-none">
                                             <div class="media">
                                                 <div class="media-left mr-12pt">
-                                                    <img src="{{ url('/storage/' . $datakelass->kelas->gambar) }}" class="rounded" width="40"
-                                                        height="40" alt="Angular" class="rounded">
+                                                    <img src="{{ url('/storage/' . $datakelass->kelas->gambar) }}"
+                                                        class="rounded" width="40" height="40" alt="Angular"
+                                                        class="rounded">
                                                 </div>
                                                 <div class="media-body">
                                                     <div class="card-title mb-0"> {{ $datakelass->kelas->judul }}</div>
@@ -149,7 +152,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="d-flex align-items-center justify-content-center">
-                                                    <a href="{{ url('member/class_detail/' . $datakelass->kelas->id) . '/' . $datakelass->kelas->materi->first()->id }}"
+                                                    <a href="{{ url('member/class_detail/' . encrypt($datakelass->kelas->id)) . '/' . encrypt($datakelass->kelas->materi->first()->id) }}"
                                                         class="btn btn-primary">
                                                         Lanjutkan</a>
                                                 </div>

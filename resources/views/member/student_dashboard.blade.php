@@ -1,7 +1,7 @@
 @php
-use App\Models\Rating;
-use App\Models\History;
-use App\Models\Materi;
+    use App\Models\Rating;
+    use App\Models\History;
+    use App\Models\Materi;
 @endphp
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@ use App\Models\Materi;
 
 <body class="layout-sticky-subnav layout-learnly ">
 
-    <div class="preloader">
+    {{-- <div class="preloader">
         <div class="sk-chase">
             <div class="sk-chase-dot"></div>
             <div class="sk-chase-dot"></div>
@@ -23,7 +23,7 @@ use App\Models\Materi;
             <div class="sk-chase-dot"></div>
             <div class="sk-chase-dot"></div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Header Layout -->
     <div class="mdk-header-layout js-mdk-header-layout">
@@ -63,130 +63,137 @@ use App\Models\Materi;
 
                             <div class="row card-group-row">
                                 @if ($datakelas->count() > 0)
-                                @foreach ($datakelas as $datakelass)
-                                    <div class="col-sm-6 col-xl-4 card-group-row__col">
-                                        <div class="card card-sm card--elevated p-relative o-hidden overlay overlay--primary-dodger-
+                                    @foreach ($datakelas as $datakelass)
+                                        <div class="col-sm-6 col-xl-4 card-group-row__col">
+                                            <div class="card card-sm card--elevated p-relative o-hidden overlay overlay--primary-dodger-
                                             blue js-overlay card-group-row__card undefined"
-                                            data-toggle="popover" data-trigger="click">
-                                            <a href="student-take-course.html" class="card-img-top js-image"
-                                                data-position="" data-height="140">
-                                               <img src="{{ url('/storage/' . $datakelass->kelas->gambar) }}" style="width:70px" width="40" height="40" alt="Angular" class="rounded">
-                                                <span class="overlay__content">
-                                                    <span class="overlay__action d-flex flex-column text-center">
-                                                        <i class="material-icons icon-32pt">play_circle_outline</i>
-                                                        <span class="card-title text-white">Resume</span>
+                                                data-toggle="popover" data-trigger="click">
+                                                <a href="student-take-course.html" class="card-img-top js-image"
+                                                    data-position="" data-height="140">
+                                                    <img src="{{ url('/storage/' . $datakelass->kelas->gambar) }}"
+                                                        style="width:70px" width="40" height="40" alt="Angular"
+                                                        class="rounded">
+                                                    <span class="overlay__content">
+                                                        <span class="overlay__action d-flex flex-column text-center">
+                                                            <i class="material-icons icon-32pt">play_circle_outline</i>
+                                                            <span class="card-title text-white">Resume</span>
+                                                        </span>
                                                     </span>
-                                                </span>
-                                            </a>
+                                                </a>
 
-                                            <div class="card-body flex">
-                                                <div class="d-flex">
-                                                    <div class="flex">
-                                                        <a class="card-title" >
-                                                            {{ $datakelass->kelas->judul }}</a>
-                                                        <small class="text-50 font-weight-bold mb-4pt">
-                                                            {{ $datakelass->kelas->user->name }}</small>
+                                                <div class="card-body flex">
+                                                    <div class="d-flex">
+                                                        <div class="flex">
+                                                            <a class="card-title">
+                                                                {{ $datakelass->kelas->judul }}</a>
+                                                            <small class="text-50 font-weight-bold mb-4pt">
+                                                                {{ $datakelass->kelas->user->name }}</small>
+                                                        </div>
+
                                                     </div>
+                                                    <div class="d-flex">
+                                                        <div class="rating flex">
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($i <= $datakelass->kelas->rating->avg('rating'))
+                                                                    <span class="rating__item"><span
+                                                                            class="material-icons">star</span></span>
+                                                                @else
+                                                                    <span class="rating__item"><span
+                                                                            class="material-icons">star_border</span></span>
+                                                                @endif
+                                                            @endfor
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="row justify-content-between">
+                                                        <div class="col-auto d-flex align-items-center">
+
+                                                        </div>
+                                                        <div class="col-auto d-flex align-items-center">
+                                                            <span
+                                                                class="material-icons icon-16pt text-50 mr-4pt">play_circle_outline</span>
+                                                            <p class="flex text-50 lh-1 mb-0">
+                                                                <small>{{ $datakelass->kelas->materi->count() }}
+                                                                    materi</small>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="popoverContainer d-none">
+                                                <div class="media">
+                                                    <div class="media-left mr-12pt">
+                                                        <img src="{{ url('/storage/' . $datakelass->kelas->gambar) }}"
+                                                            class="rounded" width="40" height="40" alt="Angular"
+                                                            class="rounded">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="card-title mb-0"> {{ $datakelass->kelas->judul }}
+                                                        </div>
+                                                        <p class="lh-1 mb-0">
+                                                            <span class="text-50 small">with</span>
+                                                            <span class="text-50 small font-weight-bold">
+                                                                {{ $datakelass->kelas->user->name }}</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <p class="my-16pt text-70">{!! $datakelass->kelas->deskripsi !!}.
+                                                    kelas ini dibagi ke beberapa bab, diantaranya :.</p>
+                                                <div class="mb-16pt">
+                                                    @foreach ($datakelass->kelas->materi as $materi)
+                                                        <div class="d-flex align-items-center">
+                                                            <span
+                                                                class="material-icons icon-16pt text-50 mr-8pt">check</span>
+                                                            <p class="flex text-50 lh-1 mb-0">
+                                                                <small>{{ $materi->judul }}</small>
+                                                            </p>
+                                                        </div>
+                                                    @endforeach
 
                                                 </div>
-                                                <div class="d-flex">
-                                                    <div class="rating flex">
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($i <= $datakelass->kelas->rating->avg('rating'))
-                                                                <span class="rating__item"><span
-                                                                        class="material-icons">star</span></span>
+                                                <div class="my-32pt">
+                                                    <div
+                                                        class="d-flex align-items-center mb-8pt justify-content-center">
+                                                        <div class="d-flex align-items-center mr-8pt">
+
+                                                        </div>
+                                                        <div class="d-flex align-items-center">
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center justify-content-center">
+                                                        @if (!empty(Auth::user()))
+                                                            @php
+                                                                $history = History::where('kelas_id', $datakelass->id)
+                                                                    ->where('user_id', Auth::user()->id)
+                                                                    ->latest('materi_id')
+                                                                    ->first();
+                                                            @endphp
+                                                            @if (empty($history))
+                                                                <a href="{{ url('/member/class_detail/' . $datakelass->id . '/' . $materi->id) }}"
+                                                                    class="btn btn-primary">
+                                                                    Mulai Belajar
+                                                                </a>
                                                             @else
-                                                                <span class="rating__item"><span
-                                                                        class="material-icons">star_border</span></span>
+                                                                <a href="{{ url('/member/class_detail/' . encrypt($datakelass->id) . '/' . encrypt($history->materi_id)) }}"
+                                                                    class="btn btn-primary">
+                                                                    Lanjutkan Belajar
+                                                                </a>
                                                             @endif
-                                                        @endfor
+                                                        @endif
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="row justify-content-between">
-                                                    <div class="col-auto d-flex align-items-center">
 
-                                                    </div>
-                                                    <div class="col-auto d-flex align-items-center">
-                                                        <span
-                                                            class="material-icons icon-16pt text-50 mr-4pt">play_circle_outline</span>
-                                                        <p class="flex text-50 lh-1 mb-0">
-                                                            <small>{{ $datakelass->kelas->materi->count() }}
-                                                                materi</small>
-                                                        </p>
-                                                    </div>
+                                                <div class="d-flex align-items-center">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="popoverContainer d-none">
-                                            <div class="media">
-                                                <div class="media-left mr-12pt">
-                                                    <img src="{{ url('/storage/' . $datakelass->kelas->gambar) }}" class="rounded" width="40"
-                                                        height="40" alt="Angular" class="rounded">
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="card-title mb-0"> {{ $datakelass->kelas->judul }}</div>
-                                                    <p class="lh-1 mb-0">
-                                                        <span class="text-50 small">with</span>
-                                                        <span class="text-50 small font-weight-bold">
-                                                            {{ $datakelass->kelas->user->name }}</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <p class="my-16pt text-70">{!! $datakelass->kelas->deskripsi !!}.
-                                                kelas ini dibagi ke beberapa bab, diantaranya :.</p>
-                                            <div class="mb-16pt">
-                                                @foreach ($datakelass->kelas->materi as $materi)
-                                                    <div class="d-flex align-items-center">
-                                                        <span
-                                                            class="material-icons icon-16pt text-50 mr-8pt">check</span>
-                                                        <p class="flex text-50 lh-1 mb-0">
-                                                            <small>{{ $materi->judul }}</small>
-                                                        </p>
-                                                    </div>
-                                                @endforeach
-
-                                            </div>
-                                            <div class="my-32pt">
-                                                <div class="d-flex align-items-center mb-8pt justify-content-center">
-                                                    <div class="d-flex align-items-center mr-8pt">
-
-                                                    </div>
-                                                    <div class="d-flex align-items-center">
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex align-items-center justify-content-center">
-                                                    @if (!empty(Auth::user()))
-                                                @php
-                                                $history = History::where("kelas_id", $datakelass->id)
-                                                ->where("user_id", Auth::user()->id)
-                                                ->latest('materi_id')
-                                                ->first();
-                                                @endphp
-                                                @if (empty($history))
-                                                <a href="{{ url('/member/class_detail/' . $datakelass->id . '/' . $materi->id) }}" class="btn btn-primary">
-                                                    Mulai Belajar
-                                                </a>
-                                                @else
-                                                <a href="{{ url('/member/class_detail/' . $datakelass->id . '/' . $history->materi_id ) }}" class="btn btn-primary">
-                                                    Lanjutkan Belajar
-                                                </a>
-                                                @endif
-                                                @endif
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex align-items-center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
                                 @else
-                        <div class="alert alert-primary" role="alert">
-                            Belum ada ada kelas pembelajaran !
-                    </div>
-                    @endif
+                                    <div class="alert alert-primary" role="alert">
+                                        Belum ada ada kelas pembelajaran !
+                                    </div>
+                                @endif
 
                             </div>
                         </div>

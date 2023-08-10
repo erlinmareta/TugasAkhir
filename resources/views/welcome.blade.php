@@ -294,7 +294,7 @@
                                         <div class="col text-right">
                                             @if (!empty(Auth::user()))
                                                 @php
-                                                    $history = History::where('kelas_id', 1)
+                                                    $history = History::where('kelas_id', $class->id)
                                                         ->where('user_id', Auth::user()->id)
                                                         ->latest('materi_id')
                                                         ->first();

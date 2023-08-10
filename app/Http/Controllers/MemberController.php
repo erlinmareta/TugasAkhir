@@ -56,8 +56,8 @@ class MemberController extends Controller
     public function ClassDetail($kelas, $materi)
     {
         $idUser = $this->hashids->decode(Auth::user()->id)[0];
-        $idKelas = $this->hashids->decode($kelas)[0];
-        $idMateri = $this->hashids->decode($materi)[0];
+        $idKelas = decrypt($kelas);
+        $idMateri = decrypt($materi);
 
         $history = History::where("user_id", $idUser)->first();
 
@@ -152,11 +152,10 @@ class MemberController extends Controller
     public function StudentDashboard()
     {
         // decode
-        $idUser = $this->hashids->decode(Auth::user()->id)[0];
-        $datakelas = Subscription::where('user_id', $idUser)
+        $datakelas = Subscription::where('user_id', Auth::user()->id)
             // ->where('kelas_id', $id)
             ->get();
-        $history = History::where("user_id", $idUser)->pluck("materi_id")->toArray();
+        $history = History::where("user_id", Auth::user()->id)->pluck("materi_id")->toArray();
         return view('member/student_dashboard', [
             'datakelas' => $datakelas,
             'history' => $history,
