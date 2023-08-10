@@ -16,7 +16,7 @@ class User extends Authenticatable
 
     public function getIdAttribute()
     {
-        if (!request()->routeIs('loginproses') && !request()->routeIs('studentdashboard')) :
+        if (!request()->routeIs('home') && !request()->routeIs('loginproses') && !request()->routeIs('studentdashboard')) :
             $hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
             return $hashids->encode($this->attributes['id']);
         else :

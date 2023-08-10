@@ -15,7 +15,7 @@ class Materi extends Model
 
     public function getIdAttribute()
     {
-        if (!request()->routeIs('StudentDashboard') && !request()->routeIs('student_course')) :
+        if (!request()->routeIs('home') && !request()->routeIs('StudentDashboard') && !request()->routeIs('student_course')) :
             $hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
             return $hashids->encode($this->attributes['id']);
         else :
