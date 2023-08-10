@@ -23,7 +23,7 @@ class MemberController extends Controller
 {
     public function index()
     {
-        return view('member/dashboard');
+        return view('member/student_dashboard');
     }
 
     public function MentorProfil($id)
@@ -128,7 +128,7 @@ class MemberController extends Controller
 
     public function StudentDashboard()
     {
-        dd('ok');
+
         $datakelas = Subscription::where('user_id', Auth::user()->id)
             // ->where('kelas_id', $id)
             ->get();
