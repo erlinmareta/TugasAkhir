@@ -99,7 +99,7 @@
                   <div class="col-md-6">
                     <div class="card">
                       <div class="card-body">
-                        <p class="card-title">Notifikasi</p>
+                        <p class="card-title">Pemberitahuan</p>
                         <ul class="icon-data-list">
                             @foreach ($infomember as $item)
                             <li>

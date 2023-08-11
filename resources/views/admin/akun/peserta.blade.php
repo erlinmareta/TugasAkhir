@@ -18,7 +18,6 @@
 <div class="main-content">
     <section class="section">
       <div class="section-header">
-        <h1>Table</h1>
         <div class="section-header-breadcrumb">
 
         </div>
@@ -59,11 +58,10 @@
                   <td>{{ $no++ }}</td>
                   <td>{{$item->name}}</td>
                   <td>{{$item->email}}</td>
-                  <td>{{$item->no_telepon}}</td>
+                  <td>{{$item->nomor_telepon}}</td>
                   <td>{{$item->alamat}}</td>
                   <td>{{$item->level }}</td>
                   <td>
-                    <a class="btn btn-sm btn-success-outline" href="" title="Edit"><span class="fa fa-edit"></span> Edit |</a>
                     <a class="btn btn-sm btn-success-outline" href="{{ url('admin/akun/hapus/' .$item->id) }}" title="Hapus"><span class="fa fa-trash"></span> Hapus |</a>
                     <button class="btn btn-sm btn-success-outline" data-toggle="modal" data-target="#myModal{{ $item->id }}s" ><span class="fa fa-info-circle"></span></button>
                 </td>

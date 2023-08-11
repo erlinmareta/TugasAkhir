@@ -32,7 +32,7 @@
               <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                  <h4 class="card-title">Data Kelas</h4>
+                  <h4 class="card-title">Data Member</h4>
                     <form action="{{ url('mentor/member/member') }}" method="get" class="form-inline">
                       <div class="input-group">
                           <input type="text" class="form-control" name="search" placeholder="Search">
@@ -65,7 +65,7 @@
                               <td>{{$item->name}}</td>
                               <td>{{$item->judul}}</td>
                               <td>{{$item->email}}</td>
-                              <td>{{$item->no_telepon}}</td>
+                              <td>{{$item->nomor_telepon}}</td>
                               <td>
                                   <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal{{ $loop->iteration }}">Detail</button>
                               </td>
