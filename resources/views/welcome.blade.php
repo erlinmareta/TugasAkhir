@@ -300,12 +300,12 @@
                                                         ->first();
                                                 @endphp
                                                 @if (empty($history))
-                                                    <a href="{{ url('/member/class_detail/' . $class->id . '/' . $class->materi_class->id) }}"
+                                                    <a href="{{ url('/member/class_detail/' . encrypt($class->id) . '/' . encrypt($class->materi_class->id)) }}"
                                                         class="btn btn-primary">
                                                         Mulai Belajar
                                                     </a>
                                                 @else
-                                                    <a href="{{ url('/member/class_detail/' . $class->id . '/' . $history->materi_id) }}"
+                                                    <a href="{{ url('/member/class_detail/' . encrypt($class->id) . '/' . encrypt($history->materi_id)) }}"
                                                         class="btn btn-primary">
                                                         Lanjutkan Belajar
                                                     </a>

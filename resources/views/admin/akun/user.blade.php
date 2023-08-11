@@ -61,7 +61,7 @@
                   <td>{{$item->level }}</td>
                   <td>
                     <a class="btn btn-sm btn-success-outline" href="" title="Edit"><span class="fa fa-edit"></span> Edit |</a>
-                    <a class="btn btn-sm btn-success-outline" href="{{ url('admin/akun/hapus/' .$item->id) }}" title="Hapus"><span class="fa fa-trash"></span> Hapus |</a>
+                    <a class="btn btn-sm btn-success-outline" href="{{ url('admin/akun/hapus/' . $item->id) }}" title="Hapus"><span class="fa fa-trash"></span> Hapus |</a>
                     <button class="btn btn-sm btn-success-outline" data-toggle="modal" data-target="#myModal{{ $item->id }}s" ><span class="fa fa-info-circle"></span></button>
                 </td>
                 </tr>
@@ -134,7 +134,7 @@
         </div>
         <div class="modal-body">
           @if ($item->foto)
-          <img src="{{ url('/storage/'.Auth::user()->foto) }}" style="width: 150px; height:150px"
+          <img src="{{ url('/storage/'. $item->foto) }}" style="width: 150px; height:150px"
           class="img-thumbnail rounded-circle mx-auto d-block">
           @else
             <img src="{{ asset('img/90x90.jpg') }}" alt="Placeholder Image" style="width: 150px; height:150px"

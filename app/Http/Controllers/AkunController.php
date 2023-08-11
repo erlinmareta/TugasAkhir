@@ -22,8 +22,7 @@ class AkunController extends Controller
     {
         $searchQuery = $request->input('search');
 
-        $user = DB::table('users')
-            ->when($searchQuery, function ($query, $searchQuery) {
+        $user = User::when($searchQuery, function ($query, $searchQuery) {
                 return $query->where('name', 'like', '%' . $searchQuery . '%')
                     ->orWhere('email', 'like', '%' . $searchQuery . '%');
             })
@@ -34,7 +33,7 @@ class AkunController extends Controller
     public function edit($id)
     {
         $idUser = $this->hashids->decode($id)[0];
-        $user = DB::table('users')->where('id', $idUser)->first();
+        $user = User::where('id', $idUser)->first();
         return view('admin.akun.edit', ['item' => $user]);
     }
 

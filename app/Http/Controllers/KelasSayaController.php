@@ -48,7 +48,8 @@ class KelasSayaController extends Controller
         $idKelas = $this->hashids->decode($id)[0];
         $kelas = Kelas::findOrFail($idKelas);
 
-        if ($kelas->status === 'sukses' || $kelas->status === 'proses' || $kelas->materi->count() === 0) {
+        $materiKelas = Materi::where('kelas_id',$idKelas)->get();
+        if ($kelas->status === 'sukses' || $kelas->status === 'proses' || $materiKelas->isEmpty()) {
             return redirect()->back()->with('error', 'Kelas tidak dapat dipublish, lengkapi terlebih dahulu materi pada kelas tersebut');
         }
 

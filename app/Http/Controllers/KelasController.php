@@ -27,7 +27,8 @@ class KelasController extends Controller
         $searchQuery = $request->input('search');
 
         $kategori = Kategori::all();
-        $kelasQuery = Kelas::where('user_id', Auth::user()->id)
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
+        $kelasQuery = Kelas::where('user_id', $idUser)
             ->when($searchQuery, function ($query, $searchQuery) {
                 return $query->where('judul', 'like', '%' . $searchQuery . '%');
             });
@@ -46,7 +47,7 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kategori_id' => 'required|integer',
+            'kategori_id' => 'required',
             'judul' => 'required|string|max:255',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'deskripsi' => 'required|string',
@@ -59,10 +60,12 @@ class KelasController extends Controller
         if ($request->file("gambar")) {
             $data = $request->file("gambar")->store("kelas");
         }
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
+        $idKategori = $this->hashids->decode($request->kategori_id)[0];
 
         Kelas::create([
-            'user_id' => Auth::user()->id,
-            'kategori_id' => $request->kategori_id,
+            'user_id' => $idUser,
+            'kategori_id' => $idKategori,
             'judul' => $request->judul,
             'gambar' => $data,
             'deskripsi' => $request->deskripsi,
@@ -83,6 +86,7 @@ class KelasController extends Controller
 
     public function update(Request $request, $id)
     {
+        $idKategori = $this->hashids->decode($request->kategori_id)[0];
         if ($request->gambar) {
             if ($request->gambarLama) {
                 Storage::delete($request->gambarLama);
@@ -95,7 +99,7 @@ class KelasController extends Controller
         // decode
         $idKelas = $this->hashids->decode($id)[0];
         Kelas::where("id", $idKelas)->update([
-            'kategori_id' => $request->kategori_id,
+            'kategori_id' => $idKategori,
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'status' => $request->status,
@@ -126,8 +130,6 @@ class KelasController extends Controller
 
     public function StoreMateri(Request $request, $id)
     {
-        $kelas_id = $id;
-
         $videoPath = null;
 
         if ($request->hasFile('isi_materi')) {
@@ -136,11 +138,13 @@ class KelasController extends Controller
         }
         // decode
         $idKelas = $this->hashids->decode($id)[0];
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
         $kelas = Kelas::findOrFail($idKelas);
+
         $materi = $kelas->materi()->orderBy('urutan')->get();
         Materi::create([
-            'user_id' => Auth::user()->id,
-            'kelas_id' => $kelas_id,
+            'user_id' =>$idUser,
+            'kelas_id' => $idKelas,
             'judul' => $request->judul_materi,
             'isi_materi' => $videoPath,
             'deskripsi' => $request->deskripsi,
@@ -156,14 +160,10 @@ class KelasController extends Controller
         // decode
         $idKelas = $this->hashids->decode($id)[0];
         $kelas = Kelas::findOrFail($idKelas);
-        $query = $kelas->materi()->orderBy('urutan');
-
+        $materi = Materi::orderBy('urutan')->where('kelas_id',$idKelas)->paginate(10);
         if ($search) {
-            $query->where('judul', 'like', '%' . $search . '%');
+            $materi = Materi::where('judul', 'like', '%' . $search . '%')->paginate(10);
         }
-
-        $materi = $query->paginate(10);
-
         return view('mentor/kelas/detail', ['materi' => $materi, 'kelas' => $kelas]);
     }
 
@@ -182,6 +182,9 @@ class KelasController extends Controller
     {
         // decode
         $idMateri = $this->hashids->decode($id)[0];
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
+        $idKelas = $this->hashids->decode($request->kelas_id)[0];
+
         $materi = Materi::findOrFail($idMateri);
 
         if ($request->isi_materi) {
@@ -195,8 +198,8 @@ class KelasController extends Controller
         }
 
         $materi->update([
-            'user_id' => Auth::user()->id,
-            'kelas_id' => $request->kelas_id,
+            'user_id' =>$idUser,
+            'kelas_id' => $idKelas,
             'judul' => $request->judul,
             'isi_materi' => $data,
             'deskripsi' => $request->deskripsi,

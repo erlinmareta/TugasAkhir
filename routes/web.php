@@ -47,10 +47,10 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::prefix('member')->middleware(['auth', 'cekLevel:member'])->group(function () {
     Route::get('/student_dashboard', [MemberController::class, 'index']);
     Route::get('/welcome', [HomeController::class, 'Home']);
-    Route::get('/class_detail/{kelas}/{materi}', [MemberController::class, 'ClassDetail']);
+    Route::get('/class_detail/{kelas}/{materi}', [MemberController::class, 'ClassDetail'])->name('classdetail');
     Route::put('/class_detail/{kelas}/{materi}/comment', [MemberController::class, 'Comment']);
     Route::put('/class_detail/{kelas}/{materi}/catatan', [MemberController::class, 'Catatan']);
-    Route::get('/mentor_profil/{id}', [MemberController::class, 'MentorProfil']);
+    Route::get('/mentor_profil/{id}', [MemberController::class, 'MentorProfil'])->name('mentorprofile');
     Route::get('/student_course', [MemberController::class, 'StudentCourse'])->name('student_course');
     Route::get('/browse_course', [CourseController::class, 'BrowseCourse']);
     Route::get('/student_profil', [MemberController::class, 'StudentProfil']);

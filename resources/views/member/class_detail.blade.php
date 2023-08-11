@@ -76,7 +76,7 @@
                             <div class="row">
                                 @if ($sebelumnya)
                                     <div class="col-md-6">
-                                        <a href="{{ url('/member/class_detail/' . $kelas . '/' . $sebelumnya->id) }}">
+                                        <a href="{{ url('/member/class_detail/' . encrypt($kelas) . '/' . encrypt($sebelumnya->id)) }}">
                                             <div class="mb-24pt">
                                                 <span
                                                     class="chip chip-outline-secondary d-inline-flex align-items-center">
@@ -90,7 +90,7 @@
 
                                 @if ($selanjutnya)
                                     <div class="col-md-6">
-                                        <a href="{{ url('/member/class_detail/' . $kelas . '/' . $selanjutnya->id) }}">
+                                        <a href="{{ url('/member/class_detail/' . encrypt($kelas) . '/' . encrypt($selanjutnya->id)) }}">
                                             <div class="mb-24pt">
                                                 <span
                                                     class="chip chip-outline-secondary d-inline-flex align-items-center">
@@ -125,7 +125,7 @@
                                             </span>
 
                                             <a class="flex"
-                                                href="{{ url('/member/class_detail/' . $item->kelas_id . '/' . $item->id) }}">{{ ucwords($item->judul) }}</a>
+                                                href="{{ url('/member/class_detail/' . encrypt($item->kelas_id) . '/' . encrypt($item->id)) }}">{{ ucwords($item->judul) }}</a>
                                             {{-- <span class="text-muted">8m 42s</span> --}}
                                     </div>
                                     @endforeach
@@ -149,7 +149,7 @@
                                     <button type="button" class="btn btn-success">
                                         <i class="fa fa-thumbs-up"></i> Anda Sudah Memberikan Rating Di Kelas Ini
                                     </button><br>
-                                    <a href="{{ url('member/sertifikat/' .$kelas ) }}" class="btn btn-danger">Sertifikat</a>
+                                    <a href="{{ url('member/sertifikat/' .encrypt($kelas) ) }}" class="btn btn-danger">Sertifikat</a>
                                     </button>
                                 @else
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -172,7 +172,7 @@
                                     class="rounded-circle">
                             </span>
                             <div class="media-body">
-                                <a class="card-title m-0" href="{{ url('member/mentor_profil/' . $materi->user->id) }}">
+                                <a class="card-title m-0" href="{{ url('member/mentor_profil/' .encrypt( $materi->user->id)) }}">
                                     {{ $materi->user->name }}
                                 </a>
                             </div>
@@ -180,7 +180,7 @@
                         <p class="text-70">{!! $materi->user->deskripsi !!}</p>
                         <div class="flex">
                             <form id="catatanForm" name="catatanForm"
-                                action="{{ url('/member/class_detail/' . $kelas . '/' . $materi->id) . '/catatan' }}"
+                                action="{{ url('/member/class_detail/' . encrypt($kelas) . '/' . encrypt($materi->id)) . '/catatan' }}"
                                 method="POST">
                                 @csrf
                                 @method('PUT')
@@ -239,7 +239,7 @@
                         class="avatar-title rounded-circle"></span> </a>
                 <div class="flex">
                     <form id="commentForm" name="commentForm"
-                        action="{{ url('/member/class_detail/' . $kelas . '/' . $materi->id) . '/comment' }}"
+                        action="{{ url('/member/class_detail/' . encrypt($kelas) . '/' . encrypt($materi->id)) . '/comment' }}"
                         method="POST">
                         @csrf
                         @method('PUT')

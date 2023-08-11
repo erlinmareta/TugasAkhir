@@ -15,7 +15,7 @@ class Kelas extends Model
 
     public function getIdAttribute()
     {
-        if (!request()->routeIs('home') && !request()->routeIs('student_course')) :
+        if (!request()->routeIs('home') && !request()->routeIs('studentdashboard') && !request()->routeIs('student_course') && !request()->routeIs('mentorprofile')) :
             $hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
             return $hashids->encode($this->attributes['id']);
         else :

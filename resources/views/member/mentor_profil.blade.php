@@ -87,7 +87,7 @@
                                         <div class="card card-sm card--elevated p-relative o-hidden overlay overlay--primary-dodger-
                                         blue js-overlay card-group-row__card undefined"
                                             data-toggle="popover" data-trigger="click">
-                                            <a href="{{ url('member/class_detail/' . $datakelass->id) . '/' . $datakelass->materi->first()->id }}"
+                                            <a href="{{ url('member/class_detail/' . encrypt($datakelass->id)) . '/' . encrypt($datakelass->materi->first()->id) }}"
                                                 class="card-img-top js-image" data-position="" data-height="140">
                                                 <img src="{{ url('/storage/' . $datakelass->gambar) }}"
                                                     style="width:70px" width="40" height="40" alt="Angular"
@@ -104,7 +104,7 @@
                                                 <div class="d-flex">
                                                     <div class="flex">
                                                         <a class="card-title"
-                                                            href="{{ url('member/class_detail/' . $datakelass->id) . '/' . $datakelass->materi->first()->id }}">
+                                                            href="{{ url('member/class_detail/' . encrypt($datakelass->id)) . '/' . encrypt($datakelass->materi->first()->id) }}">
                                                             {{ $datakelass->judul }}</a>
                                                     </div>
 

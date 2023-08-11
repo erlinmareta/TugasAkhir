@@ -35,7 +35,7 @@ class MemberController extends Controller
     public function MentorProfil($id)
     {
         // decode
-        $idUser = $this->hashids->decode($id)[0];
+        $idUser = decrypt($id);
         $datakelas = Kelas::where('user_id', $idUser)->where('status', 'sukses')->get();
         $datamentor = User::where('id', $idUser)->first();
 
@@ -55,7 +55,7 @@ class MemberController extends Controller
 
     public function ClassDetail($kelas, $materi)
     {
-        $idUser = $this->hashids->decode(Auth::user()->id)[0];
+        $idUser = Auth::user()->id;
         $idKelas = decrypt($kelas);
         $idMateri = decrypt($materi);
 
@@ -116,8 +116,8 @@ class MemberController extends Controller
     {
         // decode
         $idUser = $this->hashids->decode(Auth::user()->id)[0];
-        $idMateri = $this->hashids->decode($materi)[0];
-        $idKelas = $this->hashids->decode($kelas)[0];
+        $idMateri = decrypt($materi);
+        $idKelas = decrypt($kelas);
 
         if ($request->comment !== null) {
             Comment::create([
@@ -134,8 +134,8 @@ class MemberController extends Controller
     {
         // decode
         $idUser = $this->hashids->decode(Auth::user()->id)[0];
-        $idMateri = $this->hashids->decode($materi)[0];
-        $idKelas = $this->hashids->decode($kelas)[0];
+        $idMateri = decrypt($materi);
+        $idKelas = decrypt($kelas);
 
         if ($request->catatan !== null) {
             Catatan::create([
@@ -251,18 +251,23 @@ class MemberController extends Controller
     {
         // decode
         $idUser = $this->hashids->decode(Auth::user()->id)[0];
-        $idKelas = $this->hashids->decode($id)[0];
+        $idKelas = decrypt($id);
 
         $user = User::find($idUser);
         $kelas = Kelas::findOrFail($idKelas);
         $mentor = $kelas->user;
+        $userId = $kelas->user_id;
+        $mentorId = User::findOrFail($userId);
 
+            $path = base_path('public/storage/'.$mentorId->signature);
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
-
-        $pdf = PDF::loadView('member.sertifikat', ['user' => $user, 'kelas' => $kelas])->setPaper('a4', 'landscape');
+        $pic = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        $pdf = PDF::loadView('member.sertifikat', ['user' => $user, 'kelas' => $kelas, 'pic'=>$pic])->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
 }
