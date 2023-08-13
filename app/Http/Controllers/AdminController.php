@@ -92,8 +92,8 @@ class AdminController extends Controller
                 $foto = $request->gambarLama;
             }
         }
-
-        $user = User::where('id', Auth::user()->id)->update([
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
+        $user = User::where('id', $idUser)->update([
             "name" => $request->name,
             "email" => $request->email,
             "tempat_lahir" => $request->tempat_lahir,

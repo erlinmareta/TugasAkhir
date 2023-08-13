@@ -38,7 +38,7 @@ class KelasSayaController extends Controller
         // decode
         $idKelas = $this->hashids->decode($id)[0];
         $kelas = Kelas::findOrFail($idKelas);
-        $materi = $kelas->materi()->orderBy('urutan')->get();
+        $materi = Materi::where('kelas_id', $idKelas)->orderBy('urutan')->get();
         return view('mentor/kelas_saya/detail', ['materi' => $materi]);
     }
 

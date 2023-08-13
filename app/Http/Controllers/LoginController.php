@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Hashids\Hashids;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Redirect;
@@ -14,6 +15,11 @@ use Carbon\Carbon;
 
 class LoginController extends Controller
 {
+    public function __construct()
+    {
+        $this->hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
+    }
+
     public function login()
     {
         return view('login');
@@ -68,7 +74,7 @@ class LoginController extends Controller
         $user->level = $request->level;
         $user->password = bcrypt($request->password);
         $save = $user->save();
-        $last_id = $user->id;
+        $last_id = $this->hashids->decode($user->id)[0];
 
         $token = $last_id . hash('sha256', \Str::random(120));
         $verifyURL = route('user.verify', ['token' => $token, 'service' => 'Email_verification']);

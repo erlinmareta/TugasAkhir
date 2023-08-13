@@ -114,7 +114,8 @@ class KelasController extends Controller
     {
         // decode
         $idKelas = $this->hashids->decode($id)[0];
-        DB::table('kelas')->where('id', $idKelas)->delete();
+
+        Kelas::where('id', $idKelas)->delete();
         return back()->with('success', 'Data Berhasil dihapus!');
     }
 
@@ -213,8 +214,9 @@ class KelasController extends Controller
     {
         // decode
         $idKelas = $this->hashids->decode($id)[0];
+        $idUser = $this->hashids->decode(Auth::user()->id)[0];
         $subscription = Subscription::where('kelas_id', $idKelas)->first();
-        $kelas = Kelas::where('user_id', Auth::user()->id)->where('status', 'sukses')->find($idKelas);
+        $kelas = Kelas::where('user_id', $idUser)->where('status', 'sukses')->find($idKelas);
         $rating = Rating::where('kelas_id', $idKelas)->paginate(10);
         return view('mentor/kelas/info', ['subscription' => $subscription, 'kelas' => $kelas, 'rating' => $rating]);
     }
