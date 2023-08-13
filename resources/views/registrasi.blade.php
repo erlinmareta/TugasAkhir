@@ -115,52 +115,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-                <div class="form-group mb-2">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" checked="" class="custom-control-input" id="terms" />
-                        <label class="custom-control-label" for="terms">Saya Setuju <label class="modal-text" type="text"
-                            data-toggle="modal" data-target="#myModal">Syarat dan Ketentuan</label></b>
-                    </div>
-                </div>
-
-                <style>
-                    .modal-text {
-                        font-size: 16px;
-                        font-weight: bold;
-                        color: blue;
-                        cursor: pointer;
-                        text-decoration: underline;
-                    }
-
-                </style>
-
-                {{-- modal
-                <div class="modal" tabindex="-1" id="myModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Syarat dan Ketentuan Instruktor dan Peserta</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <ol>
-                                    <li>Bersungguh-sungguh dalam menjalankan perannya sebagai Instruktor</li>
-                                    <li>Video yang diunggah tidak mengandung unsur SARA, kekerasan, pornografi dan hal-hal negatif lainnya.</li>
-                                    <li>Tidak menyalahgunakan akun</li>
-                                    <li>Apabila ditemukannya ketidaksesuain atau melanggar syarat dan ketentuan berlaku saya siap
-                                        menanggung konsekuensi yang sudah ditetapkan.</li>
-                                </ol>
-                            </div>
-                            <div class="modal-footer">
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
 
                 <div class="form-group text-center">
                     <button class="btn btn-primary mb-2"

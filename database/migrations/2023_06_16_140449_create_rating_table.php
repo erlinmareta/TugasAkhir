@@ -19,7 +19,7 @@ class CreateRatingTable extends Migration
             $table->integer("user_id");
             $table->integer("materi_id");
             $table->enum("rating", [1, 2, 3, 4, 5]);
-            $table->string("ulasan");
+            $table->string("ulasan")->nullable();
             $table->timestamps();
         });
     }

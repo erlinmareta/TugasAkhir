@@ -18,7 +18,7 @@ class CreateCommentTable extends Migration
             $table->integer("kelas_id");
             $table->integer("user_id");
             $table->integer("materi_id");
-            $table->integer("reply_id");
+            $table->integer("reply_id")->nullable();
             $table->string("comment");
             $table->timestamps();
         });
