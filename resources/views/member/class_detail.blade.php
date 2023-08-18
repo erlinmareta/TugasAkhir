@@ -257,7 +257,7 @@
                 <h4>{{ $comments->count() }} Komentar</h4>
                 @foreach ($comments as $item)
                     <form id="commentForm" name="commentForm"
-                        action="{{ url('/member/class_detail/' . $kelas . '/' . $materi->id) . '/comment' }}"
+                        action="{{ url('/member/class_detail/' . encrypt($kelas) . '/' . encrypt($materi->id)) . '/comment' }}"
                         method="POST">
                         @csrf
                         @method('PUT')
@@ -374,7 +374,7 @@
                     </button>
                 </div>
 
-                <form action="{{ url('/member/rating/' . $materi->id) }}" method="POST">
+                <form action="{{ url('/member/rating/' . encrypt($materi->id)) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">

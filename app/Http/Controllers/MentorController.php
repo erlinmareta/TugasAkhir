@@ -153,8 +153,9 @@ class MentorController extends Controller
         $idUser = $this->hashids->decode(Auth::user()->id)[0];
 
         $search = $request->input('search');
-        $student = Kelas::select('kelas.id AS mentor', 'users.name', 'users.email', 'users.nomor_telepon',
-         'kelas.judul', 'subscription.created_at AS created_at')
+        $student = Kelas::select('kelas.id AS mentor', 'users.name', 'users.alamat', 'users.pekerjaan',
+         'users.email', 'users.nomor_telepon',
+         'users.deskripsi', 'users.foto', 'kelas.judul', 'subscription.created_at AS created_at')
             ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
             ->join('users', 'users.id', '=', 'subscription.user_id')
             ->where('kelas.user_id', $idUser)

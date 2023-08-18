@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="{{ asset('stisla/assets/modules/summernote/summernote-bs4.css')}}">
 <link rel="stylesheet" href="{{ asset('stisla/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css')}}">
 <link rel="stylesheet" href="{{ asset('stisla/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css')}}">
-<link rel="stylesheet" href="{{ asset('modules/bootstrap-social/bootstrap-social.css')}}">
-  <link rel="stylesheet" href="{{ asset('modules/summernote/summernote-bs4.css')}}">
+<link rel="stylesheet" href="{{ asset('stisla/modules/bootstrap-social/bootstrap-social.css')}}">
+  <link rel="stylesheet" href="{{ asset('stisla/modules/summernote/summernote-bs4.css')}}">
 
 <!-- Template CSS -->
 <link rel="stylesheet" href="{{ asset('stisla/assets/css/style.css')}}">

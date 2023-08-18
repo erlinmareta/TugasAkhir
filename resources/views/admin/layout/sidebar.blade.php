@@ -25,7 +25,6 @@
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Data Master</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{ url('admin/kategori/kategori') }}">Kategori</a></li>
-              <li><a class="nav-link" href="{{ url('admin/s&k/s&k')}}">Syarat & Ketentuan</a></li>
             </ul>
           </li>
 

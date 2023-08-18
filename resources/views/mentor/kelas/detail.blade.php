@@ -79,7 +79,7 @@
                                 <a href="{{ url('mentor/kelas/editmateri/' . $kelas->id .'/'. $item->id) }}" title="Edit">
                                     <i class="fas fa-edit"></i>Edit |
                                 </a>
-                                <a href="{{ url('mentor/hapus/' . $item->id) }}" data-confirm-delete="true"><i class="fas fa-trash-alt"></i> Hapus</a>
+                                <a href="{{ url('mentor/hapusmateri/' . $item->id) }}" data-confirm-delete="true"><i class="fas fa-trash-alt"></i> Hapus</a>
                             </td>
                             @endif
                         </tr>

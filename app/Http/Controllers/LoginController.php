@@ -104,10 +104,10 @@ class LoginController extends Controller
         });
 
         if ($save) {
-            return redirect()->back()->with('success', 'you need to verify your account, we have sent you an activation
-            link, please check your email');
+            return redirect()->back()->with('success', 'Kamu perlu melakan verifikasi Email, kami sudah mengirim link verifikasi,
+            mohon untuk memeriksa email anda');
         } else {
-            return redirect()->back()->with('fail', 'something went wrong, failed register');
+            return redirect()->back()->with('fail', 'terjadi masalah, tidak dapat melakukan registrasi');
         }
     }
 
@@ -125,7 +125,7 @@ class LoginController extends Controller
                 return redirect()->route('login')->with('success', 'Email berhasil terverifikasi,
                 anda bisa login sekarang !')->with('verifiedEmail', $user->email);
             } else {
-                return redirect()->route('/login')->with('success', 'Email berhasil terverifikasi,
+                return redirect()->route('login')->with('success', 'Email berhasil terverifikasi,
                 anda bisa login sekarang !')->with('verifiedEmail', $user->email);;
             }
         }
@@ -159,7 +159,7 @@ class LoginController extends Controller
                 ->subject('Reset Password');
         });
 
-        return back()->with('success', 'we telah mengirimkan untuk mengubah password link pada email anda ');
+        return back()->with('success', 'Kami telah mengirimkan untuk mengubah password link pada email anda ');
     }
 
     public function ShowResetForm(Request $request, $token = null)

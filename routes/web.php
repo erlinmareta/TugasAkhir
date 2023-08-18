@@ -85,6 +85,7 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
     Route::get('/kelas/detail/{id}', [KelasController::class, 'detail']);
     Route::get('/kelas/editmateri/{classId}/{id}', [KelasController::class, 'editMateri']);
     Route::put('/kelas/materi/{classId}/{id}', [KelasController::class, 'updateMateri']);
+    Route::get('/hapusmateri/{id}', [KelasController::class, 'hapusMateri']);
 
     //Kelas Publish
     Route::get('/kelas_saya/kelas_saya', [KelasSayaController::class, 'KelasSaya']);

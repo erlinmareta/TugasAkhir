@@ -210,6 +210,15 @@ class KelasController extends Controller
         return redirect('/mentor/kelas/detail/' . $classId)->with('success', 'Materi berhasil diperbarui.');
     }
 
+    public function hapusMateri($id)
+    {
+        // decode
+        $idMateri = $this->hashids->decode($id)[0];
+
+        Materi::where('id', $idMateri)->delete();
+        return back()->with('success', 'Data Berhasil dihapus!');
+    }
+
     public function info($id)
     {
         // decode
