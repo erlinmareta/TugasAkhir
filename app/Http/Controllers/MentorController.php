@@ -231,8 +231,12 @@ class MentorController extends Controller
         $student = Kelas::select(
             'kelas.id AS mentor',
             'users.name',
+            'users.alamat',
+            'users.pekerjaan',
             'users.email',
             'users.nomor_telepon',
+            'users.deskripsi',
+            'users.foto',
             'kelas.judul',
             'subscription.created_at AS created_at'
         )

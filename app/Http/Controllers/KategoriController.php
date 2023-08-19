@@ -59,7 +59,7 @@ class KategoriController extends Controller
     {
         // decode
         $idKategori = $this->hashids->decode($id)[0];
-        DB::table('kategori')->where('id', $idKategori)->delete();
+        Kategori::where('id', $idKategori)->delete();
         return back()->with('success', 'Data Berhasil dihapus!');
     }
 }

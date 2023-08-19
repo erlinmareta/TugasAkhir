@@ -143,7 +143,7 @@ class LoginController extends Controller
                 return redirect()->route('login')->with('success', 'Email berhasil terverifikasi,
                 anda bisa login sekarang !')->with('verifiedEmail', $user->email);
             } else {
-                return redirect()->route('/login')->with('success', 'Email berhasil terverifikasi,
+                return redirect()->route('login')->with('success', 'Email berhasil terverifikasi,
                 anda bisa login sekarang !')->with('verifiedEmail', $user->email);;
             }
         }

@@ -54,12 +54,12 @@
                 <div class="form-group">
                     <label for="foto">Materi</label><br>
                     <input type="file" class="form-control" name="isi_materi" id="isi_materi" accept="video/*">
-                    <small>video yang diunggah tidak boleh melebihi 30 mb dan durasinya tidak boleh lebih dari 10 menit</small>
+                    <small>video yang diunggah tidak boleh melebihi 30 mb</small>
                     </div>
                 <div class="form-group">
                     <label for="exampleInputName1">Deskripsi</label>
                     <textarea name="deskripsi" class="form-control" placeholder="Masukkan Deskripsi" id="deskripsiTextarea"></textarea>
-                    <small>deskripsi singkat tentang materi ini, dan panjangnya tidak boleh melebihi 200 karakter</small>
+                    <small>Deskripsi singkat tentang materi ini, deskripsi dapat berupa rangkuman materi</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputName1">Urutan</label>

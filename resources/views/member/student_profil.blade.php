@@ -76,21 +76,21 @@
                                     @endif
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label>
-                                        <input type="text" name="name" class="form-control"
+                                        <input autocomplete="off" type="text" name="name" class="form-control"
                                         placeholder="Masukkan nama"
                                         value="{{ old('name', Auth::user()->name) }}">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Tempat Lahir</label>
-                                        <input type="text" name="tempat_lahir" class="form-control"
+                                        <input autocomplete="off" type="text" name="tempat_lahir" class="form-control"
                                         placeholder="Masukkan tempat lahir"
                                         value="{{ old('tempat_lahir', Auth::user()->tempat_lahir) }}">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Tanggal Lahir</label>
-                                        <input type="date" name="tanggal_lahir" class="form-control"
+                                        <input autocomplete="off" type="date" name="tanggal_lahir" class="form-control"
                                         placeholder="Masukkan Tanggal Lahir"
                                         value="{{ old('tanggal_lahir', Auth::user()->tanggal_lahir) }}">
                                     </div>
@@ -98,7 +98,6 @@
                                     <div class="mb-3">
                                         <label for="">jenis kelamin</label>
                                         <select class="form-select form-control form-select-sm" aria-label=".form-select-sm example" name="jenis_kelamin">
-                                            <option selected>Pilih jenis kelamin</option>
                                             <option value="Laki-Laki" {{Auth::user()->jenis_kelamin=="Laki-Laki"?"selected" : ""}}>Laki-Laki</option>
                                             <option value="Perempuan" {{Auth::user()->jenis_kelamin=="Perempuan"?"selected" : ""}}>Perempuan</option>
 
@@ -107,34 +106,34 @@
 
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Email</label>
-                                        <input type="email" name="email" class="form-control" placeholder="Masukkan email"
+                                        <input autocomplete="off" type="email" name="email" class="form-control" placeholder="Masukkan email"
                                         value="{{ old('email', Auth::user()->email) }}">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">No.Telepon</label>
-                                        <input type="text" name="nomor_telepon" class="form-control"
+                                        <input autocomplete="off" type="text" name="nomor_telepon" class="form-control"
                                         placeholder="Masukkan Nomor Telepon"
                                         value="{{ old('nomor_telepon', Auth::user()->nomor_telepon) }}">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Alamat</label>
-                                        <input type="text" name="alamat" class="form-control"
+                                        <input autocomplete="off" type="text" name="alamat" class="form-control"
                                         placeholder="Masukkan Alamat"
                                         value="{{ old('alamat', Auth::user()->alamat) }}">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Pekerjaan</label>
-                                        <input type="text" name="pekerjaan" class="form-control"
+                                        <input autocomplete="off" type="text" name="pekerjaan" class="form-control"
                                         placeholder="Masukkan Pekerjaan"
                                         value="{{ old('pekerjaan', Auth::user()->pekerjaan) }}">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Deskripsi</label>
-                                        <input type="text" name="deskripsi" class="form-control"
+                                        <input autocomplete="off" type="text" name="deskripsi" class="form-control"
                                         value="{{ old('deskripsi', Auth::user()->deskripsi) }}">
                                     </div>
 

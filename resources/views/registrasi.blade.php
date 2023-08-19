@@ -121,7 +121,7 @@
                     <button class="btn btn-primary mb-2"
                             type="submit">Register</button><br>
                     <a class="text-body text-underline"
-                       href="login.html">Sudah Punya Akun? Login</a>
+                       href="{{ url('/login')}}">Sudah Punya Akun? Login</a>
                 </div>
             </form>
         </div>

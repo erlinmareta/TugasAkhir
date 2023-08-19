@@ -136,14 +136,8 @@
                                     <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/detail/' .$item->id) }}" title="Detail">
                                         <i class="fas fa-info-circle"></i> Detail
                                     </a>
-                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/kelas/edit/' .$item->id) }}" title="Edit">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </a>
-                                    <a class="btn btn-sm btn-success-outline" href="{{ url('mentor/hapus/' .$item->id) }}" title="Hapus">
-                                        <i class="fas fa-trash-alt"></i> Hapus
-                                    </a>
-                                    <a class="btn btn-sm btn-success-outline" href="#" title="publish" onclick="publishConfirmation('{{ route('mentor.kelas_saya.publish', $item->id) }}')">
-                                        <span class="badge badge-info">Publish</span>
+                                    <a class="btn btn-sm btn-success-outline">
+                                        <i class="fas fa-info-circle" data-toggle="modal" data-target="#myModal{{ $item->id }}s" ></i> Info
                                     </a>
                                 </td>
                             </tr>
@@ -160,6 +154,26 @@
             </div>
         </div>
     </div>
+    @foreach ($kelas as $item)
+    <div class="modal" tabindex="-1" id="myModal{{ $item->id }}s">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{$item->judul}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Alasan : {{$item->alasan}}</p>
+
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+    </div>
+    @endforeach
 </div>
 
   @include('mentor.layout.script')
