@@ -27,15 +27,45 @@ class AkunController extends Controller
 
     public function requirement_validate()
     {
-        $status = request('status');
-        $idUser = request('user');
+        try {
+            $status = request('status');
+            $idUser = request('user');
 
-        MentorBerkas::query()
-            ->where('user_id', '=', $idUser)
-            ->update([
-                'status' => $status
-            ]);
-        return back()->with('success', 'Data berhasil diubah');
+            $user = User::findOrFail($idUser);
+            MentorBerkas::query()
+                ->where('user_id', '=', $idUser)
+                ->update([
+                    'status' => $status
+                ]);
+            $message = 'Dear <b>' . $user['name'] . '</b>';
+            if (request('status') === 'reject') :
+                $jwbStatus = 'Ditolak';
+                $message .= ' Informasi mengenai pengajuan sebagai mentor <b>' . $jwbStatus . '</b>';
+            elseif (request('status') === 'completed') :
+                $jwbStatus = 'Diterima';
+                $message .= ' Informasi mengenai pengajuan sebagai mentor telah <b>' . $jwbStatus . '</b>';
+            elseif (request('status') === 'pending') :
+                $jwbStatus = 'Menunggu';
+                $message .= ' Informasi mengenai pengajuan sebagai mentor berada pada status <b>' . $jwbStatus . '</b>';
+            endif;
+
+            $mail_data = [
+                'recipient' => $user['email'],
+                'fromEmail' => $user['email'],
+                'fromName' => $user['name'],
+                'subject' => 'Mentor Submission Validation',
+                'body' => $message
+            ];
+
+            \Mail::send('email_validation_mentor', $mail_data, function ($message) use ($mail_data) {
+                $message->to($mail_data['recipient'])
+                    ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                    ->subject($mail_data['subject']);
+            });
+            return back()->with('success', 'Data berhasil diubah');
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Terjadi kesalahan, data gagal diubah');
+        }
     }
 
     public function Akun(Request $request)
