@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MentorBerkas;
 use App\Models\User;
 use Hashids\Hashids;
 use App\Models\Pendidikan;
@@ -18,14 +19,33 @@ class AkunController extends Controller
         $this->hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
     }
 
+    public function requirement()
+    {
+        $getBerkas = MentorBerkas::query()->latest()->get();
+        return view('admin.requirement.index', compact('getBerkas'));
+    }
+
+    public function requirement_validate()
+    {
+        $status = request('status');
+        $idUser = request('user');
+
+        MentorBerkas::query()
+            ->where('user_id', '=', $idUser)
+            ->update([
+                'status' => $status
+            ]);
+        return back()->with('success', 'Data berhasil diubah');
+    }
+
     public function Akun(Request $request)
     {
         $searchQuery = $request->input('search');
 
         $user = User::when($searchQuery, function ($query, $searchQuery) {
-                return $query->where('name', 'like', '%' . $searchQuery . '%')
-                    ->orWhere('email', 'like', '%' . $searchQuery . '%');
-            })
+            return $query->where('name', 'like', '%' . $searchQuery . '%')
+                ->orWhere('email', 'like', '%' . $searchQuery . '%');
+        })
             ->paginate(5);
         return view('admin/akun/user', ['user' => $user, 'searchQuery' => $searchQuery]);
     }

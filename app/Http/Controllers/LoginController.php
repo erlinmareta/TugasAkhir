@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
 use Hashids\Hashids;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\VerifyUser;
+use Illuminate\Support\Str;
+use App\Models\MentorBerkas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use App\Models\User;
-use App\Models\VerifyUser;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -37,7 +38,25 @@ class LoginController extends Controller
             if ($user->level == 'admin') {
                 return redirect()->route('dashboard.admin');
             } else if ($user->level == 'mentor') {
-                return redirect('mentor/dashboard');
+                if (request()->routeIs('loginproses')) {
+                    $idUser = auth()->user()->id;
+                } else {
+                    $idUser = $this->hashids->decode(auth()->user()->id)[0];
+                }
+                $getData = MentorBerkas::query()
+                    ->where([
+                        ['user_id', '=', $idUser],
+                        ['nik', '!=', null],
+                        ['file_riwayat_pendidikan', '!=', null],
+                        ['file_keahlian_khusus', '!=', null],
+                        ['file_prestasi', '!=', null],
+                        ['status', '=', 'completed']
+                    ])->first();
+                if ($getData) {
+                    return redirect('mentor/dashboard');
+                } else {
+                    return route('berkas.index');
+                }
             } else {
                 return redirect('member/student_dashboard');
             }
@@ -60,7 +79,6 @@ class LoginController extends Controller
 
     public function RegisterUser(Request $request)
     {
-
         $password = $request->password;
 
         if (strlen($password) < 8) {
@@ -104,10 +122,10 @@ class LoginController extends Controller
         });
 
         if ($save) {
-            return redirect()->back()->with('success', 'you need to verify your account, we have sent you an activation
-            link, please check your email');
+            return redirect()->back()->with('success', 'Kamu perlu melakan verifikasi Email, kami sudah mengirim link verifikasi,
+            mohon untuk memeriksa email anda');
         } else {
-            return redirect()->back()->with('fail', 'something went wrong, failed register');
+            return redirect()->back()->with('fail', 'terjadi masalah, tidak dapat melakukan registrasi');
         }
     }
 
@@ -159,7 +177,7 @@ class LoginController extends Controller
                 ->subject('Reset Password');
         });
 
-        return back()->with('success', 'we telah mengirimkan untuk mengubah password link pada email anda ');
+        return back()->with('success', 'Kami telah mengirimkan untuk mengubah password link pada email anda ');
     }
 
     public function ShowResetForm(Request $request, $token = null)

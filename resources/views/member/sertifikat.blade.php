@@ -129,7 +129,7 @@
             <div class="date-container">
                 <div class="best-regards">
                     Best Regards,
-                    {{-- <img src="{{ asset('/storage/' . $kelas->user->signature) }}" style="width: 150px; height: 150px" alt="User Signature"> --}}
+                    {{-- <img src="{{ asset('storage/signature/' . $signatureImagePath) }}" style="width: 150px; height: 150px" alt="User Signature"> --}}
                 </div>
                 <div class="date">
                     {{ date('d F Y') }}

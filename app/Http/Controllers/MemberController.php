@@ -231,11 +231,10 @@ class MemberController extends Controller
             'rating' => 'required|integer|min:1|max:5', // Contoh validasi untuk field rating
         ]);
         // decode
-        $idMateri = $this->hashids->decode($id_materi)[0];
+        $idMateri = decrypt($id_materi);
         $idUser = $this->hashids->decode(Auth::user()->id)[0];
 
         $materi = Materi::where("id", $idMateri)->first();
-
         Rating::create([
             "kelas_id" => $materi["kelas_id"],
             "user_id" => $idUser,
@@ -259,15 +258,15 @@ class MemberController extends Controller
         $userId = $kelas->user_id;
         $mentorId = User::findOrFail($userId);
 
-            $path = base_path('public/storage/'.$mentorId->signature);
-            $type = pathinfo($path, PATHINFO_EXTENSION);
-            $data = file_get_contents($path);
+
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
-        $pic = 'data:image/' . $type . ';base64,' . base64_encode($data);
-        $pdf = PDF::loadView('member.sertifikat', ['user' => $user, 'kelas' => $kelas, 'pic'=>$pic])->setPaper('a4', 'landscape');
+
+        // $signatureImagePath = $user->signature;
+        $pdf = PDF::loadView('member.sertifikat', ['user' => $user, 'kelas' => $kelas])
+                  ->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
 }

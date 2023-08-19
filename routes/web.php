@@ -41,6 +41,8 @@ Route::middleware(['cekLogin'])->group(function () {
     Route::get('/password/reset/{token}', [LoginController::class, 'ShowResetForm'])->name('reset.password.form');
     Route::post('/password/reset', [LoginController::class, 'ResetPassword']);
 });
+Route::post('mentor/requirement', [MentorController::class, 'berkas_store'])->name('berkas.store');
+Route::get('mentor/requirement', [MentorController::class, 'berkas'])->name('berkas.index');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -61,7 +63,7 @@ Route::prefix('member')->middleware(['auth', 'cekLevel:member'])->group(function
 });
 
 //mentor
-Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function () {
+Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor', 'cekLogin'])->group(function () {
     Route::get('/dashboard', [MentorController::class, 'MentorDashboard']);
     Route::get('/profil', [MentorController::class, 'MentorProfil']);
     Route::get('/profil/profil', [MentorController::class, 'ProfileMentor']);
@@ -105,6 +107,9 @@ Route::prefix('mentor')->middleware(['auth', 'cekLevel:mentor'])->group(function
 //admin
 Route::prefix('admin')->middleware(['auth', 'cekLevel:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard.admin');
+    // Mentor
+    Route::get('/permintaan-mentor', [AkunController::class, 'requirement'])->name('requirement.index');
+    Route::get('/permintaan-mentor-validate', [AkunController::class, 'requirement_validate'])->name('validate-mentor-status');
     //user
     Route::get('/akun/user', [AkunController::class, 'akun']);
     Route::get('/akun/mentor', [AkunController::class, 'DataMentor']);

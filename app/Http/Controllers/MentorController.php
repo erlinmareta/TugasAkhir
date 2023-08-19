@@ -6,8 +6,10 @@ use App\Models\User;
 use Hashids\Hashids;
 use App\Models\Kelas;
 use App\Models\Materi;
+use App\Models\MentorBerkas;
 use App\Models\Pendidikan;
 use App\Models\Subscription;
+use Hamcrest\Type\IsNumeric;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +22,79 @@ class MentorController extends Controller
     public function __construct()
     {
         $this->hashids = new Hashids(env('MY_SECRET_SALT_KEY'), 12, env('MY_ALPHABET_KEY'));
+    }
+
+    public function berkas()
+    {
+        // cek berkas
+        if (request()->routeIs('loginproses')) {
+            $idUser = auth()->user()->id;
+        } else {
+            $idUser = $this->hashids->decode(auth()->user()->id)[0];
+        }
+        $getBerkas = MentorBerkas::query()
+            ->where([
+                ['user_id', '=', $idUser],
+                ['nik', '!=', null],
+                ['file_riwayat_pendidikan', '!=', null],
+                ['file_keahlian_khusus', '!=', null],
+                ['file_prestasi', '!=', null]
+            ])
+            ->first();
+        $getBerkasCompleted = MentorBerkas::query()
+            ->where([
+                ['user_id', '=', $idUser],
+                ['nik', '!=', null],
+                ['file_riwayat_pendidikan', '!=', null],
+                ['file_keahlian_khusus', '!=', null],
+                ['file_prestasi', '!=', null],
+                ['status', '=', 'completed'],
+            ])
+            ->exists();
+        if ($getBerkasCompleted) {
+            return redirect('mentor/dashboard');
+        }
+        return view('mentor.requirement.index', compact('getBerkas'));
+    }
+
+    public function berkas_store(Request $request)
+    {
+        $message = [
+            'required' => 'Kolom tidak boleh kosong',
+            'file_riwayat_pendidikan.max' => 'Maksimal 2mb',
+            'file_keahilan_khusus.max' => 'Maksimal 2mb',
+            'file_prestasi.max' => 'Maksimal 2mb',
+            'nik.max' => 'Maksimal 16 Karaketer',
+            'nik.min' => 'Minimal 16 Karakter',
+            'mimes' => 'Hanya diperbolehkan :values'
+        ];
+        $validated = $request->validate([
+            'nik' => 'required|min:16|numeric|unique:mentor_berkas,nik',
+            'file_riwayat_pendidikan' => 'required|mimes:png,jpg,pdf,jpeg,jfif|max:2048',
+            'file_keahilan_khusus' => 'required|mimes:png,jpg,pdf,jpeg,jfif|max:2048',
+            'file_prestasi' => 'required|mimes:png,jpg,pdf,jpeg,jfif|max:2048',
+            'user_id' => '',
+        ], $message);
+
+        if (!is_numeric($validated['nik'])) {
+            return back()->with('error', 'NIK harus berupa angka');
+        }
+        try {
+            if ($request->hasFile('file_riwayat_pendidikan') && $request->hasFile('file_keahilan_khusus') && $request->hasFile('file_prestasi')) {
+                // store local
+                $validated['file_riwayat_pendidikan'] = $request->file('file_riwayat_pendidikan')->store('berkas_riwayat_pendidikan');
+                $validated['file_keahilan_khusus'] = $request->file('file_keahilan_khusus')->store('berkas_keahilan_khusus');
+                $validated['file_prestasi'] = $request->file('file_prestasi')->store('berkas_file_prestasi');
+            }
+            $idUser = $this->hashids->decode(auth()->user()->id)[0];
+
+            $validated['user_id'] = $idUser;
+            MentorBerkas::query()
+                ->create($validated);
+            return back()->with('success', 'Berhasil menyimpan berkas');
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Terjadi kesalahan dalam menyimpan berkas');
+        }
     }
 
     public function MentorDashboard()
@@ -153,8 +228,14 @@ class MentorController extends Controller
         $idUser = $this->hashids->decode(Auth::user()->id)[0];
 
         $search = $request->input('search');
-        $student = Kelas::select('kelas.id AS mentor', 'users.name', 'users.email', 'users.nomor_telepon',
-         'kelas.judul', 'subscription.created_at AS created_at')
+        $student = Kelas::select(
+            'kelas.id AS mentor',
+            'users.name',
+            'users.email',
+            'users.nomor_telepon',
+            'kelas.judul',
+            'subscription.created_at AS created_at'
+        )
             ->join('subscription', 'subscription.kelas_id', '=', 'kelas.id')
             ->join('users', 'users.id', '=', 'subscription.user_id')
             ->where('kelas.user_id', $idUser)
