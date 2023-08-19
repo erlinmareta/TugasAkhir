@@ -135,7 +135,6 @@ class LoginController extends Controller
         $verifyUser = VerifyUser::where('token', $token)->first();
         if (!is_null($verifyUser)) {
             $user = $verifyUser->user;
-
             if (!$user->email_verified) {
                 $verifyUser->user->email_verified = 1;
                 $verifyUser->user->save();
@@ -144,7 +143,7 @@ class LoginController extends Controller
                 anda bisa login sekarang !')->with('verifiedEmail', $user->email);
             } else {
                 return redirect()->route('login')->with('success', 'Email berhasil terverifikasi,
-                anda bisa login sekarang !')->with('verifiedEmail', $user->email);;
+                anda bisa login sekarang !')->with('verifiedEmail', $user->email);
             }
         }
     }

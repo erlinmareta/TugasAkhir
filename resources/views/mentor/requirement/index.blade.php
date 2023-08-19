@@ -13,7 +13,11 @@
             <div class="card-body">
                 @if (empty($getBerkas))
                     <div class="alert alert-success">
-                        <h3>Anda Login sebagai Mentor</h3>
+                        <div class="d-flex justify-content-between">
+                            <h3>Anda Login sebagai Mentor</h3>
+                            <a href="{{ url('/logout') }}">Logout
+                            </a>
+                        </div>
                         <h5>Untuk dapat melanjutkan ke halaman dashboard, lengkap persyaratan di bawah ini.</h5>
                     </div>
                     <h4 class="card-title">Upload Prasyarat Berkas</h4>
@@ -49,7 +53,7 @@
                         </div>
                         <div class="form-group">
                             <label for="file_keahilan_khusus">Berkas Keahilan Khusus*</label><br>
-                            <input type="file" class="form-control" name="file_keahilan_khusus"
+                            <input type="file" class="form-control" name="file_keahlian_khusus"
                                 id="file_keahilan_khusus" accept=".pdf,.png,.jpg,.jpeg,.jfif" required>
                             <small>.pdf,.png,.jpg,.jpeg,.jfif maks. 2mb</small>
                             <div>
@@ -82,7 +86,11 @@
                                 <img src="{{ asset('img/success.svg') }}" alt="success-image" width="35px">
                             </div>
                             <div>
-                                <h3>Anda telah melakukan pengiriman berkas.</h3>
+                                <div class="d-flex justify-content-between">
+                                    <h3>Anda telah melakukan pengiriman berkas.</h3>
+                                    <a href="{{ url('/logout') }}">Logout
+                                    </a>
+                                </div>
                                 <h5>Untuk informasi selanjutnya akan dikirimkan melalui email yang terdaftar!
                                     Terimakasih.
                                 </h5>
@@ -96,7 +104,11 @@
                                 <img src="{{ asset('img/error.svg') }}" alt="success-image" width="35px">
                             </div>
                             <div>
-                                <h3>Oops!! Pengajuan ditolak</h3>
+                                <div class="d-flex justify-content-between">
+                                    <h3>Oops!! Pengajuan ditolak</h3>
+                                    <a href="{{ url('/logout') }}">Logout
+                                    </a>
+                                </div>
                                 <h5>Pengajuan Anda ditolak, Anda tidak dapat melanjutkan ke menu lainnya.
                                 </h5>
                             </div>

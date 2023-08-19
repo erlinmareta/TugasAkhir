@@ -62,7 +62,7 @@ class MentorController extends Controller
         $message = [
             'required' => 'Kolom tidak boleh kosong',
             'file_riwayat_pendidikan.max' => 'Maksimal 2mb',
-            'file_keahilan_khusus.max' => 'Maksimal 2mb',
+            'file_keahlian_khusus.max' => 'Maksimal 2mb',
             'file_prestasi.max' => 'Maksimal 2mb',
             'nik.max' => 'Maksimal 16 Karaketer',
             'nik.min' => 'Minimal 16 Karakter',
@@ -71,11 +71,10 @@ class MentorController extends Controller
         $validated = $request->validate([
             'nik' => 'required|min:16|numeric|unique:mentor_berkas,nik',
             'file_riwayat_pendidikan' => 'required|mimes:png,jpg,pdf,jpeg,jfif|max:2048',
-            'file_keahilan_khusus' => 'required|mimes:png,jpg,pdf,jpeg,jfif|max:2048',
+            'file_keahlian_khusus' => 'required|mimes:png,jpg,pdf,jpeg,jfif|max:2048',
             'file_prestasi' => 'required|mimes:png,jpg,pdf,jpeg,jfif|max:2048',
             'user_id' => '',
         ], $message);
-
         if (!is_numeric($validated['nik'])) {
             return back()->with('error', 'NIK harus berupa angka');
         }
