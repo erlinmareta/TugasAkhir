@@ -59,6 +59,7 @@ class MentorController extends Controller
 
     public function berkas_store(Request $request)
     {
+
         $message = [
             'required' => 'Kolom tidak boleh kosong',
             'file_riwayat_pendidikan.max' => 'Maksimal 2mb',
@@ -79,10 +80,10 @@ class MentorController extends Controller
             return back()->with('error', 'NIK harus berupa angka');
         }
         try {
-            if ($request->hasFile('file_riwayat_pendidikan') && $request->hasFile('file_keahilan_khusus') && $request->hasFile('file_prestasi')) {
+            if ($request->hasFile('file_riwayat_pendidikan') && $request->hasFile('file_keahlian_khusus') && $request->hasFile('file_prestasi')) {
                 // store local
                 $validated['file_riwayat_pendidikan'] = $request->file('file_riwayat_pendidikan')->store('berkas_riwayat_pendidikan');
-                $validated['file_keahilan_khusus'] = $request->file('file_keahilan_khusus')->store('berkas_keahilan_khusus');
+                $validated['file_keahlian_khusus'] = $request->file('file_keahlian_khusus')->store('berkas_keahlian_khusus');
                 $validated['file_prestasi'] = $request->file('file_prestasi')->store('berkas_file_prestasi');
             }
             $idUser = $this->hashids->decode(auth()->user()->id)[0];
