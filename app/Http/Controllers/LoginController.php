@@ -55,7 +55,22 @@ class LoginController extends Controller
                 if ($getData) {
                     return redirect('mentor/dashboard');
                 } else {
-                    return route('berkas.index');
+                    // cek berkas
+                    if (request()->routeIs('loginproses')) {
+                        $idUser = auth()->user()->id;
+                    } else {
+                        $idUser = $this->hashids->decode(auth()->user()->id)[0];
+                    }
+                    $getBerkas = MentorBerkas::query()
+                        ->where([
+                            ['user_id', '=', $idUser],
+                            ['nik', '!=', null],
+                            ['file_riwayat_pendidikan', '!=', null],
+                            ['file_keahlian_khusus', '!=', null],
+                            ['file_prestasi', '!=', null]
+                        ])
+                        ->first();
+                    return view('mentor.requirement.index', compact('getBerkas'));
                 }
             } else {
                 return redirect('member/student_dashboard');

@@ -46,7 +46,7 @@ class CekLogin
                 if ($getData) {
                     return $next($request);
                 } else {
-                    return redirect()->route('berkas.index');
+                    return redirect('mentor/requirement');
                 }
             } elseif (Auth::user()->level == 'member') {
                 return redirect('member/student_dashboard');

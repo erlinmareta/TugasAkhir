@@ -119,6 +119,10 @@
                                 <embed type="application/pdf"
                                     src="{{ asset('storage/' . $item['file_riwayat_pendidikan']) }}" width="450"
                                     height="400"></embed>
+                            @elseif($isImage)
+                                <img class="mx-auto d-block"
+                                    src="{{ asset('storage/' . $item['file_riwayat_pendidikan']) }}" alt="file"
+                                    width="300px">
                             @endif
                         @endif
                     </div>
@@ -148,6 +152,10 @@
                                 <embed type="application/pdf"
                                     src="{{ asset('storage/' . $item['file_keahlian_khusus']) }}" width="450"
                                     height="400"></embed>
+                            @elseif($isImage)
+                                <img class="mx-auto d-block"
+                                    src="{{ asset('storage/' . $item['file_keahlian_khusus']) }}" alt="file"
+                                    width="300px">
                             @endif
                         @endif
                     </div>
@@ -186,7 +194,7 @@
             </div>
         </div>
     @endforeach
-    {{-- footer       --}}
+    {{-- footer --}}
     @include('admin.layout.footer')
 
     {{-- script --}}
