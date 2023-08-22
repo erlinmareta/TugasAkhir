@@ -37,8 +37,10 @@ class AkunController extends Controller
                 ->update([
                     'status' => $status
                 ]);
+
             $message = 'Dear <b>' . $user['name'] . '</b>';
             if (request('status') === 'reject') :
+                $user->delete();
                 $jwbStatus = 'Ditolak';
                 $message .= ' Informasi mengenai pengajuan sebagai mentor <b>' . $jwbStatus . '</b>';
             elseif (request('status') === 'completed') :
